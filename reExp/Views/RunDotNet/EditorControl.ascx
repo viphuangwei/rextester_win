@@ -190,13 +190,13 @@
                     mode: "<%:mode%>",
                 <%} %>
                 <% if(Model.LanguageChoice == LanguagesEnum.Nasm || 
-                      Model.LanguageChoice == LanguagesEnum.Javascript ||
-                      Model.LanguageChoice == LanguagesEnum.Nodejs ||
+                      //Model.LanguageChoice == LanguagesEnum.Javascript ||
+                      //Model.LanguageChoice == LanguagesEnum.Nodejs ||
                       Model.LanguageChoice == LanguagesEnum.Scala || 
                       Model.LanguageChoice == LanguagesEnum.Prolog ||
                       Model.LanguageChoice == LanguagesEnum.FSharp)
                 {%>
-                    //smartIndent: false,
+                    smartIndent: false,
                 <%} %>
                 lineNumbers: true,
                 indentUnit: 4,

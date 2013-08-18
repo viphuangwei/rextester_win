@@ -1,1 +1,0 @@
-This is VS 2012 project.

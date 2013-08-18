@@ -1,0 +1,10 @@
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Release\Service.dll.config
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Release\Service.dll
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Release\Service.XmlSerializers.dll
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Release\Service.pdb
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Release\GlobalUtils.dll
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Release\GlobalUtils.pdb
+C:\Users\ren-computer\Desktop\rextester\win\Service\obj\Release\Service.csprojResolveAssemblyReference.cache
+C:\Users\ren-computer\Desktop\rextester\win\Service\obj\Release\Service.dll
+C:\Users\ren-computer\Desktop\rextester\win\Service\obj\Release\Service.pdb
+C:\Users\ren-computer\Desktop\rextester\win\Service\obj\Release\Service.XmlSerializers.dll
