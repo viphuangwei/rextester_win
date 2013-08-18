@@ -1,0 +1,5 @@
+C:\Users\ren-computer\Desktop\rextester\win\SqlServer\bin\Debug\SqlServer.exe.config
+C:\Users\ren-computer\Desktop\rextester\win\SqlServer\bin\Debug\SqlServer.exe
+C:\Users\ren-computer\Desktop\rextester\win\SqlServer\bin\Debug\SqlServer.pdb
+C:\Users\ren-computer\Desktop\rextester\win\SqlServer\obj\x86\Debug\SqlServer.exe
+C:\Users\ren-computer\Desktop\rextester\win\SqlServer\obj\x86\Debug\SqlServer.pdb

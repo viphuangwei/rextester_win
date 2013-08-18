@@ -1,0 +1,206 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </title>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <asp:ContentPlaceHolder ID="MetaContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <style type="text/css">
+        body
+        {
+            font-family: Arial;    
+        }
+        h2
+        {
+            color:Gray; 
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        pre.resultarea
+        {
+            font-family: "Consolas",monospace;
+            font-size: 14px;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;
+        }
+        span.yellow
+        {
+            background: yellow;    
+        }
+        span.blue
+        {
+            background: #CCFFFF;    
+        }
+        span.magenta
+        {
+            background: #FFCCFF;    
+        }
+        span.options
+        {
+            font-family: Arial;
+            font-size: 13px;
+            white-space:nowrap;
+        }
+        div.formcontent
+        {
+            background: #EEEEEE;
+            margin-bottom:0.5em;
+        }
+        a.selectedlink
+        {
+            background: #9966FF;
+            color: White;
+        }
+        a.notselectedlink
+        {
+            color: #9966FF;
+        }
+        a.notselectedlink:hover
+        {
+            background: #9966FF;
+            color: White;
+        }
+        a.smalllink:hover
+        {
+            background-color: #777;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+        a.smalllink
+        {
+            color: #444;
+            font-family: sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        span.smalllink
+        {
+            color: #444;
+            font-family: sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        span.hov:hover {
+            background-color: #777;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        pre#Result
+        {
+            margin-left: 0.5em;    
+        }
+        input[type=button],
+        input[type=submit]
+        {
+            color: #555;
+            border: 1px solid #555;
+            font-weight: bold;
+        }
+        .sqloutput
+        {
+            border-style: none;    
+            border-collapse: collapse;
+        }
+        .sqloutput th, .sqloutput td
+        {
+            border-style: solid;
+            border-width: 1px;
+            border-color: Gray;
+            padding: 0 3px 0 3px;
+        }
+    </style>
+    <script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
+        <%if(SessionManager.IsUserInSession())
+        {%>
+            $(document).ready(function () {
+
+                $.ajax({
+                    type: "get", url: "<%:Utils.BaseUrl+"login/getnotificationscount"%>",
+                    success: function (data, text) {
+                        var obj = jQuery.parseJSON(data);
+                        if (obj.Total > 0) {
+                            $("#notifications").replaceWith("<a href=\"<%:Utils.BaseUrl+"login/notifications"%>\" id=\"notifications\" style=\"background-color:red; color: white; padding-left:3px; padding-right:3px;text-decoration:none;\">"+obj.Total+"</a>");
+                        }
+                    },
+                    error: function (request, status, error) {                        
+                    },
+                    cache: false
+                });
+
+            });
+        <%}%>
+    </script>
+    <!-- Put the following javascript before the closing </head> tag. -->
+    <script type="text/javascript">
+        <%if(Utils.GetCurrentPage() == Utils.PagesEnum.Home)
+        {%>
+            (function () {
+                var cx = '017131087770067236583:tpyq17ei4jw';
+                var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+                gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                    '//www.google.com/cse/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+            })();
+        <%}%>
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-15090815-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+<body>
+    <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <%var currentPage = Utils.GetCurrentPage();%>
+    <table style="width: 100%; padding-right: 2em">
+        <tr>
+            <td align="right">
+                <a <%if(currentPage == Utils.PagesEnum.Home){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Home)%>">Home</a>&nbsp;
+                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Tester || currentPage == Utils.PagesEnum.Replace || currentPage == Utils.PagesEnum.Reference || currentPage == Utils.PagesEnum.Diff) {%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Misc</a>&nbsp;
+                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Rundotnet){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run Code</a>&nbsp;
+                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Codewall){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code Wall</a>&nbsp;
+                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Users){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">Users</a>&nbsp;
+                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Feedback){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Feedback)%>">Feedback</a>&nbsp;
+                <%if (SessionManager.IsUserInSession())
+                  {                      
+                      %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.UsersStuff || currentPage == Utils.PagesEnum.Notifications){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.UsersStuff)%>"><%:SessionManager.UserName%></a>&nbsp;<span id="notifications"></span>
+                        |&nbsp;<a class="notselectedlink" href="<%:Utils.GetUrl(Utils.PagesEnum.Logout)%>">Log out</a>&nbsp;<%
+                  }
+                  else
+                  {
+                      %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.Login){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a>&nbsp;<%
+                  } %>
+            </td>
+        </tr>
+    </table>
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

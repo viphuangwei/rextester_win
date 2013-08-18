@@ -1,0 +1,5 @@
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Debug\Service.dll.config
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Debug\Service.dll
+C:\Users\ren-computer\Desktop\rextester\win\Service\bin\Debug\Service.pdb
+C:\Users\ren-computer\Desktop\rextester\win\Service\obj\Debug\Service.dll
+C:\Users\ren-computer\Desktop\rextester\win\Service\obj\Debug\Service.pdb
