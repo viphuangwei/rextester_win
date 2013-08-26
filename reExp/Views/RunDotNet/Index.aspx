@@ -274,10 +274,10 @@
     }%>
     <%if (Model.IsLive)
     { %>
-        <script src="http://226589.s.dedikuoti.lt:8000/codemirror_attach.js"></script>
-        <script src="http://226589.s.dedikuoti.lt:8000/channel/bcsocket.js"></script>
-        <script src="http://226589.s.dedikuoti.lt:8000/share/share.js"></script>
-        <script src="http://226589.s.dedikuoti.lt:8000/share/textarea.js"></script>    
+        <script src="http://api.rextester.com:8000/share/codemirror_attach.js"></script>
+        <script src="http://api.rextester.com:8000/channel/bcsocket.js"></script>
+        <script src="http://api.rextester.com:8000/share/share.js"></script>
+        <script src="http://api.rextester.com:8000/share/textarea.js"></script>    
     <%} %>
     <script type="text/javascript">
         //<![CDATA[

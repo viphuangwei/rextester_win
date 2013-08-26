@@ -259,7 +259,7 @@
             <%if(Model.IsLive && Model.EditorChoice == EditorsEnum.Codemirror)
             { %>
                 var guid = '<%:Model.CodeGuid %>';
-                var connection = sharejs.open(guid.toUpperCase(), 'text', 'http://226589.s.dedikuoti.lt:8000/channel', function(error, doc) {
+                var connection = sharejs.open(guid.toUpperCase(), 'text', 'http://api.rextester.com:8000/channel', function(error, doc) {
                     if (error) {
   		                $('#Link').text("Error occurred while establishing live session. Try again later.");
                         console.error(error);
@@ -273,7 +273,7 @@
                     doc.attach_codemirror(GlobalEditor, false);
                 });
 
-                sharejs.open('chat'+guid.toUpperCase(), 'text', 'http://226589.s.dedikuoti.lt:8000/channel', function(error, doc) {
+                sharejs.open('chat' + guid.toUpperCase(), 'text', 'http://api.rextester.com:8000/channel', function (error, doc) {
                     var displayName = '<%:Model.DisplayName%>';
                     if (error) {
   		                $('#Link').text("Error occurred while establishing live session. Try again later.");
@@ -307,7 +307,7 @@
 
                 <%if(Model.ShowInput) 
                 {%>
-                sharejs.open('input'+guid.toUpperCase(), 'text', 'http://226589.s.dedikuoti.lt:8000/channel', function(error, doc) {
+            sharejs.open('input' + guid.toUpperCase(), 'text', 'http://api.rextester.com:8000/channel', function (error, doc) {
                     if (error) {
                         $('#Link').text("Error occurred while establishing live session. Try again later.");
                         console.error(error);
@@ -331,7 +331,7 @@
 
             <%if(Model.ShowCompilerArgs) 
             {%>
-                sharejs.open('args' + guid.toUpperCase(), 'text', 'http://226589.s.dedikuoti.lt:8000/channel', function (error, doc) {
+            sharejs.open('args' + guid.toUpperCase(), 'text', 'http://api.rextester.com:8000/channel', function (error, doc) {
                     if (error) {
                         $('#Link').text("Error occurred while establishing live session. Try again later.");
                         console.error(error);

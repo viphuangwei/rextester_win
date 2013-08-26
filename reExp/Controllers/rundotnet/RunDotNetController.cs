@@ -283,9 +283,6 @@ namespace reExp.Controllers.rundotnet
             data.IsSaved = true;
             data.LiveUsersCount = Model.LiveUsersCount(savedNr);
             data.DisplayName = SessionManager.IsUserInSession() ? SessionManager.UserName : Utils.Utils.RandomLetter();
-
-            if (Utils.Utils.IsIE || Utils.Utils.IsOpera)
-                data.WholeError = "Internet explorer and older versions of Opera are not supported in live collaboration mode.";
             
             return View("Index", data);
         }

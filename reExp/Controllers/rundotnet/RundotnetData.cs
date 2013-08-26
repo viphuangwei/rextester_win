@@ -133,7 +133,7 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if ((this.LanguageChoice == LanguagesEnum.CSharp || this.LanguageChoice == LanguagesEnum.Python) && 
+                if ((this.LanguageChoice == LanguagesEnum.CSharp /*|| this.LanguageChoice == LanguagesEnum.Python*/) && 
                     this.EditorChoice == EditorsEnum.Codemirror && 
                     !Utils.Utils.IsIE)
                 {
