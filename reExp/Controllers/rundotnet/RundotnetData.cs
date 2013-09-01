@@ -133,7 +133,7 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if ((this.LanguageChoice == LanguagesEnum.CSharp /*|| this.LanguageChoice == LanguagesEnum.Python*/) && 
+                if ((this.LanguageChoice == LanguagesEnum.CSharp || this.LanguageChoice == LanguagesEnum.Python) && 
                     this.EditorChoice == EditorsEnum.Codemirror && 
                     !Utils.Utils.IsIE)
                 {
@@ -759,6 +759,7 @@ print -dpng some_name.png;
                     return "";
             }
         }
+        
         public string RunStats
         {
             get;
@@ -846,6 +847,11 @@ print -dpng some_name.png;
             set;
         }
         public bool IsSaved
+        {
+            get;
+            set;
+        }
+        public bool IsApi
         {
             get;
             set;

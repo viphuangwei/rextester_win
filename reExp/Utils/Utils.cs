@@ -264,11 +264,11 @@ namespace reExp.Utils
             { }
         }
 
-        public static void LogCodeToDB(string data, string input, string compiler_args, string result, int lang)
+        public static void LogCodeToDB(string data, string input, string compiler_args, string result, int lang, bool is_api)
         {
             try
             {
-                var job = new LogDBJob(data, input, compiler_args, result, lang);
+                var job = new LogDBJob(data, input, compiler_args, result, lang, is_api);
                 ThreadPool.QueueUserWorkItem(f => job.DoWork());
             }
             catch (Exception)
@@ -340,20 +340,22 @@ namespace reExp.Utils
         string input;
         string compiler_args;
         int lang;
-        public LogDBJob(string data, string input, string compiler_args, string result, int lang)
+        bool is_api;
+        public LogDBJob(string data, string input, string compiler_args, string result, int lang, bool is_api)
         {
             this.data = data;
             this.result = result;
             this.compiler_args = compiler_args;
             this.input = input;
             this.lang = lang;
+            this.is_api = is_api;
         }
         public void DoWork()
         {
             try
             {
                 //Model.LogCodeData(data, input, compiler_args, result, lang);
-                Model.IncrementLangCounter(data, input, compiler_args, result, lang);
+                Model.IncrementLangCounter(data, input, compiler_args, result, lang, is_api);
             }
             catch (Exception)
             { }

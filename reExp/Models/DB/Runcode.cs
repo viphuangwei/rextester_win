@@ -37,13 +37,13 @@ namespace reExp.Models.DB
         }
 
 
-        public static void Increment_Lang_Counter(string data, string input, string compiler_args, string result, int lang)
+        public static void Increment_Lang_Counter(string data, string input, string compiler_args, string result, int lang, bool is_api)
         {
             string query = @"INSERT OR REPLACE INTO LangCounters (lang_id, lang_name, counter) 
-                             VALUES (@LangID, @Lang, coalesce((SELECT counter FROM LangCounters WHERE lang_id = @LangID), 0)+1)";
+                             VALUES (@LangID, @Lang, coalesce((SELECT counter FROM LangCounters WHERE lang_name = @Lang), 0)+1)";
             var pars = new List<SQLiteParameter>();
-            pars.Add(new SQLiteParameter("LangID", lang));
-            pars.Add(new SQLiteParameter("Lang", ((LanguagesEnum)lang).ToLanguage()));
+            pars.Add(new SQLiteParameter("LangID", lang + (is_api ? 1000 : 0)));
+            pars.Add(new SQLiteParameter("Lang", ((LanguagesEnum)lang).ToLanguage()+ (is_api ? "_api" : "")));
             ExecuteNonQuery(query, pars);
         }
 

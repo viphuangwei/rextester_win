@@ -3,3 +3,6 @@ C:\Users\ren-computer\Desktop\rextester\win\SqlServer\bin\Debug\SqlServer.exe
 C:\Users\ren-computer\Desktop\rextester\win\SqlServer\bin\Debug\SqlServer.pdb
 C:\Users\ren-computer\Desktop\rextester\win\SqlServer\obj\x86\Debug\SqlServer.exe
 C:\Users\ren-computer\Desktop\rextester\win\SqlServer\obj\x86\Debug\SqlServer.pdb
+C:\Users\ren-computer\Desktop\rextester\win\SqlServer\bin\Debug\GlobalUtils.dll
+C:\Users\ren-computer\Desktop\rextester\win\SqlServer\bin\Debug\GlobalUtils.pdb
+C:\Users\ren-computer\Desktop\rextester\win\SqlServer\obj\x86\Debug\SqlServer.csprojResolveAssemblyReference.cache

@@ -55,7 +55,10 @@
                 <%--<input id="InfoString" name="InfoString" type="hidden" value="<%:Model.InfoString %>" />           
                 <input id="CaptchaRegex" name="CaptchaRegex" type="hidden" value="<%: Model.CaptchaRegex %>" />--%>
                 
-	        <div><a href="http://rextester.uservoice.com/">Uservoice</a></div>      
+	        <div><a href="http://rextester.uservoice.com/">Uservoice</a>
+                <br/>
+                        <a href="https://groups.google.com/forum/#!forum/rextester">Discission google group.</a><br/><br/>
+	        </div>      
             </div>
        <%}%>
        <%if (Model.IsResult)

@@ -9,7 +9,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/db.s3db">
-      <publishTime>08/25/2013 20:58:38</publishTime>
+      <publishTime>08/31/2013 21:41:25</publishTime>
+    </File>
+    <File Include="bin/BookSleeve.dll">
+      <publishTime>08/15/2013 23:33:06</publishTime>
     </File>
     <File Include="bin/FSharp.Compiler.CodeDom.dll">
       <publishTime>02/17/2013 11:09:40</publishTime>
@@ -21,10 +24,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2013 11:09:22</publishTime>
     </File>
     <File Include="bin/GlobalUtils.dll">
-      <publishTime>08/18/2013 23:02:02</publishTime>
+      <publishTime>08/31/2013 19:33:22</publishTime>
     </File>
     <File Include="bin/reExp.dll">
-      <publishTime>08/26/2013 23:36:32</publishTime>
+      <publishTime>09/01/2013 17:43:19</publishTime>
     </File>
     <File Include="bin/Roslyn.Compilers.CSharp.dll">
       <publishTime>03/16/2013 19:22:54</publishTime>
@@ -33,10 +36,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2013 19:22:54</publishTime>
     </File>
     <File Include="bin/Service.dll">
-      <publishTime>08/24/2013 12:12:10</publishTime>
+      <publishTime>08/31/2013 21:15:17</publishTime>
     </File>
     <File Include="bin/Service.XmlSerializers.dll">
-      <publishTime>08/24/2013 12:12:11</publishTime>
+      <publishTime>08/31/2013 21:15:17</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.DLL">
       <publishTime>03/16/2013 19:22:54</publishTime>
@@ -121,6 +124,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/ZeroClipboard.swf">
       <publishTime>03/16/2013 19:22:57</publishTime>
+    </File>
+    <File Include="dlls/BookSleeve.dll">
+      <publishTime>08/15/2013 23:33:06</publishTime>
     </File>
     <File Include="dlls/FSharp.Core.dll">
       <publishTime>07/26/2012 19:41:24</publishTime>
@@ -306,7 +312,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2013 19:22:45</publishTime>
     </File>
     <File Include="Scripts/codemirror2/lib/util/python-hint.js">
-      <publishTime>08/24/2013 12:13:27</publishTime>
+      <publishTime>08/29/2013 22:37:47</publishTime>
     </File>
     <File Include="Scripts/codemirror2/lib/util/runmode.js">
       <publishTime>03/16/2013 19:22:45</publishTime>
@@ -1182,7 +1188,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/14/2013 22:55:36</publishTime>
     </File>
     <File Include="Views/Feedback/Index.aspx">
-      <publishTime>03/16/2013 19:22:52</publishTime>
+      <publishTime>08/28/2013 23:28:58</publishTime>
     </File>
     <File Include="Views/Login/CreateGoogleUser.aspx">
       <publishTime>03/16/2013 19:22:53</publishTime>
@@ -1197,10 +1203,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2013 19:22:53</publishTime>
     </File>
     <File Include="Views/Main/Faq.aspx">
-      <publishTime>03/16/2013 19:22:52</publishTime>
+      <publishTime>08/28/2013 23:28:25</publishTime>
     </File>
     <File Include="Views/Main/Index.aspx">
-      <publishTime>08/25/2013 20:28:30</publishTime>
+      <publishTime>09/01/2013 17:40:59</publishTime>
     </File>
     <File Include="Views/Reference/Index.aspx">
       <publishTime>08/15/2013 16:19:17</publishTime>
@@ -1212,7 +1218,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 23:35:53</publishTime>
     </File>
     <File Include="Views/RunDotNet/Index.aspx">
-      <publishTime>08/25/2013 20:06:21</publishTime>
+      <publishTime>08/31/2013 21:24:53</publishTime>
     </File>
     <File Include="Views/Shared/Site.Master">
       <publishTime>08/15/2013 16:20:18</publishTime>
@@ -1236,7 +1242,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2013 19:22:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/20/2013 21:25:23</publishTime>
+      <publishTime>08/31/2013 19:35:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

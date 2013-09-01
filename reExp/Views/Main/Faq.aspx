@@ -22,7 +22,7 @@ These are common problems noticed so far:
         All what's needed are smart contributors. Please, put interesting/useful-to-others stuff. And give it a propper title.
     </li>
     <li>
-        If you have any questions - ask using feedback form.
+        If you have any questions - ask using <a href="https://groups.google.com/forum/#!forum/rextester">this google group.</a><br/><br/>.
     </li>
 </ul>
 <h2>Codemirror shortcuts</h2>

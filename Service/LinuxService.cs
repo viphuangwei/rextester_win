@@ -17,13 +17,13 @@ namespace Service
                     if (!string.IsNullOrEmpty(Program) && Program.Length > 1000)
                     {
                         ProgramCompressed = true;
-                        Program = Utils.Compress(Program);
+                        Program = GlobalUtils.Utils.Compress(Program);
                     }
                     bool InputCompressed = false;
                     if (!string.IsNullOrEmpty(Input) && Input.Length > 1000)
                     {
                         InputCompressed = true;
-                        Input = Utils.Compress(Input);
+                        Input = GlobalUtils.Utils.Compress(Input);
                     }
 
 
@@ -40,7 +40,7 @@ namespace Service
                             res.Output = System.Text.Encoding.Unicode.GetString(res.Output_Bytes);
                     }
                     if (res.IsOutputCompressed)
-                        res.Output = Utils.Decompress(res.Output);
+                        res.Output = GlobalUtils.Utils.Decompress(res.Output);
 
                     return res;
                 }
@@ -60,8 +60,8 @@ namespace Service
             {
                 try 
                 {
-                    var res = service.Diff(Utils.Compress(left), Utils.Compress(right), GlobalUtils.TopSecret.Linux_user, GlobalUtils.TopSecret.Linux_pass);
-                    res.Result = Utils.Decompress(res.Result);
+                    var res = service.Diff(GlobalUtils.Utils.Compress(left), GlobalUtils.Utils.Compress(right), GlobalUtils.TopSecret.Linux_user, GlobalUtils.TopSecret.Linux_pass);
+                    res.Result = GlobalUtils.Utils.Decompress(res.Result);
                     return res;
                 }
                 catch (Exception ex)

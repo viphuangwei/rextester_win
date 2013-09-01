@@ -6,16 +6,119 @@ using reExp.Controllers.rundotnet;
 using reExp.Controllers.regex;
 using System.Security.Cryptography;
 using reExp.Utils;
+using BookSleeve;
+using System.Web.Script.Serialization;
+using System.Text;
 
 namespace reExp.Models
 {
     public partial class Model
     {
-        public static void IncrementLangCounter(string data, string input, string compiler_args, string result, int lang)
+        public class RedisData
+        {
+            public string Program { get; set; }
+            public string Input { get; set; }
+            public string Args { get; set; }
+            public int LanguageChoice { get; set; }
+
+            public string WholeError { get; set; }
+            public string WholeWarning { get; set; }
+            public string WholeOutput { get; set; }
+            public string RunStatus { get; set; }
+        }
+        static RedisConnection redis_conn = null;
+        static object redis_lock = new object();
+        public static RedisConnection RedisConnection
+        {
+            get
+            {
+                lock (redis_lock)
+                {
+                    if (redis_conn == null)
+                    {
+                        redis_conn = new RedisConnection("localhost");
+                    }
+                    if (redis_conn.State != RedisConnectionBase.ConnectionState.Open)
+                    {
+                        redis_conn.Open().Wait();
+                    }
+                }
+                return redis_conn;
+            }
+        }
+        public static int redis_db = 0;
+        public static void InsertRundotnetDataToRedis(RundotnetData data)
         {
             try
             {
-                DB.DB.Increment_Lang_Counter(data, input, compiler_args, result, lang);
+                if (data.LanguageChoice == LanguagesEnum.Octave)
+                    return;
+
+                var conn = RedisConnection;
+                JavaScriptSerializer json = new JavaScriptSerializer();
+                string key = json.Serialize(new RedisData() 
+                    {
+                        Program = data.Program,
+                        Input = data.Input,
+                        Args = data.CompilerArgs,
+                        LanguageChoice = (int)data.LanguageChoice
+                    });
+                key = Utils.EncryptionUtils.CreateMD5Hash(key);
+                string val = json.Serialize(new RedisData() 
+                    { 
+                        Program = data.Program, 
+                        Input = data.Input, 
+                        Args = data.CompilerArgs, 
+                        LanguageChoice = (int)data.LanguageChoice,
+                        WholeError = data.WholeError,
+                        WholeWarning = data.WholeWarning,
+                        WholeOutput = data.Output,
+                        RunStatus = data.RunStats
+                    });
+                val = GlobalUtils.Utils.Compress(val);
+                conn.Strings.Set(redis_db, new Dictionary<string, byte[]>() { { key, Encoding.UTF8.GetBytes(val) } }).Wait();
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, "redis insert error");
+            }
+        }
+
+        public static RedisData GetRundotnetDataFromRedis(RundotnetData data)
+        {
+            try
+            {
+                if (data.LanguageChoice == LanguagesEnum.Octave)
+                    return null;
+
+                var conn = RedisConnection;
+                JavaScriptSerializer json = new JavaScriptSerializer();
+                string key = json.Serialize(new RedisData()
+                {
+                    Program = data.Program,
+                    Input = data.Input,
+                    Args = data.CompilerArgs,
+                    LanguageChoice = (int)data.LanguageChoice
+                });
+                key = Utils.EncryptionUtils.CreateMD5Hash(key);
+                var bytes = conn.Strings.Get(redis_db, key).Result;
+                if (bytes == null)
+                    return null;
+                string val = Encoding.UTF8.GetString(bytes);
+                return json.Deserialize<RedisData>(GlobalUtils.Utils.Decompress(val));
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, "redis get error");
+                return null;
+            }
+        }
+
+        public static void IncrementLangCounter(string data, string input, string compiler_args, string result, int lang, bool is_api)
+        {
+            try
+            {
+                DB.DB.Increment_Lang_Counter(data, input, compiler_args, result, lang, is_api);
             }
             catch (Exception e)
             {

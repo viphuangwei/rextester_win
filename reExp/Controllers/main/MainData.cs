@@ -12,5 +12,10 @@ namespace reExp.Controllers.main
             get;
             set;
         }
+        public Dictionary<string, long> ApiLangCounters
+        {
+            get;
+            set;
+        }
     }
 }

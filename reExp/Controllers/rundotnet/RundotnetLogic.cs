@@ -15,6 +15,7 @@ namespace reExp.Controllers.rundotnet
     {
         public static RundotnetData RunProgram(RundotnetData data)
         {
+
             if (data.LanguageChoice == LanguagesEnum.CSharp || data.LanguageChoice == LanguagesEnum.VB || data.LanguageChoice == LanguagesEnum.FSharp)
             {
                 return RunDotNet(data);
@@ -91,7 +92,7 @@ namespace reExp.Controllers.rundotnet
                                     string partialResult = output.Builder.ToString();
                                     data.Output = partialResult;
                                     data.RunStats = string.Format("Absolute service time: {0} sec", Math.Round((double)(DateTime.Now - start).TotalMilliseconds / 1000, 2));
-                                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, res, (int)data.LanguageChoice);
+                                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, res, (int)data.LanguageChoice, data.IsApi);
                                     return data;
                                 }
                             }
@@ -112,7 +113,7 @@ namespace reExp.Controllers.rundotnet
                         data.Output = output.Builder.ToString();
                         data.Errors.Add(error.Output);
                         data.RunStats = string.Format("Absolute service time: {0} sec", Math.Round((double)(DateTime.Now - start).TotalMilliseconds / 1000, 2));
-                        Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, error.Output, (int)data.LanguageChoice);
+                        Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, error.Output, (int)data.LanguageChoice, data.IsApi);
                         return data;
                     }
 
@@ -134,7 +135,7 @@ namespace reExp.Controllers.rundotnet
                     }
 
                     data.Output = output.Output;
-                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "OK", (int)data.LanguageChoice);
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "OK", (int)data.LanguageChoice, data.IsApi);
                     return data;
                 }
                 catch (Exception e)
@@ -243,7 +244,7 @@ namespace reExp.Controllers.rundotnet
                 {
                     data.Errors.Add(string.Format("({0}:{1}) {2}", ce.Line, ce.Column, ce.ErrorText));
                 }
-                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Compilation errors", (int)data.LanguageChoice);
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Compilation errors", (int)data.LanguageChoice, data.IsApi);
                 data.RunStats = string.Format("Compilation time: {0} s", Math.Round((compilationTimeInMs / (double)1000), 2));
                 return data;
             }
@@ -316,7 +317,7 @@ namespace reExp.Controllers.rundotnet
                                         data.Errors.Add(res);
                                         string partialResult = output.Builder.ToString();
                                         data.Output = partialResult;
-                                        Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, res, (int)data.LanguageChoice);
+                                        Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, res, (int)data.LanguageChoice, data.IsApi);
                                         data.RunStats = string.Format("Compilation time: {0} sec, absolute running time: {1} sec, cpu time: {2} sec, average memory usage: {3} Mb, average nr of threads: {4}",
                                             Math.Round((compilationTimeInMs / (double)1000), 2),
                                             Math.Round((DateTime.Now - start).TotalSeconds, 2),
@@ -348,11 +349,11 @@ namespace reExp.Controllers.rundotnet
                         {
                             data.Output = output.Builder.ToString();
                             data.Errors.Add(error.Output);
-                            Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, error.Output, (int)data.LanguageChoice);
+                            Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, error.Output, (int)data.LanguageChoice, data.IsApi);
                             return data;
                         }
                         data.Output = output.Output;
-                        Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "OK", (int)data.LanguageChoice);
+                        Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "OK", (int)data.LanguageChoice, data.IsApi);
                         return data;
                     }
                     catch (Exception e)
@@ -486,7 +487,7 @@ namespace reExp.Controllers.rundotnet
             {
                 reExp.Utils.Log.LogInfo("Linux " + res.System_Error, "RunDotNet");
                 data.Errors.Add(res.System_Error);
-                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: system error", (int)data.LanguageChoice);
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: system error", (int)data.LanguageChoice, data.IsApi);
                 return data;
             }
             if (!string.IsNullOrEmpty(res.Errors))
@@ -494,7 +495,7 @@ namespace reExp.Controllers.rundotnet
                 data.Errors.Add(res.Errors);
                 if (!logged)
                 {
-                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: error", (int)data.LanguageChoice);
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: error", (int)data.LanguageChoice, data.IsApi);
                     logged = true;
                 }
             }
@@ -503,7 +504,7 @@ namespace reExp.Controllers.rundotnet
                 data.Errors.Add(res.Exit_Status);
                 if (!logged)
                 {
-                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: negative exit code", (int)data.LanguageChoice);
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: negative exit code", (int)data.LanguageChoice, data.IsApi);
                     logged = true;
                 }
             }
@@ -512,7 +513,7 @@ namespace reExp.Controllers.rundotnet
                 data.Warnings.Add(res.Warnings);
                 if (!logged)
                 {
-                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: warnings", (int)data.LanguageChoice);
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: warnings", (int)data.LanguageChoice, data.IsApi);
                     logged = true;
                 }
             }
@@ -527,7 +528,7 @@ namespace reExp.Controllers.rundotnet
             }
             if (!logged)
             {
-                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: ok", (int)data.LanguageChoice);
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: ok", (int)data.LanguageChoice, data.IsApi);
                 logged = true;
             }
             return data;

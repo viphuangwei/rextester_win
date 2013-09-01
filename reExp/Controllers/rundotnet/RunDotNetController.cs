@@ -54,6 +54,35 @@ namespace reExp.Controllers.rundotnet
         }
     }
 
+    class JsonDataSubset
+    {
+        public string Warnings
+        {
+            get;
+            set;
+        }
+        public string Errors
+        {
+            get;
+            set;
+        }
+        public string Result
+        {
+            get;
+            set;
+        }
+        public string Stats
+        {
+            get;
+            set;
+        }
+        public List<string> Files
+        {
+            get;
+            set;
+        }
+    }
+
 
     public class RunDotNetController : Controller
     {
@@ -322,25 +351,49 @@ namespace reExp.Controllers.rundotnet
         {
             Compression.SetCompression();
             JavaScriptSerializer json = new JavaScriptSerializer();
-
+            
             if (!string.IsNullOrEmpty(data.Program) && data.Program.Length > maxChars)
             {
-                return json.Serialize(new JsonData() { Errors = string.Format("Program is too long (max is {0} characters).\n", maxChars) });
+                return json.Serialize(new JsonDataSubset() { Errors = string.Format("Program is too long (max is {0} characters).\n", maxChars) });
             }
             if (!string.IsNullOrEmpty(data.Input) && data.Input.Length > maxChars)
             {
-                return json.Serialize(new JsonData() { Errors = string.Format("Input is too long (max is {0} characters).\n", maxChars) });
+                return json.Serialize(new JsonDataSubset() { Errors = string.Format("Input is too long (max is {0} characters).\n", maxChars) });
             }
 
             data.Warnings = new List<string>();
             data.Errors = new List<string>();
-            data = RundotnetLogic.RunProgram(data);
-            string warnings = null, errors = null;
-            if (data.Warnings.Count() != 0 && data.ShowWarnings)
-                warnings = data.Warnings.Aggregate((a, b) => a + "\n" + b);
-            if (data.Errors.Count() != 0)
-                errors = data.Errors.Aggregate((a, b) => a + "\n" + b);
-            return json.Serialize(new JsonData() { Warnings = warnings, Errors = errors, Result = data.Output, Stats = data.RunStats, Files = data.Files });
+
+            var cache = Model.GetRundotnetDataFromRedis(data);
+            if (cache != null)
+            {
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, data.Output, (int)data.LanguageChoice, data.IsApi);
+                return json.Serialize(new JsonDataSubset() { Warnings = data.ShowWarnings || data.IsApi ? cache.WholeWarning : null, Errors = cache.WholeError, Result = cache.WholeOutput, Stats = cache.RunStatus + " (cached)" });
+            }
+            else
+            {
+                data = RundotnetLogic.RunProgram(data);
+                string warnings = null, errors = null;
+                if (data.Warnings.Count() != 0)
+                    warnings = data.Warnings.Aggregate((a, b) => a + "\n" + b);
+                if (data.Errors.Count() != 0)
+                    errors = data.Errors.Aggregate((a, b) => a + "\n" + b);
+                ThreadPool.QueueUserWorkItem(f =>
+                    { 
+                        data.WholeWarning = warnings;
+                        data.WholeError = errors;
+                        Model.InsertRundotnetDataToRedis(data);
+                    });
+                return json.Serialize(new JsonDataSubset() { Warnings = data.ShowWarnings || data.IsApi ? warnings : null, Errors = errors, Result = data.Output, Stats = data.RunStats, Files = data.Files });
+            }
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        [ValidateInput(false)]
+        public ContentResult Api(RundotnetData data)
+        {
+            data.IsApi = true;
+            return this.Content(Run(data), "application/json");
         }
     }
 }

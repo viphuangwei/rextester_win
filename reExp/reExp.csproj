@@ -49,6 +49,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BookSleeve">
+      <HintPath>dlls\BookSleeve.dll</HintPath>
+    </Reference>
     <Reference Include="FSharp.Compiler.CodeDom, Version=4.0.0.1, Culture=neutral, PublicKeyToken=f536804aa0eb945b, processorArchitecture=MSIL" />
     <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -158,6 +161,7 @@
     <Content Include="Content\up.png" />
     <Content Include="Content\upvoted.png" />
     <Content Include="Content\ZeroClipboard.swf" />
+    <Content Include="dlls\BookSleeve.dll" />
     <Content Include="dlls\FSharp.Core.dll" />
     <Content Include="dlls\FSharp.Core.xml" />
     <Content Include="dlls\FSharp.PowerPack.Build.Tasks.dll" />

@@ -12,7 +12,8 @@
         <h2>About</h2>
         Rextester - some online tools for anyone who finds them useful. It was started as online .net regex tester.
         <br/>
-        <a href="http://rextester.com/main/faq/">Short faq and troubleshooting.</a> <br/><br/>
+        <a href="http://rextester.com/main/faq/">Short faq and troubleshooting.</a> <br/>
+        <a href="https://groups.google.com/forum/#!forum/rextester">Discission google group.</a><br/><br/>
         <div style="padding-left: 2em">
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Regex tester</a> - .net regex tester. <br />
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Replace)%>">Regex replace</a> - .net regex replacement.<br />
@@ -85,10 +86,10 @@
                 <li><code>Scala - scala 2.9.2 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</code></li>
                 <li><code>Scheme - guile 2.0.7</code></li>
             </ul> 
-            Your code will be run on behalf user <code>'nobody'</code> and group <code>'nogroup'</code>. Also your code will be executed from Python wrapper which sets various limits to the process. It does so
+            Your code will be run on behalf special user and group. Also your code will be executed from Python wrapper which sets various limits to the process. It does so
             by using <code>'setrlimit'</code> system call. You'll have max 5 sec of cpu time, limited memory (~1500 Mb) and other restrictions will apply (like no writing permissions). Also your process and all its children will be run in a
             newly created process group which will be terminated after 10 seconds from start if still running.<br/>
-            <br/>We don't claim that this is secure. In many senses you'll have the power of <code>'nobody'</code> user. On a bright side, this has some <a href="http://rextester.com/runcode?code=KAKN22727">useful</a> side-effects. The reason why, at least for now, 
+            <br/>We don't claim that this is secure. In many senses you'll have the power of special user. On a bright side, this has some <a href="http://rextester.com/runcode?code=KAKN22727">useful</a> side-effects. The reason why, at least for now, 
             we leave so many potential security breaches is because it's <b>hard</b> to make it really secure. What are the options? 
             <ul>
                 <li><a href="http://codepad.org/">Codepad</a> seems to <a href="http://rextester.com/runcode?code=JAJ71205"><code>'ptrace'</code></a>
@@ -141,6 +142,95 @@
                 foreach(var lang in Model.LangCounters.OrderByDescending(f => f.Value)) 
                 {
                     int filled = (int)Math.Round((double)Model.LangCounters[lang.Key]*100 / (double)sum);
+                    %>
+                    <tr>
+                        <td><%:lang.Key%></td>
+                        <td><%:lang.Value%></td>
+                        <%for(int i = 0; i < filled; i++)
+                        {%>
+                             <td style="width:1px; background-color:grey;"></td>    
+                       <%}%>
+                        <%for(int i = 0; i < 100 - filled; i++)
+                        {%>
+                             <td style="width:1px;"></td>    
+                       <%}%>
+                    </tr>    
+                <%}%>
+            </table>
+            <br/>
+            <b style="color:Gray">Api</b><br/>
+            Restfull api is supported (both POST and GET) at <code>http://rextester.com/rundotnet/api</code>. What needs to be supplied are these values:
+<pre>
+    LanguageChoiceWrapper=Language number (see below)
+    Program=Code to run
+    Input=Input to be supplied to stdin of a process
+    CompilerArgs=compiler args as one string (when applicable)
+</pre>
+            Returned is json string with the following properties:
+<pre>
+    Result=Output of a program (in case of Sql Server - html)
+    Warnings=Warnings, if any, as one string
+    Errors=Errors, if any, as one string
+    Stats=Execution stats as one string
+    Files=In case of Octave - list of png images encoded as base64 strings
+</pre>
+            Language numbers:
+<pre>
+    C# = 1
+    VB.NET = 2
+    F# = 3
+    Java = 4
+    Python = 5
+    C (gcc) = 6
+    C++ (gcc) = 7
+    Php = 8
+    Pascal = 9
+    Objective-C = 10
+    Haskell = 11
+    Ruby = 12
+    Perl = 13
+    Lua = 14
+    Nasm = 15
+    Sql Server = 16
+    Javascript = 17
+    Lisp = 18
+    Prolog = 19
+    Go = 20
+    Scala = 21
+    Scheme = 22
+    Node.js = 23
+    Python 3 = 24
+    Octave = 25
+    C (clang) = 26
+    C++ (clang) = 27    
+</pre>
+            <br/>
+            Api stats:
+            <table style="border-color:gray;">
+                <tr>
+                    <td>
+                        Language&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        Runs&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <%
+                sum = Model.ApiLangCounters.Sum(f => f.Value);
+                sum = sum == 0 ? 1 : sum;
+                foreach(var lang in Model.ApiLangCounters.OrderByDescending(f => f.Value)) 
+                {
+                    int filled = (int)Math.Round((double)Model.ApiLangCounters[lang.Key]*100 / (double)sum);
                     %>
                     <tr>
                         <td><%:lang.Key%></td>

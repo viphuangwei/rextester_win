@@ -3,13 +3,13 @@
     function scriptHint(editor, callback) {
         var cur = editor.getCursor(), token = editor.getTokenAt(cur);
         if (token.string[0] === "(") {
-            $.post('http://api.rextester.com/Service.asmx/GetPythonParenCompletions', { source: $('<div/>').text(editor.getValue()).html(), line: cur.line + 1, column: cur.ch },
+            $.post('http://api.rextester.com/service/Service.asmx/GetPythonParenCompletions', { source: $('<div/>').text(editor.getValue()).html(), line: cur.line + 1, column: cur.ch },
                 function (data) {
                     Do(editor, callback, data, '(')
                 }, 'text')
         }
         else {
-            $.post('http://api.rextester.com/Service.asmx/GetPythonDotCompletions', { source: $('<div/>').text(editor.getValue()).html(), line: cur.line + 1, column: cur.ch },
+            $.post('http://api.rextester.com/service/Service.asmx/GetPythonDotCompletions', { source: $('<div/>').text(editor.getValue()).html(), line: cur.line + 1, column: cur.ch },
                 function (data) {
                     Do(editor, callback, data, '.')
                 }, 'text')

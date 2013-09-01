@@ -19,7 +19,13 @@ namespace reExp.Controllers.main
         public ActionResult Index(MainData data)
         {
             Compression.SetCompression();
-            data.LangCounters = Model.GetLangCounter();
+            var list = Model.GetLangCounter();
+            data.LangCounters = list.Where(f => f.Key.ToLower() != "unknown")
+                                    .Where(f => !f.Key.ToLower().EndsWith("_api"))
+                                    .ToDictionary(f => f.Key, f => f.Value);
+            data.ApiLangCounters = list.Where(f => f.Key.ToLower() != "unknown_api")
+                                       .Where(f => f.Key.ToLower().EndsWith("_api"))
+                                       .ToDictionary(f => f.Key.Substring(0, f.Key.Length-4), f => f.Value);
             return View(data);
         }
 

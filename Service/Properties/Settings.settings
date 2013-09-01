@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Service_linux_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://api.rextester.com/Service.asmx</Value>
+      <Value Profile="(Default)">http://api.rextester.com/service/Service.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>
