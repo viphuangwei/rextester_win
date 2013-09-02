@@ -77,6 +77,7 @@ namespace reExp.Models
                     });
                 val = GlobalUtils.Utils.Compress(val);
                 conn.Strings.Set(redis_db, new Dictionary<string, byte[]>() { { key, Encoding.UTF8.GetBytes(val) } }).Wait();
+                conn.Keys.Expire(redis_db, key, 24 * 60 * 60);
             }
             catch (Exception e)
             {
@@ -90,13 +91,13 @@ namespace reExp.Models
             {
                 if (data.LanguageChoice == LanguagesEnum.Octave)
                     return null;
-
+                
                 var conn = RedisConnection;
                 JavaScriptSerializer json = new JavaScriptSerializer();
                 string key = json.Serialize(new RedisData()
                 {
                     Program = data.Program,
-                    Input = data.Input,
+                    Input = data.LanguageChoice == LanguagesEnum.Prolog ? data.Input + "\nhalt." : data.Input,
                     Args = data.CompilerArgs,
                     LanguageChoice = (int)data.LanguageChoice
                 });
