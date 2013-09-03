@@ -748,7 +748,7 @@ print -dpng some_name.png;
                 case LanguagesEnum.CClang:
                     return "-Wall -std=gnu99 -O2 -o a.out source_file.c";
                 case LanguagesEnum.CPPClang:
-                    return "-Wall -std=c++11 -O2 -o a.out source_file.cpp";
+                    return "-Wall -std=c++11 -stdlib=libc++ -ldl -O2 -o a.out source_file.cpp";
                 case LanguagesEnum.Go:
                     return "-o a.out source_file.go";
                 case LanguagesEnum.Haskell:

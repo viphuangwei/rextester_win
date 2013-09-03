@@ -9,7 +9,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/db.s3db">
-      <publishTime>09/02/2013 22:20:36</publishTime>
+      <publishTime>09/02/2013 22:46:31</publishTime>
     </File>
     <File Include="bin/BookSleeve.dll">
       <publishTime>08/15/2013 23:33:06</publishTime>
@@ -27,7 +27,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2013 19:33:22</publishTime>
     </File>
     <File Include="bin/reExp.dll">
-      <publishTime>09/02/2013 22:38:23</publishTime>
+      <publishTime>09/03/2013 23:56:34</publishTime>
     </File>
     <File Include="bin/Roslyn.Compilers.CSharp.dll">
       <publishTime>03/16/2013 19:22:54</publishTime>
@@ -36,10 +36,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2013 19:22:54</publishTime>
     </File>
     <File Include="bin/Service.dll">
-      <publishTime>09/02/2013 00:38:50</publishTime>
+      <publishTime>09/02/2013 23:10:35</publishTime>
     </File>
     <File Include="bin/Service.XmlSerializers.dll">
-      <publishTime>09/02/2013 00:38:51</publishTime>
+      <publishTime>09/02/2013 23:10:35</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.DLL">
       <publishTime>03/16/2013 19:22:54</publishTime>
@@ -1188,7 +1188,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/14/2013 22:55:36</publishTime>
     </File>
     <File Include="Views/Feedback/Index.aspx">
-      <publishTime>08/28/2013 23:28:58</publishTime>
+      <publishTime>09/03/2013 23:55:58</publishTime>
     </File>
     <File Include="Views/Login/CreateGoogleUser.aspx">
       <publishTime>03/16/2013 19:22:53</publishTime>
@@ -1206,7 +1206,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/28/2013 23:28:25</publishTime>
     </File>
     <File Include="Views/Main/Index.aspx">
-      <publishTime>09/01/2013 17:40:59</publishTime>
+      <publishTime>09/03/2013 23:55:31</publishTime>
     </File>
     <File Include="Views/Reference/Index.aspx">
       <publishTime>08/15/2013 16:19:17</publishTime>

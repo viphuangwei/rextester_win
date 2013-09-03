@@ -57,7 +57,7 @@
                 
 	        <div><a href="http://rextester.uservoice.com/">Uservoice</a>
                 <br/>
-                        <a href="https://groups.google.com/forum/#!forum/rextester">Discission google group.</a><br/><br/>
+                        <a href="https://groups.google.com/forum/#!forum/rextester">Discussion forum</a><br/><br/>
 	        </div>      
             </div>
        <%}%>

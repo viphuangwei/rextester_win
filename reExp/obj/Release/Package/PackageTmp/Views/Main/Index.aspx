@@ -13,7 +13,15 @@
         Rextester - some online tools for anyone who finds them useful. It was started as online .net regex tester.
         <br/>
         <a href="http://rextester.com/main/faq/">Short faq and troubleshooting.</a> <br/>
-        <a href="https://groups.google.com/forum/#!forum/rextester">Discission google group.</a><br/><br/>
+        <a href="https://groups.google.com/forum/#!forum/rextester">Discussion forum.</a><br/><br/>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="5GVYLXYXTHCZA">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+        <br/>
+        <br/>
         <div style="padding-left: 2em">
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Regex tester</a> - .net regex tester. <br />
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Replace)%>">Regex replace</a> - .net regex replacement.<br />
