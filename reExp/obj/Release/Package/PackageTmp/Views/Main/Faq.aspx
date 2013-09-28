@@ -18,8 +18,8 @@ These are common problems noticed so far:
         sign at the bottom). The whole input should be supplied before running code - at runtime it will be piped to the stdin stream of the process.
     </li>
     <li>
-        Codewall - the ambitious idea to build something like a wikipedia for algorithms and solutions to interesting problems.
-        All what's needed are smart contributors. Please, put interesting/useful-to-others stuff. And give it a propper title.
+        Codewall - put there code snippets you want to find later easily. For example, google for 'rebuild indexes rextester' to get Sql Server's script to rebuild all indexes.<br/>
+        Personal code walls - put anything you like there. Nice and encouraged usage would be to put tutorials there as in <a href="http://rextester.com/users/31">C# tutorial</a>.
     </li>
     <li>
         If you have any questions - ask using <a href="https://groups.google.com/forum/#!forum/rextester">this google group.</a><br/><br/>.

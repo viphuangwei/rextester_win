@@ -1,0 +1,4 @@
+C:\Users\Renat\Desktop\rextester_win\GlobalUtils\bin\Debug\GlobalUtils.dll
+C:\Users\Renat\Desktop\rextester_win\GlobalUtils\bin\Debug\GlobalUtils.pdb
+C:\Users\Renat\Desktop\rextester_win\GlobalUtils\obj\Debug\GlobalUtils.dll
+C:\Users\Renat\Desktop\rextester_win\GlobalUtils\obj\Debug\GlobalUtils.pdb

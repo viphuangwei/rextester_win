@@ -196,36 +196,36 @@ namespace reExp.Utils
             {
                 string page = parts[parts.Length - 1].ToLower();
 
-                if (pagePath.Contains("tester"))
+                if (pagePath.Trim('/').ToLower().Trim() == "tester")
                     return PagesEnum.Tester;
-                if (pagePath.Contains("replace"))
+                if (pagePath.Trim('/').ToLower().Trim() == "replace")
                     return PagesEnum.Replace;
-                if (pagePath.Contains("reference"))
+                if (pagePath.Trim('/').ToLower().Trim() == "reference")
                     return PagesEnum.Reference;
-                if (pagePath.Contains("diff"))
+                if (pagePath.Trim('/').ToLower().Trim() == "diff")
                     return PagesEnum.Diff;
-                if (pagePath.Contains("codewall"))
+                if (pagePath.Trim('/').ToLower().Trim() == "codewall")
                     return PagesEnum.Codewall;
-                if (pagePath.Contains("feedback"))
+                if (pagePath.Trim('/').ToLower().Trim() == "feedback")
                     return PagesEnum.Feedback;
-                if (pagePath.Contains("usersstuff"))
+                if (pagePath.Trim('/').ToLower().Trim() == "login/usersstuff")
                     return PagesEnum.UsersStuff;
-                if (pagePath.Contains("notifications"))
+                if (pagePath.Trim('/').ToLower().Trim() == "login/notifications")
                     return PagesEnum.Notifications;
-                if (pagePath.Contains("users"))
+                if (pagePath.Trim('/').ToLower().Trim() == "users" || pagePath.Trim('/').ToLower().Trim().StartsWith("users/"))
                     return PagesEnum.Users;
-                if (pagePath.Contains("login"))
+                if (pagePath.Trim('/').ToLower().Trim() == "login")
                     return PagesEnum.Login;
-                if (pagePath.Contains("logout"))
+                if (pagePath.Trim('/').ToLower().Trim() == "logout")
                     return PagesEnum.Logout;
-                if (pagePath.Contains("faq"))
+                if (pagePath.Trim('/').ToLower().Trim() == "main/faq")
                     return PagesEnum.Home;
-                if (pagePath.Contains("discussion"))
-                    return PagesEnum.Rundotnet;
-                if (pagePath.Contains("rundotnet") || pagePath.Contains("runcode") || pagePath.Contains("versions") || new System.Text.RegularExpressions.Regex(@"/[a-z]+\d+.*", System.Text.RegularExpressions.RegexOptions.IgnoreCase).IsMatch(pagePath))
-                    return PagesEnum.Rundotnet;
+                //if (pagePath.Trim('/').ToLower().Trim() == "discussion")
+                //    return PagesEnum.Rundotnet;
+                //if (pagePath.Contains("rundotnet") || pagePath.Contains("runcode") || pagePath.Contains("versions") || new System.Text.RegularExpressions.Regex(@"/[a-z]+\d+.*", System.Text.RegularExpressions.RegexOptions.IgnoreCase).IsMatch(pagePath))
+                //    return PagesEnum.Rundotnet;
 
-                return PagesEnum.Unknown;
+                return PagesEnum.Rundotnet;
             }
             else
                 return PagesEnum.Home;
