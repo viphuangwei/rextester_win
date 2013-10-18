@@ -127,7 +127,15 @@
           mode = "text/x-csrc";
           js.Add("mode/clike/clike.js");
           break;
+      case LanguagesEnum.VC:
+          mode = "text/x-csrc";
+          js.Add("mode/clike/clike.js");
+          break;
       case LanguagesEnum.CPP:
+          mode = "text/x-c++src";
+          js.Add("mode/clike/clike.js");
+          break;
+      case LanguagesEnum.VCPP:
           mode = "text/x-c++src";
           js.Add("mode/clike/clike.js");
           break;

@@ -32,6 +32,10 @@ namespace reExp.Utils
                     return "C (clang)";
                 case LanguagesEnum.CPPClang:
                     return "C++ (clang)";
+                case LanguagesEnum.VCPP:
+                    return "C++ (vc++)";
+                case LanguagesEnum.VC:
+                    return "C (vc)";
                 case LanguagesEnum.Php:
                     return "Php";
                 case LanguagesEnum.Pascal:

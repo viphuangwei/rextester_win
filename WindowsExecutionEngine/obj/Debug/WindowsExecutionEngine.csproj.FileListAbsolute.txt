@@ -1,0 +1,5 @@
+C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\bin\Debug\WindowsExecutionEngine.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\bin\Debug\WindowsExecutionEngine.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\obj\Debug\WindowsExecutionEngine.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\obj\Debug\WindowsExecutionEngine.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\obj\Debug\WindowsExecutionEngine.csprojResolveAssemblyReference.cache

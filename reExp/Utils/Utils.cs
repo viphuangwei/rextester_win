@@ -548,6 +548,8 @@ namespace reExp.Utils
         Octave = 25,
         CClang = 26,
         CPPClang = 27,
+        VCPP = 28,
+        VC = 29,
         Unknown = 0
     }
 }

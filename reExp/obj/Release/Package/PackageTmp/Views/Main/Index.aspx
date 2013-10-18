@@ -14,12 +14,22 @@
         <br/>
         <a href="http://rextester.com/main/faq/">Short faq and troubleshooting.</a> <br/>
         <a href="https://groups.google.com/forum/#!forum/rextester">Discussion forum.</a><br/><br/>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="5GVYLXYXTHCZA">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-        </form>
+
+        <table>
+            <tr>
+                <td>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="5GVYLXYXTHCZA">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                </td>
+                <td>
+	                <script id='fb7px4k'>(function (i) { var f, s = document.getElementById(i); f = document.createElement('iframe'); f.src = '//api.flattr.com/button/view/?uid=ren&button=compact&url=' + encodeURIComponent(document.URL); f.title = 'Flattr'; f.height = 20; f.width = 110; f.style.borderWidth = 0; s.parentNode.insertBefore(f, s); })('fb7px4k');</script>
+                </td>
+            </tr>
+        </table>
         <br/>
         <br/>
         <div style="padding-left: 2em">
@@ -67,14 +77,20 @@
             separately, in different batches. So, for example, if you want to create a function and later use it in select statement you have to separate create statement and select statement by 'GO', 
             otherwise you'll receive an error from parser since in select statement you would be reffering to a function which doesn't yet exist.<br/>
             For convinience there is simple pre-built schema, shown <a href="../../Content/Schema.png">here</a>.
+            <br/><br/><b style="color:Gray">Visual C++ (and C)</b><br/>
+            Your code is compiled to native binary which runs on Windows Server 2012. Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
+            After 10 seconds of execution this process will be killed. This and the fact that your code will be executed on behalf of IIS application pool identity are the only security measures taken.
+            Think you can break the service? Probably so and we'd like to hear how would you do this.
             <br/><br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
             <ul>
                 <li><code>Assembly - nasm 2.10.01</code></li>
                 <li><code>C++ (gcc) - g++ 4.7.3 (g++ -Wall -std=c++11 -O2)</code></li>
                 <li><code>C++ (clang) - clang 3.2 (clang++ -Wall -std=c++11 -O2)</code></li>
+                <li><code>C++ (vc++) - cl.exe that comes with VS2013 release candidate</code></li>
                 <li><code>C (gcc) - gcc 4.7.3 (gcc -Wall -std=gnu99 -O2)</code></li>
                 <li><code>C (clang) - clang 3.2 (clang -Wall -std=gnu99 -O2)</code></li>
+                <li><code>C (vc) - cl.exe that comes with VS2013 release candidate</code></li>
                 <li><code>Common Lisp - gnu clisp 2.49</code></li>
                 <li><code>Go - go 1.0.2</code></li>
                 <li><code>Haskell - ghc 7.6.2</code></li>
@@ -211,6 +227,8 @@
     Octave = 25
     C (clang) = 26
     C++ (clang) = 27    
+    C++ (vc++) = 28
+    C (vc) = 29
 </pre>
             <br/>
             Api stats:

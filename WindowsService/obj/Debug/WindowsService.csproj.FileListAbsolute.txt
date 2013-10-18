@@ -1,0 +1,9 @@
+C:\Users\Renat\Desktop\rextester_win\WindowsService\obj\Debug\WindowsService.csprojResolveAssemblyReference.cache
+C:\Users\Renat\Desktop\rextester_win\WindowsService\bin\WindowsService.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsService\bin\WindowsService.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsService\bin\GlobalUtils.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsService\bin\WindowsExecutionEngine.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsService\bin\GlobalUtils.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsService\bin\WindowsExecutionEngine.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsService\obj\Debug\WindowsService.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsService\obj\Debug\WindowsService.pdb

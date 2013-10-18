@@ -24,6 +24,10 @@ namespace reExp.Controllers.rundotnet
             {
                 return RunSqlServer(data);
             }
+            else if (data.LanguageChoice == LanguagesEnum.VCPP || data.LanguageChoice == LanguagesEnum.VC)
+            {
+                return RunWindows(data);
+            }
             else
             {
                 return RunLinux(data);
@@ -385,6 +389,86 @@ namespace reExp.Controllers.rundotnet
             }
 
             return null;
+        }
+        static RundotnetData RunWindows(RundotnetData data)
+        {
+            WindowsService service = new WindowsService();
+            Service.win.Languages lang = Service.win.Languages.VCPP;
+
+            switch (data.LanguageChoice)
+            {
+                case LanguagesEnum.VCPP:
+                    lang = Service.win.Languages.VCPP;
+                    break;
+                case LanguagesEnum.VC:
+                    lang = Service.win.Languages.VC;
+                    break;
+                default:
+                    break;
+            }
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            var res = service.DoWork(data.Program, data.Input, data.CompilerArgs, lang);
+            watch.Stop();
+            if (res != null)
+            {
+                if (string.IsNullOrEmpty(res.Stats))
+                    res.Stats = "";
+                else
+                    res.Stats += ", ";
+                res.Stats += string.Format("absolute service time: {0} sec", Math.Round((double)watch.ElapsedMilliseconds / (double)1000, 2));
+                data.RunStats = res.Stats;
+            }
+            bool logged = false;
+            if (!string.IsNullOrEmpty(res.System_Error))
+            {
+                reExp.Utils.Log.LogInfo("Windows " + res.System_Error, "RunDotNet");
+                data.Errors.Add(res.System_Error);
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Windows: system error", (int)data.LanguageChoice, data.IsApi);
+                return data;
+            }
+            if (!string.IsNullOrEmpty(res.Errors))
+            {
+                data.Errors.Add(res.Errors);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Windows: error", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            if (res.Exit_Code < 0)
+            {
+                data.Errors.Add(res.Exit_Status);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Windows: negative exit code", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            if (!string.IsNullOrEmpty(res.Warnings))
+            {
+                data.Warnings.Add(res.Warnings);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Windows: warnings", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            data.Output = res.Output;
+            if (res.Files != null)
+            {
+                data.Files = new List<string>();
+                foreach (var f in res.Files)
+                {
+                    data.Files.Add(Convert.ToBase64String(f));
+                }
+            }
+            if (!logged)
+            {
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Windows: ok", (int)data.LanguageChoice, data.IsApi);
+                logged = true;
+            }
+            return data;
         }
         static RundotnetData RunLinux(RundotnetData data)
         {

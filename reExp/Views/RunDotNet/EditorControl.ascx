@@ -66,6 +66,16 @@
           syntax = "cpp";
           js = "mode/clike/clike.js";
           break;
+      case LanguagesEnum.VCPP:
+          mode = "text/x-c++src";
+          syntax = "cpp";
+          js = "mode/clike/clike.js";
+          break;
+      case LanguagesEnum.VC:
+          mode = "text/x-csrc";
+          syntax = "c";
+          js = "mode/clike/clike.js";
+          break;
       case LanguagesEnum.Php:
           mode = "application/x-httpd-php";
           syntax = "php";

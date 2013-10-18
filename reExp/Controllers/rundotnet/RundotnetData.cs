@@ -192,7 +192,9 @@ namespace reExp.Controllers.rundotnet
                     this.LanguageChoice == LanguagesEnum.CClang ||
                     this.LanguageChoice == LanguagesEnum.Go ||
                     this.LanguageChoice == LanguagesEnum.Haskell ||
-                    this.LanguageChoice == LanguagesEnum.ObjectiveC)
+                    this.LanguageChoice == LanguagesEnum.ObjectiveC ||
+                    this.LanguageChoice == LanguagesEnum.VCPP ||
+                    this.LanguageChoice == LanguagesEnum.VC)
                     return true;
                 else
                     return false;
@@ -218,6 +220,10 @@ namespace reExp.Controllers.rundotnet
                         return "ghc";
                     case LanguagesEnum.ObjectiveC:
                         return "gcc";
+                    case LanguagesEnum.VCPP:
+                        return "cl.exe";
+                    case LanguagesEnum.VC:
+                        return "cl.exe";
                     default:
                         return "";
                 }
@@ -271,6 +277,11 @@ namespace reExp.Controllers.rundotnet
                     },
                     new SelectListItem()
                     {
+                        Text = "C++ (vc++)",
+                        Value = ((int)LanguagesEnum.VCPP).ToString()
+                    },
+                    new SelectListItem()
+                    {
                         Text = "C (gcc)",
                         Value = ((int)LanguagesEnum.C).ToString()
                     },
@@ -278,6 +289,11 @@ namespace reExp.Controllers.rundotnet
                     {
                         Text = "C (clang)",
                         Value = ((int)LanguagesEnum.CClang).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "C (vc)",
+                        Value = ((int)LanguagesEnum.VC).ToString()
                     },
                     new SelectListItem()
                     {
@@ -577,6 +593,28 @@ int main()
 {
     cout << ""Hello, world!\n"";
 }";
+                case LanguagesEnum.VCPP:
+                    return
+@"//Title of this code
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << ""Hello, world!\n"";
+}";
+                case LanguagesEnum.VC:
+                    return
+@"//Title of this code
+
+#include  <stdio.h>
+
+int main(void)
+{
+    printf(""Hello, world!\n"");
+    return 0;
+}";
 
                 case LanguagesEnum.Php:
                     return
@@ -749,6 +787,10 @@ print -dpng some_name.png;
                     return "-Wall -std=gnu99 -O2 -o a.out source_file.c";
                 case LanguagesEnum.CPPClang:
                     return "-Wall -std=c++11 -stdlib=libc++ -ldl -O2 -o a.out source_file.cpp";
+                case LanguagesEnum.VCPP:
+                    return "source_file.cpp -o a.exe /EHsc";
+                case LanguagesEnum.VC:
+                    return "source_file.c -o a.exe";
                 case LanguagesEnum.Go:
                     return "-o a.out source_file.go";
                 case LanguagesEnum.Haskell:
