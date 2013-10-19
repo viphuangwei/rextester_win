@@ -251,11 +251,15 @@ namespace WindowsExecutionEngine
                         errorReader.Join(5000);
                         outputReader.Join(5000);
 
+                        if (process.ExitCode != 0)
+                            error.Output = string.Format("Process exit code is not 0: {0}\n", process.ExitCode) + error.Output;
+
                         odata.Errors = error.Output;
                         odata.Output = output.Output;
                     }
                 }
                 watch.Stop();
+
 
                 if (Utils.IsCompiled(idata.Lang))
                 {

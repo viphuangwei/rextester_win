@@ -13,3 +13,4 @@ C:\Users\Renat\Desktop\rextester_win\SqlServer\bin\Debug\GlobalUtils.dll
 C:\Users\Renat\Desktop\rextester_win\SqlServer\bin\Debug\GlobalUtils.pdb
 C:\Users\Renat\Desktop\rextester_win\SqlServer\obj\x86\Debug\SqlServer.exe
 C:\Users\Renat\Desktop\rextester_win\SqlServer\obj\x86\Debug\SqlServer.pdb
+C:\Users\Renat\Desktop\rextester_win\SqlServer\obj\x86\Debug\SqlServer.csprojResolveAssemblyReference.cache
