@@ -96,6 +96,10 @@ namespace reExp.Controllers.rundotnet
             if (!string.IsNullOrEmpty(savedNr))
             {
                 var code = Model.GetCode(savedNr, false);
+                if (code == null)
+                {
+                    throw new HttpException(404, "not found");
+                }
                 data.Title = code.Title; 
                 data.Program = code.Program;
                 data.Input = code.Input;
@@ -296,8 +300,11 @@ namespace reExp.Controllers.rundotnet
         {
             Compression.SetCompression();
             RundotnetData data = new RundotnetData();
-            data.LiveUserToken = Utils.Utils.GetGuid();
-            var code = Model.GetLiveCode(savedNr, data.LiveUserToken);
+            var code = Model.GetLiveCode(savedNr);
+            if (code == null)
+            {
+                throw new HttpException(404, "not found");
+            }
 
             data.Program = code.Program;
             data.Input = code.Input;
@@ -310,7 +317,6 @@ namespace reExp.Controllers.rundotnet
             data.PrimaryGuid = data.CodeGuid;
             data.IsLive = true;
             data.IsSaved = true;
-            data.LiveUsersCount = Model.LiveUsersCount(savedNr);
             data.DisplayName = SessionManager.IsUserInSession() ? SessionManager.UserName : Utils.Utils.RandomLetter();
             
             return View("Index", data);
@@ -322,6 +328,10 @@ namespace reExp.Controllers.rundotnet
         {
             Compression.SetCompression();
             var code = Model.GetCode(savedNr, false);
+            if (code == null)
+            {
+                throw new HttpException(404, "not found");
+            }
             data.Title = code.Title;
             data.Program = code.Program;
             data.Input = code.Input;

@@ -40,7 +40,7 @@
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run code</a> - online compiling and execution for some languages.
             <br/><br/><b style="color:Gray">C#, Visual basic, F#</b><br/>
             .Net framework v. 4.5 is used. Your code will be given max 5 sec of cpu time and limited memory (~150 Mb). Also your code will run in an appdomain with basic execution, reflection, thread control and web privileges only.<br/>
-            The entry point for you code is given Main method in type Program in namespace Rextester. <b>This entry point shouldn't be changed.</b>
+            The entry point for your code is given Main method in type Program in namespace Rextester. <b>This entry point shouldn't be changed.</b>
             Types from following assemblies are available:
              <ul>
                 <li><code>System.dll</code></li>
@@ -68,7 +68,13 @@
                 <li><code>FSharp.PowerPack.Parallel.Seq.dll</code></li>
             </ul>
             If you found security breaches and can break something in some way - we would appreciate your feedback on this.
-            <br/><br/><b style="color:Gray">Sql Server</b><br/>
+            <br/>Compiler versions:
+            <ul>
+                <li><code>C# - Microsoft (R) Visual C# Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5</code></li>
+                <li><code>Visual Basic - Microsoft (R) Visual Basic Compiler version 11.0.50709.17929</code></li>
+                <li><code>F# - Microsoft (R) F# Compiler version 11.0.50727.1</code></li>
+            </ul>
+            <br/><b style="color:Gray">Sql Server</b><br/>
             Sql Server 2012 Express Edition is used. There is only one database that queries run against. Queries executed on behalf database owner so all sort of actions are allowed including DDL queries.
             However, all actions run in transaction which is rolled back immediately after execution is over. This way any desired objects may be built, populated with data and worked on within the scope 
             of one request. There is 10 seconds limit for work to be completed. Execution of queries is achieved using ado.net mechanisms, in particular SqlDataReader type. 
@@ -80,17 +86,19 @@
             <br/><br/><b style="color:Gray">Visual C++ (and C)</b><br/>
             Your code is compiled to native binary which runs on Windows Server 2012. Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
             After 10 seconds of execution this process will be killed. This and the fact that your code will be executed on behalf of IIS application pool identity are the only security measures taken.
-            Think you can break the service? Probably so and we'd like to hear how would you do this.
-            <br/><br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
+            Think you can break the service? Probably so and we'd like to hear how would you do this. Also let us know if you need some other Windows-based compilers.
+            <br/>Compiler version:
+            <ul>
+                <li><code>C++ (vc++) and C - Microsoft (R) C/C++ Optimizing Compiler Version 18.00.21005.1 for x86</code></li>
+            </ul>
+            <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
             <ul>
                 <li><code>Assembly - nasm 2.10.01</code></li>
                 <li><code>C++ (gcc) - g++ 4.7.3 (g++ -Wall -std=c++11 -O2)</code></li>
                 <li><code>C++ (clang) - clang 3.2 (clang++ -Wall -std=c++11 -O2)</code></li>
-                <li><code>C++ (vc++) - cl.exe that comes with VS2013 release candidate</code></li>
                 <li><code>C (gcc) - gcc 4.7.3 (gcc -Wall -std=gnu99 -O2)</code></li>
                 <li><code>C (clang) - clang 3.2 (clang -Wall -std=gnu99 -O2)</code></li>
-                <li><code>C (vc) - cl.exe that comes with VS2013 release candidate</code></li>
                 <li><code>Common Lisp - gnu clisp 2.49</code></li>
                 <li><code>Go - go 1.0.2</code></li>
                 <li><code>Haskell - ghc 7.6.2</code></li>
@@ -128,10 +136,10 @@
             Everything that will be submitted as input will be piped to process via <code>stdin</code> stream. So your code should consume input as if it came from keyboard.
             <br/><br/>
             <b style="color:Gray">Live collaboration</b><br/>
-            Write code so that others see this real-time. Every participant can make changes and see changes made by others. <a href="http://sharejs.org/">ShareJS</a> library is used for operational transformations on text.
+            Write code so that others see this real-time. Every participant can make changes and see changes made by others. We use <a href="http://www.firepad.io">Firepad</a> and <a href="https://www.firebase.com/">Firebase</a>.
             <br/><br/>
             <b style="color:Gray">Credit</b><br/>
-            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://sharejs.org/">ShareJS</a>, <a href="http://code.google.com/p/coderev/">Coderev</a> and <a href="http://jedi.jedidjah.ch/">Jedi</a>.<br/><br />
+            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a>, <a href="http://code.google.com/p/coderev/">Coderev</a> and <a href="http://jedi.jedidjah.ch/">Jedi</a>.<br/><br />
             <b style="color:Gray">Code wall</b><br/>
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code wall</a> as well as <a href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">personal code walls</a> - place code on a wall for public display. These entries will be crawled by search engines, so one 
             possible use is to put there scripts that you may need for easy access later. For example, whenever I need a sql script for searching database definitions I simply search for <a href="https://www.google.com/search?q=sql+definition+rextester">'sql definition rextester'</a> and there is my script (it seems that code wall is 

@@ -8,70 +8,6 @@ using System.Collections.Concurrent;
 
 namespace reExp.Controllers.rundotnet
 {
-    public class LiveData
-    {
-        static ConcurrentDictionary<string, LiveRegistration> Versions = new ConcurrentDictionary<string, LiveRegistration>();
-        public static LiveRegistration GetRegistration(LiveCode code)
-        {
-            if (!Versions.ContainsKey(code.Guid))
-            {
-                if (Versions.Count > 1000)
-                {
-                    Versions = new ConcurrentDictionary<string, LiveRegistration>();
-                    Utils.Log.LogInfo("ConcurrentDictionary<string, LiveRegistration> Versions  was cleared", "Live cooperation notice.");
-                }
-                LiveRegistration live = new LiveRegistration() { Code = code };
-                Versions[code.Guid] = live;
-            }
-            return Versions[code.Guid];
-        }
-
-    }
-    public class LiveRegistration
-    {
-        public delegate void CodeUpdatedDelegate(LiveCode code);
-        public event CodeUpdatedDelegate CodeUpdated;
-
-        LiveCode _code;
-        public LiveCode Code
-        {
-            get
-            {
-                return _code;
-            }
-            set
-            {
-                _code = value;
-                if (this.CodeUpdated != null)
-                    CodeUpdated(value);
-            }
-        }
-    }
-
-    public class LiveCode
-    {
-        public string Program
-        {
-            get;
-            set;
-        }
-        public string Guid
-        {
-            get;
-            set;
-        }
-        public string VersionToken
-        {
-            get;
-            set;
-        }
-        public string UserToken
-        {
-            get;
-            set;
-        }
-    }
-
     public class RundotnetData
     {
         public LanguagesEnum LanguageChoice
@@ -812,11 +748,6 @@ print -dpng some_name.png;
             get;
             set;
         }
-        public string LiveGuid
-        {
-            get;
-            set;
-        }
         public string SavedOutput
         {
             get;
@@ -828,18 +759,6 @@ print -dpng some_name.png;
             set;
         }
         public bool IsLive
-        {
-            get;
-            set;
-        }
-    
-        public string LiveUserToken
-        {
-            get;
-            set;
-        }
-        
-        public int LiveUsersCount
         {
             get;
             set;

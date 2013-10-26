@@ -74,8 +74,8 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
-    <link rel="stylesheet" href="../../Scripts/codemirror2/lib/codemirror.css">
-    <link rel="stylesheet" href="../../Scripts/codemirror2/doc/docs2.css">
+    <link rel="stylesheet" href="../../Scripts/codemirror3/lib/codemirror.css">
+    <link rel="stylesheet" href="../../Scripts/codemirror3/doc/docs2.css">
 <%--    <%if (Model.Language == LanguagesEnum.CSharp)
     { 
         %><link rel="stylesheet" href="../../Scripts/codemirror2/theme/csharp.css"/><%
@@ -87,8 +87,8 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script src="../../Scripts/codemirror2/lib/codemirror.js"></script>
-    <script src="../../Scripts/codemirror2/lib/util/runmode.js"></script>
+    <script src="../../Scripts/codemirror3/lib/codemirror.js"></script>
+    <script src="../../Scripts/codemirror3/addon/runmode/runmode.js"></script>
 
     <%  
   string mode = null;
@@ -218,7 +218,7 @@
   }
   foreach(var j in js)
   {
-      %><script type="text/javascript" src="../../Scripts/codemirror2/<%:j%>"></script><%
+      %><script type="text/javascript" src="../../Scripts/codemirror3/<%:j%>"></script><%
   }
   %>
     <%if(Model.ShowComments)

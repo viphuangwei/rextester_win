@@ -332,39 +332,10 @@ namespace reExp.Models.DB
             ExecuteNonQuery(query, pars);
         }
 
-        public static List<Dictionary<string, object>> Live_Code_Get(string guid, string user_token)
+        public static List<Dictionary<string, object>> Live_Code_Get(string guid)
         {
-            string query = @"insert into LiveParticipants(livecode_id, participant_token, last_written, last_read) values((select lc.id from livecode lc inner join code c on lc.code_id = c.id where c.guid = @Guid), @Token, null, DATETIME('now'))";
+            string query = @"select * from Code c inner join LiveCode lc on lc.code_id = c.id where c.guid = @Guid";
             var pars = new List<SQLiteParameter>();
-            pars.Add(new SQLiteParameter("Guid", guid));
-            pars.Add(new SQLiteParameter("Token", user_token));
-            ExecuteNonQuery(query, pars);
-
-            query = @"select * from Code c inner join LiveCode lc on lc.code_id = c.id where c.guid = @Guid";
-            pars = new List<SQLiteParameter>();
-            pars.Add(new SQLiteParameter("Guid", guid));
-            return ExecuteQuery(query, pars);
-        }
-
-        public static List<Dictionary<string, object>> Get_Live_Users_Total(string guid, string user_token)
-        {
-            string query = null;
-            List<SQLiteParameter> pars = null;
-            if (!string.IsNullOrEmpty(user_token))
-            {
-                query = @"update LiveParticipants set last_read = DATETIME('now') where participant_token = @Token";
-                pars = new List<SQLiteParameter>();
-                pars.Add(new SQLiteParameter("Token", user_token));
-                ExecuteNonQuery(query, pars);
-            }
-            query =   @"select count(*) as 'total'
-                        from code c
-                            inner join livecode lc on c.id = lc.code_id
-                            inner join liveparticipants lp on lp.livecode_id = lc.id
-                        where c.guid = @Guid and
-                            (datetime('now', '-60 seconds') <= lp.last_written or datetime('now', '-60 seconds') <= lp.last_read)";
-
-            pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("Guid", guid));
             return ExecuteQuery(query, pars);
         }

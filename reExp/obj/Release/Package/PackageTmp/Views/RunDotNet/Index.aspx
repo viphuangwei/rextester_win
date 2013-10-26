@@ -78,7 +78,7 @@
             <%if (Model.ShowInput)
               {%>
                 <div style="width: 94.5%; margin-top:0.5em;margin-left:0;">                            
-                    <textarea spellcheck="false" cols="1000" id="Input" name="Input" rows="5" style="background-color:#FFFFBB;border: solid 1px gray;width: 100%;resize:none;<%:(string.IsNullOrEmpty(Model.Input) || Model.IsLive) ? "display:none;":"" %>"><%=Model.IsLive ? "" : Model.Input%></textarea>
+                    <textarea spellcheck="false" cols="1000" id="Input" name="Input" rows="5" style="background-color:#FFFFBB;border: solid 1px gray;width: 100%;resize:none;<%:(string.IsNullOrEmpty(Model.Input)) ? "display:none;":"" %>"><%=Model.Input%></textarea>
                 </div>
             <%} %>
             <table style="width: 95%; margin-top:0.5em;">
@@ -127,7 +127,7 @@
                          {%>
                             <%if (Model.EditorChoice == EditorsEnum.Codemirror)
                              {%>
-                            <span style="font-size: 0.85em;">Number of participants: <span id="UsersCount"><%:Model.LiveUsersCount%></span></span> 
+                            <span style="font-size: 0.85em;">Number of participants: <span id="UsersCount">-</span></span> 
                             <span  id="chat" style="font-size: 0.85em; margin-left:0.5em;cursor:pointer;">[&nbsp;<span id="chatsign" style="font-size: 0.85em;">+</span>&nbsp;]&nbsp;</span>
                             <%} %>
                          <%}%>
@@ -153,9 +153,6 @@
             <% if(Model.IsLive && Model.EditorChoice == EditorsEnum.Codemirror)
                {%>
                     <input id="InitialCode" name="InitialCode" type="hidden" value="<%:Model.Program%>"/>
-                    <%if(Model.ShowInput) {%>
-                    <input id="InitialInput" name="InitialInput" type="hidden" value="<%:Model.Input%>"/>
-                    <%} %>
               <%}
             %>
         </div>
@@ -187,14 +184,6 @@
         </table>
         <%} %>
 
-    <%} %>
-    <%if (Model.IsLive)
-      {          
-          using (Html.BeginForm("Index", "rundotnet", FormMethod.Post, new { id = "liveForm" }))
-          {%>   
-                <input id="LiveGuid" name="LiveGuid" type="hidden" value="<%:Model.CodeGuid%>"/>
-                <input id="LiveUserToken" name="LiveUserToken" type="hidden" value="<%:Model.LiveUserToken%>"/>
-        <%}%>
     <%} %>
     <pre id="Link" class="resultarea"><%:Model.IsLive && string.IsNullOrEmpty(Model.WholeError)? "This is (permanent) live collaboration session. You will see changes that others make as well as be able to make your own." : ""%></pre>
 
@@ -236,37 +225,40 @@
     }%>
     <%if (Model.EditorChoice == EditorsEnum.Codemirror)
      {
-             %><link rel="stylesheet" href="../../Scripts/codemirror2/lib/codemirror.css"/><%
+             %><link rel="stylesheet" href="../../Scripts/codemirror3/lib/codemirror.css"/>
+                <link rel="stylesheet" href="../../Scripts/codemirror3/addon/display/fullscreen.css"/><%
             if (Model.LanguageChoice == LanguagesEnum.CSharp || Model.LanguageChoice == LanguagesEnum.FSharp || Model.LanguageChoice == LanguagesEnum.VB)
             { 
-                %><link rel="stylesheet" href="../../Scripts/codemirror2/theme/csharp.css"/><%
+                %><link rel="stylesheet" href="../../Scripts/codemirror3/theme/csharp.css"/><%
             }
             else if (Model.LanguageChoice == LanguagesEnum.Java || Model.LanguageChoice == LanguagesEnum.Scala)
             { 
-                %><link rel="stylesheet" href="../../Scripts/codemirror2/theme/java.css"/><%
+                %><link rel="stylesheet" href="../../Scripts/codemirror3/theme/java.css"/><%
             }
             if (Model.IsIntellisense)
             {            
-                %><link rel="stylesheet" href="../../Scripts/codemirror2/lib/util/simple-hint.css"><%
+                %><link rel="stylesheet" href="../../Scripts/codemirror3/addon/hint/show-hint.css"><%
             }
     }%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
     <%if (Model.EditorChoice == EditorsEnum.Codemirror)
       {
-            %><script src="../../Scripts/codemirror2/lib/codemirror.js" type="text/javascript"></script><%
+            %><script src="../../Scripts/codemirror3/lib/codemirror.js" type="text/javascript"></script>
+              <script src="../../Scripts/codemirror3/addon/edit/matchbrackets.js" type="text/javascript"></script>
+              <script src="../../Scripts/codemirror3/addon/display/fullscreen.js" type="text/javascript"></script><%
     }%>
     <%if (Model.IsIntellisense)
     {
-            %><script src="../../Scripts/codemirror2/lib/util/simple-hint.js" type="text/javascript"></script><%
+            %><script src="../../Scripts/codemirror3/addon/hint/show-hint.js" type="text/javascript"></script><%
     }%>
     <%if (Model.LanguageChoice == LanguagesEnum.CSharp && Model.IsIntellisense)
     {
-            %><script src="../../Scripts/codemirror2/lib/util/csharp-hint.js" type="text/javascript"></script><%
+            %><script src="../../Scripts/codemirror3/addon/hint/csharp-hint.js" type="text/javascript"></script><%
     }%>
     <%if (Model.LanguageChoice == LanguagesEnum.Python && Model.IsIntellisense)
     {
-            %><script src="../../Scripts/codemirror2/lib/util/python-hint.js" type="text/javascript"></script><%
+            %><script src="../../Scripts/codemirror3/addon/hint/python-hint.js" type="text/javascript"></script><%
     }%>
     <%if (Model.EditorChoice == EditorsEnum.Editarea)
     {
@@ -274,10 +266,9 @@
     }%>
     <%if (Model.IsLive)
     { %>
-        <script src="http://api.rextester.com:8000/share/codemirror_attach.js"></script>
-        <script src="http://api.rextester.com:8000/channel/bcsocket.js"></script>
-        <script src="http://api.rextester.com:8000/share/share.js"></script>
-        <script src="http://api.rextester.com:8000/share/textarea.js"></script>    
+        <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+        <link rel="stylesheet" href="../../Scripts/firepad/firepad.css" />
+        <script src="../../Scripts/firepad/firepad.js"></script>
     <%} %>
     <script type="text/javascript">
         //<![CDATA[
@@ -615,17 +606,23 @@
             }
             <% if(Model.IsIntellisense)
             {%>
-                if ((e.keyCode == 190) && e.type == 'keydown' && !e.shiftKey) {
-                    //e.stop();                
-                    setTimeout(function(){CodeMirror.LanguageHint(cm, CodeMirror.simpleHint)}, 50);
+                if ((e.keyCode == 190) && e.type == 'keyup' && !e.shiftKey) {
+                    
+                    <%if(Model.LanguageChoice == LanguagesEnum.CSharp)
+                    {%>
+                        CodeMirror.showHint(cm, CodeMirror.hint.csharp, {async: true});
+                    <%}
+                    else if(Model.LanguageChoice == LanguagesEnum.Python)
+                    {%>
+                        //CodeMirror.showHint(cm, CodeMirror.hint.python, {async: true});
+                    <%}%>
                 }
             <%} %>
             <% if(Model.IsIntellisense && Model.LanguageChoice == LanguagesEnum.Python)
             {%>
-                if ((e.keyCode == 57) && e.type == 'keydown' && e.shiftKey) {
-                    //e.stop();                
-                    setTimeout(function(){CodeMirror.LanguageHint(cm, CodeMirror.simpleHint)}, 50);
-                }
+                //if ((e.keyCode == 57) && e.type == 'keydown' && e.shiftKey) {
+                    //CodeMirror.showHint(cm, CodeMirror.hint.python, {async: true});
+                //}
             <%} %>
         }
         //]]>

@@ -22,7 +22,9 @@ namespace reExp.Controllers.rundotnet
             JavaScriptSerializer json = new JavaScriptSerializer();
 
             if (string.IsNullOrEmpty(code))
-                return null;
+                return json.Serialize(new List<string>());
+
+            //return json.Serialize(new List<string>() { "abc", "xyz", "some_method(string a)"});
 
             try
             {
@@ -42,7 +44,7 @@ namespace reExp.Controllers.rundotnet
                             position--;
                         }
                         if (code[position] != '.')
-                            return null;
+                            return json.Serialize(new List<string>());
                     }
                     if (is_using)
                     {
@@ -91,7 +93,7 @@ namespace reExp.Controllers.rundotnet
                             return json.Serialize(namespaces);
                         }
                         else
-                            return null;
+                            return json.Serialize(new List<string>());
                     }
 
 
@@ -113,7 +115,7 @@ namespace reExp.Controllers.rundotnet
                         identifier = p.Parent as ObjectCreationExpressionSyntax;
 
                     if (identifier == null)
-                        return null;
+                        return json.Serialize(new List<string>());
 
                     var semanticInfo = semanticModel.GetTypeInfo(identifier);
                     var type = semanticInfo.Type;
@@ -151,13 +153,13 @@ namespace reExp.Controllers.rundotnet
                 }
                 else
                 {
-                    return null;
+                    return json.Serialize(new List<string>());
                 }
             }
             catch (Exception e)
             {
                 Utils.Log.LogInfo(e.Message+"\n\n\n"+code, "code completion error, position: "+position);
-                return null;
+                return json.Serialize(new List<string>());
             }
         }
 

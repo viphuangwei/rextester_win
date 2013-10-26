@@ -231,11 +231,11 @@ namespace reExp.Models
             }
         }
 
-        public static Code GetLiveCode(string guid, string user_token)
+        public static Code GetLiveCode(string guid)
         {
             try
             {
-                var res = DB.DB.Live_Code_Get(guid, user_token);
+                var res = DB.DB.Live_Code_Get(guid);
                 if (res.Count != 0)
                     return new Code()
                     {
@@ -249,28 +249,12 @@ namespace reExp.Models
                         VersionToken = (string)res[0]["version_token"]
                     };
                 else
-                    return new Code();
+                    return null;
             }
             catch (Exception e)
             {
                 Utils.Log.LogInfo(e.Message, "error");
-                return new Code();
-            }
-        }
-
-
-
-        public static int LiveUsersCount(string guid, string user_token = null)
-        {
-            try
-            {
-                var res = DB.DB.Get_Live_Users_Total(guid, user_token);
-                return Convert.ToInt32(res[0]["total"]);
-            }
-            catch (Exception e)
-            {
-                Utils.Log.LogInfo(e.Message, "error");
-                return -1;
+                return null;
             }
         }
 
@@ -312,12 +296,12 @@ namespace reExp.Models
                     return code;
                 }
                 else
-                    return new Code();
+                    return null;
             }
             catch (Exception e)
             {
                 Utils.Log.LogInfo(e.Message, "error");
-                return new Code();
+                return null;
             }
         }
 
@@ -350,12 +334,12 @@ namespace reExp.Models
                         Date = (DateTime)res[0]["date"]
                     };
                 else
-                    return new Code();
+                    return null;
             }
             catch (Exception e)
             {
                 Utils.Log.LogInfo(e.Message, "error");
-                return new Code();
+                return null;
             }
         }
 

@@ -28,7 +28,12 @@ namespace reExp.Controllers.versions
                     });
             data.IsLive = Model.IsLive(data.CodeGuid);
             data.Author = Model.GetUserByGuid(data.CodeGuid);
-            data.CreationDate = Model.GetCode(data.CodeGuid, false).Date;
+            var code = Model.GetCode(data.CodeGuid, false);
+            if (code == null)
+            {
+                throw new HttpException(404, "not found");
+            }
+            data.CreationDate = code.Date;
             return View(data);
         }
 
@@ -41,6 +46,10 @@ namespace reExp.Controllers.versions
             var left = Model.GetCode(LeftGuid, false);
             var right = Model.GetCode(RightGuid, false);
 
+            if (left == null || right == null)
+            {
+                throw new HttpException(404, "not found");
+            }
             Service.LinuxService ser = new Service.LinuxService();
             var res = ser.GetDiff(left.Program, right.Program);
             if (res.IsError)

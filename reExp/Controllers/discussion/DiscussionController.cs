@@ -21,6 +21,10 @@ namespace reExp.Controllers.discussion
             if (!Utils.Utils.IsDisqus)
                 increment = true;
             var code = Model.GetCode(data.Guid, increment);
+            if (code == null)
+            {
+                throw new HttpException(404, "not found");
+            }
             if (!code.IsOnAWall)
                 data.Title = "Discussion not available";
             else

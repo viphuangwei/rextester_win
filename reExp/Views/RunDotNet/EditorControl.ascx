@@ -121,9 +121,9 @@
           js = "mode/nasm/nasm.js";
           break;
       case LanguagesEnum.SqlServer:
-          mode = "text/x-mysql";
+          mode = "text/x-mssql";
           syntax = "tsql";
-          js = "mode/mysql/mysql.js";
+          js = "mode/sql/sql.js";
           break;
       case LanguagesEnum.Go:
           mode = "text/x-go";
@@ -167,16 +167,17 @@
 {%>
     <%if(js != null)
     {%>
-        <script type="text/javascript" src="../../Scripts/codemirror2/<%:js%>"></script>
+        <script type="text/javascript" src="../../Scripts/codemirror3/<%:js%>"></script>
     <%} %>
     <%foreach(var a in additionalJs)
     {%>
-        <script type="text/javascript" src="../../Scripts/codemirror2/<%:a%>"></script>
+        <script type="text/javascript" src="../../Scripts/codemirror3/<%:a%>"></script>
     <%}%>
     <script type="text/javascript">
         //<![CDATA[
         $(document).ready(function () {
             var editor = CodeMirror.fromTextArea(document.getElementById("Program"), {
+                matchBrackets : true,
                 <% if(Model.LanguageChoice == LanguagesEnum.Python)
                 {%>
                     mode:
@@ -223,193 +224,95 @@
                 <%}%>
                     "Tab": "indentMore", 
                     "Shift-Tab": "indentLess",
-                    "F11": function() {
-                          var scroller = editor.getScrollerElement();
-                          if (scroller.className.search(/\bCodeMirror-fullscreen\b/) === -1) {
-                            scroller.className += " CodeMirror-fullscreen";
-                            scroller.style.height = "100%";
-                            scroller.style.width = "100%";
-                            editor.refresh();
-                          } else {
-                            scroller.className = scroller.className.replace(" CodeMirror-fullscreen", "");
-                            scroller.style.height = '';
-                            scroller.style.width = '';
-                            editor.refresh();
-                          }
-                        },
-                    "Esc": function() {
-                      var scroller = editor.getScrollerElement();
-                      if (scroller.className.search(/\bCodeMirror-fullscreen\b/) !== -1) {
-                        scroller.className = scroller.className.replace(" CodeMirror-fullscreen", "");
-                        scroller.style.height = '';
-                        scroller.style.width = '';
-                        editor.refresh();
-                      }
-                    }, 
-                    "F8": function() {
-                      var scroller = editor.getScrollerElement();
-                      if (scroller.className.search(/\bCodeMirror-fullscreen\b/) !== -1) {
-                        scroller.className = scroller.className.replace(" CodeMirror-fullscreen", "");
-                        scroller.style.height = '';
-                        scroller.style.width = '';
-                        editor.refresh();
-                      }
-                   }                
+                    <%if(!Model.IsLive)
+                    { %>
+                        "F11": function(cm) {
+                                cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                            },
+                        "Esc": function(cm) {
+                                if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                            }, 
+                        "F8": function(cm) {
+                                if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                        }
+                    <%}%>
                 }
             });
             GlobalEditor = editor;
             
-            <%if(Model.IsIntellisense) 
+            <%if (Model.IsIntellisense && Model.LanguageChoice == LanguagesEnum.CSharp) 
             {%>
-                CodeMirror.commands.autocomplete = function(cm) {
-                    CodeMirror.LanguageHint(cm, CodeMirror.simpleHint);
-                    //setTimeout(function(){CodeMirror.LanguageHint(cm, CodeMirror.simpleHint)}, 50);
-                }
+                    CodeMirror.commands.autocomplete = function (cm) {
+                        CodeMirror.showHint(cm, CodeMirror.hint.csharp, { async: true });
+                    };
+            <%}
+             else if (Model.IsIntellisense && Model.LanguageChoice == LanguagesEnum.Python)
+             {%>
+                    CodeMirror.commands.autocomplete = function (cm) {
+                        CodeMirror.showHint(cm, CodeMirror.hint.python, { async: true });
+                    };
             <%}%>
+
             <%if(Model.IsLive && Model.EditorChoice == EditorsEnum.Codemirror)
             { %>
                 var guid = '<%:Model.CodeGuid %>';
-                var connection = sharejs.open(guid.toUpperCase(), 'text', 'http://api.rextester.com:8000/channel', function(error, doc) {
-                    if (error) {
-  		                $('#Link').text("Error occurred while establishing live session. Try again later.");
-                        console.error(error);
-                        return;
+                var firepadRef = new Firebase('https://rextester.firebaseio.com/firepads/' + guid);
+                firepadRef.once('value', function (snapshot) {
+                    if (snapshot.val() === null) {
+                        editor.setValue('');
+                        var firepad = Firepad.fromCodeMirror(firepadRef, editor);
+                        firepad.on('ready', function () {
+                            firepad.setText($("#InitialCode").val());
+                        });
                     }
-
-                    if (doc.created) {
-                        doc.insert(0, $("#InitialCode").val());
+                    else {
+                        editor.setValue('');
+                        var firepad = Firepad.fromCodeMirror(firepadRef, editor);
                     }
-
-                    doc.attach_codemirror(GlobalEditor, false);
                 });
+                
+                var firepadChatRef = new Firebase('https://rextester.firebaseio.com/chats/' + guid);
+                var displayName = '<%:Model.DisplayName%>';
 
-                sharejs.open('chat' + guid.toUpperCase(), 'text', 'http://api.rextester.com:8000/channel', function (error, doc) {
-                    var displayName = '<%:Model.DisplayName%>';
-                    if (error) {
-  		                $('#Link').text("Error occurred while establishing live session. Try again later.");
-                        console.error(error);
-                        return;
-                    }
-
-                    if (doc.created) {
-                        doc.insert(0, 'Chat created on <%:DateTime.Now.ToUniversalTime().ToString()%>\n<%:"Logged in users will be represented by their nicks, others - by random letters."%>\n\n');    
-                    }
-                    $("#chatAreaText").val(doc.getText());
+                firepadChatRef/*.limit(10)*/.on('child_added', function (snapshot) {
+                    var message = snapshot.val();
+                    if ($("#chatsign").text() == "+")
+                        $("#chatsign").css('color', 'red');
+                    $('#chatAreaText').val($("#chatAreaText").val() + message.name + ': ' + message.text);
                     ScrollToBottom($("#chatAreaText"));
-
-                    doc.on('insert', function(pos, text) {
-                        if ($("#chatsign").text() == "+")
-                            $("#chatsign").css('color', 'red');
-                        $("#chatAreaText").val(doc.getText());
-                        ScrollToBottom($("#chatAreaText"));
-                    });
-
-                    $("#chatBoxText").keydown(function(event) {
-                        if(event.keyCode == 13) {
-                            doc.insert(doc.getText().length, '\n'+'<'+displayName+'>: '+$("#chatBoxText").val());
-                            $("#chatAreaText").val(doc.getText());
-                            ScrollToBottom($("#chatAreaText"));
-                            $("#chatBoxText").val("");
-                            return false;
-                        }
-                    });
                 });
 
-                <%if(Model.ShowInput) 
-                {%>
-            sharejs.open('input' + guid.toUpperCase(), 'text', 'http://api.rextester.com:8000/channel', function (error, doc) {
-                    if (error) {
-                        $('#Link').text("Error occurred while establishing live session. Try again later.");
-                        console.error(error);
-                        return;
+                $("#chatBoxText").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        firepadChatRef.push({ name: displayName, text: $("#chatBoxText").val()+'\n' });
+                        $("#chatBoxText").val("");
+                        return false;
                     }
-
-                    if (doc.created) {
-                        doc.insert(0, $("#InitialInput").val());
-                    }
-                    if (doc.getText() !== "" && $("#Expand_input_sign").text() == "+")
-                    {
-                        $("#Input").toggle();
-                        $("#Expand_input_sign").text("-");
-                        $("#Expand_input_text").text("Hide input");
-                    }
-                    var elem = document.getElementById('Input');
-                    doc.attach_textarea(elem);
-
                 });
-            <%}%>
-
-            <%if(Model.ShowCompilerArgs) 
-            {%>
-            sharejs.open('args' + guid.toUpperCase(), 'text', 'http://api.rextester.com:8000/channel', function (error, doc) {
-                    if (error) {
-                        $('#Link').text("Error occurred while establishing live session. Try again later.");
-                        console.error(error);
-                        return;
-                    }
-
-                    if (doc.created) {
-                        doc.insert(0, $("#CompilerArgs").val());
-                    }
-                    var elem = document.getElementById('CompilerArgs');
-                    doc.attach_textarea(elem);
-
-                });
-        <%}%>
 
                 function ScrollToBottom(textArea) {
                     textArea.scrollTop(
                         textArea[0].scrollHeight - textArea.height()
                     );
                 }
-                var connectionError = false;
-                connection.on("ok", function() {
-                       if(connectionError) {
-                            $('#Link').text("Connection is restored.");
-                            connectionError = false;
-                        }
-                });
-                connection.on("connecting", function() {
-                        $('#Link').text("Connection lost, trying to restore...");
-                });
-                connection.on("disconnected", function() {
-                        $('#Link').text("Connection lost, trying to restore...");
-                        connectionError = true;
-                });
-                connection.on("stopped", function() {
-                        $('#Link').text("Connection error occurred, please refresh the page.");
-                        connectionError = true;
+                
+                var listRef = new Firebase('https://rextester.firebaseio.com/presence/' + guid);
+                var userRef = listRef.push();
+
+                var presenceRef = new Firebase("https://rextester.firebaseio.com/.info/connected");
+                presenceRef.on("value", function (snap) {
+                    if (snap.val()) {
+                        userRef.set(true);
+                        // Remove ourselves when we disconnect.
+                        userRef.onDisconnect().remove();
+                    }
                 });
 
-                setTimeout(CheckUserStats, 30000);
-                function CheckUserStats() {
-                    var serializedData = $("#liveForm").serialize();
+                // Number of online users is the number of objects in the presence list.
+                listRef.on("value", function (snap) {
+                    $("#UsersCount").replaceWith("<span id=\"UsersCount\">" + snap.numChildren() + "</span>");
+                });
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/live/UserStats",
-                        data: serializedData,
-                        success:  
-                            function (data, textStatus, XMLHttpRequest) 
-                            {
-                                try
-                                {
-                                    var obj = jQuery.parseJSON(data);                                        
-                                    $("#UsersCount").replaceWith("<span id=\"UsersCount\">"+obj.Users_count+"</span>");
-                                    setTimeout(CheckUserStats, 30000);
-                                }
-                                catch(err)
-                                {
-                                    setTimeout(CheckUserStats, 30000);
-                                }
-                            },
-                        dataType: 'text',
-                        timeout: 45000,
-                        error: function (request, status, err) {
-                                    setTimeout(CheckUserStats, 30000);
-                                }
-                    });
-                }
             <%} %>
         });
     //]]>
