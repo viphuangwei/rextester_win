@@ -225,7 +225,7 @@
     }%>
     <%if (Model.EditorChoice == EditorsEnum.Codemirror)
      {
-             %><link rel="stylesheet" href="../../Scripts/codemirror3/lib/codemirror.css"/>
+             %> <link rel="stylesheet" href="../../Scripts/codemirror3/lib/codemirror.css"/>
                 <link rel="stylesheet" href="../../Scripts/codemirror3/addon/display/fullscreen.css"/><%
             if (Model.LanguageChoice == LanguagesEnum.CSharp || Model.LanguageChoice == LanguagesEnum.FSharp || Model.LanguageChoice == LanguagesEnum.VB)
             { 

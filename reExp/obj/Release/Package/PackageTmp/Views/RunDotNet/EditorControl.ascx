@@ -177,7 +177,7 @@
         //<![CDATA[
         $(document).ready(function () {
             var editor = CodeMirror.fromTextArea(document.getElementById("Program"), {
-                matchBrackets : true,
+                //matchBrackets : true,
                 <% if(Model.LanguageChoice == LanguagesEnum.Python)
                 {%>
                     mode:
