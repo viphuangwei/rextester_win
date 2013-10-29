@@ -138,12 +138,12 @@ namespace reExp.Controllers.rundotnet
                             prefix = prefix.Substring(0, prefix.IndexOf('<') == -1 ? prefix.Length : prefix.IndexOf('<'));
                             result = prefix + result.Substring(result.IndexOf('('));
                         }
-                        if (result.Length > 100)
-                        {
-                            result = result.Substring(0, 100) + " ...";
-                            if (symbol.Kind == SymbolKind.Method)
-                                result += ")";
-                        }
+                        //if (result.Length > 100)
+                        //{
+                        //    result = result.Substring(0, 100) + " ...";
+                        //    if (symbol.Kind == SymbolKind.Method)
+                        //        result += ")";
+                        //}
                         if(!res.Contains(result))
                             res.Add(result);
                     }

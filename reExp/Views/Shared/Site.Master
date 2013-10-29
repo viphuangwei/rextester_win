@@ -125,6 +125,7 @@
             border-color: Gray;
             padding: 0 3px 0 3px;
         }
+        .CodeMirror {font-size:13px}
     </style>
     <script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript">
