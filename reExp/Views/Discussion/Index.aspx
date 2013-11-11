@@ -184,8 +184,8 @@
           js.Add("mode/nasm/nasm.js");
           break;
       case LanguagesEnum.SqlServer:
-          mode = "text/x-mysql";
-          js.Add("mode/mysql/mysql.js");
+          mode = "text/x-mssql";
+          js.Add("mode/sql/sql.js");
           break;
       case LanguagesEnum.Go:
           mode = "text/x-go";
