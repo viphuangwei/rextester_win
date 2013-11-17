@@ -65,7 +65,8 @@ namespace WindowsExecutionEngine.Compiling
             var regex = new Regex(@"Microsoft \(R\) C/C\+\+ Optimizing Compiler Version [\d\.]+ for x86");
             text = regex.Replace(text, "")
                         .Replace("Copyright (C) Microsoft Corporation.  All rights reserved.", "")
-                        .Replace("cl : Command line warning D9035 : option 'o' has been deprecated and will be removed in a future release", "");
+                        .Replace("cl : Command line warning D9035 : option 'o' has been deprecated and will be removed in a future release", "")
+                        .Replace(@"/LIBPATH:C:\boost_1_55_0\stage\lib", "");
 
             regex = new Regex(@"Microsoft \(R\) Incremental Linker Version [\d\.]+");
             text = regex.Replace(text, "");

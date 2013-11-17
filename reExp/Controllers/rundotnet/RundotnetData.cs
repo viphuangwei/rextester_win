@@ -510,11 +510,10 @@ int main(void)
 @"//Title of this code
 
 #include <iostream>
-using namespace std;
 
 int main()
 {
-    cout << ""Hello, world!\n"";
+    std::cout << ""Hello, world!\n"";
 }";
 
                 case LanguagesEnum.CPPClang:
@@ -522,22 +521,20 @@ int main()
 @"//Title of this code
 
 #include <iostream>
-using namespace std;
 
 int main()
 {
-    cout << ""Hello, world!\n"";
+    std::cout << ""Hello, world!\n"";
 }";
                 case LanguagesEnum.VCPP:
                     return
 @"//Title of this code
 
 #include <iostream>
-using namespace std;
 
 int main()
 {
-    cout << ""Hello, world!\n"";
+    std::cout << ""Hello, world!\n"";
 }";
                 case LanguagesEnum.VC:
                     return
@@ -723,7 +720,7 @@ print -dpng some_name.png;
                 case LanguagesEnum.CPPClang:
                     return "-Wall -std=c++11 -stdlib=libc++ -ldl -O2 -o a.out source_file.cpp";
                 case LanguagesEnum.VCPP:
-                    return "source_file.cpp -o a.exe /EHsc";
+                    return @"source_file.cpp -o a.exe /EHsc /I C:\boost_1_55_0 /link /LIBPATH:C:\boost_1_55_0\stage\lib";
                 case LanguagesEnum.VC:
                     return "source_file.c -o a.exe";
                 case LanguagesEnum.Go:
