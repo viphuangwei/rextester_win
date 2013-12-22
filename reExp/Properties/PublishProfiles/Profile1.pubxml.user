@@ -25,8 +25,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/GlobalUtils.dll">
       <publishTime>10/12/2013 20:31:19</publishTime>
     </File>
+    <File Include="bin/MarkdownDeep.dll">
+      <publishTime>12/19/2013 21:47:25</publishTime>
+    </File>
     <File Include="bin/reExp.dll">
-      <publishTime>11/17/2013 21:35:34</publishTime>
+      <publishTime>12/22/2013 20:25:34</publishTime>
     </File>
     <File Include="bin/reExp.pdb">
       <publishTime>06/29/2012 00:16:38</publishTime>
@@ -38,13 +41,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2013 14:18:39</publishTime>
     </File>
     <File Include="bin/Service.dll">
-      <publishTime>11/17/2013 21:35:16</publishTime>
+      <publishTime>12/22/2013 20:25:16</publishTime>
     </File>
     <File Include="bin/Service.pdb">
       <publishTime>06/26/2012 23:43:24</publishTime>
     </File>
     <File Include="bin/Service.XmlSerializers.dll">
-      <publishTime>11/17/2013 21:35:21</publishTime>
+      <publishTime>12/22/2013 20:25:17</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.DLL">
       <publishTime>09/28/2013 14:18:39</publishTime>
@@ -183,6 +186,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Global.asax">
       <publishTime>09/28/2013 14:18:33</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>12/19/2013 21:47:29</publishTime>
     </File>
     <File Include="Scripts/codemirror2/demo/activeline.html">
       <publishTime>09/28/2013 14:18:34</publishTime>
@@ -773,7 +779,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/21/2013 10:20:00</publishTime>
     </File>
     <File Include="Scripts/codemirror3/addon/hint/csharp-hint.js">
-      <publishTime>10/23/2013 22:24:08</publishTime>
+      <publishTime>12/17/2013 23:41:02</publishTime>
     </File>
     <File Include="Scripts/codemirror3/addon/hint/css-hint.js">
       <publishTime>10/21/2013 10:20:00</publishTime>
@@ -2182,6 +2188,33 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
       <publishTime>09/28/2013 14:18:37</publishTime>
     </File>
+    <File Include="Scripts/MarkdownDeep License.txt">
+      <publishTime>12/19/2013 21:47:27</publishTime>
+    </File>
+    <File Include="Scripts/MarkdownDeep Quick Reference.txt">
+      <publishTime>12/19/2013 21:47:27</publishTime>
+    </File>
+    <File Include="Scripts/MarkdownDeepLib.min.js">
+      <publishTime>12/21/2013 21:00:32</publishTime>
+    </File>
+    <File Include="Scripts/mdd_ajax_loader.gif">
+      <publishTime>12/19/2013 21:47:27</publishTime>
+    </File>
+    <File Include="Scripts/mdd_gripper.png">
+      <publishTime>12/19/2013 21:47:27</publishTime>
+    </File>
+    <File Include="Scripts/mdd_help.htm">
+      <publishTime>12/19/2013 21:47:27</publishTime>
+    </File>
+    <File Include="Scripts/mdd_modal_background.png">
+      <publishTime>12/19/2013 21:47:27</publishTime>
+    </File>
+    <File Include="Scripts/mdd_styles.css">
+      <publishTime>12/19/2013 21:47:27</publishTime>
+    </File>
+    <File Include="Scripts/mdd_toolbar.png">
+      <publishTime>12/19/2013 21:47:26</publishTime>
+    </File>
     <File Include="Scripts/MicrosoftAjax.debug.js">
       <publishTime>09/28/2013 14:18:33</publishTime>
     </File>
@@ -2221,8 +2254,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Diff/Index.aspx">
       <publishTime>09/28/2013 14:18:38</publishTime>
     </File>
+    <File Include="Views/Discussion/DiscussionControl.ascx">
+      <publishTime>12/22/2013 20:04:02</publishTime>
+    </File>
+    <File Include="Views/Discussion/EditComment.aspx">
+      <publishTime>12/21/2013 21:50:31</publishTime>
+    </File>
     <File Include="Views/Discussion/Index.aspx">
-      <publishTime>11/11/2013 21:45:24</publishTime>
+      <publishTime>12/22/2013 20:02:43</publishTime>
     </File>
     <File Include="Views/Feedback/Index.aspx">
       <publishTime>09/28/2013 14:18:38</publishTime>
@@ -2240,10 +2279,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2013 14:18:38</publishTime>
     </File>
     <File Include="Views/Main/Faq.aspx">
-      <publishTime>09/29/2013 00:44:19</publishTime>
+      <publishTime>12/22/2013 20:10:46</publishTime>
     </File>
     <File Include="Views/Main/Index.aspx">
-      <publishTime>10/25/2013 23:07:26</publishTime>
+      <publishTime>12/22/2013 20:25:13</publishTime>
     </File>
     <File Include="Views/Reference/Index.aspx">
       <publishTime>09/28/2013 14:18:38</publishTime>
@@ -2255,10 +2294,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/28/2013 21:50:13</publishTime>
     </File>
     <File Include="Views/RunDotNet/Index.aspx">
-      <publishTime>10/29/2013 22:14:40</publishTime>
+      <publishTime>11/30/2013 16:08:19</publishTime>
     </File>
     <File Include="Views/Shared/Site.Master">
-      <publishTime>11/02/2013 18:15:27</publishTime>
+      <publishTime>12/21/2013 22:03:43</publishTime>
     </File>
     <File Include="Views/Tester/Index.aspx">
       <publishTime>09/28/2013 14:18:38</publishTime>
@@ -2276,7 +2315,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2013 14:18:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/17/2013 21:35:38</publishTime>
+      <publishTime>12/22/2013 20:25:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

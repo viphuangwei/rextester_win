@@ -87,23 +87,6 @@ namespace reExp.Utils
             }
         }
 
-        public static bool IsDisqus
-        {
-            get
-            {
-                try
-                {
-                    if (System.Web.HttpContext.Current.Request.UrlReferrer != null)
-                        return System.Web.HttpContext.Current.Request.UrlReferrer.Host.ToLower().Contains("disqus");
-                    else
-                        return false;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-        }
 
         public static Random GetTrulyRandom()
         {

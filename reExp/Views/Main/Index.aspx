@@ -139,7 +139,7 @@
             Write code so that others see this real-time. Every participant can make changes and see changes made by others. We use <a href="http://www.firepad.io">Firepad</a> and <a href="https://www.firebase.com/">Firebase</a>.
             <br/><br/>
             <b style="color:Gray">Credit</b><br/>
-            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a>, <a href="http://code.google.com/p/coderev/">Coderev</a> and <a href="http://jedi.jedidjah.ch/">Jedi</a>.<br/><br />
+            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>, <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a>, <a href="http://code.google.com/p/coderev/">Coderev</a> and <a href="http://jedi.jedidjah.ch/">Jedi</a>.<br/><br />
             <b style="color:Gray">Code wall</b><br/>
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code wall</a> as well as <a href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">personal code walls</a> - place code on a wall for public display. These entries will be crawled by search engines, so one 
             possible use is to put there scripts that you may need for easy access later. For example, whenever I need a sql script for searching database definitions I simply search for <a href="https://www.google.com/search?q=sql+definition+rextester">'sql definition rextester'</a> and there is my script (it seems that code wall is 

@@ -59,6 +59,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FSharp.PowerPack, Version=4.0.0.1, Culture=neutral, PublicKeyToken=f536804aa0eb945b, processorArchitecture=MSIL" />
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\packages\MarkdownDeep.Full.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Roslyn.Compilers, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -120,10 +123,12 @@
     <Compile Include="Controllers\versions\VersionsData.cs" />
     <Compile Include="Models\CodeWall.cs" />
     <Compile Include="Models\DB\CodeWall.cs" />
+    <Compile Include="Models\DB\Discussion.cs" />
     <Compile Include="Models\DB\Notifications.cs" />
     <Compile Include="Models\DB\Regexes.cs" />
     <Compile Include="Models\DB\UsersStuff.cs" />
     <Compile Include="Models\DB\UserWalls.cs" />
+    <Compile Include="Models\Discussion.cs" />
     <Compile Include="Models\Notifications.cs" />
     <Compile Include="Models\Regexes.cs" />
     <Compile Include="Models\UsersStuff.cs" />
@@ -647,6 +652,15 @@
     <Content Include="Scripts\firepad\firepad.css" />
     <Content Include="Scripts\firepad\firepad.js" />
     <Content Include="Scripts\jquery-linedtextarea.js" />
+    <Content Include="Scripts\MarkdownDeep License.txt" />
+    <Content Include="Scripts\MarkdownDeep Quick Reference.txt" />
+    <Content Include="Scripts\MarkdownDeepLib.min.js" />
+    <Content Include="Scripts\mdd_ajax_loader.gif" />
+    <Content Include="Scripts\mdd_gripper.png" />
+    <Content Include="Scripts\mdd_help.htm" />
+    <Content Include="Scripts\mdd_modal_background.png" />
+    <Content Include="Scripts\mdd_styles.css" />
+    <Content Include="Scripts\mdd_toolbar.png" />
     <Content Include="Scripts\sharejs_exampleserver.js" />
     <Content Include="Scripts\tabby-0.11.min.js" />
     <Content Include="Scripts\tmp.js" />
@@ -654,6 +668,8 @@
     <Content Include="Scripts\ZeroClipboard.min.js" />
     <Content Include="Views\CodeWall\Index.aspx" />
     <Content Include="Views\Diff\Index.aspx" />
+    <Content Include="Views\Discussion\DiscussionControl.ascx" />
+    <Content Include="Views\Discussion\EditComment.aspx" />
     <Content Include="Views\Discussion\Index.aspx" />
     <Content Include="Views\Feedback\Index.aspx" />
     <Content Include="Views\Login\CreateGoogleUser.aspx" />
@@ -733,6 +749,7 @@
     <Content Include="App_Data\db.s3db" />
     <Content Include="dlls\FSharp.Core.optdata" />
     <Content Include="dlls\FSharp.Core.sigdata" />
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\PublishProfiles\Profile2.pubxml" />
     <Content Include="Scripts\codemirror3\.travis.yml" />

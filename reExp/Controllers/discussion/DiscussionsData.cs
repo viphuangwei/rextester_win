@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using reExp.Utils;
+using reExp.Models;
 
 namespace reExp.Controllers.discussion
 {
@@ -17,11 +18,21 @@ namespace reExp.Controllers.discussion
         public bool ShowComments { get; set; }
         public int? Votes { get; set; }
         public bool? VoteUp { get; set; }
+        public List<Comment> Comments { get; set; }
+        public string NewComment { get; set; }
     }
 
     class VoteData
     {
         public bool NotLoggedIn { get; set; }
         public bool AlreadyVoted { get; set; }
+    }
+
+    public class EditData
+    {
+        public bool IsEdit { get; set; }
+        public int? Comment_ID { get; set; }
+        public string Text { get; set; }
+        public string Guid { get; set; }
     }
 }

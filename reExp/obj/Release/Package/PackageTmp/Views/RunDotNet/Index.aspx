@@ -268,7 +268,7 @@
     { %>
         <script src="https://cdn.firebase.com/v0/firebase.js"></script>
         <link rel="stylesheet" href="../../Scripts/firepad/firepad.css" />
-        <script src="../../Scripts/firepad/firepad.js"></script>
+        <script src="../../Scripts/firepad/firepad-min.js"></script>
     <%} %>
     <script type="text/javascript">
         //<![CDATA[

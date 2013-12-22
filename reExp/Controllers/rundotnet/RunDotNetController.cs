@@ -374,28 +374,28 @@ namespace reExp.Controllers.rundotnet
             data.Warnings = new List<string>();
             data.Errors = new List<string>();
 
-            var cache = Model.GetRundotnetDataFromRedis(data);
-            if (cache != null)
-            {
-                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, data.Output, (int)data.LanguageChoice, data.IsApi);
-                return json.Serialize(new JsonDataSubset() { Warnings = data.ShowWarnings || data.IsApi ? cache.WholeWarning : null, Errors = cache.WholeError, Result = cache.WholeOutput, Stats = cache.RunStatus + " (cached)" });
-            }
-            else
-            {
+            //var cache = Model.GetRundotnetDataFromRedis(data);
+            //if (cache != null)
+            //{
+            //    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, data.Output, (int)data.LanguageChoice, data.IsApi);
+            //    return json.Serialize(new JsonDataSubset() { Warnings = data.ShowWarnings || data.IsApi ? cache.WholeWarning : null, Errors = cache.WholeError, Result = cache.WholeOutput, Stats = cache.RunStatus + " (cached)" });
+            //}
+            //else
+            //{
                 data = RundotnetLogic.RunProgram(data);
                 string warnings = null, errors = null;
                 if (data.Warnings.Count() != 0)
                     warnings = data.Warnings.Aggregate((a, b) => a + "\n" + b);
                 if (data.Errors.Count() != 0)
                     errors = data.Errors.Aggregate((a, b) => a + "\n" + b);
-                ThreadPool.QueueUserWorkItem(f =>
-                    { 
-                        data.WholeWarning = warnings;
-                        data.WholeError = errors;
-                        Model.InsertRundotnetDataToRedis(data);
-                    });
+                //ThreadPool.QueueUserWorkItem(f =>
+                //    { 
+                //        data.WholeWarning = warnings;
+                //        data.WholeError = errors;
+                //        Model.InsertRundotnetDataToRedis(data);
+                //    });
                 return json.Serialize(new JsonDataSubset() { Warnings = data.ShowWarnings || data.IsApi ? warnings : null, Errors = errors, Result = data.Output, Stats = data.RunStats, Files = data.Files });
-            }
+            //}
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]

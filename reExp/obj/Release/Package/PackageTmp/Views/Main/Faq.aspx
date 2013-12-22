@@ -30,10 +30,6 @@ These are common problems noticed so far:
     <li>Run snippet: 'F8' or 'F5' while cursor is in the editor.</li>
     <li>Full-screen mode: 'F11' while cursor is in the editor. 'Esc' to exit or 'F8' to exit and run.</li>
 </ul>
-<h2>Disquss comments</h2>
-<ul>
-    <li>Wrap code snippets in &lt;pre&gt;&lt/pre&gt; tags. All available tags are <a href="http://help.disqus.com/customer/portal/articles/466253-what-html-tags-are-allowed-within-comments-">here</a>.</li>
-</ul>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">

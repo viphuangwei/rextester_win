@@ -9,4 +9,3 @@ C:\Users\Renat\Desktop\rextester_win\Sandbox\bin\Debug\Sandbox.exe
 C:\Users\Renat\Desktop\rextester_win\Sandbox\bin\Debug\Sandbox.pdb
 C:\Users\Renat\Desktop\rextester_win\Sandbox\obj\x86\Debug\Sandbox.exe
 C:\Users\Renat\Desktop\rextester_win\Sandbox\obj\x86\Debug\Sandbox.pdb
-C:\Users\Renat\Desktop\rextester_win\Sandbox\obj\x86\Debug\Sandbox.csprojResolveAssemblyReference.cache

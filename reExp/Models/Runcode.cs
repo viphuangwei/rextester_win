@@ -285,7 +285,8 @@ namespace reExp.Models
                         Views = (res[0]["views"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["views"])),
                         IsPrimaryVersion = (res[0]["version_id"] == DBNull.Value ? true : false),
                         PrimaryGuid = (res[0]["primary_guid"] == DBNull.Value ? null : (string)res[0]["primary_guid"]),
-                        Date = (DateTime)res[0]["date"]
+                        Date = (DateTime)res[0]["date"],
+                        ID = Convert.ToInt32(res[0]["id"])
                     };
                     if (code.Votes != null && SessionManager.IsUserInSession())                     
                         code = GetCodeWithInfo(guid);
@@ -331,7 +332,8 @@ namespace reExp.Models
                         Views = (res[0]["views"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["views"])),
                         IsPrimaryVersion = (res[0]["version_id"] == DBNull.Value ? true : false),
                         PrimaryGuid = (res[0]["primary_guid"] == DBNull.Value ? null : (string)res[0]["primary_guid"]),
-                        Date = (DateTime)res[0]["date"]
+                        Date = (DateTime)res[0]["date"],
+                        ID = Convert.ToInt32(res[0]["id"])
                     };
                 else
                     return null;
@@ -460,6 +462,11 @@ namespace reExp.Models
     
     public class Code
     {
+        public int ID
+        {
+            get;
+            set;
+        }
         public string Title
         {
             get;

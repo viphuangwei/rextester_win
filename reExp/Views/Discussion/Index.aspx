@@ -56,27 +56,42 @@
     </table>
 
     <%if(Model.ShowComments)
-      { %>
-        <div id="disqus_thread" style="margin: 3em auto;max-width: 64.3em;"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'rextester'; // required: replace example with your forum shortname
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function () {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <%--<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>--%>
-    <%} %>
+    {%>
+        <div id="comments_thread" style="margin: 3em auto;max-width: 54.3em;">
+            <%foreach(var com in Model.Comments)
+            {%>             
+                <span>
+                    <% Html.RenderPartial("DiscussionControl", com); %> 
+                </span>
+            <%}%> 
+            <br/><br/>
+
+            <%if(SessionManager.IsUserInSession())
+              {
+                using (Html.BeginForm())
+                {%>
+                    <div class="mdd_toolbar"></div>
+                    <textarea cols="50" rows="12" class="mdd_editor" id="NewComment" name="NewComment"><%=Model.NewComment%></textarea>
+                    <div class="mdd_resizer"></div>
+                    <div class="mdd_preview" style="display:block;word-wrap:break-word;"></div>
+                    <input id="Button" type="submit" value="Submit"/>
+                <%}
+              }
+              else
+              {%>
+                    Please <a href="<%=Utils.BaseUrl+"login"%>">log in</a> to post a comment.
+            <%}%>
+        </div>
+    <%}%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
-    <link rel="stylesheet" href="../../Scripts/codemirror3/lib/codemirror.css">
-    <link rel="stylesheet" href="../../Scripts/codemirror3/doc/docs2.css">
-<%--    <%if (Model.Language == LanguagesEnum.CSharp)
+    <link rel="stylesheet" href="../../Scripts/codemirror3/lib/codemirror.css" />
+    <link rel="stylesheet" href="../../Scripts/codemirror3/doc/docs2.css" />
+    <link rel="stylesheet" href="../../Scripts/mdd_styles.css" /> 
+
+
+    <%--<%if (Model.Language == LanguagesEnum.CSharp)
     { 
         %><link rel="stylesheet" href="../../Scripts/codemirror2/theme/csharp.css"/><%
     }
@@ -89,6 +104,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
     <script src="../../Scripts/codemirror3/lib/codemirror.js"></script>
     <script src="../../Scripts/codemirror3/addon/runmode/runmode.js"></script>
+    <script src="../../Scripts/MarkdownDeepLib.min.js"></script>
 
     <%  
   string mode = null;
@@ -230,6 +246,10 @@
                                document.getElementById("output"));
 
         
+            $("textarea.mdd_editor").MarkdownDeep({
+                help_location: "../../Scripts/mdd_help.htm",
+                disableTabHandling: true
+            });
         $("#upVote").click(VoteUpClick);
         function VoteUpClick()
         {

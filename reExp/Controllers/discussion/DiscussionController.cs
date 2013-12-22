@@ -13,18 +13,32 @@ namespace reExp.Controllers.discussion
     {
         //
         // GET: /Discussion/
-        [HttpGet]
+        //[HttpGet]
+        [ValidateInput(false)]
         public ActionResult Index(DiscussionData data)
         {
             Compression.SetCompression();
-            bool increment = false;
-            if (!Utils.Utils.IsDisqus)
-                increment = true;
-            var code = Model.GetCode(data.Guid, increment);
+            var code = Model.GetCode(data.Guid, true);
             if (code == null)
             {
                 throw new HttpException(404, "not found");
             }
+            
+            if (!string.IsNullOrEmpty(data.NewComment))
+            {
+                if (!SessionManager.IsUserInSession())
+                {
+                    return this.Redirect(Utils.Utils.BaseUrl + @"login");
+                }
+                Model.SaveComment(new Comment()
+                    {
+                        User_Id = (int)SessionManager.UserId,
+                        Text = data.NewComment,
+                        Code_Id = code.ID
+                    });
+                data.NewComment = "";
+            }
+
             if (!code.IsOnAWall)
                 data.Title = "Discussion not available";
             else
@@ -35,9 +49,47 @@ namespace reExp.Controllers.discussion
             data.Code = code.Program;
             data.Date = code.Date;
             data.Language = code.Lang;
+
+            data.Comments = Model.GetComments(data.Guid);
+
+            var md = new MarkdownDeep.Markdown();
+
+            md.ExtraMode = true;
+            md.SafeMode = true;
+            foreach (var c in data.Comments)
+            {
+                c.Text = md.Transform(c.Text);
+            }
             return View(data);
         }
 
+        [ValidateInput(false)]
+        public ActionResult EditComment(EditData data)
+        {
+            Compression.SetCompression();
+            var com = Model.GetComment((int)data.Comment_ID);
+            if (!SessionManager.IsUserInSession() || SessionManager.UserId != com.User_Id)
+            {
+                return this.Redirect(Utils.Utils.BaseUrl + @"login");
+            }
+            if (data.IsEdit)
+            {
+                data.Text = com.Text;
+                return View("EditComment", data);
+            }
+            else
+            {
+                var code = Model.GetCode(data.Guid);
+                Model.UpdateComment(new Comment()
+                {
+                    Id = (int)data.Comment_ID,
+                    User_Id = (int)SessionManager.UserId,
+                    Text = data.Text
+                });
+                return this.Redirect(Utils.Utils.BaseUrl + @"discussion/" + code.Guid + @"/" + code.Title.StringToUrl());
+            }
+        }
+       
         [HttpPost]
         public string Vote(DiscussionData data)
         {
