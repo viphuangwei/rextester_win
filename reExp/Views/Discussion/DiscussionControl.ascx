@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<reExp.Models.Comment>" %>
 
 <span>
-    <span style="display:block;word-wrap:break-word;">
+    <span style="display:block;word-wrap:break-word;" id="comment_<%:Model.Id%>">
         <%:Html.Raw(Model.Text)%>
         <span style="color:gray; font-size:12px;">&nbsp; by &nbsp;<%:Model.User_Name%>,&nbsp;<%:Model.Date.TimeAgo()%></span>
         <%if(SessionManager.IsUserInSession() && SessionManager.UserId == Model.User_Id)

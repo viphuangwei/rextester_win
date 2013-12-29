@@ -54,6 +54,18 @@ namespace reExp.Models.DB
             ExecuteNonQuery(query, pars);
         }
 
+        public static List<Dictionary<string, object>> Comment_Last_Id(int Code_id)
+        {
+            string query = @"select com.id as id
+                             from Comments com
+                             where com.code_id = @CodeID
+                             order by com.id desc
+                             limit 1";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("CodeID", Code_id));
+            return ExecuteQuery(query, pars);
+        }
+
         public static void Comments_Update(int comments_id, string text)
         {
             string query = @"update Comments set Text = @Text, edited_date = DATETIME('now') where id = @Id";
@@ -69,6 +81,29 @@ namespace reExp.Models.DB
             var pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("Id", comments_id));
             ExecuteNonQuery(query, pars);
+        }
+
+        public static List<Dictionary<string, object>> GetRelated(int Code_id)
+        {
+            string query = @"select id,
+                                    title,
+                                    guid
+                             from
+                                (select c.Id,
+                                        c.Title,
+                                        c.Guid
+                                 from Code c
+                                      left outer join wall w on w.code_id = c.id
+                                      left outer join codeonwalls cw on cw.code_id = c.id
+                                 where c.lang = (select lang from Code where id = @CodeId) and
+                                       (w.id is not null or cw.id is not null) and 
+                                       c.id <> @CodeId
+                                )
+                            order by random()
+                            limit 10;";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("CodeId", Code_id));
+            return ExecuteQuery(query, pars);
         }
     }
 }

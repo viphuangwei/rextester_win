@@ -36,13 +36,16 @@ namespace reExp.Controllers.discussion
                         Text = data.NewComment,
                         Code_Id = code.ID
                     });
-                data.NewComment = "";
+                return this.Redirect(Utils.Utils.BaseUrl + @"discussion/" + code.Guid + "#comment_" + Model.Comment_Last_Id(code.ID));
             }
+
 
             if (!code.IsOnAWall)
                 data.Title = "Discussion not available";
             else
                 data.Title = code.Title;
+
+            data.Related = Model.GeRelated(code.ID);            
             data.Votes = code.Votes;
             data.VoteUp = code.Voted;
             data.ShowComments = code.IsOnAWall;
@@ -86,7 +89,7 @@ namespace reExp.Controllers.discussion
                     User_Id = (int)SessionManager.UserId,
                     Text = data.Text
                 });
-                return this.Redirect(Utils.Utils.BaseUrl + @"discussion/" + code.Guid + @"/" + code.Title.StringToUrl());
+                return this.Redirect(Utils.Utils.BaseUrl + @"discussion/" + code.Guid + "#comment_"+data.Comment_ID);
             }
         }
        

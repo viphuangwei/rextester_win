@@ -36,6 +36,21 @@
             word-wrap: break-word;       /* Internet Explorer 5.5+ */
             width: 99%;
         }
+        a.related 
+        {
+            text-decoration:none;
+            color:gray;
+        }
+        a.related:visited 
+        {
+            text-decoration:none;
+            color:black;
+        }
+        a.related:hover 
+        {
+            text-decoration:underline;
+            color:gray;
+        }
         span.yellow
         {
             background: yellow;    

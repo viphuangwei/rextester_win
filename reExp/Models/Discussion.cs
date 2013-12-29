@@ -1,4 +1,5 @@
-﻿using System;
+﻿using reExp.Controllers.discussion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -67,6 +68,22 @@ namespace reExp.Models
                 Utils.Log.LogInfo(e.Message, "error");
             }
         }
+
+
+        public static int? Comment_Last_Id(int code_id)
+        {
+            try
+            {
+                var res = DB.DB.Comment_Last_Id(code_id);
+                return Convert.ToInt32(res[0]["id"]);
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, "error");
+                return 0;
+            }
+        }
+
         public static void UpdateComment(Comment comment)
         {
             try
@@ -87,6 +104,25 @@ namespace reExp.Models
             catch (Exception e)
             {
                 Utils.Log.LogInfo(e.Message, "error");
+            }
+        }
+
+        public static List<RelatedEntry> GeRelated(int code_id)
+        {
+            try
+            {
+                var res = DB.DB.GetRelated(code_id);
+                return res.Select(c => new RelatedEntry()
+                {
+                    Guid = (string)c["guid"],
+                    Title = (string)c["title"]
+                })
+                .ToList();
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, "error");
+                return new List<RelatedEntry>();
             }
         }
     }

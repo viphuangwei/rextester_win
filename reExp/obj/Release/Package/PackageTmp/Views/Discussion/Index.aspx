@@ -57,30 +57,39 @@
 
     <%if(Model.ShowComments)
     {%>
-        <div id="comments_thread" style="margin: 3em auto;max-width: 54.3em;">
-            <%foreach(var com in Model.Comments)
-            {%>             
-                <span>
-                    <% Html.RenderPartial("DiscussionControl", com); %> 
-                </span>
-            <%}%> 
-            <br/><br/>
+        <div id="comments_thread" style="margin: 3em auto;max-width: 70em;">
+            <table style="width:100%">
+                <tr>
+                    <td style="vertical-align:top; width: 62%">
+                         <%foreach(var com in Model.Comments)
+                        {%>             
+                            <span>
+                                <% Html.RenderPartial("DiscussionControl", com); %> 
+                            </span>
+                        <%}%> 
+                        <br/><br/>
 
-            <%if(SessionManager.IsUserInSession())
-              {
-                using (Html.BeginForm())
-                {%>
-                    <div class="mdd_toolbar"></div>
-                    <textarea cols="50" rows="12" class="mdd_editor" id="NewComment" name="NewComment"><%=Model.NewComment%></textarea>
-                    <div class="mdd_resizer"></div>
-                    <div class="mdd_preview" style="display:block;word-wrap:break-word;"></div>
-                    <input id="Button" type="submit" value="Submit"/>
-                <%}
-              }
-              else
-              {%>
-                    Please <a href="<%=Utils.BaseUrl+"login"%>">log in</a> to post a comment.
-            <%}%>
+                        <%if(SessionManager.IsUserInSession())
+                          {
+                            using (Html.BeginForm())
+                            {%>
+                                <div class="mdd_toolbar"></div>
+                                <textarea cols="50" rows="12" class="mdd_editor" id="NewComment" name="NewComment"><%=Model.NewComment%></textarea>
+                                <div class="mdd_resizer"></div>
+                                <div class="mdd_preview" style="display:block;word-wrap:break-word;"></div>
+                                <input id="Button" type="submit" value="Submit"/>
+                            <%}
+                          }
+                          else
+                          {%>
+                                Please <a href="<%=Utils.BaseUrl+"login"%>">log in</a> to post a comment.
+                        <%}%>
+                    </td>
+                    <td style="padding-left: 80px; vertical-align:top;width: 18%;">
+                        <% Html.RenderPartial("RelatedControl", Model.Related); %> 
+                    </td>
+                </tr>          
+            </table>
         </div>
     <%}%>
 </asp:Content>

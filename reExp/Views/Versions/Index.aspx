@@ -22,7 +22,19 @@
           <%} %>
         <a href="<%=Utils.BaseUrl+(Model.IsLive ? "live/" : "" )+Model.CodeGuid%>"><%:latest%></a>
         <div class="sub" style="display:inline-block;">
-            <i><%:string.IsNullOrEmpty(Model.Author) ? "" : " by " + Model.Author + ", "%><%:Model.CreationDate.TimeAgo()%></i>
+            <i><%if (Model.Author != null)
+                {
+                      if(Model.Author.Wall_ID != null)
+                      {%>
+                        by <a href="<%:Utils.BaseUrl+"users/"+Model.Author.Wall_ID%>"><%:Model.Author.Name%></a>,
+                     <%}
+                     else
+                     {%>
+                       by <%:Model.Author.Name%>,
+                     <%}%>                                          
+                <%}%>
+                <%:Model.CreationDate.TimeAgo()%>
+            </i>
         </div>
     </div>
     <hr/>

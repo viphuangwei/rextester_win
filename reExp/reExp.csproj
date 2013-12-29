@@ -671,6 +671,7 @@
     <Content Include="Views\Discussion\DiscussionControl.ascx" />
     <Content Include="Views\Discussion\EditComment.aspx" />
     <Content Include="Views\Discussion\Index.aspx" />
+    <Content Include="Views\Discussion\RelatedControl.ascx" />
     <Content Include="Views\Feedback\Index.aspx" />
     <Content Include="Views\Login\CreateGoogleUser.aspx" />
     <Content Include="Views\Login\Index.aspx" />

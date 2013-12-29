@@ -99,7 +99,12 @@ namespace reExp.Models.DB
 
         public static List<Dictionary<string, object>> GetUserByGuid(string guid)
         {
-            string query = @"select u.* from Code c inner join Users u on c.user_id = u.id where c.guid = @Guid";
+            string query = @"select u.name,
+                                    uw.id as wall_id 
+                             from Code c 
+                                  inner join Users u on c.user_id = u.id 
+                                  left outer join UserWalls uw on u.id = uw.user_id
+                             where c.guid = @Guid";
             var pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("Guid", guid));
             return ExecuteQuery(query, pars);
