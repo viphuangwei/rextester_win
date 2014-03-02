@@ -94,29 +94,29 @@
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
             <ul>
-                <li><code>Assembly - nasm 2.10.01</code></li>
-                <li><code>C++ (gcc) - g++ 4.7.3 (g++ -Wall -std=c++11 -O2)</code></li>
-                <li><code>C++ (clang) - clang 3.2 (clang++ -Wall -std=c++11 -O2)</code></li>
-                <li><code>C (gcc) - gcc 4.7.3 (gcc -Wall -std=gnu99 -O2)</code></li>
-                <li><code>C (clang) - clang 3.2 (clang -Wall -std=gnu99 -O2)</code></li>
+                <li><code>Assembly - nasm 2.10.07</code></li>
+                <li><code>C++ (gcc) - g++  4.8.1 (g++ -Wall -std=c++11 -O2)</code></li>
+                <li><code>C++ (clang) - clang 3.4 (clang++ -Wall -std=c++11 -O2)</code></li>
+                <li><code>C (gcc) - gcc 4.8.1 (gcc -Wall -std=gnu99 -O2)</code></li>
+                <li><code>C (clang) - clang 3.4 (clang -Wall -std=gnu99 -O2)</code></li>
                 <li><code>Common Lisp - gnu clisp 2.49</code></li>
-                <li><code>Go - go 1.0.2</code></li>
-                <li><code>Haskell - ghc 7.6.2</code></li>
-                <li><code>Java - Oracle's implementation of Java, compiler version 1.7.0_25 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</code></li>
+                <li><code>Go - go 1.1.2</code></li>
+                <li><code>Haskell - ghc 7.6.3</code></li>
+                <li><code>Java - Oracle's implementation of Java, compiler version 1.7.0_51 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</code></li>
                 <li><code>Javascript - V8 3.21.3.1</code></li>
-                <li><code>Lua - lua 5.2.1</code></li>
-                <li><code>Node.js - nodejs 0.10.17</code></li>
-                <li><code>Objective-C - gcc 4.7.3 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</code></li>
+                <li><code>Lua - lua 5.2.2</code></li>
+                <li><code>Node.js - nodejs 0.10.25</code></li>
+                <li><code>Objective-C - gcc 4.8.1 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</code></li>
                 <li><code>Octave - GNU Octave 3.6.4 (octave -q -f --no-window-system)</code></li>
-                <li><code>Pascal - fpc 2.6.0-9</code></li>
+                <li><code>Pascal - fpc 2.6.2-5</code></li>
                 <li><code>Perl - perl 5.14.2 (perl -w)</code></li>
-                <li><code>Php - php 5.4.9</code></li>
-                <li><code>Prolog - swi-prolog 5.10.4</code></li>
-                <li><code>Python - python 2.7.4</code></li>
-                <li><code>Python 3 - python 3.3.1</code></li>
+                <li><code>Php - php 5.5.3</code></li>
+                <li><code>Prolog - swi-prolog 6.2.6</code></li>
+                <li><code>Python - python 2.7.5</code></li>
+                <li><code>Python 3 - python 3.3.2</code></li>
                 <li><code>Ruby - ruby 1.9.3 (ruby -w -W1)</code></li>
                 <li><code>Scala - scala 2.9.2 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</code></li>
-                <li><code>Scheme - guile 2.0.7</code></li>
+                <li><code>Scheme - guile 2.0.9</code></li>
             </ul> 
             Your code will be run on behalf special user and group. Also your code will be executed from Python wrapper which sets various limits to the process. It does so
             by using <code>'setrlimit'</code> system call. You'll have max 5 sec of cpu time, limited memory (~1500 Mb) and other restrictions will apply (like no writing permissions). Also your process and all its children will be run in a
@@ -139,7 +139,7 @@
             Write code so that others see this real-time. Every participant can make changes and see changes made by others. We use <a href="http://www.firepad.io">Firepad</a> and <a href="https://www.firebase.com/">Firebase</a>.
             <br/><br/>
             <b style="color:Gray">Credit</b><br/>
-            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>, <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a>, <a href="http://code.google.com/p/coderev/">Coderev</a> and <a href="http://jedi.jedidjah.ch/">Jedi</a>.<br/><br />
+            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>, <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/><br />
             <b style="color:Gray">Code wall</b><br/>
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code wall</a> as well as <a href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">personal code walls</a> - place code on a wall for public display. These entries will be crawled by search engines, so one 
             possible use is to put there scripts that you may need for easy access later. For example, whenever I need a sql script for searching database definitions I simply search for <a href="https://www.google.com/search?q=sql+definition+rextester">'sql definition rextester'</a> and there is my script (it seems that code wall is 

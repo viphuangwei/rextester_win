@@ -256,10 +256,6 @@
     {
             %><script src="../../Scripts/codemirror3/addon/hint/csharp-hint.js" type="text/javascript"></script><%
     }%>
-    <%if (Model.LanguageChoice == LanguagesEnum.Python && Model.IsIntellisense)
-    {
-            %><script src="../../Scripts/codemirror3/addon/hint/python-hint.js" type="text/javascript"></script><%
-    }%>
     <%if (Model.EditorChoice == EditorsEnum.Editarea)
     {
         %><script src="../../Scripts/editarea/edit_area_full.js" type="text/javascript"></script><%
@@ -611,18 +607,8 @@
                     <%if(Model.LanguageChoice == LanguagesEnum.CSharp)
                     {%>
                         CodeMirror.showHint(cm, CodeMirror.hint.csharp, {async: true});
-                    <%}
-                    else if(Model.LanguageChoice == LanguagesEnum.Python)
-                    {%>
-                        //CodeMirror.showHint(cm, CodeMirror.hint.python, {async: true});
                     <%}%>
                 }
-            <%} %>
-            <% if(Model.IsIntellisense && Model.LanguageChoice == LanguagesEnum.Python)
-            {%>
-                //if ((e.keyCode == 57) && e.type == 'keydown' && e.shiftKey) {
-                    //CodeMirror.showHint(cm, CodeMirror.hint.python, {async: true});
-                //}
             <%} %>
         }
         //]]>

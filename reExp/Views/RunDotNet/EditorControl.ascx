@@ -245,12 +245,6 @@
                     CodeMirror.commands.autocomplete = function (cm) {
                         CodeMirror.showHint(cm, CodeMirror.hint.csharp, { async: true });
                     };
-            <%}
-             else if (Model.IsIntellisense && Model.LanguageChoice == LanguagesEnum.Python)
-             {%>
-                    CodeMirror.commands.autocomplete = function (cm) {
-                        CodeMirror.showHint(cm, CodeMirror.hint.python, { async: true });
-                    };
             <%}%>
 
             <%if(Model.IsLive && Model.EditorChoice == EditorsEnum.Codemirror)
