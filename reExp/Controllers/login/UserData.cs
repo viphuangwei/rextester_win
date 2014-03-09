@@ -43,5 +43,10 @@ namespace reExp.Controllers.login
             get;
             set;
         }
+        public string Query
+        {
+            get;
+            set;
+        }
     }
 }

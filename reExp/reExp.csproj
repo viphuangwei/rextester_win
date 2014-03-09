@@ -64,6 +64,9 @@
       <HintPath>..\packages\MarkdownDeep.Full.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Roslyn.Compilers, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dlls\Roslyn.Compilers.dll</HintPath>
@@ -149,6 +152,7 @@
     <Compile Include="Models\DB\Runcode.cs" />
     <Compile Include="Models\Runcode.cs" />
     <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Utils\Search.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -772,6 +776,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="executables\usercode\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

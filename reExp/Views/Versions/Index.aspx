@@ -48,7 +48,14 @@
             <input id="radio_right_<%:i+1%>" name="RightChecked" type="radio" value="<%:ordered[i].Guid%>" />
             <a href="<%=Utils.BaseUrl+ordered[i].Guid%>"><%:version%>&nbsp;<%:ordered.Count-i%></a>
             <div class="sub" style="display:inline-block;">
-                <i><%:string.IsNullOrEmpty(ordered[i].Author) ? "" : " by " + ordered[i].Author + ", "%><%:ordered[i].CreationDate.TimeAgo()%></i>
+                <%if (ordered[i].Wall_id != null) 
+                {%>
+                    <i>by <a href="<%:Utils.BaseUrl+"users/"+ordered[i].Wall_id%>"><%:ordered[i].Author%></a>, <%:ordered[i].CreationDate.TimeAgo()%></i>
+                <%}
+                else 
+                {%>
+                    <i><%:string.IsNullOrEmpty(ordered[i].Author) ? "" : " by " + ordered[i].Author + ", "%><%:ordered[i].CreationDate.TimeAgo()%></i> 
+                <%}%>
             </div>
             </div>
             <hr/>

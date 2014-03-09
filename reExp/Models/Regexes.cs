@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using reExp.Controllers.regex;
 using reExp.Utils;
+using System.Threading.Tasks;
 
 namespace reExp.Models
 {
@@ -19,6 +20,23 @@ namespace reExp.Models
                 foreach (var o in data.Options)
                     options += o ? "1" : "0";
                 DB.DB.Regex_Insert(data.Pattern, data.Text, data.SavedOutput, options, guid, SessionManager.UserId);
+
+                if (SessionManager.IsUserInSession())
+                {
+                    int uid = (int)SessionManager.UserId;
+                    Task.Run(() =>
+                    {
+                        Search.PutUserItem(new UsersItem()
+                        {
+                            Date = DateTime.Now,
+                            Guid = guid,
+                            ID = "regex_" + guid,
+                            UserId = uid,
+                            Regex = data.Pattern,
+                            Text = data.Text
+                        });
+                    });
+                }
             }
             catch (Exception e)
             {
@@ -66,6 +84,24 @@ namespace reExp.Models
                 foreach (var o in data.Options)
                     options += o ? "1" : "0";
                 DB.DB.Regex_Replace_Insert(data.Pattern, data.Substitution, data.Text, data.SavedOutput, options, guid, SessionManager.UserId);
+
+                if (SessionManager.IsUserInSession())
+                {
+                    int uid = (int)SessionManager.UserId;
+                    Task.Run(() =>
+                    {
+                        Search.PutUserItem(new UsersItem()
+                        {
+                            Date = DateTime.Now,
+                            Guid = guid,
+                            ID = "regex_r_" + guid,
+                            UserId = uid,
+                            Regex = data.Pattern,
+                            Replace = data.Substitution,
+                            Text = data.Text
+                        });
+                    });
+                }
             }
             catch (Exception e)
             {

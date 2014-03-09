@@ -8,25 +8,30 @@
     <%if (!Model.IsError)
       { %>        
         <h2><%:Model.UserName%>'s stuff</h2>
-            <table style="width:95%">
-                <tr>
-                    <td align="right">
-                        <a href="usersstuff" style="color:white; background-color:gray;">
-                            stuff
-                        </a>
-                        &nbsp;|&nbsp;
-                        <a href="notifications" style="color:gray;">
-                            notifications
-                        </a>
-                        <%if(Model.Wall_ID != null) {%>
-                        &nbsp;|&nbsp;
-                        <a href="<%:Utils.BaseUrl+"users/"+Model.Wall_ID%>" style="color:gray;">
-                            my wall
-                        </a>
-                        <%} %>
-                     </td>
-                </tr>
-            </table>
+            <form id="searchForm" method="post">
+                <table style="width:95%">
+                    <tr>
+                        <td align="left">
+                            <input type="text" name="Query"  id="Query" style="width: 250px" value="<%:Model.Query%>"/> <input type="submit" value="search" />
+                        </td>
+                        <td align="right">
+                            <a href="usersstuff" style="color:white; background-color:gray;">
+                                stuff
+                            </a>
+                            &nbsp;|&nbsp;
+                            <a href="notifications" style="color:gray;">
+                                notifications
+                            </a>
+                            <%if(Model.Wall_ID != null) {%>
+                            &nbsp;|&nbsp;
+                            <a href="<%:Utils.BaseUrl+"users/"+Model.Wall_ID%>" style="color:gray;">
+                                my wall
+                            </a>
+                            <%} %>
+                         </td>
+                    </tr>
+                </table>
+            </form>
          <%int maxDisplayLength = 100; %>
          <%if (Model.Items.Count > 0)
             {%>
@@ -53,7 +58,10 @@
                                 <br/>
                                 <div class="sub">
                                     <i><%:item.Lang.ToLanguage()%>, <%:item.IsLive ? "live, " : "" %><%:item.IsWall ? "on a wall, " : ""%><%if(item.IsPersonalWall) {%><a href="<%:Utils.BaseUrl%>users/<%:Model.Wall_ID%>">on your wall,</a><%}%></i><%:item.Date.TimeAgo()%>
+                                    <%if(item.ID != 0) 
+                                    {%>
                                     &nbsp;&nbsp&nbsp;<span style="cursor:pointer;" class="hov" id="<%:item.ID%>">remove</span>
+                                    <%} %>
                                 </div>
                             <%}
                               else if (item.Type == 2)
@@ -68,7 +76,10 @@
                                 <br/>
                                 <div  class="sub">
                                     <i>Regex</i>,&nbsp;<%:item.Date.TimeAgo()%>
+                                    <%if(item.ID != 0) 
+                                    {%>
                                     &nbsp;&nbsp&nbsp;<span style="cursor:pointer;" class="hov" id="<%:item.ID%>">remove</span>
+                                    <%} %>
                                 </div>
                               <%}
                               else if (item.Type == 3)
@@ -83,7 +94,10 @@
                                 <br/>
                                 <div  class="sub">
                                     <i>Regex replace</i>,&nbsp;<%:item.Date.TimeAgo()%>
+                                    <%if(item.ID != 0) 
+                                    {%>
                                     &nbsp;&nbsp&nbsp;<span style="cursor:pointer;" class="hov" id="<%:item.ID%>">remove</span>
+                                    <%}%>
                                 </div>
                               <%}%>
                         </div>

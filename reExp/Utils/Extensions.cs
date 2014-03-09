@@ -77,6 +77,23 @@ namespace reExp.Utils
             }
         }
 
+        public static LanguagesEnum ToLanguageEnum(this string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return LanguagesEnum.Unknown;
+            }
+            for (int i = 0; i < 30; i++)
+            {
+                if (s.ToLower() == ((LanguagesEnum)i).ToLanguage().ToLower())
+                {
+                    return (LanguagesEnum)i;
+                }
+            }
+
+            return LanguagesEnum.Unknown;
+        }
+
 
         public static GlobalConst.RundotnetStatus ToRundotnetStatus(this int number)
         {

@@ -12,7 +12,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/db.s3db">
-      <publishTime>01/19/2014 18:34:33</publishTime>
+      <publishTime>03/08/2014 21:35:59</publishTime>
     </File>
     <File Include="bin/BookSleeve.dll">
       <publishTime>01/19/2014 18:34:42</publishTime>
@@ -27,13 +27,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:43</publishTime>
     </File>
     <File Include="bin/GlobalUtils.dll">
-      <publishTime>03/02/2014 18:40:46</publishTime>
+      <publishTime>03/08/2014 14:47:52</publishTime>
     </File>
     <File Include="bin/MarkdownDeep.dll">
       <publishTime>01/19/2014 18:34:43</publishTime>
     </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/08/2014 14:38:53</publishTime>
+    </File>
     <File Include="bin/reExp.dll">
-      <publishTime>03/02/2014 18:41:23</publishTime>
+      <publishTime>03/08/2014 21:54:44</publishTime>
     </File>
     <File Include="bin/reExp.pdb">
       <publishTime>06/29/2012 00:16:38</publishTime>
@@ -45,13 +48,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:44</publishTime>
     </File>
     <File Include="bin/Service.dll">
-      <publishTime>03/02/2014 18:40:50</publishTime>
+      <publishTime>03/08/2014 14:47:58</publishTime>
     </File>
     <File Include="bin/Service.pdb">
       <publishTime>06/26/2012 23:43:24</publishTime>
     </File>
     <File Include="bin/Service.XmlSerializers.dll">
-      <publishTime>03/02/2014 18:40:52</publishTime>
+      <publishTime>03/08/2014 14:48:01</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.DLL">
       <publishTime>01/19/2014 18:34:45</publishTime>
@@ -192,7 +195,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:34</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>01/19/2014 18:34:47</publishTime>
+      <publishTime>03/08/2014 14:39:00</publishTime>
     </File>
     <File Include="Scripts/codemirror2/demo/activeline.html">
       <publishTime>09/28/2013 14:18:34</publishTime>
@@ -2283,7 +2286,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:42</publishTime>
     </File>
     <File Include="Views/Login/UsersStuff.aspx">
-      <publishTime>01/19/2014 18:34:42</publishTime>
+      <publishTime>03/08/2014 21:23:08</publishTime>
     </File>
     <File Include="Views/Main/Faq.aspx">
       <publishTime>01/19/2014 18:34:42</publishTime>
@@ -2316,7 +2319,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:42</publishTime>
     </File>
     <File Include="Views/Versions/Index.aspx">
-      <publishTime>01/19/2014 18:34:42</publishTime>
+      <publishTime>03/04/2014 00:14:03</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>01/19/2014 18:34:42</publishTime>

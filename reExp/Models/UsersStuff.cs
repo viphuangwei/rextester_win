@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using reExp.Utils;
+using System.Threading.Tasks;
 
 namespace reExp.Models
 {
@@ -43,7 +44,16 @@ namespace reExp.Models
 
         public static bool DeleteUserItem(int id)
         {
-            return DB.DB.DeleteUserItem(id);
+            var res = DB.DB.DeleteUserItem(id);
+            if (res && SessionManager.IsUserInSession())
+            {
+                int uid = (int)SessionManager.UserId;
+                Task.Run(() =>
+                {
+                    Search.DeleteUserItem(uid, DB.DB.GetDeleteUserItemsSearchId(id));
+                });
+            }
+            return res;
         }
         public static int GetUsersTotal(int userId)
         {

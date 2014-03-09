@@ -20,12 +20,15 @@ namespace reExp.Controllers.versions
             var versions = Model.GetVersions(data.CodeGuid);
             data.Versions = new List<Version>();
             foreach (var v in versions)
+            {
                 data.Versions.Add(new Version()
                     {
                         Author = v.Author,
                         CreationDate = v.DateCreated,
-                        Guid = v.VersionGuid
+                        Guid = v.VersionGuid,
+                        Wall_id = v.Wall_Id
                     });
+            }
             data.IsLive = Model.IsLive(data.CodeGuid);
             data.Author = Model.GetUserByGuid(data.CodeGuid);
             var code = Model.GetCode(data.CodeGuid, false);

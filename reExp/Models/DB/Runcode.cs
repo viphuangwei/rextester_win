@@ -375,11 +375,12 @@ namespace reExp.Models.DB
 
         public static List<Dictionary<string, object>> GetVersions(string guid)
         {
-            string query = @"select vc.date as 'date', u.name as 'author', vc.guid as 'version_guid'
+            string query = @"select vc.date as 'date', u.name as 'author', vc.guid as 'version_guid', uw.id as wall_id
                              from versions v
                                   inner join code pc on v.primary_code_id = pc.id
                                   inner join code vc on v.snapshot_code_id = vc.id
                                   left outer join users u on vc.user_id = u.id
+                                  left outer join userwalls uw on u.id = uw.user_id
                              where pc.guid = @Guid";
             var pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("Guid", guid));

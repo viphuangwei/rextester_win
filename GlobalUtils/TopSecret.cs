@@ -8,7 +8,7 @@ namespace GlobalUtils
 {
     public class TopSecret
     {
-        public static string FeedbackAdress 
+        public static string FeedbackAdress
         {
             get
             {
@@ -68,6 +68,20 @@ namespace GlobalUtils
             }
         }
 
+        public static string Service_user
+        {
+            get
+            {
+                return @"";
+            }
+        }
+        public static string Service_pass
+        {
+            get
+            {
+                return @"";
+            }
+        }
         public static string Linux_user
         {
             get
@@ -89,6 +103,14 @@ namespace GlobalUtils
             get
             {
                 return @"";
+            }
+        }
+
+        public static string ElasticUrl
+        {
+            get
+            {
+                return @"a";
             }
         }
     }

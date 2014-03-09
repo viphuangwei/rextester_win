@@ -81,6 +81,33 @@ namespace reExp.Models.DB
             return true;
         }
 
+        public static string GetDeleteUserItemsSearchId(int id)
+        {
+            string query = @"select c.guid as c_guid, rr.guid as rr_guid, r.guid as r_guid
+                             from UsersCode uc
+                                  left outer join Code c on uc.code_id = c.id
+                                  left outer join Regex r on uc.regex_id = r.id
+                                  left outer join RegexReplace rr uc.regexreplace_id = rr.id
+                             where id = @Id";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("@Id", id));
+            var res = ExecuteQuery(query, pars);
+            if (res[0]["c_guid"] != DBNull.Value)
+            {
+                return "code_" + res[0]["c_guid"];
+            }
+            if (res[0]["rr_guid"] != DBNull.Value)
+            {
+                return "regex_r_" + res[0]["rr_guid"];
+            }
+            if (res[0]["r_guid"] != DBNull.Value)
+            {
+                return "regex_" + res[0]["r_guid"];
+            }
+
+            return null;
+        }
+
         public static List<Dictionary<string, object>> GoogleEmailExists(string email)
         {
             string query = @"select * from Users where email = @Email and name is not null";

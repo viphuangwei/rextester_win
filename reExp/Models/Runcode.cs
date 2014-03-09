@@ -9,6 +9,7 @@ using reExp.Utils;
 using BookSleeve;
 using System.Web.Script.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace reExp.Models
 {
@@ -156,6 +157,24 @@ namespace reExp.Models
             try
             {
                 DB.DB.Code_Insert(data.Title, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, Convert.ToInt32(data.LanguageChoice), Convert.ToInt32(data.EditorChoice), guid, SessionManager.UserId, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave, wall, live, personal);
+
+                if (SessionManager.IsUserInSession())
+                {
+                    int uid = (int)SessionManager.UserId;
+                    Task.Run(() =>
+                        {
+                            Search.PutUserItem(new UsersItem()
+                            {
+                                Code = data.Program,
+                                Date = DateTime.Now,
+                                Guid = guid,
+                                ID = "code_"+guid,
+                                Lang = data.LanguageChoice.ToLanguage(),
+                                UserId = uid,
+                                Title = data.Title
+                            });
+                        });
+                }
             }
             catch (Exception e)
             {
@@ -171,9 +190,30 @@ namespace reExp.Models
             try
             {
                 if (data.IsLive)
+                {
                     DB.DB.Live_Code_Update(guid, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, data.CodeGuid, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave);
+                }
                 else
+                {
                     DB.DB.Code_Update(guid, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, data.CodeGuid, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave);
+                }
+                if (SessionManager.IsUserInSession())
+                {
+                    int uid = (int)SessionManager.UserId;
+                    Task.Run(() =>
+                    {
+                        Search.PutUserItem(new UsersItem()
+                        {
+                            Code = data.Program,
+                            Date = DateTime.Now,
+                            Guid = data.CodeGuid,
+                            ID = "code_" + data.CodeGuid,
+                            Lang = data.LanguageChoice.ToLanguage(),
+                            UserId = uid,
+                            Title = data.Title
+                        });
+                    });
+                }
             }
             catch (Exception e)
             {
@@ -207,7 +247,8 @@ namespace reExp.Models
                     {
                         DateCreated = (DateTime)ver["date"],
                         Author = ver["author"] == DBNull.Value ? null : (string)(ver["author"]),
-                        VersionGuid = (string)ver["version_guid"]
+                        VersionGuid = (string)ver["version_guid"],
+                        Wall_Id = ver["wall_id"] == DBNull.Value ? null : (int?)Convert.ToInt32((ver["wall_id"]))
                     });
                 }
                 return versions;
@@ -602,6 +643,13 @@ namespace reExp.Models
             get;
             set;
         }
+
+        public int? Wall_Id
+        {
+            get;
+            set;
+        }
+
     }
 
 

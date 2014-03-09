@@ -49,6 +49,12 @@ namespace reExp.Controllers.versions
             set;
         }
 
+        public int? Wall_id
+        {
+            get;
+            set;
+        }
+
         public string Guid
         {
             get;

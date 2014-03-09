@@ -102,7 +102,7 @@ namespace reExp.Controllers.login
             return View(data);
         }
 
-        public ActionResult UsersStuff(int page=0)
+        public ActionResult UsersStuff(int page=0, string Query = null)
         {
             Compression.SetCompression();
             UserData data = new UserData();
@@ -114,9 +114,31 @@ namespace reExp.Controllers.login
             }
             data.UserName = SessionManager.UserName;
             int userId = (int)SessionManager.UserId;
-            data.Items = Model.GetUsersItems(userId, page);
-            data.CurrentPage = page;
-            data.TotalRecords = Model.GetUsersTotal(userId);
+            if (string.IsNullOrEmpty(Query))
+            {
+                data.Items = Model.GetUsersItems(userId, page);
+                data.CurrentPage = page;
+                data.TotalRecords = Model.GetUsersTotal(userId);
+            }
+            else
+            {
+                data.Query = Query;
+                data.Items = Search.MakeSearch(Query, (int)SessionManager.UserId)
+                                   .Select(f => new SavedItem() 
+                                   { 
+                                       Date = f.Date,
+                                       Guid = f.Guid,
+                                       Program = f.Code,
+                                       Regex = f.Regex,
+                                       Title = f.Title,
+                                       Type = f.ID.StartsWith("code") ? 1 : (f.ID.StartsWith("regex_r") ? 3 : 2),
+                                       Lang = f.Lang.ToLanguageEnum()
+                                   })
+                                   .ToList();
+                data.CurrentPage = 0;
+                data.TotalRecords = 10;
+            }
+
             data.Wall_ID = Model.GetUserWallId();
             return View(data);
         }
