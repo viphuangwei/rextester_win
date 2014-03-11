@@ -183,6 +183,21 @@ namespace reExp.Models
             }
             return guid;
         }
+        public static void UpdateLiveCache(string code, string chat, string guid)
+        {
+            var c = Model.GetCode(guid);
+            Search.PutUserItem(new UsersItem()
+            {
+                Code = code,
+                Date = c.Date,
+                Guid = guid,
+                ID = "code_" + guid,
+                Lang = c.Lang.ToLanguage(),
+                UserId = (int)c.UserId,
+                Text = chat,
+                IsLive = true
+            });
+        }
 
         public static void UpdateCode(RundotnetData data)
         {
@@ -196,23 +211,23 @@ namespace reExp.Models
                 else
                 {
                     DB.DB.Code_Update(guid, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, data.CodeGuid, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave);
-                }
-                if (SessionManager.IsUserInSession())
-                {
-                    int uid = (int)SessionManager.UserId;
-                    Task.Run(() =>
+                    if (SessionManager.IsUserInSession())
                     {
-                        Search.PutUserItem(new UsersItem()
+                        int uid = (int)SessionManager.UserId;
+                        Task.Run(() =>
                         {
-                            Code = data.Program,
-                            Date = DateTime.Now,
-                            Guid = data.CodeGuid,
-                            ID = "code_" + data.CodeGuid,
-                            Lang = data.LanguageChoice.ToLanguage(),
-                            UserId = uid,
-                            Title = data.Title
+                            Search.PutUserItem(new UsersItem()
+                            {
+                                Code = data.Program,
+                                Date = DateTime.Now,
+                                Guid = data.CodeGuid,
+                                ID = "code_" + data.CodeGuid,
+                                Lang = data.LanguageChoice.ToLanguage(),
+                                UserId = uid,
+                                Title = data.Title
+                            });
                         });
-                    });
+                    }
                 }
             }
             catch (Exception e)
@@ -287,7 +302,8 @@ namespace reExp.Models
                         Input = res[0]["input"] == DBNull.Value ? "" : (string)res[0]["input"],
                         Guid = (string)res[0]["guid"],
                         ShowWarnings = (res[0]["show_warnings"] == DBNull.Value ? false : (bool)res[0]["show_warnings"]),
-                        VersionToken = (string)res[0]["version_token"]
+                        VersionToken = (string)res[0]["version_token"],
+                        UserId = res[0]["user_id"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["user_id"])
                     };
                 else
                     return null;
@@ -327,7 +343,8 @@ namespace reExp.Models
                         IsPrimaryVersion = (res[0]["version_id"] == DBNull.Value ? true : false),
                         PrimaryGuid = (res[0]["primary_guid"] == DBNull.Value ? null : (string)res[0]["primary_guid"]),
                         Date = (DateTime)res[0]["date"],
-                        ID = Convert.ToInt32(res[0]["id"])
+                        ID = Convert.ToInt32(res[0]["id"]),
+                        UserId = res[0]["user_id"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["user_id"])
                     };
                     if (code.Votes != null && SessionManager.IsUserInSession())                     
                         code = GetCodeWithInfo(guid);
@@ -503,6 +520,11 @@ namespace reExp.Models
     
     public class Code
     {
+        public int? UserId
+        {
+            get;
+            set;
+        }
         public int ID
         {
             get;

@@ -132,7 +132,8 @@ namespace reExp.Controllers.login
                                        Regex = f.Regex,
                                        Title = f.Title,
                                        Type = f.ID.StartsWith("code") ? 1 : (f.ID.StartsWith("regex_r") ? 3 : 2),
-                                       Lang = f.Lang.ToLanguageEnum()
+                                       Lang = f.Lang.ToLanguageEnum(),
+                                       IsLive = f.IsLive ?? false
                                    })
                                    .ToList();
                 data.CurrentPage = 0;

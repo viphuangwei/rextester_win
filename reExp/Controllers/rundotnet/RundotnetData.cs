@@ -812,5 +812,10 @@ print -dpng some_name.png;
             get;
             set;
         }
+        public int? User_Id
+        {
+            get;
+            set;
+        }
     }
 }

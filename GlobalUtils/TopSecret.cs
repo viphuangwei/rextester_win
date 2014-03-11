@@ -110,7 +110,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"a";
+                return @"";
             }
         }
     }

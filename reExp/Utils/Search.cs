@@ -121,7 +121,8 @@ namespace reExp.Utils
                         Score = stuff.hits.hits[i]._score,
                         Regex = stuff.hits.hits[i]._source.Regex,
                         Replace = stuff.hits.hits[i]._source.Replace,
-                        Date = stuff.hits.hits[i]._source.Date
+                        Date = stuff.hits.hits[i]._source.Date,
+                        IsLive = stuff.hits.hits[i]._source.IsLive
                     };
                     if (stuff.hits.hits[i].highlight != null)
                     {
@@ -149,6 +150,7 @@ namespace reExp.Utils
         public string Replace { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
+        public bool? IsLive { get; set; }
     }
 
     public class SearchResult
@@ -165,6 +167,7 @@ namespace reExp.Utils
         public DateTime Date { get; set; }
         public string Highlight { get; set; }
         public double Score { get; set; }
+        public bool? IsLive { get; set; }
     }
 
     [System.ComponentModel.DesignerCategory("")]

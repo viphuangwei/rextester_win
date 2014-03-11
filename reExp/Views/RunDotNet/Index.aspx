@@ -341,6 +341,14 @@
                         textArea[0].scrollHeight - textArea.height()
                     );
                 }
+
+                <%if (Model.User_Id != null)
+                {%>
+                    setInterval(function() {
+                        $.post('/rundotnet/updateliveindex', { code: GlobalEditor.getValue(), chat: $("#chatAreaText").val(), guid: '<%:Model.CodeGuid%>'}, null, 'text'); 
+                    }, 60000);
+                <%}%>
+
             <%} %>
 
             $("#Help").click(function () {

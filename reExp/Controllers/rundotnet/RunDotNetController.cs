@@ -294,6 +294,14 @@ namespace reExp.Controllers.rundotnet
             return json.Serialize(new JsonData() { Url = url });
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public void UpdateLiveIndex(string code, string chat, string guid)
+        {
+            Model.UpdateLiveCache(code, chat, guid);
+        }
+        
+
         [HttpGet]
         [ValidateInput(false)]
         public ViewResult GetLiveCode(string savedNr)
@@ -313,6 +321,7 @@ namespace reExp.Controllers.rundotnet
             data.EditorChoice = (EditorsEnum)code.Editor;
             data.ShowWarnings = code.ShowWarnings;
             data.CodeGuid = savedNr;
+            data.User_Id = code.UserId;
 
             data.PrimaryGuid = data.CodeGuid;
             data.IsLive = true;
