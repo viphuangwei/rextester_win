@@ -1,8 +1,0 @@
-C:\Users\ren-computer\Desktop\rextester\win\GlobalUtils\bin\Release\GlobalUtils.dll
-C:\Users\ren-computer\Desktop\rextester\win\GlobalUtils\bin\Release\GlobalUtils.pdb
-C:\Users\ren-computer\Desktop\rextester\win\GlobalUtils\obj\Release\GlobalUtils.dll
-C:\Users\ren-computer\Desktop\rextester\win\GlobalUtils\obj\Release\GlobalUtils.pdb
-C:\Users\Renat\Desktop\rextester_win\GlobalUtils\bin\Release\GlobalUtils.dll
-C:\Users\Renat\Desktop\rextester_win\GlobalUtils\bin\Release\GlobalUtils.pdb
-C:\Users\Renat\Desktop\rextester_win\GlobalUtils\obj\Release\GlobalUtils.dll
-C:\Users\Renat\Desktop\rextester_win\GlobalUtils\obj\Release\GlobalUtils.pdb
