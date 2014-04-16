@@ -198,7 +198,7 @@ namespace reExp.Controllers.rundotnet
             cp.ReferencedAssemblies.Add("System.Data.DataSetExtensions.dll");
             cp.ReferencedAssemblies.Add("System.Xml.dll");
             cp.ReferencedAssemblies.Add("System.Xml.Linq.dll");
-
+            cp.ReferencedAssemblies.Add("System.Drawing.dll");
 
             if (data.LanguageChoice == LanguagesEnum.CSharp)
                 cp.ReferencedAssemblies.Add("Microsoft.CSharp.dll");
@@ -209,6 +209,7 @@ namespace reExp.Controllers.rundotnet
             cp.ReferencedAssemblies.Add(typeof(System.ComponentModel.Composition.ImportAttribute).Assembly.Location);
             cp.ReferencedAssemblies.Add(typeof(System.Web.HttpRequest).Assembly.Location);
             cp.ReferencedAssemblies.Add(typeof(System.Net.Http.HttpClient).Assembly.Location);
+            cp.ReferencedAssemblies.Add(typeof(Newtonsoft.Json.JsonSerializer).Assembly.Location);
 
             //cp.ReferencedAssemblies.Add(typeof(System.Windows.Threading.DispatcherTimer).Assembly.Location);
 

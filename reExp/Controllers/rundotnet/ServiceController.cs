@@ -69,11 +69,13 @@ namespace reExp.Controllers.rundotnet
                     var web = new AssemblyFileReference(typeof(System.Web.HttpRequest).Assembly.Location);
                     var http = new AssemblyFileReference(typeof(System.Net.Http.HttpClient).Assembly.Location);
                     var numerics = new AssemblyFileReference(typeof(System.Numerics.BigInteger).Assembly.Location);
+                    var drawing = new AssemblyFileReference(typeof(System.Drawing.Image).Assembly.Location);
+                    //var newton_json = new AssemblyFileReference(typeof(Newtonsoft.Json.JsonSerializer).Assembly.Location);
 
                     var compilation = Roslyn.Compilers.CSharp.Compilation.Create(
                         "MyCompilation",
                         syntaxTrees: new[] { tree },
-                        references: new[] { mscorlib, core, data, xml, xml_linq, c_sharp, anot, comp, web, http, numerics });
+                        references: new[] { mscorlib, core, data, xml, xml_linq, c_sharp, anot, comp, web, http, numerics, drawing/*, newton_json*/ });
 
                     var semanticModel = compilation.GetSemanticModel(tree);     
 

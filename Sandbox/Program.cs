@@ -62,6 +62,8 @@ namespace Sandbox
             var a2 = typeof(System.ComponentModel.Composition.ImportAttribute).Assembly.GetName();
             var a3 = typeof(System.Web.HttpRequest).Assembly.GetName();
             var a4 = typeof(System.Net.Http.HttpClient).Assembly.GetName();
+            var a5 = typeof(System.Drawing.Image).Assembly.GetName();
+            var a6 = typeof(Newtonsoft.Json.JsonSerializer).Assembly.GetName();
 
 
             adSetup.PartialTrustVisibleAssemblies = new string[]
@@ -70,6 +72,8 @@ namespace Sandbox
                 string.Format("{0}, PublicKey={1}", a2.Name, ByteArrayToString(a2.GetPublicKey()).ToUpper()),                
                 string.Format("{0}, PublicKey={1}", a3.Name, ByteArrayToString(a3.GetPublicKey()).ToUpper()),
                 string.Format("{0}, PublicKey={1}", a4.Name, ByteArrayToString(a4.GetPublicKey()).ToUpper()),
+                string.Format("{0}, PublicKey={1}", a5.Name, ByteArrayToString(a5.GetPublicKey()).ToUpper()),
+                string.Format("{0}, PublicKey={1}", a6.Name, ByteArrayToString(a6.GetPublicKey()).ToUpper()),
             };
 
             //Now we have everything we need to create the AppDomain, so let's create it.

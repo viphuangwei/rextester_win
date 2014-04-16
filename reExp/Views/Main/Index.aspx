@@ -56,6 +56,8 @@
                 <li><code>System.Web.dll</code></li>
                 <li><code>System.ComponentModel.DataAnnotations.dll</code></li>
                 <li><code>System.ComponentModel.Composition.dll</code></li>
+                <li><code>System.Drawing.dll</code></li>
+                <li><code>Newtonsoft.Json.dll</code></li>
                 <li><code><a href="http://rextester.com/feedback/">Let us know if you need more.</a></code></li>
             </ul>
             For F# additional assemblies are included:

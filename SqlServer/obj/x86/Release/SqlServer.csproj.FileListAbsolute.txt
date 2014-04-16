@@ -1,0 +1,7 @@
+C:\Users\Renat\Desktop\rextester_win\SqlServer\bin\Release\SqlServer.exe.config
+C:\Users\Renat\Desktop\rextester_win\SqlServer\bin\Release\SqlServer.exe
+C:\Users\Renat\Desktop\rextester_win\SqlServer\bin\Release\SqlServer.pdb
+C:\Users\Renat\Desktop\rextester_win\SqlServer\bin\Release\GlobalUtils.dll
+C:\Users\Renat\Desktop\rextester_win\SqlServer\bin\Release\GlobalUtils.pdb
+C:\Users\Renat\Desktop\rextester_win\SqlServer\obj\x86\Release\SqlServer.exe
+C:\Users\Renat\Desktop\rextester_win\SqlServer\obj\x86\Release\SqlServer.pdb
