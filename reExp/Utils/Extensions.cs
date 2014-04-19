@@ -72,6 +72,8 @@ namespace reExp.Utils
                     return "Python 3";
                 case LanguagesEnum.Octave:
                     return "Octave";
+                case LanguagesEnum.D:
+                    return "D";
                 default:
                     return "Unknown";
             }
@@ -83,7 +85,7 @@ namespace reExp.Utils
             {
                 return LanguagesEnum.Unknown;
             }
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i <= Enum.GetNames(typeof(LanguagesEnum)).Length; i++)
             {
                 if (s.ToLower() == ((LanguagesEnum)i).ToLanguage().ToLower())
                 {

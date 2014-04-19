@@ -56,6 +56,8 @@
                 <li><code>System.Web.dll</code></li>
                 <li><code>System.ComponentModel.DataAnnotations.dll</code></li>
                 <li><code>System.ComponentModel.Composition.dll</code></li>
+                <li><code>System.Drawing.dll</code></li>
+                <li><code>Newtonsoft.Json.dll</code></li>
                 <li><code><a href="http://rextester.com/feedback/">Let us know if you need more.</a></code></li>
             </ul>
             For F# additional assemblies are included:
@@ -84,7 +86,7 @@
             otherwise you'll receive an error from parser since in select statement you would be reffering to a function which doesn't yet exist.<br/>
             For convinience there is simple pre-built schema, shown <a href="../../Content/Schema.png">here</a>.
             <br/><br/><b style="color:Gray">Visual C++ (and C)</b><br/>
-            Your code is compiled to native binary which runs on Windows Server 2012. Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
+            Your code is compiled to native binary which runs on Windows Server 2012 (maximum compile time is 30 seconds). Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
             After 10 seconds of execution this process will be killed. This and the fact that your code will be executed on behalf of IIS application pool identity are the only security measures taken.
             Think you can break the service? Probably so and we'd like to hear how would you do this. Also let us know if you need some other Windows-based compilers.
             <br/>Compiler version:
@@ -100,6 +102,7 @@
                 <li><code>C (gcc) - gcc 4.8.1 (gcc -Wall -std=gnu99 -O2)</code></li>
                 <li><code>C (clang) - clang 3.4 (clang -Wall -std=gnu99 -O2)</code></li>
                 <li><code>Common Lisp - gnu clisp 2.49</code></li>
+                <li><code>D - DMD64 D Compiler v2.065</code></li>
                 <li><code>Go - go 1.1.2</code></li>
                 <li><code>Haskell - ghc 7.6.3</code></li>
                 <li><code>Java - Oracle's implementation of Java, compiler version 1.7.0_51 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</code></li>
@@ -119,7 +122,7 @@
                 <li><code>Scheme - guile 2.0.9</code></li>
             </ul> 
             Your code will be run on behalf special user and group. Also your code will be executed from Python wrapper which sets various limits to the process. It does so
-            by using <code>'setrlimit'</code> system call. You'll have max 5 sec of cpu time, limited memory (~1500 Mb) and other restrictions will apply (like no writing permissions). Also your process and all its children will be run in a
+            by using <code>'setrlimit'</code> system call. You'll have max 30 sec to compile, max 5 sec of cpu time to run, limited memory (~1500 Mb) and other restrictions will apply (like no writing permissions). Also your process and all its children will be run in a
             newly created process group which will be terminated after 10 seconds from start if still running.<br/>
             <br/>We don't claim that this is secure. In many senses you'll have the power of special user. On a bright side, this has some <a href="http://rextester.com/runcode?code=KAKN22727">useful</a> side-effects. The reason why, at least for now, 
             we leave so many potential security breaches is because it's <b>hard</b> to make it really secure. What are the options? 
@@ -237,6 +240,7 @@
     C++ (clang) = 27    
     C++ (vc++) = 28
     C (vc) = 29
+    D = 30
 </pre>
             <br/>
             Api stats:

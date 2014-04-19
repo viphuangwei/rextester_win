@@ -161,6 +161,11 @@
           syntax = "octave";
           js = "mode/octave/octave.js";
           break;
+      case LanguagesEnum.D:
+          mode = "text/x-d";
+          syntax = "c";
+          js = "mode/d/d.js";
+          break;
   }
 %>
 <%if(Model.EditorChoice == EditorsEnum.Codemirror) 

@@ -27,6 +27,7 @@
           <xs:enumeration value="Octave" />
           <xs:enumeration value="CClang" />
           <xs:enumeration value="CppClang" />
+          <xs:enumeration value="D" />
         </xs:restriction>
       </xs:simpleType>
       <xs:element name="DoWork">
@@ -165,6 +166,7 @@
           <xs:enumeration value="Octave" />
           <xs:enumeration value="CClang" />
           <xs:enumeration value="CppClang" />
+          <xs:enumeration value="D" />
         </xs:restriction>
       </xs:simpleType>
     </xs:schema>

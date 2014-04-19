@@ -7,3 +7,4 @@ C:\Users\Renat\Desktop\rextester_win\WindowsService\bin\WindowsExecutionEngine.p
 C:\Users\Renat\Desktop\rextester_win\WindowsService\obj\Release\WindowsService.dll
 C:\Users\Renat\Desktop\rextester_win\WindowsService\obj\Release\WindowsService.pdb
 C:\Users\Renat\Desktop\rextester_win\WindowsService\obj\Release\WindowsService.csprojResolveAssemblyReference.cache
+C:\Users\Renat\Desktop\rextester_win\WindowsService\bin\WindowsService.dll.config

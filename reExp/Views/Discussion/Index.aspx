@@ -240,6 +240,10 @@
           mode = "text/x-octave";
           js.Add("mode/octave/octave.js");
           break;
+      case LanguagesEnum.D:
+          mode = "text/x-d";
+          js.Add("mode/d/d.js");
+          break;
   }
   foreach(var j in js)
   {

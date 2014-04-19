@@ -2,3 +2,4 @@ C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\bin\Release\WindowsE
 C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\bin\Release\WindowsExecutionEngine.pdb
 C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\obj\Release\WindowsExecutionEngine.dll
 C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\obj\Release\WindowsExecutionEngine.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsExecutionEngine\obj\Release\WindowsExecutionEngine.csprojResolveAssemblyReference.cache

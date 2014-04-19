@@ -355,35 +355,46 @@ namespace WindowsExecutionEngine
         {
             Stopwatch watch = new Stopwatch();
             using (Process process = new Process())
+            using (var job = new Job())
             {
                 process.StartInfo.FileName = compiler;
                 process.StartInfo.Arguments = args;
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.CreateNoWindow = true;
-                //process.StartInfo.CreateNoWindow = false;
-                //process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;
 
-                watch.Start();
                 process.Start();
+                watch.Start();
+                job.AddProcess(process.Handle);
 
-                OutputReader output = new OutputReader(process.StandardOutput, 100);
+                OutputReader output = new OutputReader(process.StandardOutput);
                 Thread outputReader = new Thread(new ThreadStart(output.ReadOutput));
                 outputReader.Start();
-                OutputReader error = new OutputReader(process.StandardError, 100);
+                OutputReader error = new OutputReader(process.StandardError);
                 Thread errorReader = new Thread(new ThreadStart(error.ReadOutput));
                 errorReader.Start();
 
-                process.WaitForExit();
+                process.WaitForExit(30000);
+                bool is_killed = false;
+                if (!process.HasExited)
+                {
+                    process.Kill();
+                    is_killed = true;
+                }
                 watch.Stop();
-
+                
                 CompileTimeMs = watch.ElapsedMilliseconds;
                 errorReader.Join(5000);
                 outputReader.Join(5000);
 
+
                 List<string> compOutput = new List<string>();
                 compOutput.Add(output.Output);
+                if (is_killed)
+                {
+                    error.Output = "Compilation terminated after 30 seconds. " + Environment.NewLine + error.Output;
+                }
                 compOutput.Add(error.Output);
                 return compOutput;
             }

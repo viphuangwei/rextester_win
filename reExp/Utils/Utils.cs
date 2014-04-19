@@ -533,6 +533,7 @@ namespace reExp.Utils
         CPPClang = 27,
         VCPP = 28,
         VC = 29,
+        D = 30,
         Unknown = 0
     }
 }

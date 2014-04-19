@@ -128,7 +128,8 @@ namespace reExp.Controllers.rundotnet
                     this.LanguageChoice == LanguagesEnum.Haskell ||
                     this.LanguageChoice == LanguagesEnum.ObjectiveC ||
                     this.LanguageChoice == LanguagesEnum.VCPP ||
-                    this.LanguageChoice == LanguagesEnum.VC)
+                    this.LanguageChoice == LanguagesEnum.VC ||
+                    this.LanguageChoice == LanguagesEnum.D)
                     return true;
                 else
                     return false;
@@ -158,6 +159,8 @@ namespace reExp.Controllers.rundotnet
                         return "cl.exe";
                     case LanguagesEnum.VC:
                         return "cl.exe";
+                    case LanguagesEnum.D:
+                        return "dmd";
                     default:
                         return "";
                 }
@@ -233,6 +236,11 @@ namespace reExp.Controllers.rundotnet
                     {
                         Text = "Common Lisp",
                         Value = ((int)LanguagesEnum.Lisp).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "D",
+                        Value = ((int)LanguagesEnum.D).ToString()
                     },
                     new SelectListItem()
                     {
@@ -701,6 +709,16 @@ x=1:0.1:10;
 plot(x, sin(x));
 print -dpng some_name.png;
 ";
+                case LanguagesEnum.D:
+                    return
+@"//Title of this code
+
+import std.stdio;
+ 
+void main()
+{
+    writeln(""Hello, World!"");
+}";
                 default:
                     return @"";
             }
@@ -728,6 +746,8 @@ print -dpng some_name.png;
                     return "-o a.out source_file.hs";
                 case LanguagesEnum.ObjectiveC:
                     return "-MMD -MP -DGNUSTEP -DGNUSTEP_BASE_LIBRARY=1 -DGNU_GUI_LIBRARY=1 -DGNU_RUNTIME=1 -DGNUSTEP_BASE_LIBRARY=1 -fno-strict-aliasing -fexceptions -fobjc-exceptions -D_NATIVE_OBJC_EXCEPTIONS -pthread -fPIC -Wall -DGSWARN -DGSDIAGNOSE -Wno-import -g -O2 -fgnu-runtime -fconstant-string-class=NSConstantString -I. -I/usr/local/include/GNUstep -I/usr/include/GNUstep -o a.out source_file.m -lobjc -lgnustep-base";
+                case LanguagesEnum.D:
+                    return "source_file.d -ofa.out";
                 default:
                     return "";
             }

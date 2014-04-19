@@ -551,6 +551,9 @@ namespace reExp.Controllers.rundotnet
                 case LanguagesEnum.CPPClang:
                     lang = Service.linux.Languages.CppClang;
                     break;
+                case LanguagesEnum.D:
+                    lang = Service.linux.Languages.D;
+                    break;
                 default:
                     break;
             }
