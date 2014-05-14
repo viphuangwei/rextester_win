@@ -12,7 +12,6 @@
         <h2>About</h2>
         Rextester - some online tools for anyone who finds them useful. It was started as online .net regex tester.
         <br/>
-        <a href="http://rextester.com/main/faq/">Short faq and troubleshooting.</a> <br/>
         <a href="https://groups.google.com/forum/#!forum/rextester">Discussion forum.</a><br/><br/>
 
         <table>
@@ -143,13 +142,11 @@
             <br/><br/>
             <b style="color:Gray">Credit</b><br/>
             Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>, <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/><br />
-            <b style="color:Gray">Code wall</b><br/>
-            <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code wall</a> as well as <a href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">personal code walls</a> - place code on a wall for public display. These entries will be crawled by search engines, so one 
-            possible use is to put there scripts that you may need for easy access later. For example, whenever I need a sql script for searching database definitions I simply search for <a href="https://www.google.com/search?q=sql+definition+rextester">'sql definition rextester'</a> and there is my script (it seems that code wall is 
-            crawled better than personal walls, though). It's important that code snippet have a meaningful title.
+            <b style="color:Gray">Questions</b><br/>
+            <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Questions</a> - place to ask programming questions and (hopefully) get answers. <br/>
             <br /> <br />
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Feedback)%>">Feedback</a> - give us feedback. We have implemented a lot of requests so far.<br />
-            <a href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a> - once logged in you'll be able to track your saved snippets and more. <br />
+            <a href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a> - once logged in you'll be able to track your saved snippets, ask questions and more. <br />
             <br/><br/>
             <b style="color:Gray">Stats (since 2013-08-15)</b><br/>
             <table style="border-color:gray;">

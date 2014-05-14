@@ -26,7 +26,7 @@
                 {
                       if(Model.Author.Wall_ID != null)
                       {%>
-                        by <a href="<%:Utils.BaseUrl+"users/"+Model.Author.Wall_ID%>"><%:Model.Author.Name%></a>,
+                        by <%--<a href="<%:Utils.BaseUrl+"users/"+Model.Author.Wall_ID%>">--%><%:Model.Author.Name%><%--</a>--%>,
                      <%}
                      else
                      {%>
@@ -50,7 +50,7 @@
             <div class="sub" style="display:inline-block;">
                 <%if (ordered[i].Wall_id != null) 
                 {%>
-                    <i>by <a href="<%:Utils.BaseUrl+"users/"+ordered[i].Wall_id%>"><%:ordered[i].Author%></a>, <%:ordered[i].CreationDate.TimeAgo()%></i>
+                    <i>by <%:ordered[i].Author%>, <%:ordered[i].CreationDate.TimeAgo()%></i>
                 <%}
                 else 
                 {%>

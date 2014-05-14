@@ -22,12 +22,12 @@
                             <a href="notifications" style="color:gray;">
                                 notifications
                             </a>
-                            <%if(Model.Wall_ID != null) {%>
+                            <%--<%if(Model.Wall_ID != null) {%>
                             &nbsp;|&nbsp;
                             <a href="<%:Utils.BaseUrl+"users/"+Model.Wall_ID%>" style="color:gray;">
                                 my wall
                             </a>
-                            <%} %>
+                            <%} %>--%>
                          </td>
                     </tr>
                 </table>
@@ -57,7 +57,7 @@
                                 </a>
                                 <br/>
                                 <div class="sub">
-                                    <i><%:item.Lang.ToLanguage()%>, <%:item.IsLive ? "live, " : "" %><%:item.IsWall ? "on a wall, " : ""%><%if(item.IsPersonalWall) {%><a href="<%:Utils.BaseUrl%>users/<%:Model.Wall_ID%>">on your wall,</a><%}%></i><%:item.Date.TimeAgo()%>
+                                    <i><%:item.Lang.ToLanguage()%>, <%:item.IsLive ? "live, " : "" %><%:item.IsWall ? "question, " : ""%></i><%:item.Date.TimeAgo()%>
                                     <%if(item.ID != 0) 
                                     {%>
                                     &nbsp;&nbsp&nbsp;<span style="cursor:pointer;" class="hov" id="<%:item.ID%>">remove</span>

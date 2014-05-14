@@ -131,8 +131,11 @@
                             <span  id="chat" style="font-size: 0.85em; margin-left:0.5em;cursor:pointer;">[&nbsp;<span id="chatsign" style="font-size: 0.85em;">+</span>&nbsp;]&nbsp;</span>
                             <%} %>
                          <%}%>
-                        <input style="margin-left:1em;" id="Wall" type="button" value="Put on a wall" />
-                        <input style="margin-left:1em;" id="Help" type="button" value="?"/>
+                        <input style="margin-left:1em;" id="Wall" type="button" value="Ask a question" />
+                        <%if (Model.EditorChoice == EditorsEnum.Codemirror && !Model.IsLive)
+                        {%>
+                            <input title="Fullscreen (F11), Esc to exit" style="margin-left:1em;" id="Full" type="button" value="F"/>
+                        <%}%>
                     </td>                  
                 </tr>
                 <tr>
@@ -351,9 +354,16 @@
 
             <%} %>
 
-            $("#Help").click(function () {
-                window.open("<%:Utils.GetUrl(Utils.PagesEnum.Faq)%>",'_blank');
-            });
+            <%if (Model.EditorChoice == EditorsEnum.Codemirror && !Model.IsLive)
+            {%>
+                $("#Full").click(function () {
+                    if(!GlobalEditor.hasFocus())
+                    {
+                        GlobalEditor.focus()
+                    }
+                    GlobalEditor.setOption("fullScreen", !GlobalEditor.getOption("fullScreen"));
+                });
+            <%}%>
 
             $("#Save").click(function () {
                 <%if(Model.IsOutputInHtml) 
@@ -369,7 +379,7 @@
                 Save(1);
             });
             $("#Wall").click(function () {
-                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Give meaningful title to your code snippet:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>&nbsp;&nbsp;<br/><br/>Choose the wall:<br/>&nbsp;&nbsp;<input type=\"radio\" name=\"wall_group\" value=\"1\" checked>&nbsp;My wall<br/>&nbsp;&nbsp;<input type=\"radio\" name=\"wall_group\" value=\"2\">&nbsp;Code wall<br/><br/><input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
+                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">This is a place to ask programming questions publicly.<br/><br/>Question's title:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/><br/><br/><input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
                 $("#titleInput").focus();
                 $('html, body').animate({ scrollTop: $("#Run").offset().top }, 200);
                 $("#OKButton").click(function() {
@@ -394,10 +404,7 @@
                     $("#WholeError").val($("#ErrorSpan").text());
                     $("#WholeWarning").val($("#WarningSpan").text());
                     $("#StatsToSave").val($("#Stats").text());
-                    if($('input[type=radio]:checked').val() == '1')
-                        Save(4);
-                    else
-                        Save(2);
+                    Save(2);
                 });
             });
             <%if(!Model.IsLive) 
@@ -491,21 +498,6 @@
                 $.post('/rundotnet/saveonwall', serializedData,
                     function (data) {
                         var obj = jQuery.parseJSON(data);
-                        if(obj.Errors != null)
-                        {
-                            $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\"></pre>");
-                            $("#Error").replaceWith("<div id=\"Error\"><pre style=\"color: Red\" class=\"resultarea\">Error:</pre><pre id=\"ErrorSpan\" class=\"resultarea\"></pre></div>");
-                            $("#ErrorSpan").text(obj.Errors.replace(/\r/g, ""));
-                            return;
-                        }                        
-                        $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">This snippet is on a wall, permanent link: <a href=\""+obj.Url+"\">"+obj.Url+"</a></pre>");
-                    }, 'text');       
-            }
-            else if(what == 4)
-            {
-                $.post('/rundotnet/saveonpersonalwall', serializedData,
-                    function (data) {
-                        var obj = jQuery.parseJSON(data);
                         if(obj.NotLoggedIn == true)
                         {
                             $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Please <a href=\"login\">log in</a> first.</pre>");
@@ -518,7 +510,7 @@
                             $("#ErrorSpan").text(obj.Errors.replace(/\r/g, ""));
                             return;
                         }                        
-                        $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">This snippet is on a wall, permanent link: <a href=\""+obj.Url+"\">"+obj.Url+"</a></pre>");
+                        $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Question's link: <a href=\""+obj.Url+"\">"+obj.Url+"</a></pre>");
                     }, 'text');       
             }
             <%if(!Model.IsLive) 

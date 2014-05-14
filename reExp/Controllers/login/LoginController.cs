@@ -17,7 +17,7 @@ namespace reExp.Controllers.login
         {
             Compression.SetCompression();
             data.Notifications = Model.GetNotifications();
-            data.Subscriptions = Model.GetSubscriptions();
+            //data.Subscriptions = Model.GetSubscriptions();
             data.Wall_ID = Model.GetUserWallId();
             return View("Notifications", data);
         }

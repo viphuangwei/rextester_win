@@ -194,42 +194,8 @@ namespace reExp.Controllers.rundotnet
             Compression.SetCompression();
             JavaScriptSerializer json = new JavaScriptSerializer();
 
-            if (!string.IsNullOrEmpty(data.Program) && data.Program.Length > maxChars)
-            {
-                return json.Serialize(new JsonData() { Errors = string.Format("Program is too long (max is {0} characters).\n", maxChars) });
-            }
-
-            if (!string.IsNullOrEmpty(data.Input) && data.Input.Length > maxChars)
-            {
-                return json.Serialize(new JsonData() { Errors = string.Format("Input is too long (max is {0} characters).\n", maxChars) });
-            }
-            if (!string.IsNullOrEmpty(data.Title) && data.Title.Length > 500)
-            {
-                return json.Serialize(new JsonData() { Errors = "Title is too long (max is 500 characters).\n" });
-            }
-            string url = null;
-            if (data.Program == null)
-                data.Program = string.Empty;
-            if (!string.IsNullOrEmpty(data.WholeError))
-                data.Status = GlobalConst.RundotnetStatus.Error;
-            else
-                data.Status = GlobalConst.RundotnetStatus.OK;
-            string guid = Model.SaveCode(data, true);
-            if (!string.IsNullOrEmpty(guid))
-                url = Utils.Utils.BaseUrl + guid;
-
-            return json.Serialize(new JsonData() { Url = url });
-        }
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public string SaveOnPersonalWall(RundotnetData data)
-        {
-            Compression.SetCompression();
-            JavaScriptSerializer json = new JavaScriptSerializer();
-
             if (!SessionManager.IsUserInSession())
-            { 
+            {
                 return json.Serialize(new JsonData() { NotLoggedIn = true });
             }
 
@@ -253,9 +219,9 @@ namespace reExp.Controllers.rundotnet
                 data.Status = GlobalConst.RundotnetStatus.Error;
             else
                 data.Status = GlobalConst.RundotnetStatus.OK;
-            string guid = Model.SaveCode(data: data, personal: true);
+            string guid = Model.SaveCode(data, true);
             if (!string.IsNullOrEmpty(guid))
-                url = Utils.Utils.BaseUrl + guid;
+                url = Utils.Utils.BaseUrl + "discussion/" + guid;
 
             return json.Serialize(new JsonData() { Url = url });
         }

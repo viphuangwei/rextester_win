@@ -201,8 +201,7 @@
                 <a <%if(currentPage == Utils.PagesEnum.Home){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Home)%>">Home</a>&nbsp;
                 |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Tester || currentPage == Utils.PagesEnum.Replace || currentPage == Utils.PagesEnum.Reference || currentPage == Utils.PagesEnum.Diff) {%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Misc</a>&nbsp;
                 |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Rundotnet){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run Code</a>&nbsp;
-                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Codewall){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code Wall</a>&nbsp;
-                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Users){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">Users</a>&nbsp;
+                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Codewall){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Questions</a>&nbsp;
                 |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Feedback){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Feedback)%>">Feedback</a>&nbsp;
                 <%if (SessionManager.IsUserInSession())
                   {                      

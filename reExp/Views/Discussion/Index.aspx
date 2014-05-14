@@ -82,7 +82,7 @@
                           }
                           else
                           {%>
-                                Please <a href="<%=Utils.BaseUrl+"login"%>">log in</a> to post a comment.
+                                Please <a href="<%=Utils.BaseUrl+"login"%>">log in</a> to post answer.
                         <%}%>
                     </td>
                     <td style="padding-left: 80px; vertical-align:top;width: 18%;">
