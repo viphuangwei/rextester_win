@@ -94,8 +94,9 @@ namespace reExp.Models.DB
                                         c.Guid
                                  from Code c
                                       left outer join wall w on w.code_id = c.id
+                                      left outer join codeonwalls cw on cw.code_id = c.id
                                  where c.lang = (select lang from Code where id = @CodeId) and
-                                       w.id is not null and 
+                                       (w.id is not null or cw.id is not null) and 
                                        c.id <> @CodeId
                                 )
                             order by random()

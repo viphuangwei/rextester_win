@@ -530,6 +530,11 @@ namespace reExp.Models
             get;
             set;
         }
+        public int Wall_ID
+        {
+            get;
+            set;
+        }
         public string Title
         {
             get;

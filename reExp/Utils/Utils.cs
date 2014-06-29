@@ -83,7 +83,7 @@ namespace reExp.Utils
         {
             get
             {
-                return IsChrome || IsFirefox  || IsIE || IsOpera;
+                return IsChrome || IsFirefox || IsIE || IsOpera;
             }
         }
 
@@ -151,7 +151,7 @@ namespace reExp.Utils
                 case PagesEnum.Rundotnet:
                     return BaseUrl + "runcode";
                 case PagesEnum.Codewall:
-                    return BaseUrl + "questions";
+                    return BaseUrl + "codewall";
                 case PagesEnum.Users:
                     return BaseUrl + "users";
                 case PagesEnum.Feedback:
@@ -189,10 +189,6 @@ namespace reExp.Utils
                     return PagesEnum.Diff;
                 if (pagePath.Trim('/').ToLower().Trim() == "codewall")
                     return PagesEnum.Codewall;
-                if (pagePath.Trim('/').ToLower().Trim() == "questions")
-                    return PagesEnum.Codewall;
-                if (pagePath.Trim('/').ToLower().Contains("discussion"))
-                    return PagesEnum.Codewall;
                 if (pagePath.Trim('/').ToLower().Trim() == "feedback")
                     return PagesEnum.Feedback;
                 if (pagePath.Trim('/').ToLower().Trim() == "login/usersstuff")
@@ -207,6 +203,10 @@ namespace reExp.Utils
                     return PagesEnum.Logout;
                 if (pagePath.Trim('/').ToLower().Trim() == "main/faq")
                     return PagesEnum.Home;
+                //if (pagePath.Trim('/').ToLower().Trim() == "discussion")
+                //    return PagesEnum.Rundotnet;
+                //if (pagePath.Contains("rundotnet") || pagePath.Contains("runcode") || pagePath.Contains("versions") || new System.Text.RegularExpressions.Regex(@"/[a-z]+\d+.*", System.Text.RegularExpressions.RegexOptions.IgnoreCase).IsMatch(pagePath))
+                //    return PagesEnum.Rundotnet;
 
                 return PagesEnum.Rundotnet;
             }
@@ -466,6 +466,17 @@ namespace reExp.Utils
             get
             {
                 return HttpContext.Current.User.Identity.Name;
+            }
+        }
+        public static bool IsAdmin
+        { 
+            get
+            {
+                if(!SessionManager.IsUserInSession())
+                {
+                    return false;
+                }
+                return Model.IsCurrentUserAdmin(SessionManager.UserName);
             }
         }
         public static bool IsUserInSession()

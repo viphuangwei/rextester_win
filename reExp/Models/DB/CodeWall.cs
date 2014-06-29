@@ -12,7 +12,7 @@ namespace reExp.Models.DB
         public static List<Dictionary<string, object>> GetWallsCode(int page, int sort)
         {
             string query = string.Format(
-                            @"select c.*
+                            @"select c.*, w.id as wall_id
                             from Wall w
                                  inner join Code c on w.code_id = c.id
                             order by {0}
@@ -88,6 +88,14 @@ namespace reExp.Models.DB
                     ExecuteNonQuery(query, pars);
                 }
             }
+        }
+
+        public static void DeleteCodeWallItem(int wall_id)
+        {
+            var query = @"delete from wall where id = @Id";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("@Id", wall_id));
+            ExecuteNonQuery(query, pars);
         }
 
         static List<Dictionary<string, object>> ExecuteQuery(string query, List<SQLiteParameter> pars)

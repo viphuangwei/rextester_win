@@ -21,6 +21,7 @@ namespace reExp.Controllers.codewall
             data.Codes = Model.GetWallsCode(data.Page, data.Sort);
             data.TotalRecords = Model.GetWallsTotal();
             data.IsSubscribed = Model.IsUserSubscribed(null);
+            data.IsAdmin = SessionManager.IsAdmin;
             return View(data);
         }
         [HttpPost()]
@@ -34,6 +35,26 @@ namespace reExp.Controllers.codewall
             return json.Serialize(new SubscriptionData() { Errors = s == null, NotLoggedIn = false, Subscribed = s});
         }
 
+        public string RemoveItem(int id)
+        {
+            JavaScriptSerializer json = new JavaScriptSerializer();
+            if (SessionManager.IsAdmin)
+            {
+                var res = !Model.DeleteCodeWallItem(id);
+                return json.Serialize(new JsonData() { Errors = res });
+            }
+            else
+            {
+                return json.Serialize(new JsonData() { Errors = true, Error = "Not admin!" });
+            }
+        }
+
+    }
+
+    public class JsonData
+    {
+        public bool Errors { get; set; }
+        public string Error { get; set; }
     }
 
     public class SubscriptionData

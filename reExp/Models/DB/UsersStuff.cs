@@ -87,8 +87,8 @@ namespace reExp.Models.DB
                              from UsersCode uc
                                   left outer join Code c on uc.code_id = c.id
                                   left outer join Regex r on uc.regex_id = r.id
-                                  left outer join RegexReplace rr uc.regexreplace_id = rr.id
-                             where id = @Id";
+                                  left outer join RegexReplace rr on uc.regexreplace_id = rr.id
+                             where uc.id = @Id";
             var pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("@Id", id));
             var res = ExecuteQuery(query, pars);

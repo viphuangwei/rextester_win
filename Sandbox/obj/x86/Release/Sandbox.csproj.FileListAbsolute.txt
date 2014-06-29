@@ -1,7 +1,0 @@
-C:\Users\Renat\Desktop\rextester_win\Sandbox\bin\Release\Sandbox.exe.config
-C:\Users\Renat\Desktop\rextester_win\Sandbox\bin\Release\Sandbox.exe
-C:\Users\Renat\Desktop\rextester_win\Sandbox\bin\Release\Sandbox.pdb
-C:\Users\Renat\Desktop\rextester_win\Sandbox\bin\Release\Newtonsoft.Json.dll
-C:\Users\Renat\Desktop\rextester_win\Sandbox\bin\Release\Newtonsoft.Json.xml
-C:\Users\Renat\Desktop\rextester_win\Sandbox\obj\x86\Release\Sandbox.exe
-C:\Users\Renat\Desktop\rextester_win\Sandbox\obj\x86\Release\Sandbox.pdb

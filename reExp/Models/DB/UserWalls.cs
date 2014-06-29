@@ -13,6 +13,7 @@ namespace reExp.Models.DB
         {
             string query = @"select w.id, w.name, w.user_id
                             from UserWalls w
+                            where w.id in (select distinct userwalls_id from codeonwalls)
                             order by w.id desc
                             limit @Limit
                             offset @Offset";
@@ -25,7 +26,7 @@ namespace reExp.Models.DB
 
         public static List<Dictionary<string, object>> GetUserWallsTotal()
         {
-            string query = @"select count(*) as total from UserWalls";
+            string query = @"select count(*) as total from UserWalls w where w.id in (select distinct userwalls_id from codeonwalls)";
             return ExecuteQuery(query, new List<SQLiteParameter>());
         }
 
@@ -89,9 +90,6 @@ namespace reExp.Models.DB
             var pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("@Id", id));
             var res = ExecuteQuery(query, pars);
-            if (Convert.ToInt32(res[0]["user_id"]) != SessionManager.UserId)
-                return false;
-
             int code_id = Convert.ToInt32(res[0]["code_id"]);
 
             query = @"delete from CodeOnWalls where id = @Id";

@@ -17,7 +17,7 @@ namespace reExp.Controllers.login
         {
             Compression.SetCompression();
             data.Notifications = Model.GetNotifications();
-            //data.Subscriptions = Model.GetSubscriptions();
+            data.Subscriptions = Model.GetSubscriptions();
             data.Wall_ID = Model.GetUserWallId();
             return View("Notifications", data);
         }
@@ -39,9 +39,9 @@ namespace reExp.Controllers.login
 
             if ((string.IsNullOrEmpty(data.Name) || string.IsNullOrEmpty(data.Password)) &&
                (string.IsNullOrEmpty(data.RegName) || string.IsNullOrEmpty(data.RegPassword)))
-            return View(data);
+                return View(data);
 
-            
+
 
             if (!string.IsNullOrEmpty(data.Name) && !string.IsNullOrEmpty(data.Password))
             {
@@ -102,11 +102,11 @@ namespace reExp.Controllers.login
             return View(data);
         }
 
-        public ActionResult UsersStuff(int page=0, string Query = null)
+        public ActionResult UsersStuff(int page = 0, string Query = null)
         {
             Compression.SetCompression();
             UserData data = new UserData();
-            if(!SessionManager.IsUserInSession())
+            if (!SessionManager.IsUserInSession())
             {
                 data.Error = "Not logged in.";
                 data.IsError = true;
@@ -124,8 +124,8 @@ namespace reExp.Controllers.login
             {
                 data.Query = Query;
                 data.Items = Search.MakeSearch(Query, (int)SessionManager.UserId)
-                                   .Select(f => new SavedItem() 
-                                   { 
+                                   .Select(f => new SavedItem()
+                                   {
                                        Date = f.Date,
                                        Guid = f.Guid,
                                        Program = f.Code,
@@ -143,7 +143,7 @@ namespace reExp.Controllers.login
             data.Wall_ID = Model.GetUserWallId();
             return View(data);
         }
-        
+
         public string RemoveItem(int id)
         {
             JavaScriptSerializer json = new JavaScriptSerializer();
@@ -166,7 +166,7 @@ namespace reExp.Controllers.login
             {
                 if (!string.IsNullOrEmpty(result.error))
                 {
-                    return View("Index", new LoginData() {IsError = true, Error = string.Format("Error occured ({0}). Try again later.", result.error), redirectInfo=result.state });
+                    return View("Index", new LoginData() { IsError = true, Error = string.Format("Error occured ({0}). Try again later.", result.error), redirectInfo = result.state });
                 }
 
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://accounts.google.com/o/oauth2/token");
@@ -216,13 +216,13 @@ namespace reExp.Controllers.login
                 }
                 else
                 {
-                    return View("CreateGoogleUser", new GoogleUser() { EmailHash = hash, redirectInfo=result.state });
+                    return View("CreateGoogleUser", new GoogleUser() { EmailHash = hash, redirectInfo = result.state });
                 }
             }
             catch (Exception e)
             {
                 Utils.Log.LogInfo(e.Message, "google login error");
-                return View("Index", new LoginData() { IsError=true, Error = "Error occured. Try again later.", redirectInfo=result.state });
+                return View("Index", new LoginData() { IsError = true, Error = "Error occured. Try again later.", redirectInfo = result.state });
             }
         }
 

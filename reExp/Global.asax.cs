@@ -68,14 +68,21 @@ namespace reExp
             routes.MapRoute(
                null,
                "runcode",
-               new { controller = "RunDotNet", action = "Index", savedNr = (string)null}
+               new { controller = "RunDotNet", action = "Index", savedNr = (string)null }
            );
 
             routes.MapRoute(
                null,
                "live/{savedNr}",
-               new { controller = "RunDotNet", action = "GetLiveCode"},
+               new { controller = "RunDotNet", action = "GetLiveCode" },
                new { savedNr = @"[A-Za-z]+\d+" }
+            );
+
+            routes.MapRoute(
+               null,
+               "users/{Wall_ID}",
+               new { controller = "Users", action = "GetUserWallsCode" },
+               new { Wall_ID = @"\d+" }
             );
 
             routes.MapRoute(
@@ -100,14 +107,8 @@ namespace reExp
 
             routes.MapRoute(
                 null,
-                "questions",
-                new { controller = "codewall", action = "Index" }
-            );
-
-            routes.MapRoute(
-                null,
                 "users",
-                new { controller = "NotExisting", action = "NotExisting"}
+                new { controller = "users", action = "Index" }
             );
 
             routes.MapRoute(

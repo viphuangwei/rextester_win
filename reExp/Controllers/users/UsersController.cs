@@ -29,17 +29,25 @@ namespace reExp.Controllers.users
             data.Codes = Model.GetUsersWallCodes(data.Wall_ID, data.Page, data.Sort);
             data.TotalRecords = Model.GetUserWallCodesTotal(data.Wall_ID);
             data.IsOwner = Model.IsWallsOwner(data.Wall_ID);
+            data.IsAdmin = SessionManager.IsAdmin;
             int wall_id;
             if(Int32.TryParse(data.Wall_ID, out wall_id))
                 data.IsSubscribed = Model.IsUserSubscribed(wall_id);
             return View("UserWall", data);
         }
 
-        public string RemoveItem(int id)
+        public string RemoveItem(int id, int wall_id)
         {
             JavaScriptSerializer json = new JavaScriptSerializer();
-            var res = !Model.DeleteUserWallItem(id);
-            return json.Serialize(new JsonData() { Errors = res });
+            if (!Model.IsWallsOwner(wall_id.ToString()) && !SessionManager.IsAdmin)
+            {
+                return json.Serialize(new JsonData() { Errors = true, Error = "Not authorized!" });
+            }
+            else
+            {
+                var res = !Model.DeleteUserWallItem(id);
+                return json.Serialize(new JsonData() { Errors = res });
+            }
         }
 
     }
@@ -93,6 +101,12 @@ namespace reExp.Controllers.users
         }
 
         public bool IsOwner
+        {
+            get;
+            set;
+        }
+
+        public bool IsAdmin
         {
             get;
             set;

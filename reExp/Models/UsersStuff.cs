@@ -44,16 +44,25 @@ namespace reExp.Models
 
         public static bool DeleteUserItem(int id)
         {
-            var res = DB.DB.DeleteUserItem(id);
-            if (res && SessionManager.IsUserInSession())
+            try
             {
-                int uid = (int)SessionManager.UserId;
-                Task.Run(() =>
+                var s = DB.DB.GetDeleteUserItemsSearchId(id);
+                var res = DB.DB.DeleteUserItem(id);
+                if (res && SessionManager.IsUserInSession())
                 {
-                    Search.DeleteUserItem(uid, DB.DB.GetDeleteUserItemsSearchId(id));
-                });
+                    int uid = (int)SessionManager.UserId;
+                    Task.Run(() =>
+                    {
+                        Search.DeleteUserItem(uid, s);
+                    });
+                }
+                return res;
             }
-            return res;
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, "error while removing item");
+                return false;
+            }
         }
         public static int GetUsersTotal(int userId)
         {
@@ -161,6 +170,18 @@ namespace reExp.Models
                 return null;
 
             return Convert.ToInt32(res[0]["id"]);
+        }
+
+        public static bool IsCurrentUserAdmin(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return false;
+
+            var res = DB.DB.GetUser(name);
+            if (res.Count == 0)
+                return false;
+
+            return Convert.ToBoolean(res[0]["is_admin"]);            
         }
 
         public static Author GetUserByGuid(string guid)

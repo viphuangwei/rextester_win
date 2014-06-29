@@ -1,0 +1,13 @@
+﻿div.regexpicker
+{
+    margin: 0 0 1em 0.3em
+}
+a.selectedregex 
+{
+    color:White;
+    background-color:Gray;
+}
+a.regex
+{
+    color:Gray;
+}

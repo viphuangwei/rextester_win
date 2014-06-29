@@ -18,6 +18,7 @@ namespace reExp.Models
                 {
                     wallsCode.Add(new Code()
                     {
+                        Wall_ID = Convert.ToInt32(wcode["wall_id"]),
                         Title = (wcode["title"] == DBNull.Value ? null : (string)wcode["title"]),
                         Program = (string)wcode["code"],
                         Lang = (LanguagesEnum)Convert.ToInt32(wcode["lang"]),
@@ -79,6 +80,20 @@ namespace reExp.Models
             {
                 Utils.Log.LogInfo(e.Message, "error");
                 return null;
+            }
+        }
+
+        public static bool DeleteCodeWallItem(int id)
+        {
+            try
+            {
+                DB.DB.DeleteCodeWallItem(id);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, "error while removing codewall item");
+                return false;
             }
         }
     }

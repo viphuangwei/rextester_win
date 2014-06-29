@@ -37,5 +37,11 @@ namespace reExp.Controllers.codewall
             get;
             set;
         }
+
+        public bool IsAdmin
+        {
+            get;
+            set;
+        }
     }
 }

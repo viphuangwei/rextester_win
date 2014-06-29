@@ -100,7 +100,7 @@ namespace reExp.Controllers.rundotnet
                 {
                     throw new HttpException(404, "not found");
                 }
-                data.Title = code.Title; 
+                data.Title = code.Title;
                 data.Program = code.Program;
                 data.Input = code.Input;
                 data.CompilerArgs = code.CompilerArgs;
@@ -194,6 +194,40 @@ namespace reExp.Controllers.rundotnet
             Compression.SetCompression();
             JavaScriptSerializer json = new JavaScriptSerializer();
 
+            if (!string.IsNullOrEmpty(data.Program) && data.Program.Length > maxChars)
+            {
+                return json.Serialize(new JsonData() { Errors = string.Format("Program is too long (max is {0} characters).\n", maxChars) });
+            }
+
+            if (!string.IsNullOrEmpty(data.Input) && data.Input.Length > maxChars)
+            {
+                return json.Serialize(new JsonData() { Errors = string.Format("Input is too long (max is {0} characters).\n", maxChars) });
+            }
+            if (!string.IsNullOrEmpty(data.Title) && data.Title.Length > 500)
+            {
+                return json.Serialize(new JsonData() { Errors = "Title is too long (max is 500 characters).\n" });
+            }
+            string url = null;
+            if (data.Program == null)
+                data.Program = string.Empty;
+            if (!string.IsNullOrEmpty(data.WholeError))
+                data.Status = GlobalConst.RundotnetStatus.Error;
+            else
+                data.Status = GlobalConst.RundotnetStatus.OK;
+            string guid = Model.SaveCode(data, true);
+            if (!string.IsNullOrEmpty(guid))
+                url = Utils.Utils.BaseUrl + guid;
+
+            return json.Serialize(new JsonData() { Url = url });
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public string SaveOnPersonalWall(RundotnetData data)
+        {
+            Compression.SetCompression();
+            JavaScriptSerializer json = new JavaScriptSerializer();
+
             if (!SessionManager.IsUserInSession())
             {
                 return json.Serialize(new JsonData() { NotLoggedIn = true });
@@ -219,9 +253,9 @@ namespace reExp.Controllers.rundotnet
                 data.Status = GlobalConst.RundotnetStatus.Error;
             else
                 data.Status = GlobalConst.RundotnetStatus.OK;
-            string guid = Model.SaveCode(data, true);
+            string guid = Model.SaveCode(data: data, personal: true);
             if (!string.IsNullOrEmpty(guid))
-                url = Utils.Utils.BaseUrl + "discussion/" + guid;
+                url = Utils.Utils.BaseUrl + guid;
 
             return json.Serialize(new JsonData() { Url = url });
         }
@@ -253,9 +287,9 @@ namespace reExp.Controllers.rundotnet
             string guid = Model.SaveCode(data, false, true);
 
             Model.MakeLiveCode(guid, Utils.Utils.GetGuid());
-            
+
             if (!string.IsNullOrEmpty(guid))
-                url = Utils.Utils.BaseUrl +"live/"+guid;
+                url = Utils.Utils.BaseUrl + "live/" + guid;
 
             return json.Serialize(new JsonData() { Url = url });
         }
@@ -266,7 +300,7 @@ namespace reExp.Controllers.rundotnet
         {
             Model.UpdateLiveCache(code, chat, guid);
         }
-        
+
 
         [HttpGet]
         [ValidateInput(false)]
@@ -293,7 +327,7 @@ namespace reExp.Controllers.rundotnet
             data.IsLive = true;
             data.IsSaved = true;
             data.DisplayName = SessionManager.IsUserInSession() ? SessionManager.UserName : Utils.Utils.RandomLetter();
-            
+
             return View("Index", data);
         }
 
@@ -336,7 +370,7 @@ namespace reExp.Controllers.rundotnet
         {
             Compression.SetCompression();
             JavaScriptSerializer json = new JavaScriptSerializer();
-            
+
             if (!string.IsNullOrEmpty(data.Program) && data.Program.Length > maxChars)
             {
                 return json.Serialize(new JsonDataSubset() { Errors = string.Format("Program is too long (max is {0} characters).\n", maxChars) });
@@ -357,19 +391,19 @@ namespace reExp.Controllers.rundotnet
             //}
             //else
             //{
-                data = RundotnetLogic.RunProgram(data);
-                string warnings = null, errors = null;
-                if (data.Warnings.Count() != 0)
-                    warnings = data.Warnings.Aggregate((a, b) => a + "\n" + b);
-                if (data.Errors.Count() != 0)
-                    errors = data.Errors.Aggregate((a, b) => a + "\n" + b);
-                //ThreadPool.QueueUserWorkItem(f =>
-                //    { 
-                //        data.WholeWarning = warnings;
-                //        data.WholeError = errors;
-                //        Model.InsertRundotnetDataToRedis(data);
-                //    });
-                return json.Serialize(new JsonDataSubset() { Warnings = data.ShowWarnings || data.IsApi ? warnings : null, Errors = errors, Result = data.Output, Stats = data.RunStats, Files = data.Files });
+            data = RundotnetLogic.RunProgram(data);
+            string warnings = null, errors = null;
+            if (data.Warnings.Count() != 0)
+                warnings = data.Warnings.Aggregate((a, b) => a + "\n" + b);
+            if (data.Errors.Count() != 0)
+                errors = data.Errors.Aggregate((a, b) => a + "\n" + b);
+            //ThreadPool.QueueUserWorkItem(f =>
+            //    { 
+            //        data.WholeWarning = warnings;
+            //        data.WholeError = errors;
+            //        Model.InsertRundotnetDataToRedis(data);
+            //    });
+            return json.Serialize(new JsonDataSubset() { Warnings = data.ShowWarnings || data.IsApi ? warnings : null, Errors = errors, Result = data.Output, Stats = data.RunStats, Files = data.Files });
             //}
         }
 
