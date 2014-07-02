@@ -18,15 +18,17 @@
         <table>
             <tr>
                 <td>
+                    Source code: <a href="https://github.com/ren85/rextester_win">part I</a> and <a href="https://github.com/ren85/rextester_linux">part II</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="5GVYLXYXTHCZA">
                         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
                         <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
                     </form>
-                </td>
-                <td>
-	                <script id='fb7px4k'>(function (i) { var f, s = document.getElementById(i); f = document.createElement('iframe'); f.src = '//api.flattr.com/button/view/?uid=ren&button=compact&url=' + encodeURIComponent(document.URL); f.title = 'Flattr'; f.height = 20; f.width = 110; f.style.borderWidth = 0; s.parentNode.insertBefore(f, s); })('fb7px4k');</script>
                 </td>
             </tr>
         </table>
@@ -194,7 +196,7 @@
             </table>
             <br/>
             <b style="color:Gray">Api</b><br/>
-            Restfull api is supported (both POST and GET) at <code>http://rextester.com/rundotnet/api</code>. What needs to be supplied are these values:
+            Restfull api is supported <strike>(both POST and GET)</strike> (POST) at <code>http://rextester.com/rundotnet/api</code>. What needs to be supplied are these values:
 <pre>
     LanguageChoiceWrapper=Language number (see below)
     Program=Code to run

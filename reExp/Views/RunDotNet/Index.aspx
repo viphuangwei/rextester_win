@@ -230,7 +230,8 @@
     <%if (Model.EditorChoice == EditorsEnum.Codemirror)
      {
              %> <link rel="stylesheet" href="../../Scripts/codemirror3/lib/codemirror.css"/>
-                <link rel="stylesheet" href="../../Scripts/codemirror3/addon/display/fullscreen.css"/><%
+                <link rel="stylesheet" href="../../Scripts/codemirror3/addon/display/fullscreen.css"/>
+                <link rel="stylesheet" href="../../Scripts/codemirror3/addon/dialog/dialog.css"/><%
             if (Model.LanguageChoice == LanguagesEnum.CSharp || Model.LanguageChoice == LanguagesEnum.FSharp || Model.LanguageChoice == LanguagesEnum.VB)
             { 
                 %><link rel="stylesheet" href="../../Scripts/codemirror3/theme/csharp.css"/><%
@@ -250,7 +251,10 @@
       {
             %><script src="../../Scripts/codemirror3/lib/codemirror.js" type="text/javascript"></script>
               <script src="../../Scripts/codemirror3/addon/edit/matchbrackets.js" type="text/javascript"></script>
-              <script src="../../Scripts/codemirror3/addon/display/fullscreen.js" type="text/javascript"></script><%
+              <script src="../../Scripts/codemirror3/addon/display/fullscreen.js" type="text/javascript"></script>
+              <script src="../../Scripts/codemirror3/addon/dialog/dialog.js" type="text/javascript"></script>
+              <script src="../../Scripts/codemirror3/addon/search/searchcursor.js" type="text/javascript"></script>
+              <script src="../../Scripts/codemirror3/addon/search/search.js" type="text/javascript"></script><%
     }%>
     <%if (Model.IsIntellisense)
     {
@@ -383,7 +387,7 @@
                 Save(1);
             });
             $("#Wall").click(function () {
-                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Give meaningful title to your code snippet:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>&nbsp;&nbsp;<br/><br/>Choose the wall:<br/>&nbsp;&nbsp;<input type=\"radio\" name=\"wall_group\" value=\"1\" checked>&nbsp;My wall<br/>&nbsp;&nbsp;<input type=\"radio\" name=\"wall_group\" value=\"2\">&nbsp;Code wall<br/><br/><input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
+                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Title:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>&nbsp;&nbsp;<br/><br/>Choose the wall:<br/>&nbsp;&nbsp;<input type=\"radio\" name=\"wall_group\" value=\"1\" checked>&nbsp;My wall<br/>&nbsp;&nbsp;<input type=\"radio\" name=\"wall_group\" value=\"2\">&nbsp;Code wall<br/><br/><input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
                 $("#titleInput").focus();
                 $('html, body').animate({ scrollTop: $("#Run").offset().top }, 200);
                 $("#OKButton").click(function() {

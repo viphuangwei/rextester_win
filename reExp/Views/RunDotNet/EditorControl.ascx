@@ -229,6 +229,7 @@
                 <%}%>
                     "Tab": "indentMore", 
                     "Shift-Tab": "indentLess",
+
                     <%if(!Model.IsLive)
                     { %>
                         "F11": function(cm) {
