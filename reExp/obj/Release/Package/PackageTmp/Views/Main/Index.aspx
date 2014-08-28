@@ -18,8 +18,10 @@
         <table>
             <tr>
                 <td>
-                    Source code: <a href="https://github.com/ren85/rextester_win">I</a> and <a href="https://github.com/ren85/rextester_linux">II</a>
+                    Source code: <a href="https://github.com/ren85/rextester_win">part I</a> and <a href="https://github.com/ren85/rextester_linux">part II</a>
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                         <input type="hidden" name="cmd" value="_s-xclick">
@@ -194,7 +196,7 @@
             </table>
             <br/>
             <b style="color:Gray">Api</b><br/>
-            Restfull api is supported (both POST and GET) at <code>http://rextester.com/rundotnet/api</code>. What needs to be supplied are these values:
+            Restfull api is supported <strike>(both POST and GET)</strike> (POST) at <code>http://rextester.com/rundotnet/api</code>. What needs to be supplied are these values:
 <pre>
     LanguageChoiceWrapper=Language number (see below)
     Program=Code to run

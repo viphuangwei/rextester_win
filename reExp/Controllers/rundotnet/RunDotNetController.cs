@@ -411,6 +411,7 @@ namespace reExp.Controllers.rundotnet
         [ValidateInput(false)]
         public ContentResult Api(RundotnetData data)
         {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
             data.IsApi = true;
             return this.Content(Run(data), "application/json");
         }
