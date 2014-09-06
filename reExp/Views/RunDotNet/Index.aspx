@@ -78,7 +78,7 @@
             <%if (Model.ShowInput)
               {%>
                 <div style="width: 94.5%; margin-top:0.5em;margin-left:0;">                            
-                    <textarea spellcheck="false" cols="1000" id="Input" name="Input" rows="5" style="background-color:#FFFFBB;border: solid 1px gray;width: 100%;resize:none;<%:(string.IsNullOrEmpty(Model.Input)) ? "display:none;":"" %>"><%=Model.Input%></textarea>
+                    <textarea spellcheck="false" cols="1000" id="Input" name="Input" rows="5" style="background-color:#FFFFBB;border: solid 1px gray;width: 100%;<%:(string.IsNullOrEmpty(Model.Input)) ? "display:none;":"" %>"><%=Model.Input%></textarea>
                 </div>
             <%} %>
             <table style="width: 95%; margin-top:0.5em;">
