@@ -1,8 +1,0 @@
-C:\Users\Renat\Desktop\rextester_win\Service\bin\Debug\Service.dll.config
-C:\Users\Renat\Desktop\rextester_win\Service\bin\Debug\Service.dll
-C:\Users\Renat\Desktop\rextester_win\Service\bin\Debug\Service.pdb
-C:\Users\Renat\Desktop\rextester_win\Service\bin\Debug\GlobalUtils.dll
-C:\Users\Renat\Desktop\rextester_win\Service\bin\Debug\GlobalUtils.pdb
-C:\Users\Renat\Desktop\rextester_win\Service\obj\Debug\Service.dll
-C:\Users\Renat\Desktop\rextester_win\Service\obj\Debug\Service.pdb
-C:\Users\Renat\Desktop\rextester_win\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache

@@ -53,32 +53,9 @@ namespace reExp.Utils
             {
                 client.Encoding = Encoding.UTF8;
                 var data =
-                    //@"{
-                    // ""query"": {
-                    // ""custom_score"": {
-                    // ""query"": {
-                    // ""match"" : {
-                    // ""_all"" : {
-                    // ""query"" : """+query+@""",
-                    // ""type"" : ""phrase"",
-                    // ""slop"" : 100
-                    // }
-                    // }
-                    // },
-                    // ""script"": ""_score * (doc['Refs'].value == 0 ? 1 : log(doc['Refs'].value+2))""
-                    // }
-                    // },
-                    // ""highlight"" : {
-                    // ""order"" : ""score"",
-                    // ""fields"" : {
-                    // ""Page"" : {""fragment_size"" : 350, ""number_of_fragments"" : 1, ""no_match_size"": 150}
-                    // }
-                    // }
-                    //};";
-
 @"{
     ""query"": {
-        ""custom_score"": {
+        ""function_score"": {
             ""query"": {
                 ""multi_match"" : {
                      ""query"" : """ + query + @""",
@@ -86,8 +63,7 @@ namespace reExp.Utils
                      ""slop"" : 15,
                      ""fields"": [""Code^1"", ""Regex^1"", ""Replace^1"", ""Text^1"", ""Title^2"", ""Lang^2""]
                 }
-            },
-            ""script"": ""_score""
+            }
         }
     },
     ""highlight"" : {
@@ -103,7 +79,7 @@ namespace reExp.Utils
                 {
                     result = client.UploadString(TopSecret.ElasticUrl + UserId + "/_search", data);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return new List<SearchResult>();
                 }

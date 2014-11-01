@@ -1,0 +1,12 @@
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\bin\Release\WindowsEngineTests.exe.config
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\bin\Release\WindowsEngineTests.exe
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\bin\Release\WindowsEngineTests.XmlSerializers.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\bin\Release\WindowsEngineTests.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\bin\Release\GlobalUtils.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\bin\Release\WindowsExecutionEngine.dll
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\bin\Release\GlobalUtils.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\bin\Release\WindowsExecutionEngine.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\obj\Release\WindowsEngineTests.csprojResolveAssemblyReference.cache
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\obj\Release\WindowsEngineTests.exe
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\obj\Release\WindowsEngineTests.pdb
+C:\Users\Renat\Desktop\rextester_win\WindowsEngineTests\obj\Release\WindowsEngineTests.XmlSerializers.dll
