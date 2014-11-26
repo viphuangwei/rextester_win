@@ -166,6 +166,6 @@ Regex replacement
     <%} %>
     <br/>
     <pre class="resultarea" id="NonResultMessage"></pre>
-    <pre class="resultarea" id="Result"><%:Html.DisplayTextFor(f=>f.Result)%></pre>
+    <pre class="resultarea" id="Result"><%:@Html.Raw(@Model.Result)%></pre>
     
 </asp:Content>
