@@ -74,6 +74,8 @@ namespace reExp.Utils
                     return "Octave";
                 case LanguagesEnum.D:
                     return "D";
+                case LanguagesEnum.R:
+                    return "R";
                 default:
                     return "Unknown";
             }

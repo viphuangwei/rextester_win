@@ -545,6 +545,7 @@ namespace reExp.Utils
         VCPP = 28,
         VC = 29,
         D = 30,
+        R = 31,
         Unknown = 0
     }
 }

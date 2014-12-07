@@ -643,6 +643,7 @@
     <Content Include="Scripts\editarea\reg_syntax\php.js" />
     <Content Include="Scripts\editarea\reg_syntax\prolog.js" />
     <Content Include="Scripts\editarea\reg_syntax\python.js" />
+    <Content Include="Scripts\editarea\reg_syntax\r.js" />
     <Content Include="Scripts\editarea\reg_syntax\robotstxt.js" />
     <Content Include="Scripts\editarea\reg_syntax\ruby.js" />
     <Content Include="Scripts\editarea\reg_syntax\scala.js" />

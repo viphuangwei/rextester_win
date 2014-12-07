@@ -99,7 +99,8 @@ namespace reExp.Controllers.rundotnet
                     this.LanguageChoice == LanguagesEnum.Scala ||
                     this.LanguageChoice == LanguagesEnum.Java ||
                     this.LanguageChoice == LanguagesEnum.Python3 ||
-                    this.LanguageChoice == LanguagesEnum.Octave)
+                    this.LanguageChoice == LanguagesEnum.Octave ||
+                    this.LanguageChoice == LanguagesEnum.R)
 
                     return true;
                 else
@@ -316,6 +317,11 @@ namespace reExp.Controllers.rundotnet
                     {
                         Text = "Python 3",
                         Value = ((int)LanguagesEnum.Python3).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "R",
+                        Value = ((int)LanguagesEnum.R).ToString()
                     },
                     new SelectListItem()
                     {
@@ -719,6 +725,13 @@ void main()
 {
     writeln(""Hello, World!"");
 }";
+
+                case LanguagesEnum.R:
+                    return
+@"##Title of this code
+  
+print(""Hello, world!"")
+";
                 default:
                     return @"";
             }
