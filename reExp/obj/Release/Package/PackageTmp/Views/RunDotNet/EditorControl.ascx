@@ -171,6 +171,11 @@
           syntax = "r";
           js = "mode/r/r.js";
           break;
+      case LanguagesEnum.Tcl:
+          mode = "text/x-tcl";
+          syntax = "tcl";
+          js = "mode/tcl/tcl.js";
+          break;
   }
 %>
 <%if(Model.EditorChoice == EditorsEnum.Codemirror) 

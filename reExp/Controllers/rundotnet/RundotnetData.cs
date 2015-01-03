@@ -100,7 +100,8 @@ namespace reExp.Controllers.rundotnet
                     this.LanguageChoice == LanguagesEnum.Java ||
                     this.LanguageChoice == LanguagesEnum.Python3 ||
                     this.LanguageChoice == LanguagesEnum.Octave ||
-                    this.LanguageChoice == LanguagesEnum.R)
+                    this.LanguageChoice == LanguagesEnum.R ||
+                    this.LanguageChoice == LanguagesEnum.Tcl)
 
                     return true;
                 else
@@ -345,6 +346,11 @@ namespace reExp.Controllers.rundotnet
                     },
                     new SelectListItem()
                     {
+                        Text = "Tcl",
+                        Value = ((int)LanguagesEnum.Tcl).ToString()
+                    },
+                    new SelectListItem()
+                    {
                         Text = "Visual Basic",
                         Value = ((int)LanguagesEnum.VB).ToString()
                     },
@@ -422,6 +428,7 @@ namespace reExp.Controllers.rundotnet
                     return
 @"//Title of this code
 //Rextester.Program.Main is the entry point for your code. Don't change it.
+//Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5
 
 using System;
 using System.Collections.Generic;
@@ -444,6 +451,7 @@ namespace Rextester
                     return
 @"'Title of this code
 'Rextester.Program.Main is the entry point for your code. Don't change it.
+'Compiler version 11.0.50709.17929 for Microsoft (R) .NET Framework 4.5
 
 Imports System
 Imports System.Collections.Generic
@@ -462,6 +470,7 @@ End Namespace";
                     return
 @"//Title of this code
 //Rextester.Program.Main is the entry point for your code. Don't change it.
+//Compiler version 11.0.50727.1 for Microsoft (R) .NET Framework 4.5
 
 namespace Rextester
 module Program =
@@ -473,6 +482,7 @@ module Program =
                     return
 @"//Title of this code
 //'main' method must be in a class 'Rextester'.
+//Compiler version 1.7.0_51
 
 import java.util.*;
 import java.lang.*;
@@ -487,18 +497,21 @@ class Rextester
                 case LanguagesEnum.Python:
                     return
 @"#Title of this code
+#python 2.7.6
 
 print ""Hello, world!""
 ";
                 case LanguagesEnum.Python3:
                     return
 @"#Title of this code
+#python 3.4.0
 
 print (""Hello, world!"")
 ";
                 case LanguagesEnum.C:
                     return
 @"//Title of this code
+//gcc 4.8.2
 
 #include  <stdio.h>
 
@@ -510,6 +523,7 @@ int main(void)
                 case LanguagesEnum.CClang:
                     return
 @"//Title of this code
+//clang 3.4
 
 #include  <stdio.h>
 
@@ -521,6 +535,7 @@ int main(void)
                 case LanguagesEnum.CPP:
                     return
 @"//Title of this code
+//g++  4.8.2
 
 #include <iostream>
 
@@ -532,6 +547,7 @@ int main()
                 case LanguagesEnum.CPPClang:
                     return
 @"//Title of this code
+//clang 3.4
 
 #include <iostream>
 
@@ -542,6 +558,7 @@ int main()
                 case LanguagesEnum.VCPP:
                     return
 @"//Title of this code
+//Compiler Version 18.00.21005.1 for x86
 
 #include <iostream>
 
@@ -552,6 +569,7 @@ int main()
                 case LanguagesEnum.VC:
                     return
 @"//Title of this code
+//Compiler Version 18.00.21005.1 for x86
 
 #include  <stdio.h>
 
@@ -563,8 +581,8 @@ int main(void)
 
                 case LanguagesEnum.Php:
                     return
-@"<?php
-//Title of this code
+@"<?php //Title of this code
+//php 5.5.9
 
     echo ""Hello, world! ""
     
@@ -572,7 +590,8 @@ int main(void)
 
                 case LanguagesEnum.Pascal:
                     return
-@"{Title of this code}
+@"//Title of this code
+//fpc 2.6.2-8
 
 program HelloWorld;
 
@@ -583,6 +602,7 @@ end.
                 case LanguagesEnum.ObjectiveC:
                     return
 @"//Title of this code
+//gcc 4.8.2
 
 #import <stdio.h>
  
@@ -594,47 +614,39 @@ int main(void)
                 case LanguagesEnum.Haskell:
                     return
 @"--Title of this code
+--ghc 7.6.3
 
 main = print $ ""Hello, world!""";
                 case LanguagesEnum.Ruby:
                     return
-@"#The Greeter class
+@"#Title of this code
+#ruby 1.9.3
 
-class Greeter
-    def initialize(name)
-        @name = name.capitalize
-    end
- 
-    def salute
-        puts ""Hello #{@name}!""
-    end
-end
- 
-# Create a new object
-g = Greeter.new(""world"")
- 
-# Output ""Hello, World!""
-g.salute";
+puts ""Hello, world!""";
                 case LanguagesEnum.Perl:
                     return
 @"#Title of this code
+#perl 5.18.2 
 
 print ""Hello World\n"";";
                 case LanguagesEnum.SqlServer:
                     return
 @"--Title of this code
+--Sql Server 2012 Express Edition
 --Batches are separated by 'go'
 
 select @@version as 'sql server version'";
                 case LanguagesEnum.Lua:
                     return
 @"--Title of this code
+--lua 5.2.3
 
 print (""Hello, World!"")";
 
                 case LanguagesEnum.Nasm:
                     return
 @";Title of this code
+;nasm 2.10.09 
 
 section .data
     hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
@@ -657,12 +669,14 @@ _start:
                 case LanguagesEnum.Javascript:
                     return @"
 //Title of this code
+//V8 3.21.3.1
 
 print(""Hello, world!"")";
 
                 case LanguagesEnum.Lisp:
                     return @"
 ;Title of this code
+;gnu clisp 2.49
 
 (print ""Hello, world!"")";
 
@@ -671,13 +685,14 @@ print(""Hello, world!"")";
 %Title of this code
 %commands to the interpreter are submitted from stdin input ('show input' box below)
 %'halt.' will be automatically appended to stdin input.
-
+%swi-prolog 6.6.4
 
 program :- write('Hello, world!').
 :- program.";
                 case LanguagesEnum.Go:
                     return @"
 //Title of this code
+//go 1.2.1
 
 package main  
 import ""fmt"" 
@@ -690,6 +705,7 @@ func main() {
 //Title of this code
 //'Rextester' class is the entry point for your code.
 //Don't declare a package.
+//scala 2.9.2
 
 object Rextester extends App {
     println(""Hello, World!"")
@@ -697,12 +713,14 @@ object Rextester extends App {
                 case LanguagesEnum.Scheme:
                     return @"
 ;Title of this code
+;guile 2.0.9
 
 (display ""Hello, World!"")";
 
                 case LanguagesEnum.Nodejs:
                     return @"
 //Title of this code
+//nodejs 0.10.25
 
 console.log(""Hello, World!"");";
                 case LanguagesEnum.Octave:
@@ -710,6 +728,7 @@ console.log(""Hello, World!"");";
 @"%Title of this code
 %To view plots after 'plot' (and other plot-producing commands) this command must follow: 'print -dpng some_unique_plot_name.png;'
 %It exports current plot to png image which then is sent to your browser
+%GNU Octave 3.8.1
 
 x=1:0.1:10;
 plot(x, sin(x));
@@ -718,6 +737,7 @@ print -dpng some_name.png;
                 case LanguagesEnum.D:
                     return
 @"//Title of this code
+//DMD64 D Compiler v2.065
 
 import std.stdio;
  
@@ -728,9 +748,17 @@ void main()
 
                 case LanguagesEnum.R:
                     return
-@"##Title of this code
+@"#Title of this code
+#R version 3.0.2 
   
 print(""Hello, world!"")
+";
+                case LanguagesEnum.Tcl:
+                    return
+@"#Title of this code
+#tclsh 8.6
+
+puts ""Hello, world!""
 ";
                 default:
                     return @"";

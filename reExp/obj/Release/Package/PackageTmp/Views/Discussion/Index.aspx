@@ -262,6 +262,10 @@
           mode = "text/x-rsrc";
           js.Add("mode/r/r.js");
           break;
+      case LanguagesEnum.Tcl:
+          mode = "text/x-tcl";
+          js.Add("mode/tcl/tcl.js");
+          break;
   }
   foreach(var j in js)
   {

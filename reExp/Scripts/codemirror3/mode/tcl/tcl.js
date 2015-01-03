@@ -45,7 +45,7 @@ CodeMirror.defineMode("tcl", function() {
       else if (ch == "#" && stream.match(/ *\[ *\[/)) {
         return chain(stream, state, tokenUnparsed);
       }
-      else if (ch == "#" && stream.eat("#")) {
+      else if (ch == "#") {
         stream.skipToEnd();
         return "comment";
       }

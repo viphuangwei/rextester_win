@@ -27,7 +27,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:33</publishTime>
     </File>
     <File Include="bin/GlobalUtils.dll">
-      <publishTime>11/01/2014 16:17:45</publishTime>
+      <publishTime>01/03/2015 19:14:49</publishTime>
     </File>
     <File Include="bin/MarkdownDeep.dll">
       <publishTime>01/19/2014 18:34:22</publishTime>
@@ -36,7 +36,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/08/2014 14:38:53</publishTime>
     </File>
     <File Include="bin/reExp.dll">
-      <publishTime>12/07/2014 20:41:04</publishTime>
+      <publishTime>01/03/2015 19:14:52</publishTime>
     </File>
     <File Include="bin/reExp.pdb">
       <publishTime>06/29/2012 00:16:38</publishTime>
@@ -48,13 +48,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:33</publishTime>
     </File>
     <File Include="bin/Service.dll">
-      <publishTime>12/07/2014 20:12:42</publishTime>
+      <publishTime>01/03/2015 19:14:49</publishTime>
     </File>
     <File Include="bin/Service.pdb">
       <publishTime>06/26/2012 23:43:24</publishTime>
     </File>
     <File Include="bin/Service.XmlSerializers.dll">
-      <publishTime>12/07/2014 20:12:48</publishTime>
+      <publishTime>01/03/2015 19:14:50</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.DLL">
       <publishTime>01/19/2014 18:34:33</publishTime>
@@ -2123,6 +2123,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/editarea/reg_syntax/sql.js">
       <publishTime>01/19/2014 18:34:30</publishTime>
     </File>
+    <File Include="Scripts/editarea/reg_syntax/tcl.js">
+      <publishTime>01/03/2015 19:11:05</publishTime>
+    </File>
     <File Include="Scripts/editarea/reg_syntax/tsql.js">
       <publishTime>01/19/2014 18:34:30</publishTime>
     </File>
@@ -2274,7 +2277,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:31</publishTime>
     </File>
     <File Include="Views/Discussion/Index.aspx">
-      <publishTime>12/07/2014 20:12:22</publishTime>
+      <publishTime>01/03/2015 18:58:52</publishTime>
     </File>
     <File Include="Views/Discussion/RelatedControl.ascx">
       <publishTime>01/19/2014 18:34:31</publishTime>
@@ -2298,7 +2301,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/28/2014 17:16:06</publishTime>
     </File>
     <File Include="Views/Main/Index.aspx">
-      <publishTime>12/07/2014 20:40:38</publishTime>
+      <publishTime>01/03/2015 18:34:51</publishTime>
     </File>
     <File Include="Views/Reference/Index.aspx">
       <publishTime>01/19/2014 18:34:32</publishTime>
@@ -2307,7 +2310,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/26/2014 23:31:50</publishTime>
     </File>
     <File Include="Views/RunDotNet/EditorControl.ascx">
-      <publishTime>12/07/2014 20:27:57</publishTime>
+      <publishTime>01/03/2015 19:00:59</publishTime>
     </File>
     <File Include="Views/RunDotNet/Index.aspx">
       <publishTime>09/21/2014 19:37:59</publishTime>

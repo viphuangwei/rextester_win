@@ -76,6 +76,8 @@ namespace reExp.Utils
                     return "D";
                 case LanguagesEnum.R:
                     return "R";
+                case LanguagesEnum.Tcl:
+                    return "Tcl";
                 default:
                     return "Unknown";
             }

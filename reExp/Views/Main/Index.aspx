@@ -123,6 +123,7 @@
                 <li><code>Ruby - ruby 1.9.3 (ruby -w -W1)</code></li>
                 <li><code>Scala - scala 2.9.2 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</code></li>
                 <li><code>Scheme - guile 2.0.9</code></li>
+                <li><code>Tcl - tclsh 8.6</code></li>
             </ul> 
             Your code will be run on behalf special user and group. Also your code will be executed from Python wrapper which sets various limits to the process. It does so
             by using <code>'setrlimit'</code> system call. You'll have max 30 sec to compile, max 5 sec of cpu time to run, limited memory (~1500 Mb) and other restrictions will apply (like no writing permissions). Also your process and all its children will be run in a
@@ -145,7 +146,7 @@
             Write code so that others see this real-time. Every participant can make changes and see changes made by others. We use <a href="http://www.firepad.io">Firepad</a> and <a href="https://www.firebase.com/">Firebase</a>.
             <br/><br/>
             <b style="color:Gray">Credit</b><br/>
-            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>, <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/><br />
+            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>,<%-- <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>,--%> <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/><br />
             <b style="color:Gray">Code wall</b><br/>
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code wall</a> as well as <a href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">personal code walls</a> - place code on a wall for public display. These entries will be crawled by search engines, so one 
             possible use is to put there scripts that you may need for easy access later. For example, whenever I need a sql script for searching database definitions I simply search for <a href="https://www.google.com/search?q=sql+definition+rextester">'sql definition rextester'</a> and there is my script (it seems that code wall is 
@@ -210,7 +211,7 @@
     Warnings=Warnings, if any, as one string
     Errors=Errors, if any, as one string
     Stats=Execution stats as one string
-    Files=In case of Octave - list of png images encoded as base64 strings
+    Files=In case of Octave and R - list of png images encoded as base64 strings
 </pre>
             Language numbers:
 <pre>
@@ -245,6 +246,7 @@
     C (vc) = 29
     D = 30
     R = 31
+    Tcl = 32
 </pre>
             <br/>
             Api stats:

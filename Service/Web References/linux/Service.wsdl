@@ -29,6 +29,7 @@
           <xs:enumeration value="CppClang" />
           <xs:enumeration value="D" />
           <xs:enumeration value="R" />
+          <xs:enumeration value="Tcl" />
         </xs:restriction>
       </xs:simpleType>
       <xs:element name="DoWork">
@@ -169,6 +170,7 @@
           <xs:enumeration value="CppClang" />
           <xs:enumeration value="D" />
           <xs:enumeration value="R" />
+          <xs:enumeration value="Tcl" />
         </xs:restriction>
       </xs:simpleType>
     </xs:schema>

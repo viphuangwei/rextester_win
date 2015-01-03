@@ -557,6 +557,9 @@ namespace reExp.Controllers.rundotnet
                 case LanguagesEnum.R:
                     lang = Service.linux.Languages.R;
                     break;
+                case LanguagesEnum.Tcl:
+                    lang = Service.linux.Languages.Tcl;
+                    break;
                 default:
                     break;
             }
