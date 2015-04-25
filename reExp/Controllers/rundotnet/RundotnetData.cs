@@ -482,7 +482,7 @@ module Program =
                     return
 @"//Title of this code
 //'main' method must be in a class 'Rextester'.
-//Compiler version 1.7.0_51
+//Compiler version 1.8.0_45
 
 import java.util.*;
 import java.lang.*;
@@ -497,21 +497,21 @@ class Rextester
                 case LanguagesEnum.Python:
                     return
 @"#Title of this code
-#python 2.7.6
+#python 2.7.8
 
 print ""Hello, world!""
 ";
                 case LanguagesEnum.Python3:
                     return
 @"#Title of this code
-#python 3.4.0
+#python 3.4.2
 
 print (""Hello, world!"")
 ";
                 case LanguagesEnum.C:
                     return
 @"//Title of this code
-//gcc 4.8.2
+//gcc 4.9.1
 
 #include  <stdio.h>
 
@@ -523,7 +523,7 @@ int main(void)
                 case LanguagesEnum.CClang:
                     return
 @"//Title of this code
-//clang 3.4
+//clang 3.5.0
 
 #include  <stdio.h>
 
@@ -535,7 +535,7 @@ int main(void)
                 case LanguagesEnum.CPP:
                     return
 @"//Title of this code
-//g++  4.8.2
+//g++  4.9.1
 
 #include <iostream>
 
@@ -547,7 +547,7 @@ int main()
                 case LanguagesEnum.CPPClang:
                     return
 @"//Title of this code
-//clang 3.4
+//clang 3.5.0
 
 #include <iostream>
 
@@ -582,7 +582,7 @@ int main(void)
                 case LanguagesEnum.Php:
                     return
 @"<?php //Title of this code
-//php 5.5.9
+//php 5.5.12
 
     echo ""Hello, world! ""
     
@@ -591,7 +591,7 @@ int main(void)
                 case LanguagesEnum.Pascal:
                     return
 @"//Title of this code
-//fpc 2.6.2-8
+//fpc 2.6.4
 
 program HelloWorld;
 
@@ -602,7 +602,7 @@ end.
                 case LanguagesEnum.ObjectiveC:
                     return
 @"//Title of this code
-//gcc 4.8.2
+//gcc 4.9.1
 
 #import <stdio.h>
  
@@ -620,13 +620,13 @@ main = print $ ""Hello, world!""";
                 case LanguagesEnum.Ruby:
                     return
 @"#Title of this code
-#ruby 1.9.3
+#ruby 2.1.2p95 
 
 puts ""Hello, world!""";
                 case LanguagesEnum.Perl:
                     return
 @"#Title of this code
-#perl 5.18.2 
+#perl 5.20.1 
 
 print ""Hello World\n"";";
                 case LanguagesEnum.SqlServer:
@@ -646,7 +646,7 @@ print (""Hello, World!"")";
                 case LanguagesEnum.Nasm:
                     return
 @";Title of this code
-;nasm 2.10.09 
+;nasm 2.11 
 
 section .data
     hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
@@ -713,7 +713,7 @@ object Rextester extends App {
                 case LanguagesEnum.Scheme:
                     return @"
 ;Title of this code
-;guile 2.0.9
+;guile 2.0.11
 
 (display ""Hello, World!"")";
 
@@ -749,7 +749,7 @@ void main()
                 case LanguagesEnum.R:
                     return
 @"#Title of this code
-#R version 3.0.2 
+#R version 3.1.1 
   
 print(""Hello, world!"")
 ";

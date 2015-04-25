@@ -98,31 +98,31 @@
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
             <ul>
-                <li><code>Assembly - nasm 2.10.09</code></li>
-                <li><code>C++ (gcc) - g++  4.8.2 (g++ -Wall -std=c++11 -O2)</code></li>
-                <li><code>C++ (clang) - clang 3.4 (clang++ -Wall -std=c++11 -O2)</code></li>
-                <li><code>C (gcc) - gcc 4.8.2 (gcc -Wall -std=gnu99 -O2)</code></li>
-                <li><code>C (clang) - clang 3.4 (clang -Wall -std=gnu99 -O2)</code></li>
+                <li><code>Assembly - nasm 2.11</code></li>
+                <li><code>C++ (gcc) - g++  4.9.1 (g++ -Wall -std=c++11 -O2)</code></li>
+                <li><code>C++ (clang) - clang 3.5.0 (clang++ -Wall -std=c++11 -O2)</code></li>
+                <li><code>C (gcc) - gcc 4.9.1 (gcc -Wall -std=gnu99 -O2)</code></li>
+                <li><code>C (clang) - clang 3.5.0 (clang -Wall -std=gnu99 -O2)</code></li>
                 <li><code>Common Lisp - gnu clisp 2.49</code></li>
                 <li><code>D - DMD64 D Compiler v2.065</code></li>
                 <li><code>Go - go 1.2.1</code></li>
                 <li><code>Haskell - ghc 7.6.3</code></li>
-                <li><code>Java - Oracle's implementation of Java, compiler version 1.7.0_51 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</code></li>
+                <li><code>Java - Oracle's implementation of Java, compiler version 1.8.0_45 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</code></li>
                 <li><code>Javascript - V8 3.21.3.1</code></li>
                 <li><code>Lua - lua 5.2.3</code></li>
                 <li><code>Node.js - nodejs 0.10.25</code></li>
-                <li><code>Objective-C - gcc 4.8.2 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</code></li>
+                <li><code>Objective-C - gcc 4.9.1 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</code></li>
                 <li><code>Octave - GNU Octave 3.8.1 (octave -q -f --no-window-system)</code></li>
-                <li><code>Pascal - fpc 2.6.2-8</code></li>
-                <li><code>Perl - perl 5.18.2 (perl -w)</code></li>
-                <li><code>Php - php 5.5.9</code></li>
+                <li><code>Pascal - fpc 2.6.4</code></li>
+                <li><code>Perl - perl 5.20.1 (perl -w)</code></li>
+                <li><code>Php - php 5.5.12</code></li>
                 <li><code>Prolog - swi-prolog 6.6.4</code></li>
-                <li><code>Python - python 2.7.6</code></li>
-                <li><code>Python 3 - python 3.4.0</code></li>
-                <li><code>R - R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"</code></li>
-                <li><code>Ruby - ruby 1.9.3 (ruby -w -W1)</code></li>
+                <li><code>Python - python 2.7.8</code></li>
+                <li><code>Python 3 - python 3.4.2</code></li>
+                <li><code>R - R version 3.1.1</code></li>
+                <li><code>Ruby - ruby 2.1.2p95  (ruby -w -W1)</code></li>
                 <li><code>Scala - scala 2.9.2 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</code></li>
-                <li><code>Scheme - guile 2.0.9</code></li>
+                <li><code>Scheme - guile 2.0.11</code></li>
                 <li><code>Tcl - tclsh 8.6</code></li>
             </ul> 
             Your code will be run on behalf special user and group. Also your code will be executed from Python wrapper which sets various limits to the process. It does so
