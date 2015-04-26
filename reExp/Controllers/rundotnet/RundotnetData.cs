@@ -705,7 +705,7 @@ func main() {
 //Title of this code
 //'Rextester' class is the entry point for your code.
 //Don't declare a package.
-//scala 2.9.2
+//scala 2.11.6
 
 object Rextester extends App {
     println(""Hello, World!"")

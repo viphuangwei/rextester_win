@@ -121,7 +121,7 @@
                 <li><code>Python 3 - python 3.4.2</code></li>
                 <li><code>R - R version 3.1.1</code></li>
                 <li><code>Ruby - ruby 2.1.2p95  (ruby -w -W1)</code></li>
-                <li><code>Scala - scala 2.9.2 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</code></li>
+                <li><code>Scala - scala 2.11.6 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</code></li>
                 <li><code>Scheme - guile 2.0.11</code></li>
                 <li><code>Tcl - tclsh 8.6</code></li>
             </ul> 
