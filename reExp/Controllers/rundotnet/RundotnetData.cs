@@ -737,7 +737,7 @@ print -dpng some_name.png;
                 case LanguagesEnum.D:
                     return
 @"//Title of this code
-//DMD64 D Compiler v2.065
+//DMD64 D Compiler v2.067.1
 
 import std.stdio;
  
