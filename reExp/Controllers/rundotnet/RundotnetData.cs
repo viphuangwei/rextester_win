@@ -497,21 +497,21 @@ class Rextester
                 case LanguagesEnum.Python:
                     return
 @"#Title of this code
-#python 2.7.8
+#python 2.7.9
 
 print ""Hello, world!""
 ";
                 case LanguagesEnum.Python3:
                     return
 @"#Title of this code
-#python 3.4.2
+#python 3.4.3
 
 print (""Hello, world!"")
 ";
                 case LanguagesEnum.C:
                     return
 @"//Title of this code
-//gcc 4.9.1
+//gcc 4.9.2
 
 #include  <stdio.h>
 
@@ -523,7 +523,7 @@ int main(void)
                 case LanguagesEnum.CClang:
                     return
 @"//Title of this code
-//clang 3.5.0
+//clang 3.6.0
 
 #include  <stdio.h>
 
@@ -535,7 +535,7 @@ int main(void)
                 case LanguagesEnum.CPP:
                     return
 @"//Title of this code
-//g++  4.9.1
+//g++  4.9.2
 
 #include <iostream>
 
@@ -547,7 +547,7 @@ int main()
                 case LanguagesEnum.CPPClang:
                     return
 @"//Title of this code
-//clang 3.5.0
+//clang 3.6.0
 
 #include <iostream>
 
@@ -582,7 +582,7 @@ int main(void)
                 case LanguagesEnum.Php:
                     return
 @"<?php //Title of this code
-//php 5.5.12
+//php 5.6.4
 
     echo ""Hello, world! ""
     
@@ -602,7 +602,7 @@ end.
                 case LanguagesEnum.ObjectiveC:
                     return
 @"//Title of this code
-//gcc 4.9.1
+//gcc 4.9.2
 
 #import <stdio.h>
  
@@ -626,7 +626,7 @@ puts ""Hello, world!""";
                 case LanguagesEnum.Perl:
                     return
 @"#Title of this code
-#perl 5.20.1 
+#perl 5.20.2 
 
 print ""Hello World\n"";";
                 case LanguagesEnum.SqlServer:
@@ -646,7 +646,7 @@ print (""Hello, World!"")";
                 case LanguagesEnum.Nasm:
                     return
 @";Title of this code
-;nasm 2.11 
+;nasm 2.11.05
 
 section .data
     hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
@@ -669,7 +669,7 @@ _start:
                 case LanguagesEnum.Javascript:
                     return @"
 //Title of this code
-//V8 3.21.3.1
+//V8 3.31.1
 
 print(""Hello, world!"")";
 
@@ -685,14 +685,14 @@ print(""Hello, world!"")";
 %Title of this code
 %commands to the interpreter are submitted from stdin input ('show input' box below)
 %'halt.' will be automatically appended to stdin input.
-%swi-prolog 6.6.4
+%swi-prolog 6.6.6
 
 program :- write('Hello, world!').
 :- program.";
                 case LanguagesEnum.Go:
                     return @"
 //Title of this code
-//go 1.2.1
+//go 1.3.3
 
 package main  
 import ""fmt"" 
@@ -705,7 +705,7 @@ func main() {
 //Title of this code
 //'Rextester' class is the entry point for your code.
 //Don't declare a package.
-//scala 2.11.6
+//scala 2.11.7
 
 object Rextester extends App {
     println(""Hello, World!"")
@@ -728,7 +728,7 @@ console.log(""Hello, World!"");";
 @"%Title of this code
 %To view plots after 'plot' (and other plot-producing commands) this command must follow: 'print -dpng some_unique_plot_name.png;'
 %It exports current plot to png image which then is sent to your browser
-%GNU Octave 3.8.1
+%GNU Octave 3.8.2
 
 x=1:0.1:10;
 plot(x, sin(x));
@@ -749,7 +749,7 @@ void main()
                 case LanguagesEnum.R:
                     return
 @"#Title of this code
-#R version 3.1.1 
+#R version 3.1.2 
   
 print(""Hello, world!"")
 ";
@@ -776,7 +776,7 @@ puts ""Hello, world!""
                 case LanguagesEnum.CClang:
                     return "-Wall -std=gnu99 -O2 -o a.out source_file.c";
                 case LanguagesEnum.CPPClang:
-                    return "-Wall -std=c++11 -stdlib=libc++ -ldl -O2 -o a.out source_file.cpp";
+                    return "-Wall -std=c++11 -ldl -O2 -o a.out source_file.cpp";
                 case LanguagesEnum.VCPP:
                     return @"source_file.cpp -o a.exe /EHsc /I C:\boost_1_55_0 /link /LIBPATH:C:\boost_1_55_0\stage\lib";
                 case LanguagesEnum.VC:
@@ -786,7 +786,7 @@ puts ""Hello, world!""
                 case LanguagesEnum.Haskell:
                     return "-o a.out source_file.hs";
                 case LanguagesEnum.ObjectiveC:
-                    return "-MMD -MP -DGNUSTEP -DGNUSTEP_BASE_LIBRARY=1 -DGNU_GUI_LIBRARY=1 -DGNU_RUNTIME=1 -DGNUSTEP_BASE_LIBRARY=1 -fno-strict-aliasing -fexceptions -fobjc-exceptions -D_NATIVE_OBJC_EXCEPTIONS -pthread -fPIC -Wall -DGSWARN -DGSDIAGNOSE -Wno-import -g -O2 -fgnu-runtime -fconstant-string-class=NSConstantString -I. -I/usr/local/include/GNUstep -I/usr/include/GNUstep -o a.out source_file.m -lobjc -lgnustep-base";
+                    return "-MMD -MP -DGNUSTEP -DGNUSTEP_BASE_LIBRARY=1 -DGNU_GUI_LIBRARY=1 -DGNU_RUNTIME=1 -DGNUSTEP_BASE_LIBRARY=1 -fno-strict-aliasing -fexceptions -fobjc-exceptions -D_NATIVE_OBJC_EXCEPTIONS -pthread -fPIC -Wall -DGSWARN -DGSDIAGNOSE -Wno-import -g -O2 -fgnu-runtime -fconstant-string-class=NSConstantString -I. -I /usr/include/GNUstep -I/usr/include/GNUstep -o a.out source_file.m -lobjc -lgnustep-base";
                 case LanguagesEnum.D:
                     return "source_file.d -ofa.out";
                 default:

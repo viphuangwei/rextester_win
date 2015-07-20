@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://api.rextester.com/service/Service.asmx?wsdl" docRef="http://api.rextester.com/service/Service.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <contractRef ref="http://api.rextester.com/Service.asmx?wsdl" docRef="http://api.rextester.com/Service.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
 </discovery>
