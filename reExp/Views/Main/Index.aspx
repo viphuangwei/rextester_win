@@ -89,11 +89,12 @@
             For convinience there is simple pre-built schema, shown <a href="../../Content/Schema.png">here</a>.
             <br/><br/><b style="color:Gray">Visual C++ (and C)</b><br/>
             Your code is compiled to native binary which runs on Windows Server 2012 (maximum compile time is 30 seconds). Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
-            After 10 seconds of execution this process will be killed. This and the fact that your code will be executed on behalf of IIS application pool identity are the only security measures taken.
-            Think you can break the service? Probably so and we'd like to hear how would you do this. Also let us know if you need some other Windows-based compilers.
+            After 10 seconds of execution this process will be killed. This used to be the only security measures for a while. However, after discovering dubious services running and questionable .exes at some weird places it was decided to sandbox
+            all usercode through <a href="http://www.sandboxie.com/">Sandboxie</a>. <br/> 
+            Also let us know if you need some other Windows-based compilers.
             <br/>Compiler version:
             <ul>
-                <li><code>C++ (vc++) and C - Microsoft (R) C/C++ Optimizing Compiler Version 18.00.21005.1 for x86</code></li>
+                <li><code>C++ (vc++) and C - Microsoft (R) C/C++ Optimizing Compiler Version 18.00.31101 for x86</code></li>
             </ul>
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
@@ -136,6 +137,7 @@
                 <li>Apparmor - out of everything we tried, this did the job pretty well and it was rather easy to configure. But it doesn't work with OpenVZ virtualization that is used by our server provider.</li>
                 <li>SELinux - stopped reading documentation in the middle of it. Too (unnecessarily?) complex.</li>
                 <li>Native security mechanisms - like chroot and file permissions. Hard to make it secure this way without breaking the service and the system.</li>
+                <li>Chromium sandboxes that exist both for windows and linux. These sandboxes run chrome's page renderers and probably quite secure. Drawbacks are: hard to setup and possibly too limiting (however this needs to be verified)</li>
             </ul>
             So, if you can take the system down - then be it, but please report how you did this. Your advice on this topic is always <a href="http://rextester.com/feedback/">welcome</a>.
             <br/><br/>

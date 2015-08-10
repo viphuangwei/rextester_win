@@ -11,20 +11,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>C:\Users\Renat\Desktop\app\</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/BookSleeve.dll">
+      <publishTime>08/09/2015 22:39:32</publishTime>
+    </File>
     <File Include="bin/GlobalUtils.dll">
-      <publishTime>04/17/2014 01:33:38</publishTime>
+      <publishTime>08/02/2015 01:49:03</publishTime>
     </File>
     <File Include="bin/WindowsExecutionEngine.dll">
-      <publishTime>04/19/2014 22:22:35</publishTime>
+      <publishTime>08/09/2015 23:45:08</publishTime>
     </File>
     <File Include="bin/WindowsService.dll">
-      <publishTime>04/19/2014 22:23:04</publishTime>
+      <publishTime>08/09/2015 23:45:10</publishTime>
     </File>
     <File Include="Service.asmx">
       <publishTime>01/19/2014 18:34:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/19/2014 18:34:21</publishTime>
+      <publishTime>08/09/2015 23:35:13</publishTime>
     </File>
   </ItemGroup>
 </Project>

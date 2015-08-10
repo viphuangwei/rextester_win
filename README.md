@@ -16,6 +16,8 @@ Console application is itself monitored for resource consumption. Applies to C#,
 -WindowsEngineTests - some tests
 
 -WindowsExecutionEngine - engine to run native code on windows, currently only for VC++. Main security measure is attachnig job object 
-to process, which ensures termination. Not very secure.
+to process, which ensures termination. Now also user code is sandboxed through http://www.sandboxie.com/ . Seems secure.
+
+-WindowsSandbox - exe that is sandboxed in sandboxie and which spawns usercode
 
 -WindowsService - web service as an api to WindowsExecutionEngine.

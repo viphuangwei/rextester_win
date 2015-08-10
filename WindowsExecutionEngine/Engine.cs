@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookSleeve;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -144,10 +145,50 @@ namespace WindowsExecutionEngine
             get;
             set;
         }
+        public string Rand
+        {
+            get;
+            set;
+        }
     }
 
     public class Engine
     {
+        static RedisConnection redis_conn = null;
+        static object redis_lock = new object();
+        public static RedisConnection RedisConnection
+        {
+            get
+            {
+                lock (redis_lock)
+                {
+                    if (redis_conn == null)
+                    {
+                        redis_conn = new RedisConnection("localhost", allowAdmin: true);
+                    }
+                    if (redis_conn.State != RedisConnectionBase.ConnectionState.Open)
+                    {
+                        try
+                        {
+                            redis_conn.Open().Wait();
+                        }
+                        catch (Exception)
+                        {
+                            try
+                            {
+                                redis_conn.Dispose();
+                            }
+                            catch (Exception) { }
+
+                            redis_conn = new RedisConnection("localhost", allowAdmin: true);
+                            redis_conn.Open().Wait();
+                        }
+                    }
+                }
+                return redis_conn;
+            }
+        }
+
         public Engine()
         { }
 
@@ -157,6 +198,15 @@ namespace WindowsExecutionEngine
             {
                 //return @"/home/ren/Desktop/rextester/linux/RextesterService/usercode/";
                 return @"C:\inetpub\wwwroot\rextester\usercode\";
+            }
+        }
+
+        public string BasePath
+        {
+            get
+            {
+                //return @"/home/ren/Desktop/rextester/linux/RextesterService/usercode/";
+                return @"C:\inetpub\wwwroot\rextester\";
             }
         }
 
@@ -191,71 +241,38 @@ namespace WindowsExecutionEngine
 
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
-                using (Process process = new Process())
-                using(var job = new Job())
+                string nr = cdata.Rand;
+                if (!string.IsNullOrEmpty(idata.Input))
                 {
-                    process.StartInfo.FileName = cdata.Executor + (string.IsNullOrEmpty(cdata.Executor) ? "" : " ") + cdata.ExecuteThis;
-                    process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.CreateNoWindow = true;
-                    process.StartInfo.RedirectStandardError = true;
-                    process.StartInfo.RedirectStandardOutput = true;
-                    process.StartInfo.RedirectStandardInput = true;
+                    RedisConnection.Strings.Set(1, nr, Encoding.UTF8.GetBytes(idata.Input));
+                }
 
-                    process.Start();
-                    job.AddProcess(process.Handle);
+                RedisConnection.Strings.Set(0, nr, new byte[] {(byte)1});
 
-                    if (!string.IsNullOrEmpty(idata.Input))
+                for (int i = 400; i > 0; i--)
+                {
+                    Thread.Sleep(100);
+                    bool _break = false;
+                    var res = RedisConnection.Strings.Get(4, nr).Result;
+                    if (res != null)
                     {
-                        InputWriter input = new InputWriter(process.StandardInput, idata.Input);
-                        Thread inputWriter = new Thread(new ThreadStart(input.Writeinput));
-                        inputWriter.Start();
-                    }
-
-                    OutputReader output = new OutputReader(process.StandardOutput);
-                    Thread outputReader = new Thread(new ThreadStart(output.ReadOutput));
-                    outputReader.Start();
-                    OutputReader error = new OutputReader(process.StandardError);
-                    Thread errorReader = new Thread(new ThreadStart(error.ReadOutput));
-                    errorReader.Start();
-
-                    var start = DateTime.Now;
-                    bool killed = false;
-                    do
-                    {
-                        // Refresh the current process property values.
-                        process.Refresh();
-                        if (!process.HasExited)
+                        _break = true;
+                        var output = RedisConnection.Strings.Get(2, nr).Result;
+                        if (output != null)
                         {
-                            try
-                            {
-                                if (start + TimeSpan.FromSeconds(10) < DateTime.Now)
-                                {
-                                    process.Kill();
-                                    var res = string.Format("Process killed because it ran longer than 10 seconds");
-                                    odata.Errors = res;
-                                    odata.Output = output.Builder.ToString();
-                                    killed = true;
-                                }
-                            }
-                            catch (InvalidOperationException)
-                            {
-                                break;
-                            }
+                            odata.Output = Encoding.UTF8.GetString(output);
+                            var a = RedisConnection.Keys.Remove(2, nr).Result;
                         }
-                    }
-                    while (!process.WaitForExit(10));
-                    process.WaitForExit();
-
-                    if (!killed)
+                        var errors = RedisConnection.Strings.Get(3, nr).Result;
+                        if (errors != null)
+                        {
+                            odata.Errors = Encoding.UTF8.GetString(errors);
+                            var a = RedisConnection.Keys.Remove(3, nr).Result;
+                        }
+                    }                    
+                    if (_break)
                     {
-                        errorReader.Join(5000);
-                        outputReader.Join(5000);
-
-                        if (process.ExitCode != 0)
-                            error.Output = string.Format("Process exit code is not 0: {0}\n", process.ExitCode) + error.Output;
-
-                        odata.Errors = error.Output;
-                        odata.Output = output.Output;
+                        break;
                     }
                 }
                 watch.Stop();
@@ -299,8 +316,8 @@ namespace WindowsExecutionEngine
             try
             {
                 //cleanup
-                Directory.SetCurrentDirectory(RootPath);
-                Directory.Delete(dir, true);
+                //Directory.SetCurrentDirectory(RootPath);
+                //Directory.Delete(dir, true);
             }
             catch (Exception e) 
             {
@@ -309,8 +326,10 @@ namespace WindowsExecutionEngine
         }
         CompilerData CreateExecutable(InputData input)
         {
+            CompilerData cdata = new CompilerData();
             string ext = "";
             string rand = Utils.RandomString();
+            cdata.Rand = rand;
             string dir = rand + @"\";
             switch (input.Lang)
             {
@@ -340,7 +359,7 @@ namespace WindowsExecutionEngine
             {
                 sw.Write(input.Program);
             }
-            CompilerData cdata = new CompilerData();
+
             cdata.CleanThis = RootPath + dir;
 
             var comp = ICompilerFactory.GetICompiler(input.Lang);
