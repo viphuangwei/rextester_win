@@ -558,7 +558,7 @@ int main()
                 case LanguagesEnum.VCPP:
                     return
 @"//Title of this code
-//Compiler Version 18.00.21005.1 for x86
+//Microsoft (R) C/C++ Optimizing Compiler Version 18.00.31101 for x86
 
 #include <iostream>
 
@@ -569,7 +569,7 @@ int main()
                 case LanguagesEnum.VC:
                     return
 @"//Title of this code
-//Compiler Version 18.00.21005.1 for x86
+//Microsoft (R) C/C++ Optimizing Compiler Version 18.00.31101 for x86
 
 #include  <stdio.h>
 
@@ -778,7 +778,7 @@ puts ""Hello, world!""
                 case LanguagesEnum.CPPClang:
                     return "-Wall -std=c++11 -ldl -O2 -o a.out source_file.cpp";
                 case LanguagesEnum.VCPP:
-                    return @"source_file.cpp -o a.exe /EHsc /I C:\boost_1_55_0 /link /LIBPATH:C:\boost_1_55_0\stage\lib";
+                    return @"source_file.cpp -o a.exe /EHsc /MD /I C:\boost_1_59_0 /link /LIBPATH:C:\boost_1_59_0\stage\lib";
                 case LanguagesEnum.VC:
                     return "source_file.c -o a.exe";
                 case LanguagesEnum.Go:

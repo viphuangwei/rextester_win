@@ -160,7 +160,7 @@ namespace reExp.Controllers.rundotnet
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message+"\n\n\n"+code, "code completion error, position: "+position);
+                //Utils.Log.LogInfo(e.Message+"\n\n\n"+code, "code completion error, position: "+position);
                 return json.Serialize(new List<string>());
             }
         }

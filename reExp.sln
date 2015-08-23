@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsSandbox", "WindowsSandbox\WindowsSandbox.csproj", "{1DBFE253-1957-48D7-83FC-343AB60A00BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{9ECD3B99-A488-413E-B127-7628B09D8B0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +130,16 @@ Global
 		{1DBFE253-1957-48D7-83FC-343AB60A00BD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1DBFE253-1957-48D7-83FC-343AB60A00BD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1DBFE253-1957-48D7-83FC-343AB60A00BD}.Release|x86.ActiveCfg = Release|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9ECD3B99-A488-413E-B127-7628B09D8B0F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
