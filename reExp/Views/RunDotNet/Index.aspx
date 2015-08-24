@@ -84,7 +84,7 @@
             <table style="width: 95%; margin-top:0.5em;">
                 <tr>
                     <td align="left">
-                        <input id="Run" type="button" value="Run it<%:Model.EditorChoice == EditorsEnum.Codemirror ? " (F8)" : "" %>" />
+                        <input id="Run" type="button" value="Run it<%:Model.EditorChoice == EditorsEnum.Codemirror ? " (F8)" : "" %><%:Model.EditorChoice == EditorsEnum.Simple ? " (Shift+Enter)" : "" %>" />
                         <%
                             string button_content = "";
                             if (Model.IsLive)
@@ -267,6 +267,44 @@
     <%if (Model.EditorChoice == EditorsEnum.Editarea)
     {
         %><script src="../../Scripts/editarea/edit_area_full.js" type="text/javascript"></script><%
+    }%>
+    <%if (Model.EditorChoice == EditorsEnum.Simple)
+    {
+        %><script type="text/javascript">
+
+              $(document).ready(function () {
+
+                  $(document).delegate('#Program', 'keydown', function(e) {
+                      var keyCode = e.keyCode || e.which;
+
+                      if (keyCode == 9) {
+                          e.preventDefault();
+                          var start = $(this).get(0).selectionStart;
+                          var end = $(this).get(0).selectionEnd;
+
+                          // set textarea value to: text before caret + tab + text after caret
+                          $(this).val($(this).val().substring(0, start)
+                                      + "    "
+                                      + $(this).val().substring(end));
+
+                          // put caret at right position again
+                          $(this).get(0).selectionStart =
+                          $(this).get(0).selectionEnd = start + 4;
+                      }
+                  });
+
+                  $("#Program").keydown(function(e){
+                      // Enter was pressed without shift key
+                      if (e.keyCode == 13 && e.shiftKey)
+                      {
+                            // prevent default behavior
+                            e.preventDefault();
+                            Run();
+                      }
+                  });
+
+              });
+          </script><%
     }%>
     <%if (Model.IsLive)
     { %>
