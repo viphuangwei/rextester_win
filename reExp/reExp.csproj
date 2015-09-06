@@ -122,6 +122,8 @@
     <Compile Include="Controllers\login\LoginData.cs" />
     <Compile Include="Controllers\login\UserData.cs" />
     <Compile Include="Controllers\main\MainData.cs" />
+    <Compile Include="Controllers\rundotnet\autocomplete\CsharpComplete.cs" />
+    <Compile Include="Controllers\rundotnet\autocomplete\JavaComplete.cs" />
     <Compile Include="Controllers\rundotnet\ServiceController.cs" />
     <Compile Include="Controllers\rundotnet\SqlServerUtils.cs" />
     <Compile Include="Controllers\users\UsersController.cs" />

@@ -260,7 +260,7 @@
     {
             %><script src="../../Scripts/codemirror3/addon/hint/show-hint.js" type="text/javascript"></script><%
     }%>
-    <%if (Model.LanguageChoice == LanguagesEnum.CSharp && Model.IsIntellisense)
+    <%if (Model.IsIntellisense)
     {
             %><script src="../../Scripts/codemirror3/addon/hint/csharp-hint.js" type="text/javascript"></script><%
     }%>
@@ -667,11 +667,7 @@
             <% if(Model.IsIntellisense)
             {%>
             if ((e.keyCode == 190) && e.type == 'keyup' && !e.shiftKey) {
-                    
-                    <%if(Model.LanguageChoice == LanguagesEnum.CSharp)
-                    {%>
                     CodeMirror.showHint(cm, CodeMirror.hint.csharp, {async: true});
-                    <%}%>
                 }
             <%} %>
         }

@@ -256,7 +256,7 @@
             });
             GlobalEditor = editor;
             
-            <%if (Model.IsIntellisense && Model.LanguageChoice == LanguagesEnum.CSharp) 
+            <%if (Model.IsIntellisense) 
             {%>
                     CodeMirror.commands.autocomplete = function (cm) {
                         CodeMirror.showHint(cm, CodeMirror.hint.csharp, { async: true });
