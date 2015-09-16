@@ -124,6 +124,8 @@
     <Compile Include="Controllers\main\MainData.cs" />
     <Compile Include="Controllers\rundotnet\autocomplete\CsharpComplete.cs" />
     <Compile Include="Controllers\rundotnet\autocomplete\JavaComplete.cs" />
+    <Compile Include="Controllers\rundotnet\autocomplete\PythonComplete.cs" />
+    <Compile Include="Controllers\rundotnet\autocomplete\VcppComplete.cs" />
     <Compile Include="Controllers\rundotnet\ServiceController.cs" />
     <Compile Include="Controllers\rundotnet\SqlServerUtils.cs" />
     <Compile Include="Controllers\users\UsersController.cs" />

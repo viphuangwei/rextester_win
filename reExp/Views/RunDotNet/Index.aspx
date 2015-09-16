@@ -297,9 +297,9 @@
                       // Enter was pressed without shift key
                       if (e.keyCode == 13 && e.shiftKey)
                       {
-                            // prevent default behavior
-                            e.preventDefault();
-                            Run();
+                          // prevent default behavior
+                          e.preventDefault();
+                          Run();
                       }
                   });
 
@@ -392,7 +392,7 @@
                 {%>
             setInterval(function() {
                 $.post('/rundotnet/updateliveindex', { code: GlobalEditor.getValue(), chat: $("#chatAreaText").val(), guid: '<%:Model.CodeGuid%>'}, null, 'text'); 
-                    }, 60000);
+            }, 60000);
             <%}%>
 
             <%} %>
@@ -402,13 +402,13 @@
             });
             <%if (Model.EditorChoice == EditorsEnum.Codemirror && !Model.IsLive)
             {%>
-                $("#Full").click(function () {
-                    if(!GlobalEditor.hasFocus())
-                    {
-                        GlobalEditor.focus()
-                    }
-                    GlobalEditor.setOption("fullScreen", !GlobalEditor.getOption("fullScreen"));
-                });
+            $("#Full").click(function () {
+                if(!GlobalEditor.hasFocus())
+                {
+                    GlobalEditor.focus()
+                }
+                GlobalEditor.setOption("fullScreen", !GlobalEditor.getOption("fullScreen"));
+            });
             <%}%>
 
             $("#Save").click(function () {
@@ -461,16 +461,16 @@
             $("#Live").click(function () {
                     <%if(Model.IsOutputInHtml) 
                     {%>
-                    $("#SavedOutput").val($("#Result").html());
+                $("#SavedOutput").val($("#Result").html());
                     <%} else
                     { %>
-                    $("#SavedOutput").val($("#Result").text());
+                $("#SavedOutput").val($("#Result").text());
                     <%} %>
-                    $("#WholeError").val($("#ErrorSpan").text());
-                    $("#WholeWarning").val($("#WarningSpan").text());
-                    $("#StatsToSave").val($("#Stats").text());
-                    Save(3);
-                });
+                $("#WholeError").val($("#ErrorSpan").text());
+                $("#WholeWarning").val($("#WarningSpan").text());
+                $("#StatsToSave").val($("#Stats").text());
+                Save(3);
+            });
             <%} %>
             $("#Run").click(function () {
                 Run();
@@ -658,18 +658,44 @@
                     }, 'text');
         };
 
+        <% if(Model.IsIntellisense)
+        {%>
+        $('body').keypress(function(e){
+
+            if(String.fromCharCode( e.which ) == ':') {
+                var cur = GlobalEditor.getCursor();
+                var ln = GlobalEditor.getValue().split("\n")[cur.line];
+                if(cur.ch > 0 && ln[cur.ch-1] == ':' ) {
+                    setTimeout(function() {
+                        CodeMirror.showHint(GlobalEditor, CodeMirror.hint.csharp, {async: true});
+                    }, 100)
+                }
+            }
+            if(String.fromCharCode( e.which ) == '>') {
+                var cur = GlobalEditor.getCursor();
+                var ln = GlobalEditor.getValue().split("\n")[cur.line];
+                if(cur.ch > 0 && ln[cur.ch-1] == '-' ) {
+                    setTimeout(function() {
+                        CodeMirror.showHint(GlobalEditor, CodeMirror.hint.csharp, {async: true});
+                    }, 100)
+                }
+            }
+
+            if(String.fromCharCode( e.which ) == '.') {
+                setTimeout(function() {
+                    CodeMirror.showHint(GlobalEditor, CodeMirror.hint.csharp, {async: true});
+                }, 100)
+            }
+        });
+         <%} %>
+        
+
         function keyEvent(cm, e) {
             // Hook into F8 (and F5)
             if ((e.keyCode == 116 || e.keyCode == 119) && e.type == 'keydown') {
                 e.stop();                
                 Run();
             }
-            <% if(Model.IsIntellisense)
-            {%>
-            if ((e.keyCode == 190) && e.type == 'keyup' && !e.shiftKey) {
-                    CodeMirror.showHint(cm, CodeMirror.hint.csharp, {async: true});
-                }
-            <%} %>
         }
         //]]>
     </script>

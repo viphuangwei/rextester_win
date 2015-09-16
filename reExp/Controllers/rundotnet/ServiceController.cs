@@ -33,6 +33,14 @@ namespace reExp.Controllers.rundotnet
             {
                 return JavaComplete.Complete(code, position, line, ch);
             }
+            else if (language == (int)LanguagesEnum.CPP || language == (int)LanguagesEnum.CPPClang || language == (int)LanguagesEnum.VCPP)
+            {
+                return VcppComplete.Complete(code, position, line, ch);
+            }
+            else if (language == (int)LanguagesEnum.Python)
+            {
+                return PythonComplete.Complete(code, position, line, ch);
+            }
             else
             {
                 return json.Serialize(new List<string>());

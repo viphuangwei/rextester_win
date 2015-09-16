@@ -70,7 +70,11 @@ namespace reExp.Controllers.rundotnet
             get
             {
                 if ((this.LanguageChoice == LanguagesEnum.CSharp ||
-                    this.LanguageChoice == LanguagesEnum.Java) && this.EditorChoice == EditorsEnum.Codemirror)
+                    this.LanguageChoice == LanguagesEnum.Java ||
+                    this.LanguageChoice == LanguagesEnum.CPP ||
+                    this.LanguageChoice == LanguagesEnum.VCPP ||
+                    this.LanguageChoice == LanguagesEnum.CPPClang ||
+                    this.LanguageChoice == LanguagesEnum.Python) && this.EditorChoice == EditorsEnum.Codemirror)
                 {
                     return true;
                 }
