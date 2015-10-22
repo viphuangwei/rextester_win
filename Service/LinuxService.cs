@@ -74,5 +74,21 @@ namespace Service
                 }
             }
         }
+
+        public string GetCppCompletions(string source, int line, int column)
+        {
+            using (var service = new linux.Service())
+            {
+                try
+                {
+                    var res = service.GetCPPCompletions(GlobalUtils.Utils.Compress(source), line, column);
+                    return GlobalUtils.Utils.Decompress(res);
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+        }
     }
 }

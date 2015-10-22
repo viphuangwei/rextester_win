@@ -137,9 +137,26 @@
       <xs:element name="GetPythonParenCompletionsResponse">
         <xs:complexType />
       </xs:element>
+      <xs:element name="GetCPPCompletions">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="source" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="line" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="column" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetCPPCompletionsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="GetCPPCompletionsResult" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="Result" nillable="true" type="s0:Result" />
       <xs:element name="int" type="xs:int" />
       <xs:element name="DiffResult" nillable="true" type="s0:DiffResult" />
+      <xs:element name="string" nillable="true" type="xs:string" />
     </xs:schema>
     <xs:schema xmlns:tns="http://rextester.com/AbstractTypes" targetNamespace="http://rextester.com/AbstractTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
@@ -205,6 +222,12 @@
   <message name="GetPythonParenCompletionsSoapOut">
     <part name="parameters" element="s0:GetPythonParenCompletionsResponse" />
   </message>
+  <message name="GetCPPCompletionsSoapIn">
+    <part name="parameters" element="s0:GetCPPCompletions" />
+  </message>
+  <message name="GetCPPCompletionsSoapOut">
+    <part name="parameters" element="s0:GetCPPCompletionsResponse" />
+  </message>
   <message name="DoWorkHttpGetIn">
     <part name="Program" type="s:string" />
     <part name="Input" type="s:string" />
@@ -247,6 +270,14 @@
     <part name="column" type="s:int" />
   </message>
   <message name="GetPythonParenCompletionsHttpGetOut" />
+  <message name="GetCPPCompletionsHttpGetIn">
+    <part name="source" type="s:string" />
+    <part name="line" type="s:int" />
+    <part name="column" type="s:int" />
+  </message>
+  <message name="GetCPPCompletionsHttpGetOut">
+    <part name="Body" element="s0:string" />
+  </message>
   <message name="DoWorkHttpPostIn">
     <part name="Program" type="s:string" />
     <part name="Input" type="s:string" />
@@ -289,6 +320,14 @@
     <part name="column" type="s:int" />
   </message>
   <message name="GetPythonParenCompletionsHttpPostOut" />
+  <message name="GetCPPCompletionsHttpPostIn">
+    <part name="source" type="s:string" />
+    <part name="line" type="s:int" />
+    <part name="column" type="s:int" />
+  </message>
+  <message name="GetCPPCompletionsHttpPostOut">
+    <part name="Body" element="s0:string" />
+  </message>
   <portType name="ServiceSoap">
     <operation name="DoWork">
       <input message="s0:DoWorkSoapIn" />
@@ -309,6 +348,10 @@
     <operation name="GetPythonParenCompletions">
       <input message="s0:GetPythonParenCompletionsSoapIn" />
       <output message="s0:GetPythonParenCompletionsSoapOut" />
+    </operation>
+    <operation name="GetCPPCompletions">
+      <input message="s0:GetCPPCompletionsSoapIn" />
+      <output message="s0:GetCPPCompletionsSoapOut" />
     </operation>
   </portType>
   <portType name="ServiceSoap12">
@@ -332,6 +375,10 @@
       <input message="s0:GetPythonParenCompletionsSoapIn" />
       <output message="s0:GetPythonParenCompletionsSoapOut" />
     </operation>
+    <operation name="GetCPPCompletions">
+      <input message="s0:GetCPPCompletionsSoapIn" />
+      <output message="s0:GetCPPCompletionsSoapOut" />
+    </operation>
   </portType>
   <portType name="ServiceHttpGet">
     <operation name="DoWork">
@@ -354,6 +401,10 @@
       <input message="s0:GetPythonParenCompletionsHttpGetIn" />
       <output message="s0:GetPythonParenCompletionsHttpGetOut" />
     </operation>
+    <operation name="GetCPPCompletions">
+      <input message="s0:GetCPPCompletionsHttpGetIn" />
+      <output message="s0:GetCPPCompletionsHttpGetOut" />
+    </operation>
   </portType>
   <portType name="ServiceHttpPost">
     <operation name="DoWork">
@@ -375,6 +426,10 @@
     <operation name="GetPythonParenCompletions">
       <input message="s0:GetPythonParenCompletionsHttpPostIn" />
       <output message="s0:GetPythonParenCompletionsHttpPostOut" />
+    </operation>
+    <operation name="GetCPPCompletions">
+      <input message="s0:GetCPPCompletionsHttpPostIn" />
+      <output message="s0:GetCPPCompletionsHttpPostOut" />
     </operation>
   </portType>
   <binding name="ServiceSoap" type="s0:ServiceSoap">
@@ -417,6 +472,15 @@
     </operation>
     <operation name="GetPythonParenCompletions">
       <soap:operation soapAction="http://rextester.com/GetPythonParenCompletions" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetCPPCompletions">
+      <soap:operation soapAction="http://rextester.com/GetCPPCompletions" style="document" />
       <input>
         <soap:body use="literal" />
       </input>
@@ -472,6 +536,15 @@
         <soap12:body use="literal" />
       </output>
     </operation>
+    <operation name="GetCPPCompletions">
+      <soap12:operation soapAction="http://rextester.com/GetCPPCompletions" style="document" />
+      <input>
+        <soap12:body use="literal" />
+      </input>
+      <output>
+        <soap12:body use="literal" />
+      </output>
+    </operation>
   </binding>
   <binding name="ServiceHttpGet" type="s0:ServiceHttpGet">
     <http:binding verb="GET" />
@@ -516,6 +589,15 @@
       </input>
       <output />
     </operation>
+    <operation name="GetCPPCompletions">
+      <http:operation location="/GetCPPCompletions" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
   </binding>
   <binding name="ServiceHttpPost" type="s0:ServiceHttpPost">
     <http:binding verb="POST" />
@@ -559,6 +641,15 @@
         <mime:content type="application/x-www-form-urlencoded" />
       </input>
       <output />
+    </operation>
+    <operation name="GetCPPCompletions">
+      <http:operation location="/GetCPPCompletions" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
     </operation>
   </binding>
   <service name="Service">

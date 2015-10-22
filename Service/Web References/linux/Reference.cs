@@ -39,6 +39,8 @@ namespace Service.linux {
         
         private System.Threading.SendOrPostCallback GetPythonParenCompletionsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetCPPCompletionsOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -91,6 +93,9 @@ namespace Service.linux {
         
         /// <remarks/>
         public event GetPythonParenCompletionsCompletedEventHandler GetPythonParenCompletionsCompleted;
+        
+        /// <remarks/>
+        public event GetCPPCompletionsCompletedEventHandler GetCPPCompletionsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://rextester.com/DoWork", RequestNamespace="http://rextester.com/", ResponseNamespace="http://rextester.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -264,6 +269,39 @@ namespace Service.linux {
             if ((this.GetPythonParenCompletionsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetPythonParenCompletionsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://rextester.com/GetCPPCompletions", RequestNamespace="http://rextester.com/", ResponseNamespace="http://rextester.com/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetCPPCompletions(string source, int line, int column) {
+            object[] results = this.Invoke("GetCPPCompletions", new object[] {
+                        source,
+                        line,
+                        column});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetCPPCompletionsAsync(string source, int line, int column) {
+            this.GetCPPCompletionsAsync(source, line, column, null);
+        }
+        
+        /// <remarks/>
+        public void GetCPPCompletionsAsync(string source, int line, int column, object userState) {
+            if ((this.GetCPPCompletionsOperationCompleted == null)) {
+                this.GetCPPCompletionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCPPCompletionsOperationCompleted);
+            }
+            this.InvokeAsync("GetCPPCompletions", new object[] {
+                        source,
+                        line,
+                        column}, this.GetCPPCompletionsOperationCompleted, userState);
+        }
+        
+        private void OnGetCPPCompletionsOperationCompleted(object arg) {
+            if ((this.GetCPPCompletionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCPPCompletionsCompleted(this, new GetCPPCompletionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -646,6 +684,32 @@ namespace Service.linux {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
     public delegate void GetPythonParenCompletionsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
+    public delegate void GetCPPCompletionsCompletedEventHandler(object sender, GetCPPCompletionsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetCPPCompletionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetCPPCompletionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591
