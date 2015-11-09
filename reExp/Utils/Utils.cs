@@ -125,7 +125,7 @@ namespace reExp.Utils
         }
 
         public static string BaseUrl = /*@"http://localhost:52512/";*/ @"http://rextester.com/";
-        public static string PathToFsc = @"C:\Program Files (x86)\Microsoft SDKs\F#\3.0\Framework\v4.0";
+        //public static string PathToFsc = @"C:\Program Files (x86)\Microsoft SDKs\F#\4.0\Framework\v4.0";
         public static string CurrentPath
         {
             get
@@ -139,7 +139,7 @@ namespace reExp.Utils
             switch (page)
             {
                 case PagesEnum.Home:
-                    return BaseUrl;
+                    return BaseUrl + "main";
                 case PagesEnum.Tester:
                     return BaseUrl + "tester";
                 case PagesEnum.Replace:
@@ -149,7 +149,7 @@ namespace reExp.Utils
                 case PagesEnum.Diff:
                     return BaseUrl + "diff";
                 case PagesEnum.Rundotnet:
-                    return BaseUrl + "runcode";
+                    return BaseUrl;
                 case PagesEnum.Codewall:
                     return BaseUrl + "codewall";
                 case PagesEnum.Users:
@@ -191,9 +191,9 @@ namespace reExp.Utils
                     return PagesEnum.Codewall;
                 if (pagePath.Trim('/').ToLower().Trim() == "feedback")
                     return PagesEnum.Feedback;
-                if (pagePath.Trim('/').ToLower().Trim() == "login/usersstuff")
+                if (pagePath.Trim('/').ToLower().Contains("login/usersstuff"))
                     return PagesEnum.UsersStuff;
-                if (pagePath.Trim('/').ToLower().Trim() == "login/notifications")
+                if (pagePath.Trim('/').ToLower().Contains("login/notifications"))
                     return PagesEnum.Notifications;
                 if (pagePath.Trim('/').ToLower().Trim() == "users" || pagePath.Trim('/').ToLower().Trim().StartsWith("users/"))
                     return PagesEnum.Users;
@@ -203,6 +203,8 @@ namespace reExp.Utils
                     return PagesEnum.Logout;
                 if (pagePath.Trim('/').ToLower().Trim() == "main/faq")
                     return PagesEnum.Home;
+                if (pagePath.Trim('/').ToLower().Trim() == "main")
+                    return PagesEnum.Home;
                 //if (pagePath.Trim('/').ToLower().Trim() == "discussion")
                 //    return PagesEnum.Rundotnet;
                 //if (pagePath.Contains("rundotnet") || pagePath.Contains("runcode") || pagePath.Contains("versions") || new System.Text.RegularExpressions.Regex(@"/[a-z]+\d+.*", System.Text.RegularExpressions.RegexOptions.IgnoreCase).IsMatch(pagePath))
@@ -211,7 +213,7 @@ namespace reExp.Utils
                 return PagesEnum.Rundotnet;
             }
             else
-                return PagesEnum.Home;
+                return PagesEnum.Rundotnet;
         }
 
         public enum PagesEnum

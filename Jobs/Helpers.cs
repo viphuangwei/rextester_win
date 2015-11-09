@@ -40,6 +40,9 @@ namespace Jobs
             CPPClang = 27,
             VCPP = 28,
             VC = 29,
+            D = 30,
+            R = 31,
+            Tcl = 32,
             Unknown = 0
         }
 
@@ -105,6 +108,12 @@ namespace Jobs
                     return "Python 3";
                 case LanguagesEnum.Octave:
                     return "Octave";
+                case LanguagesEnum.D:
+                    return "D";
+                case LanguagesEnum.R:
+                    return "R";
+                case LanguagesEnum.Tcl:
+                    return "Tcl";
                 default:
                     return "Unknown";
             }
@@ -113,7 +122,7 @@ namespace Jobs
 
     public class DB
     {
-        static string location = @"C:\Users\Administrator\Desktop\db.s3db";
+        static string location = @"C:\inetpub\wwwroot\rextester\App_Data\db.s3db";
         static SQLiteConnection GetConnection()
         {
             return new SQLiteConnection(string.Format("Data Source={0};Version=3;", location));

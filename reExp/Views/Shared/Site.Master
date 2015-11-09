@@ -198,12 +198,12 @@
     <table style="width: 100%; padding-right: 2em">
         <tr>
             <td align="right">
-                <a <%if(currentPage == Utils.PagesEnum.Home){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Home)%>">Home</a>&nbsp;
-                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Tester || currentPage == Utils.PagesEnum.Replace || currentPage == Utils.PagesEnum.Reference || currentPage == Utils.PagesEnum.Diff) {%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Misc</a>&nbsp;
-                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Rundotnet){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run Code</a>&nbsp;
+                <a <%if(currentPage == Utils.PagesEnum.Rundotnet){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run Code</a>&nbsp;
                 |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Codewall){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code Wall</a>&nbsp;
                 |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Users){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">Users</a>&nbsp;
+                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Tester || currentPage == Utils.PagesEnum.Replace || currentPage == Utils.PagesEnum.Reference || currentPage == Utils.PagesEnum.Diff) {%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Misc</a>&nbsp;
                 |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Feedback){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Feedback)%>">Feedback</a>&nbsp;
+                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Home){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Home)%>">About</a>&nbsp;  
                 <%if (SessionManager.IsUserInSession())
                   {                      
                       %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.UsersStuff || currentPage == Utils.PagesEnum.Notifications){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.UsersStuff)%>"><%:SessionManager.UserName%></a>&nbsp;<span id="notifications"></span>
@@ -212,11 +212,26 @@
                   else
                   {
                       %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.Login){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a>&nbsp;<%
-                  } %>
+                  } %>                
             </td>
         </tr>
     </table>
-    <asp:ContentPlaceHolder ID="MainContent" runat="server">
-    </asp:ContentPlaceHolder>
+
+    
+    <%--<div style="float: right;width:165px;margin-top:54px;">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- rextester -->
+        <ins class="adsbygoogle"
+                style="display:inline-block;width:160px;height:600px"
+                data-ad-client="ca-pub-5295432873915987"
+                data-ad-slot="1390277153"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    <div style="overflow: hidden;">--%>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    <%--</div>--%>
 </body>
 </html>

@@ -284,7 +284,7 @@
                 var firepadChatRef = new Firebase('https://rextester.firebaseio.com/chats/' + guid);
                 var displayName = '<%:Model.DisplayName%>';
 
-                firepadChatRef/*.limit(10)*/.on('child_added', function (snapshot) {
+                firepadChatRef.limit(20).on('child_added', function (snapshot) {
                     var message = snapshot.val();
                     if ($("#chatsign").text() == "+")
                         $("#chatsign").css('color', 'red');

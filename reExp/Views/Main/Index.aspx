@@ -79,7 +79,7 @@
                 <li><code>F# - Microsoft (R) F# Compiler version 11.0.50727.1</code></li>
             </ul>
             <br/><b style="color:Gray">Sql Server</b><br/>
-            Sql Server 2012 Express Edition is used. There is only one database that queries run against. Queries executed on behalf database owner so all sort of actions are allowed including DDL queries.
+            Sql Server 2014 Express Edition is used. There is only one database that queries run against. Queries executed on behalf database owner so all sort of actions are allowed including DDL queries.
             However, all actions run in transaction which is rolled back immediately after execution is over. This way any desired objects may be built, populated with data and worked on within the scope 
             of one request. There is 10 seconds limit for work to be completed. Execution of queries is achieved using ado.net mechanisms, in particular SqlDataReader type. 
             This reader is also monitored for memory and cpu consumption. <br/>
@@ -94,7 +94,7 @@
             Also let us know if you need some other Windows-based compilers.
             <br/>Compiler version:
             <ul>
-                <li><code>C++ (vc++) and C - Microsoft (R) C/C++ Optimizing Compiler Version 18.00.31101 for x86</code></li>
+                <li><code>C++ (vc++) and C - Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86</code></li>
             </ul>
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
@@ -148,7 +148,8 @@
             Write code so that others see this real-time. Every participant can make changes and see changes made by others. We use <a href="http://www.firepad.io">Firepad</a> and <a href="https://www.firebase.com/">Firebase</a>.
             <br/><br/>
             <b style="color:Gray">Credit</b><br/>
-            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>,<%-- <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>,--%> <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/><br />
+            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>,<%-- <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>,--%> <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/>
+            Code completion is achieved using <a href="http://eclim.org/">eclipse and eclim</a> as well as <a href="https://github.com/Valloric/YouCompleteMe">youcompleteme</a>.<br /><br />
             <b style="color:Gray">Code wall</b><br/>
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code wall</a> as well as <a href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">personal code walls</a> - place code on a wall for public display. These entries will be crawled by search engines, so one 
             possible use is to put there scripts that you may need for easy access later. For example, whenever I need a sql script for searching database definitions I simply search for <a href="https://www.google.com/search?q=sql+definition+rextester">'sql definition rextester'</a> and there is my script (it seems that code wall is 

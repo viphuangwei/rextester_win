@@ -563,7 +563,7 @@ int main()
                 case LanguagesEnum.VCPP:
                     return
 @"//Title of this code
-//Microsoft (R) C/C++ Optimizing Compiler Version 18.00.31101 for x86
+//Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86
 
 #include <iostream>
 
@@ -574,7 +574,7 @@ int main()
                 case LanguagesEnum.VC:
                     return
 @"//Title of this code
-//Microsoft (R) C/C++ Optimizing Compiler Version 18.00.31101 for x86
+//Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86
 
 #include  <stdio.h>
 
@@ -637,7 +637,7 @@ print ""Hello World\n"";";
                 case LanguagesEnum.SqlServer:
                     return
 @"--Title of this code
---Sql Server 2012 Express Edition
+--Sql Server 2014 Express Edition
 --Batches are separated by 'go'
 
 select @@version as 'sql server version'";

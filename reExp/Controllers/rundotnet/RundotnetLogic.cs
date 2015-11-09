@@ -16,7 +16,7 @@ namespace reExp.Controllers.rundotnet
         public static RundotnetData RunProgram(RundotnetData data)
         {
 
-            if (data.LanguageChoice == LanguagesEnum.CSharp || data.LanguageChoice == LanguagesEnum.VB || data.LanguageChoice == LanguagesEnum.FSharp)
+            if (data.LanguageChoice == LanguagesEnum.CSharp || data.LanguageChoice == LanguagesEnum.VB)
             {
                 return RunDotNet(data);
             }
@@ -176,9 +176,6 @@ namespace reExp.Controllers.rundotnet
             Random rg = Utils.Utils.GetTrulyRandom();
             string folder = reExp.Utils.Utils.RootFolder + @"\executables\usercode\";
             string assemblyName = "userAssembly_" + rg.Next(0, 10000000);
-            
-            if (data.LanguageChoice == LanguagesEnum.FSharp)
-                assemblyName = "fsharp_" + assemblyName;
 
             string path = folder + assemblyName + ".dll";
             cp.OutputAssembly = path;
@@ -212,18 +209,7 @@ namespace reExp.Controllers.rundotnet
             cp.ReferencedAssemblies.Add(typeof(Newtonsoft.Json.JsonSerializer).Assembly.Location);
 
             //cp.ReferencedAssemblies.Add(typeof(System.Windows.Threading.DispatcherTimer).Assembly.Location);
-
-
-            if (data.LanguageChoice == LanguagesEnum.FSharp)
-            {
-                string fspath = reExp.Utils.Utils.RootFolder + @"dlls";
-                cp.ReferencedAssemblies.Add(Path.Combine(fspath, "FSharp.Core.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(fspath, "FSharp.Powerpack.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(fspath, "FSharp.PowerPack.Compatibility.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(fspath, "FSharp.PowerPack.Linq.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(fspath, "FSharp.PowerPack.Metadata.dll"));
-                cp.ReferencedAssemblies.Add(Path.Combine(fspath, "FSharp.PowerPack.Parallel.Seq.dll"));
-            }
+            
             CompilerResults cr = null;
 
             using (var provider = GetProvider(data.LanguageChoice))
@@ -385,8 +371,6 @@ namespace reExp.Controllers.rundotnet
                     return new Microsoft.CSharp.CSharpCodeProvider();
                 case LanguagesEnum.VB:
                     return new Microsoft.VisualBasic.VBCodeProvider();
-                case LanguagesEnum.FSharp:
-                    return new Microsoft.FSharp.Compiler.CodeDom.FSharpCodeProvider();
             }
 
             return null;

@@ -47,13 +47,13 @@ namespace Sandbox
             permSet.AddPermission(new NetworkInformationPermission(PermissionState.Unrestricted));
             permSet.AddPermission(new WebPermission(PermissionState.Unrestricted));
 
-            if (untrustedAssembly.StartsWith("fsharp_"))
-            {
-                //for F# printf to work
-                var fileio = new FileIOPermission(PermissionState.None);
-                fileio.AllLocalFiles = FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery;
-                permSet.AddPermission(fileio);
-            }
+            //if (untrustedAssembly.StartsWith("fsharp_"))
+            //{
+            //    //for F# printf to work
+            //    var fileio = new FileIOPermission(PermissionState.None);
+            //    fileio.AllLocalFiles = FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery;
+            //    permSet.AddPermission(fileio);
+            //}
             //We want the sandboxer assembly's strong name, so that we can add it to the full trust list.
             //StrongName fullTrustAssembly = typeof(Sandboxer).Assembly.Evidence.GetHostEvidence<StrongName>();
 

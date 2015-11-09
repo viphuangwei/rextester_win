@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>reExp</RootNamespace>
     <AssemblyName>reExp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -27,6 +27,7 @@
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,13 +54,6 @@
     <Reference Include="BookSleeve">
       <HintPath>dlls\BookSleeve.dll</HintPath>
     </Reference>
-    <Reference Include="FSharp.Compiler.CodeDom">
-      <HintPath>dlls\FSharp.Compiler.CodeDom.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FSharp.PowerPack, Version=4.0.0.1, Culture=neutral, PublicKeyToken=f536804aa0eb945b, processorArchitecture=MSIL" />
     <Reference Include="MarkdownDeep">
       <HintPath>..\packages\MarkdownDeep.Full.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
     </Reference>
@@ -96,11 +90,12 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -179,18 +174,11 @@
     <Content Include="Content\upvoted.png" />
     <Content Include="Content\ZeroClipboard.swf" />
     <Content Include="dlls\BookSleeve.dll" />
-    <Content Include="dlls\FSharp.Core.dll" />
-    <Content Include="dlls\FSharp.Core.xml" />
-    <Content Include="dlls\FSharp.PowerPack.Build.Tasks.dll" />
-    <Content Include="dlls\FSharp.PowerPack.Compatibility.dll" />
-    <Content Include="dlls\FSharp.PowerPack.dll" />
-    <Content Include="dlls\FSharp.PowerPack.Linq.dll" />
-    <Content Include="dlls\FSharp.PowerPack.Metadata.dll" />
-    <Content Include="dlls\FSharp.PowerPack.Parallel.Seq.dll" />
     <Content Include="dlls\Roslyn.Compilers.CSharp.dll" />
     <Content Include="dlls\Roslyn.Compilers.dll" />
     <Content Include="dlls\System.Data.SQLite.DLL" />
     <Content Include="dlls\System.Data.SQLite.Linq.dll" />
+    <Content Include="dlls\System.Web.Mvc.dll" />
     <Content Include="executables\SpawnedProcess.exe" />
     <Content Include="executables\SqlServer.exe" />
     <Content Include="favicon.ico" />
@@ -761,8 +749,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\db.s3db" />
-    <Content Include="dlls\FSharp.Core.optdata" />
-    <Content Include="dlls\FSharp.Core.sigdata" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\PublishProfiles\Profile2.pubxml" />

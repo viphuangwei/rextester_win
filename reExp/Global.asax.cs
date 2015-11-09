@@ -121,7 +121,7 @@ namespace reExp
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Main", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "RunDotNet", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
         }
 
@@ -132,7 +132,7 @@ namespace reExp
             RegisterRoutes(RouteTable.Routes);
 
             reExp.Utils.Utils.RootFolder = Server.MapPath("~/");
-            System.Environment.SetEnvironmentVariable("FSHARP_BIN", Utils.Utils.PathToFsc);
+            //System.Environment.SetEnvironmentVariable("FSHARP_BIN", Utils.Utils.PathToFsc);
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -151,18 +151,18 @@ namespace reExp
             }
         }
 
-        protected void Application_BeginRequest(object sender, EventArgs ev)
-        {
-            if (Request.Url.Host.StartsWith("www", StringComparison.InvariantCultureIgnoreCase))
-            {
-                Response.Clear();
-                Response.AddHeader("Location",
-                    String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Host.Substring(4), Request.Url.PathAndQuery)
-                    );
-                Response.StatusCode = 301;
-                Response.End();
-            }
-        }
+        //protected void Application_BeginRequest(object sender, EventArgs ev)
+        //{
+        //    if (Request.Url.Host.StartsWith("www", StringComparison.InvariantCultureIgnoreCase))
+        //    {
+        //        Response.Clear();
+        //        Response.AddHeader("Location",
+        //            String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Host.Substring(4), Request.Url.PathAndQuery)
+        //            );
+        //        Response.StatusCode = 301;
+        //        Response.End();
+        //    }
+        //}
 
     }
 }
