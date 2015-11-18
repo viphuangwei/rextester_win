@@ -20,6 +20,12 @@ namespace reExp.Controllers.rundotnet
             {
                 return RunDotNet(data);
             }
+            else if (data.LanguageChoice == LanguagesEnum.FSharp)
+            {
+                data.RunStats = "";
+                data.Errors = new List<string>() { "F# is no longer supported on rextester." };
+                return data;
+            }
             else if (data.LanguageChoice == LanguagesEnum.SqlServer)
             {
                 return RunSqlServer(data);
