@@ -100,6 +100,13 @@ namespace reExp
             );
 
             routes.MapRoute(
+               null,
+               "l/{lang_title}",
+               new { controller = "RunDotNet", action = "Index" },
+               new { lang_title = @".+" }
+            );
+
+            routes.MapRoute(
                 null,
                 "codewall",
                 new { controller = "codewall", action = "Index" }

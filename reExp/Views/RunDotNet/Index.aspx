@@ -7,7 +7,138 @@
     }
     else
     {
-        %>Compile and run code snippet<%
+        if (Model.LanguageChoice == LanguagesEnum.Nasm)
+                {
+                    %>compile nasm online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CSharp)
+                {
+                     %>compile c# online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CPP)
+                {
+                    %>compile c++ gcc online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CPPClang)
+                {
+                    %>compile c++ clang online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VCPP)
+                {
+                    %>compile visual studio c++ online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.C)
+                {
+                    %>compile c gcc online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CClang)
+                {
+                    %>compile c clang online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VC)
+                {
+                    %>compile visual studio c online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Lisp)
+                {
+                    %>compile lisp online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.D)
+                {
+                    %>compile d online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.FSharp)
+                {
+                    %>compile f# online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Go)
+                {
+                    %>compile go online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Haskell)
+                {
+                    %>compile haskell online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Java)
+                {
+                    %>compile java online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Javascript)
+                {
+                    %>compile javascript online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Lua)
+                {
+                    %>compile lua online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Nodejs)
+                {
+                    %>compile nodejs online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Octave)
+                {
+                    %>compile octave online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.ObjectiveC)
+                {
+                    %>compile objective-c online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Pascal)
+                {
+                    %>compile pascal online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Perl)
+                {
+                    %>compile perl online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Php)
+                {
+                    %>compile php online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Prolog)
+                {
+                    %>compile prolog online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Python)
+                {
+                    %>compile python online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Python3)
+                {
+                    %>compile python3 online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.R)
+                {
+                    %>compile R online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Ruby)
+                {
+                    %>compile ruby online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Scala)
+                {
+                    %>compile scala online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Scheme)
+                {
+                    %>compile scheme online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.SqlServer)
+                {
+                    %>compile sql server online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Tcl)
+                {
+                    %>compile tcl online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VB)
+                {
+                    %>compile vb online <%
+                }
+                else
+                {
+                    %>compile c# online<%
+                }                    
     }%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -17,7 +148,141 @@
     <%}
       else
       {%>
-            <h2>run code</h2>
+            <h2>
+                <%if (Model.LanguageChoice == LanguagesEnum.Nasm)
+                {
+                    %>compile nasm online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CSharp)
+                {
+                     %>compile c# online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CPP)
+                {
+                    %>compile c++ gcc online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CPPClang)
+                {
+                    %>compile c++ clang online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VCPP)
+                {
+                    %>compile visual studio c++ online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.C)
+                {
+                    %>compile c gcc online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CClang)
+                {
+                    %>compile c clang online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VC)
+                {
+                    %>compile visual studio c online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Lisp)
+                {
+                    %>compile lisp online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.D)
+                {
+                    %>compile d online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.FSharp)
+                {
+                    %>compile f# online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Go)
+                {
+                    %>compile go online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Haskell)
+                {
+                    %>compile haskell online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Java)
+                {
+                    %>compile java online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Javascript)
+                {
+                    %>compile javascript online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Lua)
+                {
+                    %>compile lua online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Nodejs)
+                {
+                    %>compile nodejs online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Octave)
+                {
+                    %>compile octave online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.ObjectiveC)
+                {
+                    %>compile objective-c online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Pascal)
+                {
+                    %>compile pascal online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Perl)
+                {
+                    %>compile perl online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Php)
+                {
+                    %>compile php online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Prolog)
+                {
+                    %>compile prolog online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Python)
+                {
+                    %>compile python online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Python3)
+                {
+                    %>compile python3 online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.R)
+                {
+                    %>compile R online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Ruby)
+                {
+                    %>compile ruby online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Scala)
+                {
+                    %>compile scala online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Scheme)
+                {
+                    %>compile scheme online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.SqlServer)
+                {
+                    %>compile sql server online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Tcl)
+                {
+                    %>compile tcl online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VB)
+                {
+                    %>compile vb online <%
+                }
+                else
+                {
+                    %>compile c# online<%
+                }%>
+
+            </h2>
       <%} %>
     <%using (Html.BeginForm("Index", "rundotnet", FormMethod.Post, new {id = "mainForm"}))
       {%>
@@ -218,14 +483,276 @@
     
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
-    <meta name="Keywords" content="online c#, vb, php, java, python, c, c++ code compiler, online code execution, rundotnet, runcode, online compiler, run code online, snippet, run your code online, programming online, run code, run snippet, execute snippet, execute code, C#, C++, Java, Javascript, Python, Pascal, Ruby, Lua, Perl, Haskell, Assembly" />
+    <%if (Model.LanguageChoice == LanguagesEnum.Nasm)
+                {
+                    %><meta name="Keywords" content="compile nasm online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CSharp)
+                {
+                     %><meta name="Keywords" content="compile c# online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CPP)
+                {
+                    %><meta name="Keywords" content="compile c++ gcc online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CPPClang)
+                {
+                    %><meta name="Keywords" content="compile c++ clang online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VCPP)
+                {
+                    %><meta name="Keywords" content="compile visual studio c++ online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.C)
+                {
+                    %><meta name="Keywords" content="compile c gcc online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CClang)
+                {
+                    %><meta name="Keywords" content="compile c clang online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VC)
+                {
+                    %><meta name="Keywords" content="compile c visual studio online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Lisp)
+                {
+                    %><meta name="Keywords" content="compile lisp online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.D)
+                {
+                    %><meta name="Keywords" content="compile d online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.FSharp)
+                {
+                    %><meta name="Keywords" content="compile f# online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Go)
+                {
+                    %><meta name="Keywords" content="compile go online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Haskell)
+                {
+                    %><meta name="Keywords" content="compile haskell online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Java)
+                {
+                    %><meta name="Keywords" content="compile java online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Javascript)
+                {
+                    %><meta name="Keywords" content="compile javascript online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Lua)
+                {
+                    %><meta name="Keywords" content="compile lua online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Nodejs)
+                {
+                    %><meta name="Keywords" content="compile nodejs online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Octave)
+                {
+                    %><meta name="Keywords" content="compile octave online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.ObjectiveC)
+                {
+                    %><meta name="Keywords" content="compile objective-c online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Pascal)
+                {
+                    %><meta name="Keywords" content="compile pascal online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Perl)
+                {
+                    %><meta name="Keywords" content="compile perl online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Php)
+                {
+                    %><meta name="Keywords" content="compile php online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Prolog)
+                {
+                    %><meta name="Keywords" content="compile prolog online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Python)
+                {
+                    %><meta name="Keywords" content="compile python online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Python3)
+                {
+                    %><meta name="Keywords" content="compile python3 online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.R)
+                {
+                    %><meta name="Keywords" content="compile R online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Ruby)
+                {
+                    %><meta name="Keywords" content="compile ruby online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Scala)
+                {
+                    %><meta name="Keywords" content="compile scala online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Scheme)
+                {
+                    %><meta name="Keywords" content="compile scheme online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.SqlServer)
+                {
+                    %><meta name="Keywords" content="compile sql server online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Tcl)
+                {
+                    %><meta name="Keywords" content="compile tcl online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VB)
+                {
+                    %><meta name="Keywords" content="compile vb online" /><%
+                }
+                else
+                {
+                    %><meta name="Keywords" content="compile c# online" /><%
+                }%>
     <%if (!string.IsNullOrEmpty(Model.Title))
     {
         %><meta name="Description" content="<%:Model.Title%> in <%:Model.LanguageChoice.ToLanguage()%>" /><%
     }
     else
     {
-        %><meta name="Description" content="Rextester - run code snippets in many languages from your browser." /><%
+        if (Model.LanguageChoice == LanguagesEnum.Nasm)
+                {
+                    %><meta name="Description" content="compile nasm online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CSharp)
+                {
+                     %><meta name="Description" content="compile c# online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CPP)
+                {
+                    %><meta name="Description" content="compile c++ gcc online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CPPClang)
+                {
+                    %><meta name="Description" content="compile c++ clang online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VCPP)
+                {
+                    %><meta name="Description" content="compile visual studio c++ online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.C)
+                {
+                    %><meta name="Description" content="compile c gcc online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.CClang)
+                {
+                    %><meta name="Description" content="compile c clang online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VC)
+                {
+                    %><meta name="Description" content="compile c visual studio online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Lisp)
+                {
+                    %><meta name="Description" content="compile lisp online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.D)
+                {
+                    %><meta name="Description" content="compile d online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.FSharp)
+                {
+                    %><meta name="Description" content="compile f# online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Go)
+                {
+                    %><meta name="Description" content="compile go online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Haskell)
+                {
+                    %><meta name="Description" content="compile haskell online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Java)
+                {
+                    %><meta name="Description" content="compile java online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Javascript)
+                {
+                    %><meta name="Description" content="compile javascript online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Lua)
+                {
+                    %><meta name="Description" content="compile lua online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Nodejs)
+                {
+                    %><meta name="Description" content="compile nodejs online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Octave)
+                {
+                    %><meta name="Description" content="compile octave online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.ObjectiveC)
+                {
+                    %><meta name="Description" content="compile objective-c online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Pascal)
+                {
+                    %><meta name="Description" content="compile pascal online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Perl)
+                {
+                    %><meta name="Description" content="compile perl online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Php)
+                {
+                    %><meta name="Description" content="compile php online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Prolog)
+                {
+                    %><meta name="Description" content="compile prolog online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Python)
+                {
+                    %><meta name="Description" content="compile python online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Python3)
+                {
+                    %><meta name="Description" content="compile python3 online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.R)
+                {
+                    %><meta name="Description" content="compile R online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Ruby)
+                {
+                    %><meta name="Description" content="compile ruby online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Scala)
+                {
+                    %><meta name="Description" content="compile scala online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Scheme)
+                {
+                    %><meta name="Description" content="compile scheme online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.SqlServer)
+                {
+                    %><meta name="Description" content="compile sql server online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Tcl)
+                {
+                    %><meta name="Description" content="compile tcl online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.VB)
+                {
+                    %><meta name="Description" content="compile vb online" /><%
+                }
+                else
+                {
+                    %><meta name="Description" content="compile c# online" /><%
+                }
     }%>
     <%if (Model.EditorChoice == EditorsEnum.Codemirror)
      {
@@ -482,6 +1009,143 @@
                 Reload();
             });            
             var Reload = function () {
+                var act = "";
+
+                if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Nasm%>)
+                {
+                    act = "/l/nasm_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.CSharp%>)
+                {
+                    act = "/l/csharp_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.CPP%>)
+                {
+                    act = "/l/cpp_online_compiler_gcc";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.CPPClang%>)
+                {
+                    act = "/l/cpp_online_compiler_clang";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.VCPP%>)
+                {
+                    act = "/l/cpp_online_compiler_visual";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.C%>)
+                {
+                    act = "/l/c_online_compiler_gcc";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.CClang%>)
+                {
+                    act = "/l/c_online_compiler_clang";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.VC%>)
+                {
+                    act = "/l/c_online_compiler_visual";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Lisp%>)
+                {
+                    act = "/l/common_lisp_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.D%>)
+                {
+                    act = "/l/d_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.FSharp%>)
+                {
+                    act = "/l/fsharp_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Go%>)
+                {
+                    act = "/l/go_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Haskell%>)
+                {
+                    act = "/l/haskell_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Java%>)
+                {
+                    act = "/l/java_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Javascript%>)
+                {
+                    act = "/l/js_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Lua%>)
+                {
+                    act = "/l/lua_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Nodejs%>)
+                {
+                    act = "/l/nodejs_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Octave%>)
+                {
+                    act = "/l/octave_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.ObjectiveC%>)
+                {
+                    act = "/l/objectivec_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Pascal%>)
+                {
+                    act = "/l/pascal_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Perl%>)
+                {
+                    act = "/l/perl_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Php%>)
+                {
+                    act = "/l/php_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Prolog%>)
+                {
+                    act = "/l/prolog_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Python%>)
+                {
+                    act = "/l/python_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Python3%>)
+                {
+                    act = "/l/python3_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.R%>)
+                {
+                    act = "/l/r_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Ruby%>)
+                {
+                    act = "/l/ruby_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Scala%>)
+                {
+                    act = "/l/scala_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Scheme%>)
+                {
+                    act = "/l/scheme_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.SqlServer%>)
+                {
+                    act = "/l/sql_server_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Tcl%>)
+                {
+                    act = "/l/tcl_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.VB%>)
+                {
+                    act = "/l/visual_basic_online_compiler";
+                }
+                else
+                {
+                    act = "/l/csharp_online_compiler";
+                }
+                
+                $('#mainForm').attr('action', act);
+
                 $("#Input").val('');
                 $("#SavedOutput").val('');
                 $("#WholeError").val('');

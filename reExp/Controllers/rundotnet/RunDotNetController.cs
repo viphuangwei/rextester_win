@@ -87,7 +87,7 @@ namespace reExp.Controllers.rundotnet
     public class RunDotNetController : Controller
     {
         [ValidateInput(false)]
-        public ActionResult Index(RundotnetData data, string savedNr = null)
+        public ActionResult Index(RundotnetData data, string savedNr = null, string lang_title = null)
         {
             Compression.SetCompression();
 
@@ -129,6 +129,142 @@ namespace reExp.Controllers.rundotnet
 
             data.IsLive = false;
             data.IsInEditMode = false;
+
+            if (!string.IsNullOrEmpty(lang_title))
+            {
+                if (lang_title.ToLower() == "nasm_online_compiler" || lang_title.ToLower() == "nasm")
+                {
+                    data.LanguageChoice = LanguagesEnum.Nasm;
+                }
+                else if (lang_title.ToLower() == "csharp_online_compiler" || lang_title.ToLower() == "csharp")
+                {
+                    data.LanguageChoice = LanguagesEnum.CSharp;
+                }
+                else if (lang_title.ToLower() == "cpp_online_compiler_gcc" || lang_title.ToLower() == "gcc")
+                {
+                    data.LanguageChoice = LanguagesEnum.CPP;
+                }
+                else if (lang_title.ToLower() == "cpp_online_compiler_clang" || lang_title.ToLower() == "clang")
+                {
+                    data.LanguageChoice = LanguagesEnum.CPPClang;
+                }
+                else if (lang_title.ToLower() == "cpp_online_compiler_visual" || lang_title.ToLower() == "vcpp")
+                {
+                    data.LanguageChoice = LanguagesEnum.VCPP;
+                }
+                else if (lang_title.ToLower() == "c_online_compiler_gcc" || lang_title.ToLower() == "c_gcc")
+                {
+                    data.LanguageChoice = LanguagesEnum.C;
+                }
+                else if (lang_title.ToLower() == "c_online_compiler_clang" || lang_title.ToLower() == "c_clang")
+                {
+                    data.LanguageChoice = LanguagesEnum.CClang;
+                }
+                else if (lang_title.ToLower() == "c_online_compiler_visual" || lang_title.ToLower() == "c_vcpp")
+                {
+                    data.LanguageChoice = LanguagesEnum.VC;
+                }
+                else if (lang_title.ToLower() == "common_lisp_online_compiler" || lang_title.ToLower() == "clisp")
+                {
+                    data.LanguageChoice = LanguagesEnum.Lisp;
+                }
+                else if (lang_title.ToLower() == "d_online_compiler" || lang_title.ToLower() == "d")
+                {
+                    data.LanguageChoice = LanguagesEnum.D;
+                }
+                else if (lang_title.ToLower() == "fsharp_online_compiler" || lang_title.ToLower() == "fsharp")
+                {
+                    data.LanguageChoice = LanguagesEnum.FSharp;
+                }
+                else if (lang_title.ToLower() == "go_online_compiler" || lang_title.ToLower() == "go")
+                {
+                    data.LanguageChoice = LanguagesEnum.Go;
+                }
+                else if (lang_title.ToLower() == "haskell_online_compiler" || lang_title.ToLower() == "haskell")
+                {
+                    data.LanguageChoice = LanguagesEnum.Haskell;
+                }
+                else if (lang_title.ToLower() == "java_online_compiler" || lang_title.ToLower() == "java")
+                {
+                    data.LanguageChoice = LanguagesEnum.Java;
+                }
+                else if (lang_title.ToLower() == "js_online_compiler" || lang_title.ToLower() == "js")
+                {
+                    data.LanguageChoice = LanguagesEnum.Javascript;
+                }
+                else if (lang_title.ToLower() == "lua_online_compiler" || lang_title.ToLower() == "lua")
+                {
+                    data.LanguageChoice = LanguagesEnum.Lua;
+                }
+                else if (lang_title.ToLower() == "nodejs_online_compiler" || lang_title.ToLower() == "nodejs")
+                {
+                    data.LanguageChoice = LanguagesEnum.Nodejs;
+                }
+                else if (lang_title.ToLower() == "octave_online_compiler" || lang_title.ToLower() == "octave")
+                {
+                    data.LanguageChoice = LanguagesEnum.Octave;
+                }
+                else if (lang_title.ToLower() == "objectivec_online_compiler" || lang_title.ToLower() == "objectivec")
+                {
+                    data.LanguageChoice = LanguagesEnum.ObjectiveC;
+                }
+                else if (lang_title.ToLower() == "pascal_online_compiler" || lang_title.ToLower() == "pascal")
+                {
+                    data.LanguageChoice = LanguagesEnum.Pascal;
+                }
+                else if (lang_title.ToLower() == "perl_online_compiler" || lang_title.ToLower() == "perl")
+                {
+                    data.LanguageChoice = LanguagesEnum.Perl;
+                }
+                else if (lang_title.ToLower() == "php_online_compiler" || lang_title.ToLower() == "php")
+                {
+                    data.LanguageChoice = LanguagesEnum.Php;
+                }
+                else if (lang_title.ToLower() == "prolog_online_compiler" || lang_title.ToLower() == "prolog")
+                {
+                    data.LanguageChoice = LanguagesEnum.Prolog;
+                }
+                else if (lang_title.ToLower() == "python_online_compiler" || lang_title.ToLower() == "python")
+                {
+                    data.LanguageChoice = LanguagesEnum.Python;
+                }
+                else if (lang_title.ToLower() == "python3_online_compiler" || lang_title.ToLower() == "python3")
+                {
+                    data.LanguageChoice = LanguagesEnum.Python3;
+                }
+                else if (lang_title.ToLower() == "r_online_compiler" || lang_title.ToLower() == "r")
+                {
+                    data.LanguageChoice = LanguagesEnum.R;
+                }
+                else if (lang_title.ToLower() == "ruby_online_compiler" || lang_title.ToLower() == "ruby")
+                {
+                    data.LanguageChoice = LanguagesEnum.Ruby;
+                }
+                else if (lang_title.ToLower() == "scala_online_compiler" || lang_title.ToLower() == "scala")
+                {
+                    data.LanguageChoice = LanguagesEnum.Scala;
+                }
+                else if (lang_title.ToLower() == "scheme_online_compiler" || lang_title.ToLower() == "scheme")
+                {
+                    data.LanguageChoice = LanguagesEnum.Scheme;
+                }
+                else if (lang_title.ToLower() == "sql_server_online_compiler" || lang_title.ToLower() == "sql_server")
+                {
+                    data.LanguageChoice = LanguagesEnum.SqlServer;
+                }
+                else if (lang_title.ToLower() == "tcl_online_compiler" || lang_title.ToLower() == "tcl")
+                {
+                    data.LanguageChoice = LanguagesEnum.Tcl;
+                }
+                else if (lang_title.ToLower() == "visual_basic_online_compiler" || lang_title.ToLower() == "vb")
+                {
+                    data.LanguageChoice = LanguagesEnum.VB;
+                }
+                else
+                {
+                    data.LanguageChoice = LanguagesEnum.CSharp;
+                }
+            }
 
             if ((int)data.LanguageChoice != (int)LanguagesEnum.Unknown && (int)data.EditorChoice != (int)EditorsEnum.Unknown)
                 Model.SaveUserProfile(data.LanguageChoice, data.EditorChoice);

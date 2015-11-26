@@ -74,12 +74,12 @@
             If you found security breaches and can break something in some way - we would appreciate your feedback on this.
             <br/>Compiler versions:
             <ul>
-                <li><code>C# - Microsoft (R) Visual C# Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5</code></li>
-                <li><code>Visual Basic - Microsoft (R) Visual Basic Compiler version 11.0.50709.17929</code></li>
-                <li><code>F# - Microsoft (R) F# Compiler version 11.0.50727.1</code></li>
+                <li><code><a href="http://rextester.com/l/csharp_online_compiler">C#</a> - <a href="http://rextester.com/l/csharp">Microsoft (R) Visual C# Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5</a></code></li>
+                <li><code><a href="http://rextester.com/l/visual_basic_online_compiler">Visual Basic</a> - <a href="http://rextester.com/l/vb">Microsoft (R) Visual Basic Compiler version 11.0.50709.17929</a></code></li>
+                <li><code><a href="http://rextester.com/l/fsharp_online_compiler">F#</a> - <a href="http://rextester.com/l/fsharp">Microsoft (R) F# Compiler version 11.0.50727.1</a></code></li>
             </ul>
             <br/><b style="color:Gray">Sql Server</b><br/>
-            Sql Server 2014 Express Edition is used. There is only one database that queries run against. Queries executed on behalf database owner so all sort of actions are allowed including DDL queries.
+            <a href="http://rextester.com/l/sql_server_online_compiler">Sql Server</a> <a href="http://rextester.com/l/sql_server">2014 Express Edition</a> is used. There is only one database that queries run against. Queries executed on behalf database owner so all sort of actions are allowed including DDL queries.
             However, all actions run in transaction which is rolled back immediately after execution is over. This way any desired objects may be built, populated with data and worked on within the scope 
             of one request. There is 10 seconds limit for work to be completed. Execution of queries is achieved using ado.net mechanisms, in particular SqlDataReader type. 
             This reader is also monitored for memory and cpu consumption. <br/>
@@ -94,37 +94,37 @@
             Also let us know if you need some other Windows-based compilers.
             <br/>Compiler version:
             <ul>
-                <li><code>C++ (vc++) and C - Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86</code></li>
+                <li><code><a href="http://rextester.com/l/cpp_online_compiler_visual">C++ (vc++)</a> and <a href="http://rextester.com/l/c_online_compiler_visual">C</a> - <a href="http://rextester.com/l/vcpp">Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86</a></code></li>
             </ul>
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
             <ul>
-                <li><code>Assembly - nasm 2.11.05</code></li>
-                <li><code>C++ (gcc) - g++  4.9.2 (g++ -Wall -std=c++11 -O2)</code></li>
-                <li><code>C++ (clang) - clang 3.6.0 (clang++ -Wall -std=c++11 -O2)</code></li>
-                <li><code>C (gcc) - gcc 4.9.2 (gcc -Wall -std=gnu99 -O2)</code></li>
-                <li><code>C (clang) - clang 3.6.0 (clang -Wall -std=gnu99 -O2)</code></li>
-                <li><code>Common Lisp - gnu clisp 2.49</code></li>
-                <li><code>D - DMD64 D Compiler v2.067.1</code></li>
-                <li><code>Go - go 1.3.3</code></li>
-                <li><code>Haskell - ghc 7.6.3</code></li>
-                <li><code>Java - Oracle's implementation of Java, compiler version 1.8.0_45 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</code></li>
-                <li><code>Javascript - V8 3.31.1</code></li>
-                <li><code>Lua - lua 5.2.3</code></li>
-                <li><code>Node.js - nodejs 0.10.25</code></li>
-                <li><code>Objective-C - gcc 4.9.2 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</code></li>
-                <li><code>Octave - GNU Octave 3.8.2 (octave -q -f --no-window-system)</code></li>
-                <li><code>Pascal - fpc 2.6.4</code></li>
-                <li><code>Perl - perl 5.20.2 (perl -w)</code></li>
-                <li><code>Php - php 5.6.4</code></li>
-                <li><code>Prolog - swi-prolog 6.6.6</code></li>
-                <li><code>Python - python 2.7.9</code></li>
-                <li><code>Python 3 - python 3.4.3</code></li>
-                <li><code>R - R version 3.1.2</code></li>
-                <li><code>Ruby - ruby 2.1.2p95  (ruby -w -W1)</code></li>
-                <li><code>Scala - scala 2.11.7 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</code></li>
-                <li><code>Scheme - guile 2.0.11</code></li>
-                <li><code>Tcl - tclsh 8.6</code></li>
+                <li><code><a href="http://rextester.com/l/nasm_online_compiler">Assembly</a> - <a href="http://rextester.com/l/nasm">nasm 2.11.05</a></code></li>
+                <li><code><a href="http://rextester.com/l/cpp_online_compiler_gcc">C++ (gcc)</a> - <a href="http://rextester.com/l/gcc">g++  4.9.2 (g++ -Wall -std=c++11 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/cpp_online_compiler_clang">C++ (clang)</a> - <a href="http://rextester.com/l/clang">clang 3.6.0 (clang++ -Wall -std=c++11 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/c_online_compiler_gcc">C (gcc)</a> - <a href="http://rextester.com/l/c_gcc">gcc 4.9.2 (gcc -Wall -std=gnu99 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/c_online_compiler_clang">C (clang)</a> - <a href="http://rextester.com/l/c_clang">clang 3.6.0 (clang -Wall -std=gnu99 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/common_lisp_online_compiler">Common Lisp</a> - <a href="http://rextester.com/l/clisp">gnu clisp 2.49</a></code></li>
+                <li><code><a href="http://rextester.com/l/d_online_compiler">D</a> - <a href="http://rextester.com/l/d">DMD64 D Compiler v2.067.1</a></code></li>
+                <li><code><a href="http://rextester.com/l/go_online_compiler">Go</a> - <a href="http://rextester.com/l/go">go 1.3.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/haskell_online_compiler">Haskell</a> - <a href="http://rextester.com/l/haskell">ghc 7.6.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/java_online_compiler">Java</a> - <a href="http://rextester.com/l/java">Oracle's implementation of Java, compiler version 1.8.0_45 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</a></code></li>
+                <li><code><a href="http://rextester.com/l/js_online_compiler">Javascript</a> - <a href="http://rextester.com/l/js">V8 3.31.1</a></code></li>
+                <li><code><a href="http://rextester.com/l/lua_online_compiler">Lua</a> - <a href="http://rextester.com/l/lua">lua 5.2.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/nodejs_online_compiler">Node.js</a> - <a href="http://rextester.com/l/nodejs">nodejs 0.10.25</a></code></li>
+                <li><code><a href="http://rextester.com/l/objectivec_online_compiler">Objective-C</a> - <a href="http://rextester.com/l/objectivec">gcc 4.9.2 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</a></code></li>
+                <li><code><a href="http://rextester.com/l/octave_online_compiler">Octave</a> - <a href="http://rextester.com/l/octave">GNU Octave 3.8.2 (octave -q -f --no-window-system)</a></code></li>
+                <li><code><a href="http://rextester.com/l/pascal_online_compiler">Pascal</a> - <a href="http://rextester.com/l/pascal">fpc 2.6.4</a></code></li>
+                <li><code><a href="http://rextester.com/l/perl_online_compiler">Perl</a> - <a href="http://rextester.com/l/perl">perl 5.20.2 (perl -w)</a></code></li>
+                <li><code><a href="http://rextester.com/l/php_online_compiler">Php</a> - <a href="http://rextester.com/l/php">php 5.6.4</a></code></li>
+                <li><code><a href="http://rextester.com/l/prolog_online_compiler">Prolog</a> - <a href="http://rextester.com/l/prolog">swi-prolog 6.6.6</a></code></li>
+                <li><code><a href="http://rextester.com/l/python_online_compiler">Python</a> - <a href="http://rextester.com/l/python">python 2.7.9</a></code></li>
+                <li><code><a href="http://rextester.com/l/python3_online_compiler">Python 3</a> - <a href="http://rextester.com/l/python3">python 3.4.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/r_online_compiler">R</a> - <a href="http://rextester.com/l/r">R version 3.1.2</a></code></li>
+                <li><code><a href="http://rextester.com/l/ruby_online_compiler">Ruby</a> - <a href="http://rextester.com/l/ruby">ruby 2.1.2p95  (ruby -w -W1)</a></code></li>
+                <li><code><a href="http://rextester.com/l/scala_online_compiler">Scala</a> - <a href="http://rextester.com/l/scala">scala 2.11.7 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</a></code></li>
+                <li><code><a href="http://rextester.com/l/scheme_online_compiler">Scheme</a> - <a href="http://rextester.com/l/scheme">guile 2.0.11</a></code></li>
+                <li><code><a href="http://rextester.com/l/tcl_online_compiler">Tcl</a> - <a href="http://rextester.com/l/tcl">tclsh 8.6</a></code></li>
             </ul> 
             Your code will be run on behalf special user and group. Also your code will be executed from Python wrapper which sets various limits to the process. It does so
             by using <code>'setrlimit'</code> system call. You'll have max 30 sec to compile, max 5 sec of cpu time to run, limited memory (~1500 Mb) and other restrictions will apply (like no writing permissions). Also your process and all its children will be run in a
