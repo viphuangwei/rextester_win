@@ -27,42 +27,49 @@ namespace reExp.Controllers.rundotnet.autocomplete
     {
         public static string Complete(string code, int position, int line, int ch)
         {
-            var t1 = Task.Run<List<string>>(() => EclimCompletions(code, position, line, ch));
-            var t2 = Task.Run<List<string>>(() => YcmdCompletions(code, position, line, ch));
-
-            var l1 = t1.Result;
-            var l2 = t2.Result;
-
-            if (l1 == null)
+            var l = YcmdCompletions(code, position, line, ch);
+            if (l == null)
             {
-                l1 = new List<string>();
+                l = new List<string>();
             }
-            if (l2 == null)
-            {
-                l2 = new List<string>();
-            }
+            return JsonConvert.SerializeObject(l);
 
-            //l2.AddRange(l1.Where(f => !string.IsNullOrEmpty(f) && char.IsLetter(f[0])));
-            //l2 = l2.Distinct(new CompletionComparer()).ToList();
-            //l2.AddRange(l1.Where(f => !string.IsNullOrEmpty(f) && !char.IsLetter(f[0])));
-            var dic = new Dictionary<string, string>();
-            foreach (var l in l2)
-            {
-                var k = l.Length > 7 ? l.Substring(0, 7) : l;
-                dic[k] = l;
-            }
+            //var t1 = Task.Run<List<string>>(() => EclimCompletions(code, position, line, ch));
+            //var t2 = Task.Run<List<string>>(() => YcmdCompletions(code, position, line, ch));
 
-            foreach (var l in l1)
-            { 
-                var k = l.Length > 7 ? l.Substring(0, 7) : l;
-                if (!dic.ContainsKey(k))
-                {
-                    l2.Add(l);
-                }
-            }
+            //var l1 = t1.Result;
+            //var l2 = t2.Result;
 
-            l2 = l2.OrderBy(f => f).ToList();
-            return JsonConvert.SerializeObject(l2);
+            //if (l1 == null)
+            //{
+            //    l1 = new List<string>();
+            //}
+            //if (l2 == null)
+            //{
+            //    l2 = new List<string>();
+            //}
+
+            ////l2.AddRange(l1.Where(f => !string.IsNullOrEmpty(f) && char.IsLetter(f[0])));
+            ////l2 = l2.Distinct(new CompletionComparer()).ToList();
+            ////l2.AddRange(l1.Where(f => !string.IsNullOrEmpty(f) && !char.IsLetter(f[0])));
+            //var dic = new Dictionary<string, string>();
+            //foreach (var l in l2)
+            //{
+            //    var k = l.Length > 7 ? l.Substring(0, 7) : l;
+            //    dic[k] = l;
+            //}
+
+            //foreach (var l in l1)
+            //{ 
+            //    var k = l.Length > 7 ? l.Substring(0, 7) : l;
+            //    if (!dic.ContainsKey(k))
+            //    {
+            //        l2.Add(l);
+            //    }
+            //}
+
+            //l2 = l2.OrderBy(f => f).ToList();
+            //return JsonConvert.SerializeObject(l2);
         }
 
         public static List<string> EclimCompletions(string code, int position, int line, int ch)
