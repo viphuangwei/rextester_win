@@ -7,10 +7,10 @@ Regex replacement
 <asp:Content ID="Content1" ContentPlaceHolderID="MetaContent" runat="server">    
     <meta name="Keywords" content=".net regex replacement" />
     <meta name="Description" content=".net regex replacement" />
-    <link rel="Stylesheet" href="../../Content/Tester.css" /> 
+    <link rel="Stylesheet" href="http://rextester.com:8080/Content/Tester.css" /> 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
-     <script src="../../Scripts/ZeroClipboard.min.js" type="text/javascript">
+     <script src="http://rextester.com:8080/Scripts/ZeroClipboard.min.js" type="text/javascript">
      </script>
     <script type="text/javascript">
     // <![CDATA[
@@ -30,7 +30,7 @@ Regex replacement
         }
 
         $(document).ready(function () {
-            ZeroClipboard.setMoviePath('../../Content/ZeroClipboard.swf');
+            ZeroClipboard.setMoviePath('http://rextester.com:8080/Content/ZeroClipboard.swf');
             var clip = new ZeroClipboard.Client();
             clip.setHandCursor(true);
             if ($("#ResultText").length > 0) {

@@ -34,7 +34,7 @@
                     
                          Use your Google account:<br/>
                          <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=<%:GlobalUtils.TopSecret.Google_client_id%>&redirect_uri=<%:GlobalUtils.TopSecret.Google_callback_url%>&scope=https://www.googleapis.com/auth/userinfo.email&state=<%:Model.redirectInfo%>">
-                            <img src="../../Content/Google.png" alt="Login with Google account" title="Login with Google account"/>
+                            <img src="http://rextester.com:8080/Content/Google.png" alt="Login with Google account" title="Login with Google account"/>
                          </a>
                     </td>
                </tr>

@@ -55,7 +55,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
-        <link rel="Stylesheet" href="../../Content/List.css" />
+        <link rel="Stylesheet" href="http://rextester.com:8080/Content/List.css" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">

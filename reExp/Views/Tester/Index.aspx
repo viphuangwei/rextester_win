@@ -6,7 +6,7 @@ Regex tester
 <asp:Content ID="Content1" ContentPlaceHolderID="MetaContent" runat="server">    
     <meta name="Keywords" content="online .net regex tester" />
     <meta name="Description" content="online .net regex tester" />  
-    <link rel="Stylesheet" href="../../Content/Tester.css" />  
+    <link rel="Stylesheet" href="http://rextester.com:8080/Content/Tester.css" />  
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">

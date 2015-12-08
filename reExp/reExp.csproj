@@ -750,6 +750,7 @@
   <ItemGroup>
     <Content Include="App_Data\db.s3db" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\app.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\PublishProfiles\Profile2.pubxml" />
     <Content Include="Scripts\codemirror3\.travis.yml" />

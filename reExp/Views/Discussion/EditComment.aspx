@@ -5,16 +5,16 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
-        <link rel="stylesheet" href="../../Scripts/mdd_styles.css" /> 
+        <link rel="stylesheet" href="http://rextester.com:8080/Scripts/mdd_styles.css" /> 
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script src="../../Scripts/MarkdownDeepLib.min.js"></script>
+    <script src="http://rextester.com:8080/Scripts/MarkdownDeepLib.min.js"></script>
 
         <script>
             $(document).ready(function () {
                 $("textarea.mdd_editor").MarkdownDeep({
-                    help_location: "../../Scripts/mdd_help.htm",
+                    help_location: "http://rextester.com:8080/Scripts/mdd_help.htm",
                     disableTabHandling: true
                 });
             });

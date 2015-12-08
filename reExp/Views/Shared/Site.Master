@@ -147,19 +147,20 @@
         <%if(SessionManager.IsUserInSession())
         {%>
         $(document).ready(function () {
-
-            $.ajax({
-                type: "get", url: "<%:Utils.BaseUrl+"login/getnotificationscount"%>",
-                    success: function (data, text) {
-                        var obj = jQuery.parseJSON(data);
-                        if (obj.Total > 0) {
-                            $("#notifications").replaceWith("<a href=\"<%:Utils.BaseUrl+"login/notifications"%>\" id=\"notifications\" style=\"background-color:red; color: white; padding-left:3px; padding-right:3px;text-decoration:none;\">" + obj.Total + "</a>");
-                        }
-                    },
-                    error: function (request, status, error) {
-                    },
-                    cache: false
-                });
+            setTimeout(function() {
+                $.ajax({
+                    type: "get", url: "<%:Utils.BaseUrl+"login/getnotificationscount"%>",
+                        success: function (data, text) {
+                            var obj = jQuery.parseJSON(data);
+                            if (obj.Total > 0) {
+                                $("#notifications").replaceWith("<a href=\"<%:Utils.BaseUrl+"login/notifications"%>\" id=\"notifications\" style=\"background-color:red; color: white; padding-left:3px; padding-right:3px;text-decoration:none;\">" + obj.Total + "</a>");
+                            }
+                        },
+                        error: function (request, status, error) {
+                        },
+                        cache: false
+                    });
+            }, 1000)
 
             });
         <%}%>

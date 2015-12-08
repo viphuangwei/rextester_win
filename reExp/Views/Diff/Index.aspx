@@ -38,7 +38,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
     <meta name="Keywords" content="online diff checker, text comparison, online diff, diff, diff tool, quick diff" />
     <meta name="Description" content="online diff checker" />    
-    <link rel="Stylesheet" href="../../Content/Tester.css" />
+    <link rel="Stylesheet" href="http://rextester.com:8080/Content/Tester.css" />
     <style type="text/css">
         table.diff {font-family:Courier; border:medium;}
         .diff_header {background-color:#e0e0e0}
