@@ -377,7 +377,7 @@
                         <%} %>
                         <%if (Model.LanguageChoice == LanguagesEnum.SqlServer)
                         { %>
-                        <a href="http://rextester.com:8080/Content/Schema.png" style="text-decoration: underline;color:Gray;margin-left:20px;">View schema</a>
+                        <a href="http://stats.rextester.com/Content/Schema.png" style="text-decoration: underline;color:Gray;margin-left:20px;">View schema</a>
                         <%} %>
                     </td>
                     <td align="right">
@@ -756,44 +756,44 @@
     }%>
     <%if (Model.EditorChoice == EditorsEnum.Codemirror)
      {
-             %> <link rel="stylesheet" href="http://rextester.com:8080/Scripts/codemirror3/lib/codemirror.css"/>
-                <link rel="stylesheet" href="http://rextester.com:8080/Scripts/codemirror3/addon/display/fullscreen.css"/>
-                <link rel="stylesheet" href="http://rextester.com:8080/Scripts/codemirror3/addon/dialog/dialog.css"/><%
+             %> <link rel="stylesheet" href="http://stats.rextester.com/Scripts/codemirror3/lib/codemirror.css"/>
+                <link rel="stylesheet" href="http://stats.rextester.com/Scripts/codemirror3/addon/display/fullscreen.css"/>
+                <link rel="stylesheet" href="http://stats.rextester.com/Scripts/codemirror3/addon/dialog/dialog.css"/><%
             if (Model.LanguageChoice == LanguagesEnum.CSharp || Model.LanguageChoice == LanguagesEnum.FSharp || Model.LanguageChoice == LanguagesEnum.VB)
             { 
-                %><link rel="stylesheet" href="http://rextester.com:8080/Scripts/codemirror3/theme/csharp.css"/><%
+                %><link rel="stylesheet" href="http://stats.rextester.com/Scripts/codemirror3/theme/csharp.css"/><%
             }
             else if (Model.LanguageChoice == LanguagesEnum.Java || Model.LanguageChoice == LanguagesEnum.Scala)
             { 
-                %><link rel="stylesheet" href="http://rextester.com:8080/Scripts/codemirror3/theme/java.css"/><%
+                %><link rel="stylesheet" href="http://stats.rextester.com/Scripts/codemirror3/theme/java.css"/><%
             }
             if (Model.IsIntellisense)
             {            
-                %><link rel="stylesheet" href="http://rextester.com:8080/Scripts/codemirror3/addon/hint/show-hint.css"><%
+                %><link rel="stylesheet" href="http://stats.rextester.com/Scripts/codemirror3/addon/hint/show-hint.css"><%
             }
     }%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
     <%if (Model.EditorChoice == EditorsEnum.Codemirror)
       {
-            %><script src="http://rextester.com:8080/Scripts/codemirror3/lib/codemirror.js" type="text/javascript"></script>
-              <script src="http://rextester.com:8080/Scripts/codemirror3/addon/edit/matchbrackets.js" type="text/javascript"></script>
-              <script src="http://rextester.com:8080/Scripts/codemirror3/addon/display/fullscreen.js" type="text/javascript"></script>
-              <script src="http://rextester.com:8080/Scripts/codemirror3/addon/dialog/dialog.js" type="text/javascript"></script>
-              <script src="http://rextester.com:8080/Scripts/codemirror3/addon/search/searchcursor.js" type="text/javascript"></script>
-              <script src="http://rextester.com:8080/Scripts/codemirror3/addon/search/search.js" type="text/javascript"></script><%
+            %><script src="http://stats.rextester.com/Scripts/codemirror3/lib/codemirror.js" type="text/javascript"></script>
+              <script src="http://stats.rextester.com/Scripts/codemirror3/addon/edit/matchbrackets.js" type="text/javascript"></script>
+              <script src="http://stats.rextester.com/Scripts/codemirror3/addon/display/fullscreen.js" type="text/javascript"></script>
+              <script src="http://stats.rextester.com/Scripts/codemirror3/addon/dialog/dialog.js" type="text/javascript"></script>
+              <script src="http://stats.rextester.com/Scripts/codemirror3/addon/search/searchcursor.js" type="text/javascript"></script>
+              <script src="http://stats.rextester.com/Scripts/codemirror3/addon/search/search.js" type="text/javascript"></script><%
     }%>
     <%if (Model.IsIntellisense)
     {
-            %><script src="http://rextester.com:8080/Scripts/codemirror3/addon/hint/show-hint.js" type="text/javascript"></script><%
+            %><script src="http://stats.rextester.com/Scripts/codemirror3/addon/hint/show-hint.js" type="text/javascript"></script><%
     }%>
     <%if (Model.IsIntellisense)
     {
-            %><script src="http://rextester.com:8080/Scripts/codemirror3/addon/hint/csharp-hint.js" type="text/javascript"></script><%
+            %><script src="http://stats.rextester.com/Scripts/codemirror3/addon/hint/csharp-hint.js" type="text/javascript"></script><%
     }%>
     <%if (Model.EditorChoice == EditorsEnum.Editarea)
     {
-        %><script src="http://rextester.com:8080/Scripts/editarea/edit_area_full.js" type="text/javascript"></script><%
+        %><script src="http://stats.rextester.com/Scripts/editarea/edit_area_full.js" type="text/javascript"></script><%
     }%>
     <%if (Model.EditorChoice == EditorsEnum.Simple)
     {
@@ -836,8 +836,8 @@
     <%if (Model.IsLive)
     { %>
         <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-        <link rel="stylesheet" href="http://rextester.com:8080/Scripts/firepad/firepad.css" />
-        <script src="http://rextester.com:8080/Scripts/firepad/firepad-min.js"></script>
+        <link rel="stylesheet" href="http://stats.rextester.com/Scripts/firepad/firepad.css" />
+        <script src="http://stats.rextester.com/Scripts/firepad/firepad-min.js"></script>
     <%} %>
     <script type="text/javascript">
         //<![CDATA[

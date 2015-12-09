@@ -68,7 +68,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
-    <link rel="Stylesheet" href="http://rextester.com:8080/Content/List.css" />
+    <link rel="Stylesheet" href="http://stats.rextester.com/Content/List.css" />
     <style type="text/css">
         table.diff {font-family:Courier; border:medium;}
         .diff_header {background-color:#e0e0e0}

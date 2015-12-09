@@ -108,10 +108,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Service_linux_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://5.189.136.239/Service.asmx">
+    <WebReferenceUrl Include="http://5.189.136.239:8080/Service.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\win\</RelPath>
-      <UpdateFromURL>http://5.189.136.239/Service.asmx</UpdateFromURL>
+      <UpdateFromURL>http://5.189.136.239:8080/Service.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

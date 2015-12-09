@@ -44,7 +44,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
     <meta name="Keywords" content="rextester users' code walls" />
     <meta name="Description" content="rextester users' code walls" />
-    <link rel="Stylesheet" href="http://rextester.com:8080/Content/List.css" />
+    <link rel="Stylesheet" href="http://stats.rextester.com/Content/List.css" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">

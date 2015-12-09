@@ -26,13 +26,13 @@
                 <span id="up"> 
                         <%if (Model.VoteUp == null || !(bool)Model.VoteUp)
                             {%>
-                        <img id="upVote" style="cursor:pointer" src="http://rextester.com:8080/Content/up.png" title="Vote for it." alt=""/>
-                        <img id="upVoted" style="cursor:pointer; display:none;" src="http://rextester.com:8080/Content/upvoted.png" title="You voted for it. Click to cancel." alt=""/>  
+                        <img id="upVote" style="cursor:pointer" src="http://stats.rextester.com/Content/up.png" title="Vote for it." alt=""/>
+                        <img id="upVoted" style="cursor:pointer; display:none;" src="http://stats.rextester.com/Content/upvoted.png" title="You voted for it. Click to cancel." alt=""/>  
                         <%}
                             else
                             { %>
-                        <img id="upVote" style="cursor:pointer; display:none;" src="http://rextester.com:8080/Content/up.png" title="Vote for it." alt=""/>
-                        <img id="upVoted" style="cursor:pointer" src="http://rextester.com:8080/Content/upvoted.png" title="You voted for it. Click to cancel." alt=""/>     
+                        <img id="upVote" style="cursor:pointer; display:none;" src="http://stats.rextester.com/Content/up.png" title="Vote for it." alt=""/>
+                        <img id="upVoted" style="cursor:pointer" src="http://stats.rextester.com/Content/upvoted.png" title="You voted for it. Click to cancel." alt=""/>     
                             <%} %>
                     </span>
                     <span id="votes_count" style="margin: 0 0.5em 0 0.5em; font-family: Sans-Serif; font-size: 120%; color:#555555;">
@@ -41,13 +41,13 @@
                     <span id="down">
                         <%if (Model.VoteUp == null || (bool)Model.VoteUp)
                             {%>
-                        <img id="downVote" style="cursor:pointer" src="http://rextester.com:8080/Content/down.png" title="Vote against it." alt=""/>
-                        <img id="downVoted" style="cursor:pointer; display:none;" src="http://rextester.com:8080/Content/downvoted.png" title="You voted against it. Click to cancel." alt=""/>   
+                        <img id="downVote" style="cursor:pointer" src="http://stats.rextester.com/Content/down.png" title="Vote against it." alt=""/>
+                        <img id="downVoted" style="cursor:pointer; display:none;" src="http://stats.rextester.com/Content/downvoted.png" title="You voted against it. Click to cancel." alt=""/>   
                         <%}
                             else
                             { %>
-                        <img id="downVote" style="cursor:pointer; display:none;" src="http://rextester.com:8080/Content/down.png" title="Vote against it." alt=""/>
-                        <img id="downVoted" style="cursor:pointer" src="http://rextester.com:8080/Content/downvoted.png" title="You voted against it. Click to cancel." alt=""/>   
+                        <img id="downVote" style="cursor:pointer; display:none;" src="http://stats.rextester.com/Content/down.png" title="Vote against it." alt=""/>
+                        <img id="downVoted" style="cursor:pointer" src="http://stats.rextester.com/Content/downvoted.png" title="You voted against it. Click to cancel." alt=""/>   
                             <%} %>
                     </span>
                 </td>
@@ -109,9 +109,9 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
-    <link rel="stylesheet" href="http://rextester.com:8080/Scripts/codemirror3/lib/codemirror.css" />
-    <link rel="stylesheet" href="http://rextester.com:8080/Scripts/codemirror3/doc/docs2.css" />
-    <link rel="stylesheet" href="http://rextester.com:8080/Scripts/mdd_styles.css" /> 
+    <link rel="stylesheet" href="http://stats.rextester.com/Scripts/codemirror3/lib/codemirror.css" />
+    <link rel="stylesheet" href="http://stats.rextester.com/Scripts/codemirror3/doc/docs2.css" />
+    <link rel="stylesheet" href="http://stats.rextester.com/Scripts/mdd_styles.css" /> 
 
 
     <%--<%if (Model.Language == LanguagesEnum.CSharp)
@@ -125,8 +125,8 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script src="http://rextester.com:8080/Scripts/codemirror3/lib/codemirror.js"></script>
-    <script src="http://rextester.com:8080/Scripts/codemirror3/addon/runmode/runmode.js"></script>
+    <script src="http://stats.rextester.com/Scripts/codemirror3/lib/codemirror.js"></script>
+    <script src="http://stats.rextester.com/Scripts/codemirror3/addon/runmode/runmode.js"></script>
     <%--<script src="../../Scripts/MarkdownDeepLib.min.js"></script>--%>
 
     <%  
@@ -269,7 +269,7 @@
   }
   foreach(var j in js)
   {
-      %><script type="text/javascript" src="http://rextester.com:8080/Scripts/codemirror3/<%:j%>"></script><%
+      %><script type="text/javascript" src="http://stats.rextester.com/Scripts/codemirror3/<%:j%>"></script><%
   }
   %>
     <%if(Model.ShowComments)

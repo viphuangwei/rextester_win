@@ -182,11 +182,11 @@
 {%>
     <%if(js != null)
     {%>
-        <script type="text/javascript" src="http://rextester.com:8080/Scripts/codemirror3/<%:js%>"></script>
+        <script type="text/javascript" src="http://stats.rextester.com/Scripts/codemirror3/<%:js%>"></script>
     <%} %>
     <%foreach(var a in additionalJs)
     {%>
-        <script type="text/javascript" src="http://rextester.com:8080/Scripts/codemirror3/<%:a%>"></script>
+        <script type="text/javascript" src="http://stats.rextester.com/Scripts/codemirror3/<%:a%>"></script>
     <%}%>
     <script type="text/javascript">
         //<![CDATA[

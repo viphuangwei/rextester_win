@@ -86,7 +86,7 @@
             'GO' statement just like in transact sql has special meaning: 'GO' will be removed from your code, but statements separated by 'GO' will be executed 
             separately, in different batches. So, for example, if you want to create a function and later use it in select statement you have to separate create statement and select statement by 'GO', 
             otherwise you'll receive an error from parser since in select statement you would be reffering to a function which doesn't yet exist.<br/>
-            For convinience there is simple pre-built schema, shown <a href="http://rextester.com:8080/Content/Schema.png">here</a>.
+            For convinience there is simple pre-built schema, shown <a href="http://stats.rextester.com/Content/Schema.png">here</a>.
             <br/><br/><b style="color:Gray">Visual C++ (and C)</b><br/>
             Your code is compiled to native binary which runs on Windows Server 2012 (maximum compile time is 30 seconds). Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
             After 10 seconds of execution this process will be killed. This used to be the only security measures for a while. However, after discovering dubious services running and questionable .exes at some weird places it was decided to sandbox
