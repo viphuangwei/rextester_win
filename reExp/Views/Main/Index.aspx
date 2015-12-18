@@ -201,9 +201,9 @@
             </table>
             <br/>
             <b style="color:Gray">Api</b><br/>
-            Restfull api is supported <strike>(both POST and GET)</strike> (POST) at <code>http://rextester.com/rundotnet/api</code>. What needs to be supplied are these values:
+            Restfull api is supported (POST only) at <code>http://rextester.com/rundotnet/api</code>. What needs to be supplied are these values (as http data name=val&name2=val2, content type header must <b>not</b> indicate json):
 <pre>
-    LanguageChoiceWrapper=Language number (see below)
+    LanguageChoice=Language number (see below)
     Program=Code to run
     Input=Input to be supplied to stdin of a process
     CompilerArgs=compiler args as one string (when applicable)
@@ -251,6 +251,65 @@
     R = 31
     Tcl = 32
 </pre>
+            
+            <br/>
+    Full javascript example:
+<pre>
+<%=HttpUtility.HtmlEncode(
+@"<!DOCTYPE html>
+<html>
+<body>
+
+    <head>
+    <script src=""https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js""></script>
+    <script>
+    $(document).ready(function(){
+        $(""button"").click(function(){
+
+		    var to_compile = {
+			    ""LanguageChoice"": ""1"",
+			    ""Program"": $(""#code"").val(),
+			    ""Input"": """",
+			    ""CompilerArgs"" : """"
+		    };
+
+		    $.ajax ({
+			        url: ""http://rextester.com/rundotnet/api"",
+			        type: ""POST"",
+			        data: to_compile
+			    }).done(function(data) {
+			        alert(JSON.stringify(data));
+			    }).fail(function(data, err) {
+			        alert(""fail "" + JSON.stringify(data) + "" "" + JSON.stringify(err));
+		        });
+	    });
+    });
+    </script>
+    </head>
+
+    <textarea id=""code"">
+        using System;
+        using System.Collections.Generic;
+        using System.Linq;
+        using System.Text.RegularExpressions;
+
+        namespace Rextester
+        {
+            public class Program
+            {
+                public static void Main(string[] args)
+                {
+                    //Your code goes here
+                    Console.WriteLine(""Hello, world!"");
+                }
+            }
+        }      
+    </textarea>
+    <button id=""run"">Run</button>
+
+</body>
+</html>")%>
+    </pre>
             <br/>
             Api stats:
             <table style="border-color:gray;">
