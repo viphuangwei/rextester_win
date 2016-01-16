@@ -87,6 +87,13 @@ namespace reExp
 
             routes.MapRoute(
                null,
+               "rundotnet/api_get/{nr}",
+               new { controller = "RunDotNet", action = "Api_get" },
+               new { nr = @"[A-Za-z]+\d+" }
+            );
+
+            routes.MapRoute(
+               null,
                "{savedNr}",
                new { controller = "RunDotNet", action = "Index" },
                new { savedNr = @"[A-Za-z]+\d+" }
