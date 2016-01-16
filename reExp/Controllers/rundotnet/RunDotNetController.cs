@@ -552,5 +552,18 @@ namespace reExp.Controllers.rundotnet
             data.IsApi = true;
             return this.Content(Run(data), "application/json");
         }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        [ValidateInput(false)]
+        public string Api_get(string nr)
+        {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+            var code = Model.GetCode(nr, false);
+            if (code == null)
+            {
+                return "not found";
+            }
+            return code.Program;
+        }
     }
 }
