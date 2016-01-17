@@ -565,5 +565,22 @@ namespace reExp.Controllers.rundotnet
             }
             return code.Program;
         }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
+        public string Api_save(string code)
+        {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+            var data = new RundotnetData()
+            {
+                LanguageChoice = LanguagesEnum.CSharp,
+                Program = code,
+                EditorChoice = EditorsEnum.Codemirror,
+                Title = "Rexmonitor testing code: " + DateTime.UtcNow.ToString("yyyy-MM-dd")
+            };
+
+            string guid = Model.SaveCode(data);
+            return guid;
+        }
     }
 }
