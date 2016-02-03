@@ -254,7 +254,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
     <meta name="Keywords" content="regex reference" />
     <meta name="Description" content="short regex reference" />
-    <link rel="Stylesheet" href="http://stats.rextester.com/Content/Tester.css" /> 
+    <link rel="Stylesheet" href="/Content/Tester.css" /> 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
 </asp:Content>

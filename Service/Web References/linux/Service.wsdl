@@ -654,16 +654,16 @@
   </binding>
   <service name="Service">
     <port name="ServiceSoap" binding="s0:ServiceSoap">
-      <soap:address location="http://api.rextester.com/Service.asmx" />
+      <soap:address location="http://92.51.147.212/Service.asmx" />
     </port>
     <port name="ServiceSoap12" binding="s0:ServiceSoap12">
-      <soap12:address location="http://api.rextester.com/Service.asmx" />
+      <soap12:address location="http://92.51.147.212/Service.asmx" />
     </port>
     <port name="ServiceHttpGet" binding="s0:ServiceHttpGet">
-      <http:address location="http://api.rextester.com/Service.asmx" />
+      <http:address location="http://92.51.147.212/Service.asmx" />
     </port>
     <port name="ServiceHttpPost" binding="s0:ServiceHttpPost">
-      <http:address location="http://api.rextester.com/Service.asmx" />
+      <http:address location="http://92.51.147.212/Service.asmx" />
     </port>
   </service>
 </definitions>

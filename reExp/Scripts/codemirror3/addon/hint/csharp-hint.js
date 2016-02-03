@@ -74,13 +74,18 @@
                     else {
                         var ln = editor.getValue().split("\n")[cur.line];
                         var fr = 0;
-                        for (i = cur.ch-1; i >= 0; i--) {
-                            /*                        if (!/^[a-z0-9(]+$/i.test(ln[i])) {*/
-                            if (ln[i] == '.' || ln[i] == '>' || ln[i] == ' ' || ln[i] == ':' || ln[i] == '\t' ||
-                                ln[i] == '=' || ln[i] == '!' || ln[i] == '+' || ln[i] == '-' || 
-                                ln[i] == '*' || ln[i] == '&' || ln[i] == '|') {
-                                fr = i + 1;
-                                break;
+                        if (ln[cur.ch] == '\\') {
+                            fr = cur.ch + 1;
+                        }
+                        else {
+                            for (i = cur.ch - 1; i >= 0; i--) {
+                                /*                        if (!/^[a-z0-9(]+$/i.test(ln[i])) {*/
+                                if (ln[i] == '.' || ln[i] == '>' || ln[i] == ' ' || ln[i] == ':' || ln[i] == '\t' ||
+                                    ln[i] == '=' || ln[i] == '!' || ln[i] == '+' || ln[i] == '-' ||
+                                    ln[i] == '*' || ln[i] == '&' || ln[i] == '|' || ln[i] == '<' || ln[i] == '/') {
+                                    fr = i + 1;
+                                    break;
+                                }
                             }
                         }
                         result.from = { line: cur.line, ch: fr };

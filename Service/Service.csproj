@@ -97,10 +97,10 @@
     <None Include="Web References\win\Service.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://api.rextester.com/Service.asmx">
+    <WebReferenceUrl Include="http://92.51.147.212/Service.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\linux\</RelPath>
-      <UpdateFromURL>http://api.rextester.com/Service.asmx</UpdateFromURL>
+      <UpdateFromURL>http://92.51.147.212/Service.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

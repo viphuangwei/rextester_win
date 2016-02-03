@@ -26,7 +26,7 @@ namespace GlobalUtils
         {
             get
             {
-                return "";
+                return ";
             }
         }
         public static string EmailPass

@@ -86,7 +86,7 @@
             'GO' statement just like in transact sql has special meaning: 'GO' will be removed from your code, but statements separated by 'GO' will be executed 
             separately, in different batches. So, for example, if you want to create a function and later use it in select statement you have to separate create statement and select statement by 'GO', 
             otherwise you'll receive an error from parser since in select statement you would be reffering to a function which doesn't yet exist.<br/>
-            For convinience there is simple pre-built schema, shown <a href="http://stats.rextester.com/Content/Schema.png">here</a>.
+            For convinience there is simple pre-built schema, shown <a href="/Content/Schema.png">here</a>.
             <br/><br/><b style="color:Gray">Visual C++ (and C)</b><br/>
             Your code is compiled to native binary which runs on Windows Server 2012 (maximum compile time is 30 seconds). Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
             After 10 seconds of execution this process will be killed. This used to be the only security measures for a while. However, after discovering dubious services running and questionable .exes at some weird places it was decided to sandbox
@@ -99,31 +99,31 @@
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
             <ul>
-                <li><code><a href="http://rextester.com/l/nasm_online_compiler">Assembly</a> - <a href="http://rextester.com/l/nasm">nasm 2.11.05</a></code></li>
-                <li><code><a href="http://rextester.com/l/cpp_online_compiler_gcc">C++ (gcc)</a> - <a href="http://rextester.com/l/gcc">g++  4.9.2 (g++ -Wall -std=c++11 -O2)</a></code></li>
-                <li><code><a href="http://rextester.com/l/cpp_online_compiler_clang">C++ (clang)</a> - <a href="http://rextester.com/l/clang">clang 3.6.0 (clang++ -Wall -std=c++11 -O2)</a></code></li>
-                <li><code><a href="http://rextester.com/l/c_online_compiler_gcc">C (gcc)</a> - <a href="http://rextester.com/l/c_gcc">gcc 4.9.2 (gcc -Wall -std=gnu99 -O2)</a></code></li>
-                <li><code><a href="http://rextester.com/l/c_online_compiler_clang">C (clang)</a> - <a href="http://rextester.com/l/c_clang">clang 3.6.0 (clang -Wall -std=gnu99 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/nasm_online_compiler">Assembly</a> - <a href="http://rextester.com/l/nasm">nasm 2.10.9</a></code></li>
+                <li><code><a href="http://rextester.com/l/cpp_online_compiler_gcc">C++ (gcc)</a> - <a href="http://rextester.com/l/gcc">g++  4.9.3 (g++ -Wall -std=c++11 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/cpp_online_compiler_clang">C++ (clang)</a> - <a href="http://rextester.com/l/clang">clang 3.7.0 (clang++ -Wall -std=c++11 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/c_online_compiler_gcc">C (gcc)</a> - <a href="http://rextester.com/l/c_gcc">gcc 4.9.3 (gcc -Wall -std=gnu99 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/c_online_compiler_clang">C (clang)</a> - <a href="http://rextester.com/l/c_clang">clang 3.7.0 (clang -Wall -std=gnu99 -O2)</a></code></li>
                 <li><code><a href="http://rextester.com/l/common_lisp_online_compiler">Common Lisp</a> - <a href="http://rextester.com/l/clisp">gnu clisp 2.49</a></code></li>
-                <li><code><a href="http://rextester.com/l/d_online_compiler">D</a> - <a href="http://rextester.com/l/d">DMD64 D Compiler v2.067.1</a></code></li>
-                <li><code><a href="http://rextester.com/l/go_online_compiler">Go</a> - <a href="http://rextester.com/l/go">go 1.3.3</a></code></li>
-                <li><code><a href="http://rextester.com/l/haskell_online_compiler">Haskell</a> - <a href="http://rextester.com/l/haskell">ghc 7.6.3</a></code></li>
-                <li><code><a href="http://rextester.com/l/java_online_compiler">Java</a> - <a href="http://rextester.com/l/java">Oracle's implementation of Java, compiler version 1.8.0_45 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</a></code></li>
+                <li><code><a href="http://rextester.com/l/d_online_compiler">D</a> - <a href="http://rextester.com/l/d">DMD64 D Compiler v2.49</a></code></li>
+                <li><code><a href="http://rextester.com/l/go_online_compiler">Go</a> - <a href="http://rextester.com/l/go">go 1.2.</a></code></li>
+                <li><code><a href="http://rextester.com/l/haskell_online_compiler">Haskell</a> - <a href="http://rextester.com/l/haskell">ghc 8.0.1</a></code></li>
+                <li><code><a href="http://rextester.com/l/java_online_compiler">Java</a> - <a href="http://rextester.com/l/java">Oracle's implementation of Java, compiler version 1.8.0_72 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</a></code></li>
                 <li><code><a href="http://rextester.com/l/js_online_compiler">Javascript</a> - <a href="http://rextester.com/l/js">V8 3.31.1</a></code></li>
                 <li><code><a href="http://rextester.com/l/lua_online_compiler">Lua</a> - <a href="http://rextester.com/l/lua">lua 5.2.3</a></code></li>
                 <li><code><a href="http://rextester.com/l/nodejs_online_compiler">Node.js</a> - <a href="http://rextester.com/l/nodejs">nodejs 0.10.25</a></code></li>
-                <li><code><a href="http://rextester.com/l/objectivec_online_compiler">Objective-C</a> - <a href="http://rextester.com/l/objectivec">gcc 4.9.2 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</a></code></li>
-                <li><code><a href="http://rextester.com/l/octave_online_compiler">Octave</a> - <a href="http://rextester.com/l/octave">GNU Octave 3.8.2 (octave -q -f --no-window-system)</a></code></li>
-                <li><code><a href="http://rextester.com/l/pascal_online_compiler">Pascal</a> - <a href="http://rextester.com/l/pascal">fpc 2.6.4</a></code></li>
-                <li><code><a href="http://rextester.com/l/perl_online_compiler">Perl</a> - <a href="http://rextester.com/l/perl">perl 5.20.2 (perl -w)</a></code></li>
-                <li><code><a href="http://rextester.com/l/php_online_compiler">Php</a> - <a href="http://rextester.com/l/php">php 5.6.4</a></code></li>
-                <li><code><a href="http://rextester.com/l/prolog_online_compiler">Prolog</a> - <a href="http://rextester.com/l/prolog">swi-prolog 6.6.6</a></code></li>
-                <li><code><a href="http://rextester.com/l/python_online_compiler">Python</a> - <a href="http://rextester.com/l/python">python 2.7.9</a></code></li>
+                <li><code><a href="http://rextester.com/l/objectivec_online_compiler">Objective-C</a> - <a href="http://rextester.com/l/objectivec">gcc 4.8.4 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</a></code></li>
+                <li><code><a href="http://rextester.com/l/octave_online_compiler">Octave</a> - <a href="http://rextester.com/l/octave">GNU Octave 3.8.1 (octave -q -f --no-window-system)</a></code></li>
+                <li><code><a href="http://rextester.com/l/pascal_online_compiler">Pascal</a> - <a href="http://rextester.com/l/pascal">fpc 2.6.2</a></code></li>
+                <li><code><a href="http://rextester.com/l/perl_online_compiler">Perl</a> - <a href="http://rextester.com/l/perl">perl 5.18.2 (perl -w)</a></code></li>
+                <li><code><a href="http://rextester.com/l/php_online_compiler">Php</a> - <a href="http://rextester.com/l/php">php 5.5.9</a></code></li>
+                <li><code><a href="http://rextester.com/l/prolog_online_compiler">Prolog</a> - <a href="http://rextester.com/l/prolog">swi-prolog 6.6.4</a></code></li>
+                <li><code><a href="http://rextester.com/l/python_online_compiler">Python</a> - <a href="http://rextester.com/l/python">python 2.7.6</a></code></li>
                 <li><code><a href="http://rextester.com/l/python3_online_compiler">Python 3</a> - <a href="http://rextester.com/l/python3">python 3.4.3</a></code></li>
-                <li><code><a href="http://rextester.com/l/r_online_compiler">R</a> - <a href="http://rextester.com/l/r">R version 3.1.2</a></code></li>
-                <li><code><a href="http://rextester.com/l/ruby_online_compiler">Ruby</a> - <a href="http://rextester.com/l/ruby">ruby 2.1.2p95  (ruby -w -W1)</a></code></li>
+                <li><code><a href="http://rextester.com/l/r_online_compiler">R</a> - <a href="http://rextester.com/l/r">R version 3.0.2</a></code></li>
+                <li><code><a href="http://rextester.com/l/ruby_online_compiler">Ruby</a> - <a href="http://rextester.com/l/ruby">ruby 1.9.3  (ruby -w -W1)</a></code></li>
                 <li><code><a href="http://rextester.com/l/scala_online_compiler">Scala</a> - <a href="http://rextester.com/l/scala">scala 2.11.7 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</a></code></li>
-                <li><code><a href="http://rextester.com/l/scheme_online_compiler">Scheme</a> - <a href="http://rextester.com/l/scheme">guile 2.0.11</a></code></li>
+                <li><code><a href="http://rextester.com/l/scheme_online_compiler">Scheme</a> - <a href="http://rextester.com/l/scheme">guile 2.0.9</a></code></li>
                 <li><code><a href="http://rextester.com/l/tcl_online_compiler">Tcl</a> - <a href="http://rextester.com/l/tcl">tclsh 8.6</a></code></li>
             </ul> 
             Your code will be run on behalf special user and group. Also your code will be executed from Python wrapper which sets various limits to the process. It does so

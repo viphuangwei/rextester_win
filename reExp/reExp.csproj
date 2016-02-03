@@ -98,6 +98,10 @@
       <HintPath>dlls\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -174,11 +178,17 @@
     <Content Include="Content\upvoted.png" />
     <Content Include="Content\ZeroClipboard.swf" />
     <Content Include="dlls\BookSleeve.dll" />
+    <Content Include="dlls\Microsoft.Web.Infrastructure.dll" />
     <Content Include="dlls\Roslyn.Compilers.CSharp.dll" />
     <Content Include="dlls\Roslyn.Compilers.dll" />
     <Content Include="dlls\System.Data.SQLite.DLL" />
     <Content Include="dlls\System.Data.SQLite.Linq.dll" />
+    <Content Include="dlls\System.Web.Helpers.dll" />
     <Content Include="dlls\System.Web.Mvc.dll" />
+    <Content Include="dlls\System.Web.WebPages.Administration.dll" />
+    <Content Include="dlls\System.Web.WebPages.Deployment.dll" />
+    <Content Include="dlls\System.Web.WebPages.dll" />
+    <Content Include="dlls\System.Web.WebPages.Razor.dll" />
     <Content Include="executables\SpawnedProcess.exe" />
     <Content Include="executables\SqlServer.exe" />
     <Content Include="favicon.ico" />
@@ -244,6 +254,10 @@
     <Content Include="Scripts\codemirror3\addon\tern\tern.js" />
     <Content Include="Scripts\codemirror3\addon\tern\worker.js" />
     <Content Include="Scripts\codemirror3\addon\wrap\hardwrap.js" />
+    <Content Include="Scripts\codemirror3\codemirror.css" />
+    <Content Include="Scripts\codemirror3\codemirrorwithhint.js" />
+    <Content Include="Scripts\codemirror3\codemirror_min.css" />
+    <Content Include="Scripts\codemirror3\codemirror_min.js" />
     <Content Include="Scripts\codemirror3\demo\activeline.html" />
     <Content Include="Scripts\codemirror3\demo\anywordhint.html" />
     <Content Include="Scripts\codemirror3\demo\bidi.html" />
@@ -513,6 +527,7 @@
     <Content Include="Scripts\codemirror3\theme\vibrant-ink.css" />
     <Content Include="Scripts\codemirror3\theme\xq-dark.css" />
     <Content Include="Scripts\codemirror3\theme\xq-light.css" />
+    <Content Include="Scripts\codemirror3\codemirrorwithhint_min.js" />
     <Content Include="Scripts\codemirror_attach.js" />
     <Content Include="Scripts\editarea\autocompletion.js" />
     <Content Include="Scripts\editarea\edit_area.css" />
@@ -688,7 +703,9 @@
     <Content Include="Views\Users\Index.aspx" />
     <Content Include="Views\Users\UserWall.aspx" />
     <Content Include="Views\Versions\Index.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -111,7 +111,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
     <meta name="Keywords" content="online compiler" />
     <meta name="Description" content="run code online" />
-    <link rel="Stylesheet" href="http://stats.rextester.com/Content/List.css" />
+    <link rel="Stylesheet" href="/Content/List.css" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
