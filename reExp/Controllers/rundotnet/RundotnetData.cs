@@ -431,8 +431,7 @@ namespace reExp.Controllers.rundotnet
             {
                 case LanguagesEnum.CSharp:
                     return
-@"//Title of this code
-//Rextester.Program.Main is the entry point for your code. Don't change it.
+@"//Rextester.Program.Main is the entry point for your code. Don't change it.
 //Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5
 
 using System;
@@ -454,8 +453,7 @@ namespace Rextester
 
                 case LanguagesEnum.VB:
                     return
-@"'Title of this code
-'Rextester.Program.Main is the entry point for your code. Don't change it.
+@"'Rextester.Program.Main is the entry point for your code. Don't change it.
 'Compiler version 11.0.50709.17929 for Microsoft (R) .NET Framework 4.5
 
 Imports System
@@ -473,8 +471,7 @@ Namespace Rextester
 End Namespace";
                 case LanguagesEnum.FSharp:
                     return
-@"//Title of this code
-//Rextester.Program.Main is the entry point for your code. Don't change it.
+@"//Rextester.Program.Main is the entry point for your code. Don't change it.
 //Compiler version 11.0.50727.1 for Microsoft (R) .NET Framework 4.5
 
 namespace Rextester
@@ -485,8 +482,7 @@ module Program =
         Console.WriteLine(""Hello, world!"")";
                 case LanguagesEnum.Java:
                     return
-@"//Title of this code
-//'main' method must be in a class 'Rextester'.
+@"//'main' method must be in a class 'Rextester'.
 //Compiler version 1.8.0_72
 
 import java.util.*;
@@ -501,22 +497,19 @@ class Rextester
 }";
                 case LanguagesEnum.Python:
                     return
-@"#Title of this code
-#python 2.7.6
+@"#python 2.7.6
 
 print ""Hello, world!""
 ";
                 case LanguagesEnum.Python3:
                     return
-@"#Title of this code
-#python 3.4.3
+@"#python 3.4.3
 
 print (""Hello, world!"")
 ";
                 case LanguagesEnum.C:
                     return
-@"//Title of this code
-//gcc 4.9.3
+@"//gcc 4.9.3
 
 #include  <stdio.h>
 
@@ -527,8 +520,7 @@ int main(void)
 }";
                 case LanguagesEnum.CClang:
                     return
-@"//Title of this code
-//clang 3.7.0
+@"//clang 3.7.0
 
 #include  <stdio.h>
 
@@ -539,8 +531,7 @@ int main(void)
 }";
                 case LanguagesEnum.CPP:
                     return
-@"//Title of this code
-//g++  4.9.3
+@"//g++  4.9.3
 
 #include <iostream>
 
@@ -551,8 +542,7 @@ int main()
 
                 case LanguagesEnum.CPPClang:
                     return
-@"//Title of this code
-//clang 3.7.0
+@"//clang 3.7.0
 
 #include <iostream>
 
@@ -562,8 +552,7 @@ int main()
 }";
                 case LanguagesEnum.VCPP:
                     return
-@"//Title of this code
-//Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86
+@"//Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86
 
 #include <iostream>
 
@@ -573,8 +562,7 @@ int main()
 }";
                 case LanguagesEnum.VC:
                     return
-@"//Title of this code
-//Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86
+@"//Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86
 
 #include  <stdio.h>
 
@@ -586,8 +574,7 @@ int main(void)
 
                 case LanguagesEnum.Php:
                     return
-@"<?php //Title of this code
-//php 5.5.9
+@"<?php //php 5.5.9
 
     echo ""Hello, world! ""
     
@@ -595,8 +582,7 @@ int main(void)
 
                 case LanguagesEnum.Pascal:
                     return
-@"//Title of this code
-//fpc 2.6.2
+@"//fpc 2.6.2
 
 program HelloWorld;
 
@@ -606,8 +592,7 @@ end.
 ";
                 case LanguagesEnum.ObjectiveC:
                     return
-@"//Title of this code
-//gcc 4.8.4
+@"//gcc 4.8.4
 
 #import <stdio.h>
  
@@ -618,40 +603,34 @@ int main(void)
 }";
                 case LanguagesEnum.Haskell:
                     return
-@"--Title of this code
---ghc 8.0.1 /opt/ghc/8.0.1/lib/ghc-8.0.0.20160127/
+@"--ghc 8.0.1 /opt/ghc/8.0.1/lib/ghc-8.0.0.20160127/
 
 main = print $ ""Hello, world!""";
                 case LanguagesEnum.Ruby:
                     return
-@"#Title of this code
-#ruby 1.9.3 
+@"#ruby 1.9.3 
 
 puts ""Hello, world!""";
                 case LanguagesEnum.Perl:
                     return
-@"#Title of this code
-#perl 5.18.2 
+@"#perl 5.18.2 
 
 print ""Hello World\n"";";
                 case LanguagesEnum.SqlServer:
                     return
-@"--Title of this code
---Sql Server 2014 Express Edition
+@"--Sql Server 2014 Express Edition
 --Batches are separated by 'go'
 
 select @@version as 'sql server version'";
                 case LanguagesEnum.Lua:
                     return
-@"--Title of this code
---lua 5.2.3
+@"--lua 5.2.3
 
 print (""Hello, World!"")";
 
                 case LanguagesEnum.Nasm:
                     return
-@";Title of this code
-;nasm 2.10.9
+@";nasm 2.10.9
 
 section .data
     hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
@@ -673,21 +652,18 @@ _start:
 	int 80h;";
                 case LanguagesEnum.Javascript:
                     return @"
-//Title of this code
 //V8 3.31.1
 
 print(""Hello, world!"")";
 
                 case LanguagesEnum.Lisp:
                     return @"
-;Title of this code
 ;gnu dmd 2.49
 
 (print ""Hello, world!"")";
 
                 case LanguagesEnum.Prolog:
                     return @"
-%Title of this code
 %commands to the interpreter are submitted from stdin input ('show input' box below)
 %'halt.' will be automatically appended to stdin input.
 %swi-prolog 6.6.4
@@ -696,7 +672,6 @@ program :- write('Hello, world!').
 :- program.";
                 case LanguagesEnum.Go:
                     return @"
-//Title of this code
 //go 1.2.1
 
 package main  
@@ -707,7 +682,6 @@ func main() {
 }";
                 case LanguagesEnum.Scala:
                     return @"
-//Title of this code
 //'Rextester' class is the entry point for your code.
 //Don't declare a package.
 //scala 2.11.7
@@ -717,21 +691,18 @@ object Rextester extends App {
  }";
                 case LanguagesEnum.Scheme:
                     return @"
-;Title of this code
 ;guile 2.0.9
 
 (display ""Hello, World!"")";
 
                 case LanguagesEnum.Nodejs:
                     return @"
-//Title of this code
 //nodejs 0.10.25
 
 console.log(""Hello, World!"");";
                 case LanguagesEnum.Octave:
                     return
-@"%Title of this code
-%To view plots after 'plot' (and other plot-producing commands) this command must follow: 'print -dpng some_unique_plot_name.png;'
+@"%To view plots after 'plot' (and other plot-producing commands) this command must follow: 'print -dpng some_unique_plot_name.png;'
 %It exports current plot to png image which then is sent to your browser
 %GNU Octave 3.8.1
 
@@ -741,8 +712,7 @@ print -dpng some_name.png;
 ";
                 case LanguagesEnum.D:
                     return
-@"//Title of this code
-//DMD64 D Compiler v2.070
+@"//DMD64 D Compiler v2.070
 
 import std.stdio;
  
@@ -753,15 +723,13 @@ void main()
 
                 case LanguagesEnum.R:
                     return
-@"#Title of this code
-#R version 3.0.2 
+@"#R version 3.0.2 
   
 print(""Hello, world!"")
 ";
                 case LanguagesEnum.Tcl:
                     return
-@"#Title of this code
-#tclsh 8.6
+@"#tclsh 8.6
 
 puts ""Hello, world!""
 ";
@@ -777,11 +745,11 @@ puts ""Hello, world!""
                 case LanguagesEnum.C:
                     return "-Wall -std=gnu99 -O2 -o a.out source_file.c";
                 case LanguagesEnum.CPP:
-                    return "-Wall -std=c++11 -O2 -o a.out source_file.cpp";
+                    return "-Wall -std=c++14 -O2 -o a.out source_file.cpp";
                 case LanguagesEnum.CClang:
                     return "-Wall -std=gnu99 -O2 -o a.out source_file.c";
                 case LanguagesEnum.CPPClang:
-                    return "-Wall -std=c++11 -ldl -O2 -o a.out source_file.cpp";
+                    return "-Wall -std=c++14 -O2 -o a.out source_file.cpp";
                 case LanguagesEnum.VCPP:
                     return @"source_file.cpp -o a.exe /EHsc /MD /I C:\boost_1_59_0 /link /LIBPATH:C:\boost_1_59_0\stage\lib";
                 case LanguagesEnum.VC:

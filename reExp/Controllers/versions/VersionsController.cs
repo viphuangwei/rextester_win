@@ -26,7 +26,8 @@ namespace reExp.Controllers.versions
                         Author = v.Author,
                         CreationDate = v.DateCreated,
                         Guid = v.VersionGuid,
-                        Wall_id = v.Wall_Id
+                        Wall_id = v.Wall_Id,
+                        Title = v.Title
                     });
             }
             data.IsLive = Model.IsLive(data.CodeGuid);
@@ -37,6 +38,7 @@ namespace reExp.Controllers.versions
                 throw new HttpException(404, "not found");
             }
             data.CreationDate = code.Date;
+            data.Title = code.Title;
             return View(data);
         }
 

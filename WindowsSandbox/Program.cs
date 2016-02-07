@@ -139,10 +139,10 @@ namespace WindowsSandbox
                         {
                             try
                             {
-                                if (start + TimeSpan.FromSeconds(10) < DateTime.Now)
+                                if (start + TimeSpan.FromSeconds(20) < DateTime.Now)
                                 {
                                     process.Kill();
-                                    var res = string.Format("Process killed because it ran longer than 10 seconds");
+                                    var res = string.Format("Process killed because it ran longer than 20 seconds");
                                     Errors = res;
                                     Output = output.Builder.ToString();
                                     killed = true;

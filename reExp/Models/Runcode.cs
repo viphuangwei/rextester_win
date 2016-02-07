@@ -171,7 +171,8 @@ namespace reExp.Models
                                 ID = "code_"+guid,
                                 Lang = data.LanguageChoice.ToLanguage(),
                                 UserId = uid,
-                                Title = data.Title
+                                Title = data.Title,
+                                IsLive = live
                             });
                         });
                 }
@@ -206,11 +207,11 @@ namespace reExp.Models
             {
                 if (data.IsLive)
                 {
-                    DB.DB.Live_Code_Update(guid, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, data.CodeGuid, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave);
+                    DB.DB.Live_Code_Update(guid, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, data.CodeGuid, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave, data.Title);
                 }
                 else
                 {
-                    DB.DB.Code_Update(guid, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, data.CodeGuid, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave);
+                    DB.DB.Code_Update(guid, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, data.CodeGuid, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave, data.Title);
                     if (SessionManager.IsUserInSession())
                     {
                         int uid = (int)SessionManager.UserId;
@@ -263,7 +264,8 @@ namespace reExp.Models
                         DateCreated = (DateTime)ver["date"],
                         Author = ver["author"] == DBNull.Value ? null : (string)(ver["author"]),
                         VersionGuid = (string)ver["version_guid"],
-                        Wall_Id = ver["wall_id"] == DBNull.Value ? null : (int?)Convert.ToInt32((ver["wall_id"]))
+                        Wall_Id = ver["wall_id"] == DBNull.Value ? null : (int?)Convert.ToInt32((ver["wall_id"])),
+                        Title = (string)(ver["title"] == DBNull.Value ? "" : ver["title"]),
                     });
                 }
                 return versions;
@@ -303,7 +305,8 @@ namespace reExp.Models
                         Guid = (string)res[0]["guid"],
                         ShowWarnings = (res[0]["show_warnings"] == DBNull.Value ? false : (bool)res[0]["show_warnings"]),
                         VersionToken = (string)res[0]["version_token"],
-                        UserId = res[0]["user_id"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["user_id"])
+                        UserId = res[0]["user_id"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["user_id"]),
+                        Title = (string)(res[0]["title"] == DBNull.Value ? "" : res[0]["title"]),
                     };
                 else
                     return null;
@@ -672,6 +675,12 @@ namespace reExp.Models
         }
 
         public int? Wall_Id
+        {
+            get;
+            set;
+        }
+
+        public string Title
         {
             get;
             set;

@@ -340,9 +340,9 @@ namespace reExp.Controllers.rundotnet
             {
                 return json.Serialize(new JsonData() { Errors = string.Format("Input is too long (max is {0} characters).\n", maxChars) });
             }
-            if (!string.IsNullOrEmpty(data.Title) && data.Title.Length > 500)
+            if (!string.IsNullOrEmpty(data.Title) && data.Title.Length > 100)
             {
-                return json.Serialize(new JsonData() { Errors = "Title is too long (max is 500 characters).\n" });
+                return json.Serialize(new JsonData() { Errors = "Title is too long (max is 100 characters).\n" });
             }
             string url = null;
             if (data.Program == null)
@@ -379,9 +379,9 @@ namespace reExp.Controllers.rundotnet
             {
                 return json.Serialize(new JsonData() { Errors = string.Format("Input is too long (max is {0} characters).\n", maxChars) });
             }
-            if (!string.IsNullOrEmpty(data.Title) && data.Title.Length > 500)
+            if (!string.IsNullOrEmpty(data.Title) && data.Title.Length > 100)
             {
-                return json.Serialize(new JsonData() { Errors = "Title is too long (max is 500 characters).\n" });
+                return json.Serialize(new JsonData() { Errors = "Title is too long (max is 100 characters).\n" });
             }
             string url = null;
             if (data.Program == null)
@@ -459,6 +459,7 @@ namespace reExp.Controllers.rundotnet
             data.ShowWarnings = code.ShowWarnings;
             data.CodeGuid = savedNr;
             data.User_Id = code.UserId;
+            data.Title = code.Title;
 
             data.PrimaryGuid = data.CodeGuid;
             data.IsLive = true;

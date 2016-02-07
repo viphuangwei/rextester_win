@@ -82,10 +82,10 @@ namespace reExp.Models.DB
             ExecuteNonQuery(query, pars);
         }
 
-        public static void Code_Update(string newguid, string code, string input, string output, string compiler_args, string oldguid, string error, string warning, bool show_warnings, int status, string stats)
+        public static void Code_Update(string newguid, string code, string input, string output, string compiler_args, string oldguid, string error, string warning, bool show_warnings, int status, string stats, string title)
         {
             string query = string.Format(@"insert into Code(code, input, guid, lang, editor, date, output, compiler_args, error, status, user_id, stats, warning, show_warnings, title, views, votes)
-                                           select code, input, '{0}', lang, editor, date, output, compiler_args, error, status, user_id, stats, warning, show_warnings, null, null, null
+                                           select code, input, '{0}', lang, editor, date, output, compiler_args, error, status, user_id, stats, warning, show_warnings, title, null, null
                                            from Code
                                            where guid = @Guid", newguid);
             var pars = new List<SQLiteParameter>();
@@ -100,7 +100,7 @@ namespace reExp.Models.DB
             ExecuteNonQuery(query, pars);
 
             query = @"update Code
-                      set code = @Code, input = @Input, output = @Output, compiler_args= @Args, error = @Error, warning = @Warning, show_warnings = @Show_warnings, status = @Status, stats = @Stats, user_id = @User_id, date = DATETIME('now')
+                      set code = @Code, input = @Input, output = @Output, compiler_args= @Args, error = @Error, warning = @Warning, show_warnings = @Show_warnings, status = @Status, stats = @Stats, user_id = @User_id, date = DATETIME('now'), title = @Title
                       where guid = @OldGuid";
             pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("OldGuid", oldguid));
@@ -113,6 +113,7 @@ namespace reExp.Models.DB
             pars.Add(new SQLiteParameter("Show_warnings", show_warnings));
             pars.Add(new SQLiteParameter("Status", status));
             pars.Add(new SQLiteParameter("Stats", stats));
+            pars.Add(new SQLiteParameter("Title", title));
             if (SessionManager.UserId == null)
                 pars.Add(new SQLiteParameter("User_id", DBNull.Value));
             else
@@ -157,10 +158,10 @@ namespace reExp.Models.DB
             return ExecuteQuery(query, pars);
         }
 
-        public static void Live_Code_Update(string newguid, string code, string input, string output, string compiler_args, string oldguid, string error, string warning, bool show_warnings, int status, string stats)
+        public static void Live_Code_Update(string newguid, string code, string input, string output, string compiler_args, string oldguid, string error, string warning, bool show_warnings, int status, string stats, string title)
         {
             string query = string.Format(@"insert into Code(code, input, guid, lang, editor, date, output, compiler_args, error, status, user_id, stats, warning, show_warnings, title, views, votes)
-                                           select code, input, '{0}', lang, editor, DATETIME('now'), output, compiler_args, error, status, {1}, stats, warning, show_warnings, null, null, null
+                                           select code, input, '{0}', lang, editor, DATETIME('now'), output, compiler_args, error, status, {1}, stats, warning, show_warnings, title, null, null
                                            from Code
                                            where guid = @Guid", newguid, SessionManager.UserId == null ? "null" : SessionManager.UserId.ToString());
             var pars = new List<SQLiteParameter>();
@@ -168,7 +169,7 @@ namespace reExp.Models.DB
             ExecuteNonQuery(query, pars);
 
             query = @"update Code
-                      set code = @Code, input = @Input, output = @Output, compiler_args = @Args, error = @Error, warning = @Warning, show_warnings = @Show_warnings, status = @Status, stats = @Stats
+                      set code = @Code, input = @Input, output = @Output, compiler_args = @Args, error = @Error, warning = @Warning, show_warnings = @Show_warnings, status = @Status, stats = @Stats, title = @Title
                       where guid = @NewGuid";
             pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("NewGuid", newguid));
@@ -181,6 +182,7 @@ namespace reExp.Models.DB
             pars.Add(new SQLiteParameter("Show_warnings", show_warnings));
             pars.Add(new SQLiteParameter("Status", status));
             pars.Add(new SQLiteParameter("Stats", stats));
+            pars.Add(new SQLiteParameter("Title", title));
             ExecuteNonQuery(query, pars);
 
             query = @"insert into Versions(primary_code_id, snapshot_code_id, time_created)
@@ -375,7 +377,7 @@ namespace reExp.Models.DB
 
         public static List<Dictionary<string, object>> GetVersions(string guid)
         {
-            string query = @"select vc.date as 'date', u.name as 'author', vc.guid as 'version_guid', uw.id as wall_id
+            string query = @"select vc.date as 'date', u.name as 'author', vc.guid as 'version_guid', uw.id as wall_id, vc.title as 'title'
                              from versions v
                                   inner join code pc on v.primary_code_id = pc.id
                                   inner join code vc on v.snapshot_code_id = vc.id

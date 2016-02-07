@@ -33,6 +33,11 @@ namespace reExp.Controllers.versions
             get;
             set;
         }
+        public string Title
+        {
+            get;
+            set;
+        }
     }
 
     public class Version
@@ -68,6 +73,12 @@ namespace reExp.Controllers.versions
         }
 
         public bool RightChecked
+        {
+            get;
+            set;
+        }
+
+        public string Title
         {
             get;
             set;

@@ -934,9 +934,9 @@
                         $("#titleError").text("Title shouldn't be empty.");
                         return;
                     }
-                    if($("#titleInput").val().length > 500)
+                    if($("#titleInput").val().length > 100)
                     {
-                        $("#titleError").text("Title shouldn't be longer than 500 characters.");
+                        $("#titleError").text("Title shouldn't be longer than 100 characters.");
                         return;
                     }
                     $("#Title").val($("#titleInput").val());
@@ -966,9 +966,9 @@
                         $("#titleError").text("Title shouldn't be empty.");
                         return;
                     }
-                    if($("#titleInput").val().length > 500)
+                    if($("#titleInput").val().length > 100)
                     {
-                        $("#titleError").text("Title shouldn't be longer than 500 characters.");
+                        $("#titleError").text("Title shouldn't be longer than 100 characters.");
                         return;
                     }
                     $("#Title").val($("#titleInput").val());
@@ -1001,9 +1001,9 @@
                         $("#titleError").text("Title shouldn't be empty.");
                         return;
                     }
-                    if($("#titleInput").val().length > 500)
+                    if($("#titleInput").val().length > 100)
                     {
-                        $("#titleError").text("Title shouldn't be longer than 500 characters.");
+                        $("#titleError").text("Title shouldn't be longer than 100 characters.");
                         return;
                     }
                     $("#Title").val($("#titleInput").val());

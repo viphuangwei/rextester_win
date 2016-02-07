@@ -20,7 +20,7 @@
             <input id="radio_left_0" name="LeftChecked" type="radio" value="<%:Model.CodeGuid%>" disabled="disabled"/>
             <input id="radio_right_0" name="RightChecked" type="radio" value="<%:Model.CodeGuid%>" disabled="disabled"/>
           <%} %>
-        <a href="<%=Utils.BaseUrl+(Model.IsLive ? "live/" : "" )+Model.CodeGuid%>"><%:latest%></a>
+        <a href="<%=Utils.BaseUrl+(Model.IsLive ? "live/" : "" )+Model.CodeGuid%>"><%:latest%>:&nbsp;&nbsp;<%:Model.Title%></a>
         <div class="sub" style="display:inline-block;">
             <i><%if (Model.Author != null)
                 {
@@ -46,7 +46,7 @@
             <div class="item">
             <input id="radio_left_<%:i+1%>" name="LeftChecked" type="radio" value="<%:ordered[i].Guid%>" />
             <input id="radio_right_<%:i+1%>" name="RightChecked" type="radio" value="<%:ordered[i].Guid%>" />
-            <a href="<%=Utils.BaseUrl+ordered[i].Guid%>"><%:version%>&nbsp;<%:ordered.Count-i%></a>
+            <a href="<%=Utils.BaseUrl+ordered[i].Guid%>"><%:version%>&nbsp;<%:ordered.Count-i%>:&nbsp;&nbsp;<%:ordered[i].Title%></a>
             <div class="sub" style="display:inline-block;">
                 <%if (ordered[i].Wall_id != null) 
                 {%>
