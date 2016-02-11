@@ -196,7 +196,8 @@ namespace reExp.Models
                 Lang = c.Lang.ToLanguage(),
                 UserId = (int)c.UserId,
                 Text = chat,
-                IsLive = true
+                IsLive = true,
+                Title = c.Title
             });
         }
 
