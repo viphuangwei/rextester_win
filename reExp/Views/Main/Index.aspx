@@ -94,7 +94,7 @@
             Also let us know if you need some other Windows-based compilers.
             <br/>Compiler version:
             <ul>
-                <li><code><a href="http://rextester.com/l/cpp_online_compiler_visual">C++ (vc++)</a> and <a href="http://rextester.com/l/c_online_compiler_visual">C</a> - <a href="http://rextester.com/l/vcpp">Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23026 for x86</a></code></li>
+                <li><code><a href="http://rextester.com/l/cpp_online_compiler_visual">C++ (vc++)</a> and <a href="http://rextester.com/l/c_online_compiler_visual">C</a> - <a href="http://rextester.com/l/vcpp">Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23506 for x86</a></code></li>
             </ul>
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
