@@ -87,6 +87,33 @@ namespace WindowsSandbox
             }
         }
 
+        static void CleanSandbox()
+        {
+            try
+            {
+                System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Sandbox\Administrator\DefaultBox\");
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    try
+                    {
+                        file.Delete();
+                    }
+                    catch (Exception)
+                    { }
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    try
+                    {
+                        dir.Delete(true);
+                    }
+                    catch (Exception)
+                    { }
+                }
+            }
+            catch (Exception)
+            { }
+        }
         static void ExecuteCode(string nr, string input)
         {
             try
@@ -173,14 +200,14 @@ namespace WindowsSandbox
 
                     if (!string.IsNullOrEmpty(Errors))
                     {
-                        Console.WriteLine("Sandbox: writing errors "  + nr);
+                        Console.WriteLine("Sandbox: writing errors " + nr);
                         RedisConnection.Strings.Set(3, nr, Encoding.UTF8.GetBytes(Errors));
                     }
 
                     if (!string.IsNullOrEmpty(Output))
                     {
                         Console.WriteLine("Sandbox: writing output " + nr);
-                        RedisConnection.Strings.Set(2, nr, Encoding.UTF8.GetBytes(Output));                    
+                        RedisConnection.Strings.Set(2, nr, Encoding.UTF8.GetBytes(Output));
                     }
 
                     RedisConnection.Strings.Set(4, nr, new byte[] { (byte)1 });
@@ -188,13 +215,19 @@ namespace WindowsSandbox
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Sandbox: error " + nr +" " + ex.Message);
+                Console.WriteLine("Sandbox: error " + nr + " " + ex.Message);
                 try
                 {
                     RedisConnection.Strings.Set(4, nr, new byte[] { (byte)1 });
                 }
                 catch (Exception) { }
 
+            }
+            finally
+            {
+                ThreadPool.QueueUserWorkItem(f => {
+                    CleanSandbox();
+                });
             }
         }
     }
