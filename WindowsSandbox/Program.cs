@@ -52,7 +52,10 @@ namespace WindowsSandbox
         {
             //Console.OutputEncoding = Encoding.UTF8;
             //Console.InputEncoding = Encoding.UTF8;
-            
+
+            //CleanSandbox();
+            //return;
+
             while (true)
             {
                 try
@@ -225,9 +228,9 @@ namespace WindowsSandbox
             }
             finally
             {
-                ThreadPool.QueueUserWorkItem(f => {
-                    CleanSandbox();
-                });
+                //ThreadPool.QueueUserWorkItem(f => {
+                //    CleanSandbox();
+                //});
             }
         }
     }
