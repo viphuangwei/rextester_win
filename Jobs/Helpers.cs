@@ -43,6 +43,7 @@ namespace Jobs
             D = 30,
             R = 31,
             Tcl = 32,
+            MySql = 33,
             Unknown = 0
         }
 
@@ -90,6 +91,8 @@ namespace Jobs
                     return "Assembly";
                 case LanguagesEnum.SqlServer:
                     return "Sql Server";
+                case LanguagesEnum.MySql:
+                    return "MySQL";
                 case LanguagesEnum.Javascript:
                     return "Javascript";
                 case LanguagesEnum.Lisp:

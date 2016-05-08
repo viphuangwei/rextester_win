@@ -106,6 +106,14 @@ namespace GlobalUtils
             }
         }
 
+        public static string MySqlCS
+        {
+            get
+            {
+                return @"";
+            }
+        }
+
         public static string ElasticUrl
         {
             get

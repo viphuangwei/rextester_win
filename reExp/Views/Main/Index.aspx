@@ -87,6 +87,11 @@
             separately, in different batches. So, for example, if you want to create a function and later use it in select statement you have to separate create statement and select statement by 'GO', 
             otherwise you'll receive an error from parser since in select statement you would be reffering to a function which doesn't yet exist.<br/>
             For convinience there is simple pre-built schema, shown <a href="/Content/Schema.png">here</a>.
+            <br/><b style="color:Gray">MySQL</b><br/>
+            <a href="http://rextester.com/l/mysql_online_compiler">MySQL</a> <a href="http://rextester.com/l/mysql">version  5.7.12</a> is used (on Windows). There is only one database that queries run against. Queries executed on behalf database owner so all sort of actions are allowed including DDL queries.
+            However, all actions run in transaction which is rolled back immediately after execution is over. This way any desired objects may be built, populated with data and worked on within the scope 
+            of one request. There is 10 seconds limit for work to be completed. Unfortunately MySQL doesn't support rollback of DDL statements, so once object is created it stays. Therefore one should check if object exists before creating it and ideally drop it at the end of the script.
+
             <br/><br/><b style="color:Gray">Visual C++ (and C)</b><br/>
             Your code is compiled to native binary which runs on Windows Server 2012 (maximum compile time is 30 seconds). Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
             After 10 seconds of execution this process will be killed. This used to be the only security measures for a while. However, after discovering dubious services running and questionable .exes at some weird places it was decided to sandbox

@@ -8,5 +8,8 @@
     <Setting Name="Service_win_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://5.175.13.5/Service.asmx</Value>
     </Setting>
+    <Setting Name="Service_mysql_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.175.13.4:9292/Service.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

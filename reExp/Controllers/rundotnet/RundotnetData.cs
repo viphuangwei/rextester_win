@@ -94,6 +94,7 @@ namespace reExp.Controllers.rundotnet
                     this.LanguageChoice == LanguagesEnum.Ruby ||
                     this.LanguageChoice == LanguagesEnum.Lua ||
                     this.LanguageChoice == LanguagesEnum.SqlServer ||
+                    this.LanguageChoice == LanguagesEnum.MySql ||
                     this.LanguageChoice == LanguagesEnum.Javascript ||
 
                     this.LanguageChoice == LanguagesEnum.Go ||
@@ -117,7 +118,7 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if (this.LanguageChoice == LanguagesEnum.SqlServer)
+                if (this.LanguageChoice == LanguagesEnum.SqlServer || this.LanguageChoice == LanguagesEnum.MySql)
                     return false;
                 else
                     return true;
@@ -187,7 +188,7 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if (this.LanguageChoice == LanguagesEnum.SqlServer)
+                if (this.LanguageChoice == LanguagesEnum.SqlServer || this.LanguageChoice == LanguagesEnum.MySql)
                     return true;
                 else
                     return false;
@@ -278,6 +279,11 @@ namespace reExp.Controllers.rundotnet
                     {
                         Text = "Lua",
                         Value = ((int)LanguagesEnum.Lua).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "MySql",
+                        Value = ((int)LanguagesEnum.MySql).ToString()
                     },
                     new SelectListItem()
                     {
@@ -616,6 +622,14 @@ puts ""Hello, world!""";
 @"#perl 5.18.2 
 
 print ""Hello World\n"";";
+   
+                case LanguagesEnum.MySql:
+                    return
+@"#mysql 5.7.12
+#please drop objects you've created at the end of the script 
+#or check for their existance before creating
+
+select version() as 'mysql version'";
                 case LanguagesEnum.SqlServer:
                     return
 @"--Sql Server 2014 Express Edition

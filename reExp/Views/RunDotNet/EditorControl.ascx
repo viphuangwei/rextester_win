@@ -125,6 +125,11 @@
           syntax = "tsql";
           js = "mode/sql/sql.js";
           break;
+      case LanguagesEnum.MySql:
+          mode = "text/x-mysql";
+          syntax = "mysql";
+          js = "mode/sql/sql.js";
+          break;
       case LanguagesEnum.Go:
           mode = "text/x-go";
           js = "mode/go/go.js";

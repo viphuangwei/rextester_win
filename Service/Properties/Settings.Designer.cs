@@ -42,5 +42,15 @@ namespace Service.Properties {
                 return ((string)(this["Service_win_Service"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://5.175.13.4:9292/Service.asmx")]
+        public string Service_mysql_Service {
+            get {
+                return ((string)(this["Service_mysql_Service"]));
+            }
+        }
     }
 }

@@ -54,6 +54,8 @@ namespace reExp.Utils
                     return "Assembly";
                 case LanguagesEnum.SqlServer:
                     return "Sql Server";
+                case LanguagesEnum.MySql:
+                    return "MySQL";
                 case LanguagesEnum.Javascript:
                     return "Javascript";
                 case LanguagesEnum.Lisp:

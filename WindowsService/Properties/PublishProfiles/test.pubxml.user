@@ -8,26 +8,26 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\Renat\Desktop\app\</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\renbo\Desktop\app\</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/BookSleeve.dll">
-      <publishTime>08/09/2015 22:39:32</publishTime>
+      <publishTime>05/07/2016 15:20:23</publishTime>
     </File>
     <File Include="bin/GlobalUtils.dll">
-      <publishTime>08/02/2015 01:49:03</publishTime>
+      <publishTime>05/08/2016 18:49:57</publishTime>
     </File>
     <File Include="bin/WindowsExecutionEngine.dll">
-      <publishTime>08/09/2015 23:45:08</publishTime>
+      <publishTime>05/08/2016 19:17:30</publishTime>
     </File>
     <File Include="bin/WindowsService.dll">
-      <publishTime>08/09/2015 23:45:10</publishTime>
+      <publishTime>05/08/2016 19:17:30</publishTime>
     </File>
     <File Include="Service.asmx">
-      <publishTime>01/19/2014 18:34:21</publishTime>
+      <publishTime>05/07/2016 15:20:23</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/09/2015 23:35:13</publishTime>
+      <publishTime>05/08/2016 15:58:28</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -657,6 +657,7 @@
     <Content Include="Scripts\editarea\reg_syntax\scheme.js" />
     <Content Include="Scripts\editarea\reg_syntax\sql.js" />
     <Content Include="Scripts\editarea\reg_syntax\tcl.js" />
+    <Content Include="Scripts\editarea\reg_syntax\mysql.js" />
     <Content Include="Scripts\editarea\reg_syntax\tsql.js" />
     <Content Include="Scripts\editarea\reg_syntax\vb.js" />
     <Content Include="Scripts\editarea\reg_syntax\vb1.js" />

@@ -34,6 +34,10 @@ namespace reExp.Controllers.rundotnet
             {
                 return RunWindows(data);
             }
+            else if (data.LanguageChoice == LanguagesEnum.MySql)
+            {
+                return RunMySql(data);
+            }
             else
             {
                 return RunLinux(data);
@@ -380,6 +384,74 @@ namespace reExp.Controllers.rundotnet
             }
 
             return null;
+        }
+
+        static RundotnetData RunMySql(RundotnetData data)
+        {
+            WindowsService service = new WindowsService();
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            var res = service.DoWorkMySql(data.Program, data.Input, data.CompilerArgs);
+            watch.Stop();
+            if (res != null)
+            {
+                if (string.IsNullOrEmpty(res.Stats))
+                    res.Stats = "";
+                else
+                    res.Stats += ", ";
+                res.Stats += string.Format("absolute service time: {0} sec", Math.Round((double)watch.ElapsedMilliseconds / (double)1000, 2));
+                data.RunStats = res.Stats;
+            }
+            bool logged = false;
+            if (!string.IsNullOrEmpty(res.System_Error))
+            {
+                reExp.Utils.Log.LogInfo("MySql " + res.System_Error, "RunDotNet");
+                data.Errors.Add(res.System_Error);
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "MySql: system error", (int)data.LanguageChoice, data.IsApi);
+                return data;
+            }
+            if (!string.IsNullOrEmpty(res.Errors))
+            {
+                data.Errors.Add(res.Errors);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "MySql: error", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            if (res.Exit_Code < 0)
+            {
+                data.Errors.Add(res.Exit_Status);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "MySql: negative exit code", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            if (!string.IsNullOrEmpty(res.Warnings))
+            {
+                data.Warnings.Add(res.Warnings);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "MySql: warnings", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            data.Output = res.Output;
+            if (res.Files != null)
+            {
+                data.Files = new List<string>();
+                foreach (var f in res.Files)
+                {
+                    data.Files.Add(Convert.ToBase64String(f));
+                }
+            }
+            if (!logged)
+            {
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "MySql: ok", (int)data.LanguageChoice, data.IsApi);
+                logged = true;
+            }
+            return data;
         }
         static RundotnetData RunWindows(RundotnetData data)
         {

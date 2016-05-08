@@ -99,6 +99,7 @@ namespace WindowsService
         {
             return System.Security.Principal.WindowsIdentity.GetCurrent().Name;
         }
+
     }
 
     public class Result

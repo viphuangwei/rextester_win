@@ -253,6 +253,10 @@ namespace reExp.Controllers.rundotnet
                 {
                     data.LanguageChoice = LanguagesEnum.SqlServer;
                 }
+                else if (lang_title.ToLower() == "mysql_online_compiler" || lang_title.ToLower() == "mysql")
+                {
+                    data.LanguageChoice = LanguagesEnum.MySql;
+                }
                 else if (lang_title.ToLower() == "tcl_online_compiler" || lang_title.ToLower() == "tcl")
                 {
                     data.LanguageChoice = LanguagesEnum.Tcl;

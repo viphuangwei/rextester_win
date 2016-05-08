@@ -14,7 +14,7 @@ namespace WindowsEngineTests
         {
             using (localhost.Service service = new localhost.Service())
             {
-                var testProgram = TestProgram.GetTestPrograms().Where(f => f.Name.Contains("VC_") && f.Name.Contains("_Hello")).Single();
+                var testProgram = TestProgram.GetTestPrograms().Where(f => f.Name.Contains("MySql_") && f.Name.Contains("_Hello")).Single();
                 //TestEngineThroughService(testProgram.Program, testProgram.Input, testProgram.Lang, testProgram.Args);
                 TestEngineDirectly(testProgram.Program, testProgram.Input, testProgram.Lang, testProgram.Args);
             }   
@@ -203,6 +203,15 @@ int main(void)
                     Args = "source_file.c -o a.exe /EHsc"
                 });
 
+                #endregion
+
+                #region MySql
+                list.Add(new TestProgram()
+                {
+                    Program = @"selecty 5 ",
+                    Lang = Languages.MySql,
+                    Name = "MySql_Hello"
+                });
                 #endregion             
 
                 return list;

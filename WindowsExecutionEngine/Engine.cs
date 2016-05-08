@@ -105,7 +105,8 @@ namespace WindowsExecutionEngine
     public enum Languages
     {
         VCPP,
-        VC
+        VC,
+        MySql
     }
 
     public class CompilerData
@@ -222,6 +223,18 @@ namespace WindowsExecutionEngine
         }
         public OutputData DoWork(InputData idata)
         {
+            if (idata.Lang == Languages.VC || idata.Lang == Languages.VCPP)
+            {
+                return RunVC(idata);
+            }
+            else
+            {
+                return RunSql(idata);
+            }
+        }
+
+        OutputData RunVC(InputData idata)
+        {
             CompilerData cdata = null;
             try
             {
@@ -247,7 +260,7 @@ namespace WindowsExecutionEngine
                     RedisConnection.Strings.Set(1, nr, Encoding.UTF8.GetBytes(idata.Input));
                 }
 
-                RedisConnection.Strings.Set(0, nr, new byte[] {(byte)1});
+                RedisConnection.Strings.Set(0, nr, new byte[] { (byte)1 });
 
                 for (int i = 400; i > 0; i--)
                 {
@@ -269,7 +282,7 @@ namespace WindowsExecutionEngine
                             odata.Errors = Encoding.UTF8.GetString(errors);
                             var a = RedisConnection.Keys.Remove(3, nr).Result;
                         }
-                    }                    
+                    }
                     if (_break)
                     {
                         break;
@@ -301,6 +314,139 @@ namespace WindowsExecutionEngine
             {
                 if (cdata != null)
                     Cleanup(cdata.CleanThis);
+            }
+        }
+
+        OutputData RunSql(InputData idata)
+        {
+            OutputData odata = new OutputData();
+            string path = BasePath + @"usercode\" + Utils.RandomString() + ".sql";
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.Write(idata.Program);
+            }
+
+            using (Process process = new Process())
+            {
+                try
+                {
+                    double TotalMemoryInBytes = 0;
+                    double TotalThreadCount = 0;
+                    int samplesCount = 0;
+
+                    process.StartInfo.FileName = BasePath + @"executables\SqlSandbox.exe";
+                    process.StartInfo.Arguments = path.Replace(" ", "|_|");
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.CreateNoWindow = true;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.RedirectStandardError = true;
+
+                    DateTime start = DateTime.Now;
+                    process.Start();
+
+                    OutputReader output = new OutputReader(process.StandardOutput);
+                    Thread outputReader = new Thread(new ThreadStart(output.ReadOutput));
+                    outputReader.Start();
+                    OutputReader error = new OutputReader(process.StandardError);
+                    Thread errorReader = new Thread(new ThreadStart(error.ReadOutput));
+                    errorReader.Start();
+
+
+                    do
+                    {
+                        // Refresh the current process property values.
+                        process.Refresh();
+                        if (!process.HasExited)
+                        {
+                            try
+                            {
+                                var proc = process.TotalProcessorTime;
+                                // Update the values for the overall peak memory statistics.
+                                var mem1 = process.PagedMemorySize64;
+                                var mem2 = process.PrivateMemorySize64;
+
+                                //update stats
+                                TotalMemoryInBytes += (mem1 + mem2);
+                                TotalThreadCount += (process.Threads.Count);
+                                samplesCount++;
+
+                                if (proc.TotalSeconds > 5 || mem1 + mem2 > 100000000 || process.Threads.Count > 100 || start + TimeSpan.FromSeconds(15) < DateTime.Now)
+                                {
+                                    var time = proc.TotalSeconds;
+                                    var mem = mem1 + mem2;
+                                    process.Kill();
+                                    var res = string.Format("Process killed because it exceeded given resources.\nCpu time used {0} sec, absolute running time {1} sec, memory used {2} Mb, nr of threads {3}", time, (int)(DateTime.Now - start).TotalSeconds, (int)(mem / 1048576), process.Threads.Count);
+                                    odata.Errors = odata.Errors + "\n" + res;
+                                    string partialResult = output.Builder.ToString();
+                                    odata.Output = partialResult;
+                                    //odata.Stats = string.Format("Absolute service time: {0} sec", Math.Round((double)(DateTime.Now - start).TotalMilliseconds / 1000, 2));
+                                    //Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, res, (int)data.LanguageChoice, data.IsApi);
+                                    return odata;
+                                }
+                            }
+                            catch (InvalidOperationException)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    while (!process.WaitForExit(10));
+                    process.WaitForExit();
+
+                    errorReader.Join(5000);
+                    outputReader.Join(5000);
+
+                    if (!string.IsNullOrEmpty(error.Output))
+                    {
+                        odata.Output = output.Builder.ToString();
+                        odata.Errors += "\n" + error.Output;
+                        odata.Stats = string.Format("Absolute service time: {0} sec", Math.Round((double)(DateTime.Now - start).TotalMilliseconds / 1000, 2));
+                        //Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, error.Output, (int)data.LanguageChoice, data.IsApi);
+                        return odata;
+                    }
+
+                    if (File.Exists(path + ".stats"))
+                    {
+                        using (TextReader tr = new StreamReader(path + ".stats"))
+                        {
+                            odata.Stats = tr.ReadLine();
+                            if (!string.IsNullOrEmpty(odata.Stats))
+                                odata.Stats += ", ";
+                            else
+                                odata.Stats = "";
+                            odata.Stats += string.Format("absolute service time: {0} sec", Math.Round((double)(DateTime.Now - start).TotalMilliseconds / 1000, 2));
+                        }
+                    }
+                    //else
+                    //{
+                    //    odata.Stats = string.Format("Absolute service time: {0} sec", Math.Round((double)(DateTime.Now - start).TotalMilliseconds / 1000, 2));
+                    //}
+
+                    odata.Output = output.Output;
+                   // Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "OK", (int)data.LanguageChoice, data.IsApi);
+                    return odata;
+                }
+                catch (Exception e)
+                {
+                    if (!process.HasExited)
+                    {
+                        //reExp.Utils.Log.LogInfo("Process left running " + e.Message, "RunSqlServer");
+                    }
+                    throw;
+                }
+                finally
+                {
+                    try
+                    {
+                        File.Delete(path);
+                    }
+                    catch (Exception)
+                    { }
+
+                    //SqlServerUtils job = new SqlServerUtils();
+                    //Thread t = new Thread(job.DoShrinkJob);
+                    //t.Start();
+                }
             }
         }
 
@@ -662,4 +808,12 @@ namespace WindowsExecutionEngine
     }
 
     #endregion
+
+
+    public class Result
+    {
+        public List<string> Errors { get; set; }
+        public string Output { get; set; }
+        public string RunStats { get; set; }
+    }
 }

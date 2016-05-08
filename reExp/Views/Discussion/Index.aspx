@@ -226,6 +226,10 @@
           mode = "text/x-mssql";
           js.Add("mode/sql/sql.js");
           break;
+        case LanguagesEnum.MySql:
+          mode = "text/x-mysql";
+          js.Add("mode/sql/sql.js");
+          break;
       case LanguagesEnum.Go:
           mode = "text/x-go";
           js.Add("mode/go/go.js");

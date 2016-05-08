@@ -549,6 +549,7 @@ namespace reExp.Utils
         D = 30,
         R = 31,
         Tcl = 32,
+        MySql = 33,
         Unknown = 0
     }
 }

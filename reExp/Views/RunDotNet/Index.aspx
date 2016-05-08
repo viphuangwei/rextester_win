@@ -127,6 +127,10 @@
                 {
                     %>compile sql server online <%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.MySql)
+                {
+                    %>compile mysql online <%
+                }
                 else if (Model.LanguageChoice == LanguagesEnum.Tcl)
                 {
                     %>compile tcl online <%
@@ -268,6 +272,10 @@
                 else if (Model.LanguageChoice == LanguagesEnum.SqlServer)
                 {
                     %>compile sql server online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.MySql)
+                {
+                    %>compile mysql online <%
                 }
                 else if (Model.LanguageChoice == LanguagesEnum.Tcl)
                 {
@@ -603,6 +611,10 @@
                 {
                     %><meta name="Keywords" content="compile sql server online" /><%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.MySql)
+                {
+                    %><meta name="Keywords" content="compile mysql online" /><%
+                }
                 else if (Model.LanguageChoice == LanguagesEnum.Tcl)
                 {
                     %><meta name="Keywords" content="compile tcl online" /><%
@@ -740,6 +752,10 @@
                 else if (Model.LanguageChoice == LanguagesEnum.SqlServer)
                 {
                     %><meta name="Description" content="compile sql server online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.MySql)
+                {
+                    %><meta name="Description" content="compile mysql online" /><%
                 }
                 else if (Model.LanguageChoice == LanguagesEnum.Tcl)
                 {
@@ -1153,6 +1169,10 @@
                 else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.SqlServer%>)
                 {
                     act = "/l/sql_server_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.MySql%>)
+                {
+                    act = "/l/mysql_online_compiler";
                 }
                 else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Tcl%>)
                 {
