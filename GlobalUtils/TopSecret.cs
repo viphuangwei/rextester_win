@@ -114,6 +114,22 @@ namespace GlobalUtils
             }
         }
 
+        public static string PostgresCS
+        {
+            get
+            {
+                return @"";
+            }
+        }
+
+        public static string OracleCS
+        {
+            get
+            {
+                return @"";
+            }
+        }
+
         public static string ElasticUrl
         {
             get

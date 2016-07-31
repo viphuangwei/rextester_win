@@ -257,6 +257,14 @@ namespace reExp.Controllers.rundotnet
                 {
                     data.LanguageChoice = LanguagesEnum.MySql;
                 }
+                else if (lang_title.ToLower() == "oracle_online_compiler" || lang_title.ToLower() == "oracle")
+                {
+                    data.LanguageChoice = LanguagesEnum.Oracle;
+                }
+                else if (lang_title.ToLower() == "postgresql_online_compiler" || lang_title.ToLower() == "postgresql")
+                {
+                    data.LanguageChoice = LanguagesEnum.Postgresql;
+                }
                 else if (lang_title.ToLower() == "tcl_online_compiler" || lang_title.ToLower() == "tcl")
                 {
                     data.LanguageChoice = LanguagesEnum.Tcl;

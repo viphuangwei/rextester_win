@@ -1,16 +1,15 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
+using System.IO;
+using System.Collections;
 using System.Web;
+using System.Text.RegularExpressions;
+using MySql.Data.MySqlClient;
 
-namespace MySql
+namespace SqlServer
 {
     class Program
     {
@@ -106,26 +105,26 @@ namespace MySql
                 Console.WriteLine("</tbody></table>");
         }
 
-        //List<string> GetCommands(string text)
-        //{
-        //    List<string> commands = new List<string>();
-        //    if (!string.IsNullOrEmpty(text))
-        //    {
-        //        text = "\n" + text + "\n";
-        //        Regex regex = new Regex(@"\n[\s\t]*go[\s\t]*\n", RegexOptions.IgnoreCase);
-        //        if (regex.IsMatch(text))
-        //        {
-        //            List<string> parts = regex.Split(text).Where(f => !string.IsNullOrEmpty(f.Trim())).ToList<string>();
-        //            foreach (string c in parts)
-        //                commands.AddRange(GetCommands(c));
-        //        }
-        //        else
-        //        {
-        //            commands.Add(text.Trim());
-        //        }
-        //    }
-        //    return commands;
-        //}
+        List<string> GetCommands(string text)
+        {
+            List<string> commands = new List<string>();
+            if (!string.IsNullOrEmpty(text))
+            {
+                text = "\n" + text + "\n";
+                Regex regex = new Regex(@";[\s\t\n\r]+", RegexOptions.IgnoreCase);
+                if (regex.IsMatch(text))
+                {
+                    List<string> parts = regex.Split(text).Where(f => !string.IsNullOrEmpty(f.Trim())).ToList<string>();
+                    foreach (string c in parts)
+                        commands.AddRange(GetCommands(c));
+                }
+                else
+                {
+                    commands.Add(text.Trim());
+                }
+            }
+            return commands;
+        }
         public void DoWork()
         {
             using (MySqlConnection conn = new MySqlConnection(GlobalUtils.TopSecret.MySqlCS))
@@ -149,23 +148,17 @@ namespace MySql
                         command.Transaction = sqlTran;
                         MySqlDataReader reader;
 
-                        command.CommandText = com;
-                        using (reader = command.ExecuteReader())
+                        List<string> commands = GetCommands(com);
+                        foreach (string c in commands)
                         {
-                            ShowResultSet(reader);
+                            command.CommandText = c;
+                            using (reader = command.ExecuteReader())
+                            {
+                                ShowResultSet(reader);
+                                while (reader.NextResult())
+                                    ShowResultSet(reader);
+                            }
                         }
-
-                        //List<string> commands = GetCommands(com);
-                        //foreach (string c in commands)
-                        //{
-                        //    command.CommandText = c;
-                        //    using (reader = command.ExecuteReader())
-                        //    {
-                        //        ShowResultSet(reader);
-                        //        while (reader.NextResult())
-                        //            ShowResultSet(reader);
-                        //    }
-                        //}
                         //var stats = conn.RetrieveStatistics();
                         //using (TextWriter tw = new StreamWriter(path + ".stats"))
                         //{
@@ -181,10 +174,6 @@ namespace MySql
                     Console.Error.WriteLine(e.Message);
                     if (command != null)
                         command.Cancel();
-                }
-                finally
-                {
-                    command.Cancel();
                 }
             }
         }

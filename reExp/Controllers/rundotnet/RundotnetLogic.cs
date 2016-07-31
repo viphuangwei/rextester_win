@@ -38,6 +38,14 @@ namespace reExp.Controllers.rundotnet
             {
                 return RunMySql(data);
             }
+            else if (data.LanguageChoice == LanguagesEnum.Postgresql)
+            {
+                return RunPostgre(data);
+            }
+            else if (data.LanguageChoice == LanguagesEnum.Oracle)
+            {
+                return RunOracle(data);
+            }
             else
             {
                 return RunLinux(data);
@@ -449,6 +457,142 @@ namespace reExp.Controllers.rundotnet
             if (!logged)
             {
                 Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "MySql: ok", (int)data.LanguageChoice, data.IsApi);
+                logged = true;
+            }
+            return data;
+        }
+
+        static RundotnetData RunPostgre(RundotnetData data)
+        {
+            WindowsService service = new WindowsService();
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            var res = service.DoPostgreSql(data.Program, data.Input, data.CompilerArgs);
+            watch.Stop();
+            if (res != null)
+            {
+                if (string.IsNullOrEmpty(res.Stats))
+                    res.Stats = "";
+                else
+                    res.Stats += ", ";
+                res.Stats += string.Format("absolute service time: {0} sec", Math.Round((double)watch.ElapsedMilliseconds / (double)1000, 2));
+                data.RunStats = res.Stats;
+            }
+            bool logged = false;
+            if (!string.IsNullOrEmpty(res.System_Error))
+            {
+                reExp.Utils.Log.LogInfo("PostgreSql " + res.System_Error, "RunDotNet");
+                data.Errors.Add(res.System_Error);
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "PostgreSql: system error", (int)data.LanguageChoice, data.IsApi);
+                return data;
+            }
+            if (!string.IsNullOrEmpty(res.Errors))
+            {
+                data.Errors.Add(res.Errors);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "PostgreSql: error", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            if (res.Exit_Code < 0)
+            {
+                data.Errors.Add(res.Exit_Status);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "PostgreSql: negative exit code", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            if (!string.IsNullOrEmpty(res.Warnings))
+            {
+                data.Warnings.Add(res.Warnings);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "PostgreSql: warnings", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            data.Output = res.Output;
+            if (res.Files != null)
+            {
+                data.Files = new List<string>();
+                foreach (var f in res.Files)
+                {
+                    data.Files.Add(Convert.ToBase64String(f));
+                }
+            }
+            if (!logged)
+            {
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "PostgreSql: ok", (int)data.LanguageChoice, data.IsApi);
+                logged = true;
+            }
+            return data;
+        }
+
+        static RundotnetData RunOracle(RundotnetData data)
+        {
+            WindowsService service = new WindowsService();
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            var res = service.DoOracleSql(data.Program, data.Input, data.CompilerArgs);
+            watch.Stop();
+            if (res != null)
+            {
+                if (string.IsNullOrEmpty(res.Stats))
+                    res.Stats = "";
+                else
+                    res.Stats += ", ";
+                res.Stats += string.Format("absolute service time: {0} sec", Math.Round((double)watch.ElapsedMilliseconds / (double)1000, 2));
+                data.RunStats = res.Stats;
+            }
+            bool logged = false;
+            if (!string.IsNullOrEmpty(res.System_Error))
+            {
+                reExp.Utils.Log.LogInfo("Oracle " + res.System_Error, "RunDotNet");
+                data.Errors.Add(res.System_Error);
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Oracle: system error", (int)data.LanguageChoice, data.IsApi);
+                return data;
+            }
+            if (!string.IsNullOrEmpty(res.Errors))
+            {
+                data.Errors.Add(res.Errors);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Oracle: error", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            if (res.Exit_Code < 0)
+            {
+                data.Errors.Add(res.Exit_Status);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Oracle: negative exit code", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            if (!string.IsNullOrEmpty(res.Warnings))
+            {
+                data.Warnings.Add(res.Warnings);
+                if (!logged)
+                {
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Oracle: warnings", (int)data.LanguageChoice, data.IsApi);
+                    logged = true;
+                }
+            }
+            data.Output = res.Output;
+            if (res.Files != null)
+            {
+                data.Files = new List<string>();
+                foreach (var f in res.Files)
+                {
+                    data.Files.Add(Convert.ToBase64String(f));
+                }
+            }
+            if (!logged)
+            {
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Oracle: ok", (int)data.LanguageChoice, data.IsApi);
                 logged = true;
             }
             return data;

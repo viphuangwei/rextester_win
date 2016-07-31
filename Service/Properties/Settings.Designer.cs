@@ -52,5 +52,25 @@ namespace Service.Properties {
                 return ((string)(this["Service_mysql_Service"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://5.175.13.6:9292/Service.asmx")]
+        public string Service_postgres_Service {
+            get {
+                return ((string)(this["Service_postgres_Service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://46.163.70.136:9191/Service.asmx")]
+        public string Service_oracle_Service {
+            get {
+                return ((string)(this["Service_oracle_Service"]));
+            }
+        }
     }
 }

@@ -9,15 +9,17 @@ namespace reExp.Models.DB
 {
     public partial class DB
     {
-        public static List<Dictionary<string, object>> GetWallsCode(int page, int sort)
+        public static List<Dictionary<string, object>> GetWallsCode(int page, int sort, int lang)
         {
             string query = string.Format(
                             @"select c.*, w.id as wall_id
                             from Wall w
                                  inner join Code c on w.code_id = c.id
-                            order by {0}
+                            {0}
+                            order by {1}
                             limit @Limit
                             offset @Offset",
+                            lang == 0 ? "" : ("where lang = " + lang),
                             sort == 0 ? " c.date desc " : " c.votes desc, c.date desc ");
             var pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("Limit", GlobalConst.RecordsPerPage));
@@ -25,9 +27,9 @@ namespace reExp.Models.DB
             return ExecuteQuery(query, pars);
         }
 
-        public static List<Dictionary<string, object>> GetWallsTotal()
+        public static List<Dictionary<string, object>> GetWallsTotal(int lang)
         {
-            string query = @"select count(*) as total from Wall";
+            string query = @"select count(*) as total from Wall w inner join Code c on w.code_id = c.id " + (lang == 0 ? "" : ("where c.lang = " + lang));
             return ExecuteQuery(query, new List<SQLiteParameter>());
         }
 

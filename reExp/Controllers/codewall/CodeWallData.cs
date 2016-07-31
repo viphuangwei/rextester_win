@@ -43,5 +43,11 @@ namespace reExp.Controllers.codewall
             get;
             set;
         }
+
+        public int Lang
+        {
+            get;
+            set;
+        }
     }
 }

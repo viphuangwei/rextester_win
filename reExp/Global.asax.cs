@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.IO;
+using LinqDb;
+using System.Configuration;
 
 namespace reExp
 {
@@ -147,6 +149,12 @@ namespace reExp
 
             reExp.Utils.Utils.RootFolder = Server.MapPath("~/");
             //System.Environment.SetEnvironmentVariable("FSHARP_BIN", Utils.Utils.PathToFsc);
+            Db.Init(ConfigurationManager.AppSettings["LogPath"]);
+        }
+
+        protected void Application_End()
+        {
+            Db.Dispose();
         }
 
         protected void Application_Error(object sender, EventArgs e)

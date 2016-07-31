@@ -130,6 +130,16 @@
           syntax = "mysql";
           js = "mode/sql/sql.js";
           break;
+      case LanguagesEnum.Oracle:
+          mode = "text/x-plsql";
+          syntax = "oracle";
+          js = "mode/sql/sql.js";
+          break;
+      case LanguagesEnum.Postgresql:
+          mode = "text/x-pgsql";
+          syntax = "postgres";
+          js = "mode/sql/sql.js";
+          break;
       case LanguagesEnum.Go:
           mode = "text/x-go";
           js = "mode/go/go.js";

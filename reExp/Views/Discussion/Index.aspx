@@ -60,7 +60,7 @@
         <div id="comments_thread" style="margin: 3em auto;max-width: 70em;">
             <table style="width:100%">
                 <tr>
-                    <%--<td style="vertical-align:top; width: 62%">
+                    <td style="vertical-align:top; width: 62%">
                          <%foreach(var com in Model.Comments)
                         {%>             
                             <span>
@@ -84,8 +84,8 @@
                           {%>
                                 Please <a href="<%=Utils.BaseUrl+"login"%>">log in</a> to post a comment.
                         <%}%>
-                    </td>--%>
-                    <td style="vertical-align:top; width: 62%">
+                    </td>
+                    <%--<td style="vertical-align:top; width: 62%">
                         <div id="disqus_thread" style="margin: 3em auto;max-width: 64.3em;"></div>
                         <script type="text/javascript">
                             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -98,7 +98,7 @@
                             })();
                                </script>
                         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                    </td>
+                    </td>--%>
                     <td style="padding-left: 80px; vertical-align:top;width: 18%;">
                         <% Html.RenderPartial("RelatedControl", Model.Related); %> 
                     </td>
@@ -127,7 +127,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
     <script src="/Scripts/codemirror3/lib/codemirror.js"></script>
     <script src="/Scripts/codemirror3/addon/runmode/runmode.js"></script>
-    <%--<script src="../../Scripts/MarkdownDeepLib.min.js"></script>--%>
+    <script src="../../Scripts/MarkdownDeepLib.min.js"></script>
 
     <%  
   string mode = null;
@@ -226,8 +226,16 @@
           mode = "text/x-mssql";
           js.Add("mode/sql/sql.js");
           break;
-        case LanguagesEnum.MySql:
+      case LanguagesEnum.MySql:
           mode = "text/x-mysql";
+          js.Add("mode/sql/sql.js");
+          break;
+      case LanguagesEnum.Oracle:
+          mode = "text/x-plsql";
+          js.Add("mode/sql/sql.js");
+          break;
+      case LanguagesEnum.Postgresql:
+          mode = "text/x-pgsql";
           js.Add("mode/sql/sql.js");
           break;
       case LanguagesEnum.Go:
@@ -285,10 +293,10 @@
                                document.getElementById("output"));
 
 
-            //$("textarea.mdd_editor").MarkdownDeep({
-            //    help_location: "../../Scripts/mdd_help.htm",
-            //    disableTabHandling: true
-            //});
+            $("textarea.mdd_editor").MarkdownDeep({
+                help_location: "../../Scripts/mdd_help.htm",
+                disableTabHandling: true
+            });
             $("#upVote").click(VoteUpClick);
             function VoteUpClick() {
                 $('#upVote').unbind('click');

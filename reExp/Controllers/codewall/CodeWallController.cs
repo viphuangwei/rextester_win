@@ -18,8 +18,8 @@ namespace reExp.Controllers.codewall
         public ActionResult Index(CodeWallData data)
         {
             Compression.SetCompression();
-            data.Codes = Model.GetWallsCode(data.Page, data.Sort);
-            data.TotalRecords = Model.GetWallsTotal();
+            data.Codes = Model.GetWallsCode(data.Page, data.Sort, data.Lang);
+            data.TotalRecords = Model.GetWallsTotal(data.Lang);
             data.IsSubscribed = Model.IsUserSubscribed(null);
             data.IsAdmin = SessionManager.IsAdmin;
             return View(data);

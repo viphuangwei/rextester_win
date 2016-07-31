@@ -10,6 +10,8 @@ using System.Threading;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Security;
+using System.Configuration;
+using LinqDb;
 
 namespace reExp.Utils
 {
@@ -253,8 +255,8 @@ namespace reExp.Utils
         {
             try
             {
-                var job = new LogDBJob(data, input, compiler_args, result, lang, is_api);
-                ThreadPool.QueueUserWorkItem(f => job.DoWork());
+                var job = new LogDBJob();
+                ThreadPool.QueueUserWorkItem(f => job.DoWork(data, input, compiler_args, result, lang, is_api));
             }
             catch (Exception)
             { }
@@ -318,27 +320,46 @@ namespace reExp.Utils
         }
     }
 
+    public class LogEntry
+    {
+        public int Id { get; set; }
+        public string Data { get; set; }
+        public string Result { get; set; }
+        public string Input { get; set; }
+        public string Compiler_args { get; set; }
+        public int Lang { get; set; }
+        public int Is_api { get; set; }
+        public DateTime Time { get; set; }
+
+    }
     class LogDBJob
     {
-        string data;
-        string result;
-        string input;
-        string compiler_args;
-        int lang;
-        bool is_api;
-        public LogDBJob(string data, string input, string compiler_args, string result, int lang, bool is_api)
+
+        public LogDBJob()
         {
-            this.data = data;
-            this.result = result;
-            this.compiler_args = compiler_args;
-            this.input = input;
-            this.lang = lang;
-            this.is_api = is_api;
         }
-        public void DoWork()
+        public void DoWork(string data, string input, string compiler_args, string result, int lang, bool is_api)
         {
             try
             {
+                try
+                {
+                    var entry = new LogEntry()
+                    {
+                        Data = data,
+                        Result = result,
+                        Input = input,
+                        Compiler_args = compiler_args,
+                        Lang = lang,
+                        Is_api = is_api ? 1 : 0,
+                        Time = DateTime.Now
+                    };
+                    Db.Table<LogEntry>().Save(entry);
+                }
+                catch (Exception e)
+                {
+                    File.WriteAllText(Path.Combine(ConfigurationManager.AppSettings["LogPath"], "err.txt"), e.Message + Environment.NewLine + e.StackTrace);
+                }
                 //Model.LogCodeData(data, input, compiler_args, result, lang);
                 Model.IncrementLangCounter(data, input, compiler_args, result, lang, is_api);
             }
@@ -550,6 +571,8 @@ namespace reExp.Utils
         R = 31,
         Tcl = 32,
         MySql = 33,
+        Postgresql = 34,
+        Oracle = 35,
         Unknown = 0
     }
 }

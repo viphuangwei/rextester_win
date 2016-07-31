@@ -91,6 +91,10 @@
             <a href="http://rextester.com/l/mysql_online_compiler">MySQL</a> <a href="http://rextester.com/l/mysql">version  5.7.12</a> is used (on Windows). There is only one database that queries run against. Queries executed on behalf database owner so all sort of actions are allowed including DDL queries.
             However, all actions run in transaction which is rolled back immediately after execution is over. This way any desired objects may be built, populated with data and worked on within the scope 
             of one request. There is 10 seconds limit for work to be completed. Unfortunately MySQL doesn't support rollback of DDL statements, so once object is created it stays. Therefore one should check if object exists before creating it and ideally drop it at the end of the script.
+            <br/><b style="color:Gray">PostgreSQL</b><br/>
+            <a href="http://rextester.com/l/postgresql_online_compiler">PostgreSQL</a> setup is simillar to Sql Server.
+            <br/><b style="color:Gray">Oracle</b><br/>
+             <a href="http://rextester.com/l/oracle_online_compiler">Oracle</a> setup is simillar to MySQL.
 
             <br/><br/><b style="color:Gray">Visual C++ (and C)</b><br/>
             Your code is compiled to native binary which runs on Windows Server 2012 (maximum compile time is 30 seconds). Your process will be associated with job object that has <code>LimitFlags.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</code> flag set.
@@ -153,7 +157,7 @@
             Write code so that others see this real-time. Every participant can make changes and see changes made by others. We use <a href="http://www.firepad.io">Firepad</a> and <a href="https://www.firebase.com/">Firebase</a>.
             <br/><br/>
             <b style="color:Gray">Credit</b><br/>
-            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>,<%-- <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>,--%> <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/>
+            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>, <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/>
             Code completion is achieved using <a href="http://eclim.org/">eclipse and eclim</a> as well as <a href="https://github.com/Valloric/YouCompleteMe">youcompleteme</a>.<br /><br />
             <b style="color:Gray">Code wall</b><br/>
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code wall</a> as well as <a href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">personal code walls</a> - place code on a wall for public display. These entries will be crawled by search engines, so one 
@@ -255,6 +259,9 @@
     D = 30
     R = 31
     Tcl = 32
+    MySQL = 33
+    PostgreSQL = 34
+    Oracle = 35
 </pre>
             
             <br/>

@@ -9,8 +9,17 @@
     <table style="width:95%">
         <tr>
             <td align="right">
+                <select id="language">
+                    <option <%=Model.Lang == 0 ? "selected" : "" %> value="0">All</option>
+                    <%
+                    foreach (LanguagesEnum lang in Enum.GetValues(typeof(LanguagesEnum)).OfType<LanguagesEnum>().ToList().Where(f => f != LanguagesEnum.Unknown).OrderBy(f => f.ToLanguage()))
+                    {%>
+                       <option <%=Model.Lang == (int)lang ? "selected" : "" %> value="<%=(int)lang%>"><%=lang.ToLanguage()%></option>
+                    <%}%>
+                </select>
                 <%if (Model.Sort == 0)
                   {%>
+                &nbsp;|&nbsp;
                 <span id="newest" class="sort_selected">
                     newest
                 </span>
@@ -21,6 +30,7 @@
                 <%} 
                 else
                 {%>
+                &nbsp;|&nbsp;
                 <span id="newest" class="sort_not_selected">
                     newest
                 </span>
@@ -93,11 +103,11 @@
                 {%> 
                     <%if (i == Model.Page)
                       {%>
-                            <a class="selected" href="<%:Utils.BaseUrl%>codewall?page=<%:i%>&sort=<%:Model.Sort%>"><%:i + 1%></a>&nbsp;
+                            <a class="selected" href="<%:Utils.BaseUrl%>codewall?page=<%:i%>&sort=<%:Model.Sort%>&lang=<%:Model.Lang%>"><%:i + 1%></a>&nbsp;
                     <%}
                       else
                       {%>                     
-                            <a href="<%:Utils.BaseUrl%>codewall?page=<%:i%>&sort=<%:Model.Sort%>"><%:i + 1%></a>&nbsp;
+                            <a href="<%:Utils.BaseUrl%>codewall?page=<%:i%>&sort=<%:Model.Sort%>&lang=<%:Model.Lang%>"><%:i + 1%></a>&nbsp;
                     <%} %>
                 <%}%>
             </div>
@@ -119,10 +129,13 @@
         // <![CDATA[
         $(document).ready(function () {
             $("#newest").click(function () {
-                window.location.replace("<%=Utils.BaseUrl+"codewall?page=0&sort=0"%>");
+                window.location.replace("<%=Utils.BaseUrl+"codewall?page=0&sort=0&lang="%>" + $("#language").val());
             });
             $("#votes").click(function () {
-                window.location.replace("<%=Utils.BaseUrl+"codewall?page=0&sort=1"%>");
+                window.location.replace("<%=Utils.BaseUrl+"codewall?page=0&sort=1&lang="%>" + $("#language").val());
+            });
+            $('#language').on('change', function () {
+                window.location.replace("<%=Utils.BaseUrl+ "codewall?page=0&sort=" + Model.Sort + "&lang="%>" + this.value);
             });
 
             $.ajaxSetup({

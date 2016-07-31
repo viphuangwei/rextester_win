@@ -8,12 +8,12 @@ namespace reExp.Models
 {
     public partial class Model
     {
-        public static List<Code> GetWallsCode(int page, int sort)
+        public static List<Code> GetWallsCode(int page, int sort, int lang)
         {
             try
             {
                 List<Code> wallsCode = new List<Code>();
-                var res = DB.DB.GetWallsCode(page, sort);
+                var res = DB.DB.GetWallsCode(page, sort, lang);
                 foreach (var wcode in res)
                 {
                     wallsCode.Add(new Code()
@@ -39,11 +39,11 @@ namespace reExp.Models
             }
         }
 
-        public static int GetWallsTotal()
+        public static int GetWallsTotal(int lang)
         {
             try
             {
-                return Convert.ToInt32(DB.DB.GetWallsTotal()[0]["total"]);
+                return Convert.ToInt32(DB.DB.GetWallsTotal(lang)[0]["total"]);
             }
             catch (Exception e)
             {

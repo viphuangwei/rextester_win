@@ -56,6 +56,10 @@ namespace reExp.Utils
                     return "Sql Server";
                 case LanguagesEnum.MySql:
                     return "MySQL";
+                case LanguagesEnum.Oracle:
+                    return "Oracle";
+                case LanguagesEnum.Postgresql:
+                    return "PostgreSQL";
                 case LanguagesEnum.Javascript:
                     return "Javascript";
                 case LanguagesEnum.Lisp:

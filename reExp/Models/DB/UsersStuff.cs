@@ -137,6 +137,17 @@ namespace reExp.Models.DB
             return ExecuteQuery(query, pars);
         }
 
+        public static List<Dictionary<string, object>> GetUserByCodeId(int code_id)
+        {
+            string query = @"select u.id as user_id
+                             from Code c 
+                                  left outer join Users u on c.user_id = u.id 
+                             where c.id = @Code_id";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("Code_id", code_id));
+            return ExecuteQuery(query, pars);
+        }
+
         public static void InsertUser(string name, string passwordHash, string emailHash)
         {
             string query = @"insert into Users(name, password, email) values(@Name, @Password, @Email)";

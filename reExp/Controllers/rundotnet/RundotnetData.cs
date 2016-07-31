@@ -95,6 +95,8 @@ namespace reExp.Controllers.rundotnet
                     this.LanguageChoice == LanguagesEnum.Lua ||
                     this.LanguageChoice == LanguagesEnum.SqlServer ||
                     this.LanguageChoice == LanguagesEnum.MySql ||
+                    this.LanguageChoice == LanguagesEnum.Postgresql ||
+                    this.LanguageChoice == LanguagesEnum.Oracle ||
                     this.LanguageChoice == LanguagesEnum.Javascript ||
 
                     this.LanguageChoice == LanguagesEnum.Go ||
@@ -118,7 +120,7 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if (this.LanguageChoice == LanguagesEnum.SqlServer || this.LanguageChoice == LanguagesEnum.MySql)
+                if (this.LanguageChoice == LanguagesEnum.SqlServer || this.LanguageChoice == LanguagesEnum.MySql || this.LanguageChoice == LanguagesEnum.Postgresql || this.LanguageChoice == LanguagesEnum.Oracle)
                     return false;
                 else
                     return true;
@@ -188,7 +190,7 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if (this.LanguageChoice == LanguagesEnum.SqlServer || this.LanguageChoice == LanguagesEnum.MySql)
+                if (this.LanguageChoice == LanguagesEnum.SqlServer || this.LanguageChoice == LanguagesEnum.MySql || this.LanguageChoice == LanguagesEnum.Postgresql || this.LanguageChoice == LanguagesEnum.Oracle)
                     return true;
                 else
                     return false;
@@ -302,6 +304,11 @@ namespace reExp.Controllers.rundotnet
                     },
                     new SelectListItem()
                     {
+                        Text = "Oracle",
+                        Value = ((int)LanguagesEnum.Oracle).ToString()
+                    },
+                    new SelectListItem()
+                    {
                         Text = "Pascal",
                         Value = ((int)LanguagesEnum.Pascal).ToString()
                     },
@@ -314,6 +321,11 @@ namespace reExp.Controllers.rundotnet
                     {
                         Text = "Php",
                         Value = ((int)LanguagesEnum.Php).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "PostgreSQL",
+                        Value = ((int)LanguagesEnum.Postgresql).ToString()
                     },
                     new SelectListItem()
                     {
@@ -623,19 +635,41 @@ puts ""Hello, world!""";
 
 print ""Hello World\n"";";
    
+                case LanguagesEnum.Oracle:
+                    return
+@"--Oracle 11g Express Edition
+--please drop objects you've created at the end of the script 
+--or check for their existance before creating
+--IMPORTANT: separate statements by ';'
+--';' should not appear in comments (or appear in quotes) as it is acting as a delimiter
+
+select banner as ""oracle version"" from v$version;"; 
+
                 case LanguagesEnum.MySql:
                     return
-@"#mysql 5.7.12
+@"#MySQL 5.7.12
 #please drop objects you've created at the end of the script 
 #or check for their existance before creating
+#separate statements by ';'
+#';' should not appear in comments (or appear in quotes) as it is acting as a delimiter
 
 select version() as 'mysql version'";
+
+                case LanguagesEnum.Postgresql:
+                    return
+@"--PostgreSQL 9.5
+--separate statements by ;
+--';' should not appear in comments (or appear in quotes) as it is acting as a delimiter
+
+select version() as postgresql_version";
+
                 case LanguagesEnum.SqlServer:
                     return
 @"--Sql Server 2014 Express Edition
 --Batches are separated by 'go'
 
 select @@version as 'sql server version'";
+
                 case LanguagesEnum.Lua:
                     return
 @"--lua 5.2.3

@@ -106,7 +106,9 @@ namespace WindowsExecutionEngine
     {
         VCPP,
         VC,
-        MySql
+        MySql,
+        Postgres,
+        Oracle
     }
 
     public class CompilerData

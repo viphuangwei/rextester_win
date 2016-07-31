@@ -203,6 +203,23 @@ namespace reExp.Models
                 return null;
             }
         }
+
+        public static int? GetUserIdByCodeId(int code_id)
+        {
+            try
+            {
+                var res = DB.DB.GetUserByCodeId(code_id);
+                if (res.Count == 0)
+                    return null;
+
+                return res[0]["user_id"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["user_id"]);
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, "error");
+                return null;
+            }
+        }
     }
 
     public class Author

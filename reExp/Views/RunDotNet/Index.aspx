@@ -131,6 +131,14 @@
                 {
                     %>compile mysql online <%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.Oracle)
+                {
+                    %>compile oracle online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Postgresql)
+                {
+                    %>compile postgresql online <%
+                }
                 else if (Model.LanguageChoice == LanguagesEnum.Tcl)
                 {
                     %>compile tcl online <%
@@ -276,6 +284,14 @@
                 else if (Model.LanguageChoice == LanguagesEnum.MySql)
                 {
                     %>compile mysql online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Postgresql)
+                {
+                    %>compile postgresql online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Oracle)
+                {
+                    %>compile oracle online <%
                 }
                 else if (Model.LanguageChoice == LanguagesEnum.Tcl)
                 {
@@ -607,6 +623,10 @@
                 {
                     %><meta name="Keywords" content="compile scheme online" /><%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.Oracle)
+                {
+                    %><meta name="Keywords" content="compile oracle online" /><%
+                }
                 else if (Model.LanguageChoice == LanguagesEnum.SqlServer)
                 {
                     %><meta name="Keywords" content="compile sql server online" /><%
@@ -614,6 +634,10 @@
                 else if (Model.LanguageChoice == LanguagesEnum.MySql)
                 {
                     %><meta name="Keywords" content="compile mysql online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Postgresql)
+                {
+                    %><meta name="Keywords" content="compile postgresql online" /><%
                 }
                 else if (Model.LanguageChoice == LanguagesEnum.Tcl)
                 {
@@ -745,6 +769,10 @@
                 {
                     %><meta name="Description" content="compile scala online" /><%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.Oracle)
+                {
+                    %><meta name="Description" content="compile oracle online" /><%
+                }
                 else if (Model.LanguageChoice == LanguagesEnum.Scheme)
                 {
                     %><meta name="Description" content="compile scheme online" /><%
@@ -756,6 +784,10 @@
                 else if (Model.LanguageChoice == LanguagesEnum.MySql)
                 {
                     %><meta name="Description" content="compile mysql online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Postgresql)
+                {
+                    %><meta name="Description" content="compile postgresql online" /><%
                 }
                 else if (Model.LanguageChoice == LanguagesEnum.Tcl)
                 {
@@ -1173,6 +1205,14 @@
                 else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.MySql%>)
                 {
                     act = "/l/mysql_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Oracle%>)
+                {
+                    act = "/l/oracle_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Postgresql%>)
+                {
+                    act = "/l/postgresql_online_compiler";
                 }
                 else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Tcl%>)
                 {

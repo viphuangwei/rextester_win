@@ -8,6 +8,16 @@ namespace reExp.Models.DB
 {
     public partial class DB
     {
+        public static void Notification_Insert(int user_id, string name, int code_id, int created_user_id)
+        {
+            string query = @"insert into notifications(user_id, name, code_id, created_date, created_user_id) values(@User_id, @Name, @Code_id, DATETIME('now'), @Created_user_id)";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("User_id", user_id));
+            pars.Add(new SQLiteParameter("Name", name));
+            pars.Add(new SQLiteParameter("Code_id", code_id));
+            pars.Add(new SQLiteParameter("Created_user_id", created_user_id));
+            ExecuteNonQuery(query, pars);
+        }
         public static List<Dictionary<string, object>> Comments_Get(string guid)
         {
             string query = @"select com.id,

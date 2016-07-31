@@ -61,7 +61,25 @@ namespace reExp.Models
         {
             try
             {
+                if (string.IsNullOrEmpty(comment.Text))
+                {
+                    return;
+                }
                 DB.DB.Comments_Insert(comment.Code_Id, comment.User_Id, comment.Text);
+                int? user_id = Model.GetUserIdByCodeId(comment.Code_Id);
+                if (user_id != null)
+                {
+                    DB.DB.Notification_Insert((int)user_id, "New comment on your code", comment.Code_Id, comment.User_Id);
+                }
+                var mentions = GetMentions(comment.Text);
+                foreach (var m in mentions)
+                {
+                    var user = DB.DB.GetUser(m);
+                    if (user.Any())
+                    {
+                        DB.DB.Notification_Insert(Convert.ToInt32(user[0]["id"]), "You've been mentioned in a comment", comment.Code_Id, comment.User_Id);
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -69,6 +87,21 @@ namespace reExp.Models
             }
         }
 
+        static HashSet<string> GetMentions(string text)
+        {
+            var res = new HashSet<string>();
+            var words = text.Split();
+            foreach (var w in words)
+            {
+                var word = w.Trim(" ,.:!?;-".ToArray());
+                if (word.StartsWith("@"))
+                {
+                    res.Add(word.Substring(1));
+                }
+            }
+
+            return res;
+        }
 
         public static int? Comment_Last_Id(int code_id)
         {
@@ -88,6 +121,18 @@ namespace reExp.Models
         {
             try
             {
+                var old = GetComment(comment.Id);
+                var old_mentions = GetMentions(old.Text);
+                var new_mentions = GetMentions(comment.Text);
+                new_mentions.ExceptWith(old_mentions);
+                foreach (var m in new_mentions)
+                {
+                    var user = DB.DB.GetUser(m);
+                    if (user.Any())
+                    {
+                        DB.DB.Notification_Insert(Convert.ToInt32(user[0]["id"]), "You've been mentioned in a comment", comment.Code_Id, comment.User_Id);
+                    }
+                }
                 DB.DB.Comments_Update(comment.Id, comment.Text);
             }
             catch (Exception e)

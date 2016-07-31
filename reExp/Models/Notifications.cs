@@ -22,8 +22,10 @@ namespace reExp.Models
                     items.Add(new Notification()
                     {
                         ID = item["id"] == DBNull.Value ? null : (int?)Convert.ToInt32(item["id"]),
-                        Name = (string)item["name"],
-                        Many = Convert.ToInt32(item["total"]) > 1
+                        Name = item["name"] == DBNull.Value ? "-" : (string)item["name"],
+                        Many = item["total"] == DBNull.Value ?  false : (Convert.ToInt32(item["total"]) > 1),
+                        Type = item["type"] == DBNull.Value ? NotificationType.Subscription : (NotificationType)Convert.ToInt32(item["type"]),
+                        DiscussionAddress = item["address"] == DBNull.Value ? null : (string)item["address"]
                     });
                 }
                 DB.DB.UpdateSubscriptionsCheckedDate();
@@ -83,11 +85,18 @@ namespace reExp.Models
 
     public class Notification
     {
+        public NotificationType Type { get; set; }
         public string Name { get; set; }
         public int? ID { get; set; }
         public bool Many { get; set; }
+        public string DiscussionAddress { get; set; }
     }
 
+    public enum NotificationType : int
+    {
+        Subscription = 1,
+        Comment = 2
+    }
     public class Subscription
     {
         public string Name { get; set; }

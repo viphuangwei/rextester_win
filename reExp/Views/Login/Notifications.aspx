@@ -29,17 +29,30 @@
     <%if(Model.Notifications.Count ==  0) {%> &nbsp;<span style="color:gray;">None</span><%} %>
     <%foreach (var not in Model.Notifications)
     {%>
+        <%if (not.Type == reExp.Models.NotificationType.Subscription)
+        {%>
         <div class="item" style="padding-top:10px">
             <div>
-                <a href="<%:Utils.BaseUrl +(not.ID == null ? "codewall" : (@"users/"+ not.ID))%>" style="color:gray;" title="<%:not.Name%>">
+                <a href="<%:Utils.BaseUrl + (not.ID == null ? "codewall" : (@"users/" + not.ID))%>" style="color:gray;" title="<%:not.Name%>">
                     New item<%:not.Many ? "s" : "" %> on '<%:not.Name.BeginningOfString()%>'
                 </a>
             </div>
         </div>
+        <%}
+        else
+        {%>
+        <div class="item" style="padding-top:10px">
+            <div>
+                <a href="<%:Utils.BaseUrl + "discussion/" + not.DiscussionAddress%>" style="color:gray;" title="<%:not.Name%>">
+                    <%:not.Name.BeginningOfString()%>
+                </a>
+            </div>
+        </div>
+        <%}%>
     <%} %>
     <hr/>
 <h2>Subscriptions</h2>
-        <%if(Model.Subscriptions.Count ==  0) {%> &nbsp;<span style="color:gray;">None</span><%} %>
+    <%if(Model.Subscriptions.Count ==  0) {%> &nbsp;<span style="color:gray;">None</span><%} %>
     <%foreach (var sub in Model.Subscriptions)
     {%>
         <div class="item" style="padding-top:5px">

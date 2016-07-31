@@ -11,5 +11,11 @@
     <Setting Name="Service_mysql_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://5.175.13.4:9292/Service.asmx</Value>
     </Setting>
+    <Setting Name="Service_postgres_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.175.13.6:9292/Service.asmx</Value>
+    </Setting>
+    <Setting Name="Service_oracle_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://46.163.70.136:9191/Service.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

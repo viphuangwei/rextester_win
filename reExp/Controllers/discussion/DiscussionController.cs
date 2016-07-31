@@ -87,7 +87,8 @@ namespace reExp.Controllers.discussion
                 {
                     Id = (int)data.Comment_ID,
                     User_Id = (int)SessionManager.UserId,
-                    Text = data.Text
+                    Text = data.Text,
+                    Code_Id = code.ID
                 });
                 return this.Redirect(Utils.Utils.BaseUrl + @"discussion/" + code.Guid + "#comment_"+data.Comment_ID);
             }
