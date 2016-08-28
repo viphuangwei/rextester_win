@@ -168,6 +168,8 @@ namespace reExp.Utils
                     return BaseUrl + "login/logout";
                 case PagesEnum.Faq:
                     return BaseUrl + "main/faq";
+                case PagesEnum.Log:
+                    return BaseUrl + "logdata";
                 default:
                     return BaseUrl;
             }
@@ -207,6 +209,8 @@ namespace reExp.Utils
                     return PagesEnum.Home;
                 if (pagePath.Trim('/').ToLower().Trim() == "main")
                     return PagesEnum.Home;
+                if (pagePath.Trim('/').ToLower().Trim() == "logdata")
+                    return PagesEnum.Log;
                 //if (pagePath.Trim('/').ToLower().Trim() == "discussion")
                 //    return PagesEnum.Rundotnet;
                 //if (pagePath.Contains("rundotnet") || pagePath.Contains("runcode") || pagePath.Contains("versions") || new System.Text.RegularExpressions.Regex(@"/[a-z]+\d+.*", System.Text.RegularExpressions.RegexOptions.IgnoreCase).IsMatch(pagePath))
@@ -234,6 +238,7 @@ namespace reExp.Utils
             Faq,
             Users,
             Notifications,
+            Log,
             Unknown
         }
     }
@@ -255,8 +260,7 @@ namespace reExp.Utils
         {
             try
             {
-                var job = new LogDBJob();
-                ThreadPool.QueueUserWorkItem(f => job.DoWork(data, input, compiler_args, result, lang, is_api));
+                ThreadPool.QueueUserWorkItem(f => Model.LogRun(data, input, compiler_args, result, lang, is_api, ConfigurationManager.AppSettings["LogPath"]));
             }
             catch (Exception)
             { }
@@ -314,54 +318,6 @@ namespace reExp.Utils
                 {
                     smtp.Send(message);
                 };
-            }
-            catch (Exception)
-            { }
-        }
-    }
-
-    public class LogEntry
-    {
-        public int Id { get; set; }
-        public string Data { get; set; }
-        public string Result { get; set; }
-        public string Input { get; set; }
-        public string Compiler_args { get; set; }
-        public int Lang { get; set; }
-        public int Is_api { get; set; }
-        public DateTime Time { get; set; }
-
-    }
-    class LogDBJob
-    {
-
-        public LogDBJob()
-        {
-        }
-        public void DoWork(string data, string input, string compiler_args, string result, int lang, bool is_api)
-        {
-            try
-            {
-                try
-                {
-                    var entry = new LogEntry()
-                    {
-                        Data = data,
-                        Result = result,
-                        Input = input,
-                        Compiler_args = compiler_args,
-                        Lang = lang,
-                        Is_api = is_api ? 1 : 0,
-                        Time = DateTime.Now
-                    };
-                    Db.Table<LogEntry>().Save(entry);
-                }
-                catch (Exception e)
-                {
-                    File.WriteAllText(Path.Combine(ConfigurationManager.AppSettings["LogPath"], "err.txt"), e.Message + Environment.NewLine + e.StackTrace);
-                }
-                //Model.LogCodeData(data, input, compiler_args, result, lang);
-                Model.IncrementLangCounter(data, input, compiler_args, result, lang, is_api);
             }
             catch (Exception)
             { }

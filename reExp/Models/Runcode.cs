@@ -10,6 +10,8 @@ using BookSleeve;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using LinqDb;
+using System.IO;
 
 namespace reExp.Models
 {
@@ -505,6 +507,63 @@ namespace reExp.Models
                 }
             }
         }
+
+        public static LogEntry GetLogEntry(int id)
+        {
+            return Db.Table<LogEntry>().Where(f => f.Id == id).SelectEntity().FirstOrDefault();
+        }
+        public static List<LogEntry> GetLog(int lang, DateTime? from, DateTime? to, string search)
+        {
+            var res = Db.Table<LogEntry>();
+            if (lang != 0)
+            {
+                res.Where(f => f.Lang == (int)lang);
+            }
+            if (from != null && to != null)
+            {
+                res.Between(f => f.Time, (DateTime)from, (DateTime)to, BetweenBoundaries.BothInclusive);
+            }
+            else if (from != null)
+            {
+                res.Where(f => f.Time >= (DateTime)from);
+            }
+            else if (to != null)
+            {
+                res.Where(f => f.Time <= (DateTime)to);
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
+            }
+            return res.OrderByDescending(f => f.Time).Take(250).SelectEntity();
+        }
+        public static void LogRun(string data, string input, string compiler_args, string result, int lang, bool is_api, string log_path)
+        {
+            try
+            {
+                try
+                {
+                    var entry = new LogEntry()
+                    {
+                        Data = data,
+                        Result = result,
+                        Input = input,
+                        Compiler_args = compiler_args,
+                        Lang = lang,
+                        Is_api = is_api ? 1 : 0,
+                        Time = DateTime.Now
+                    };
+                    Db.Table<LogEntry>().Save(entry);
+                }
+                catch (Exception e)
+                {
+                    File.WriteAllText(Path.Combine(log_path, "err.txt"), e.Message + Environment.NewLine + e.StackTrace + Environment.NewLine + data+"|"+input+"|"+compiler_args+"|"+result+"|"+lang+"|"+is_api);
+                }
+                Model.IncrementLangCounter(data, input, compiler_args, result, lang, is_api);
+            }
+            catch (Exception)
+            { }
+        }
     }
 
     
@@ -686,6 +745,19 @@ namespace reExp.Models
             get;
             set;
         }
+
+    }
+
+    public class LogEntry
+    {
+        public int Id { get; set; }
+        public string Data { get; set; }
+        public string Result { get; set; }
+        public string Input { get; set; }
+        public string Compiler_args { get; set; }
+        public int Lang { get; set; }
+        public int Is_api { get; set; }
+        public DateTime Time { get; set; }
 
     }
 

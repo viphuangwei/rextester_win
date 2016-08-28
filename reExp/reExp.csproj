@@ -124,6 +124,7 @@
     <Compile Include="Controllers\login\LoginController.cs" />
     <Compile Include="Controllers\login\LoginData.cs" />
     <Compile Include="Controllers\login\UserData.cs" />
+    <Compile Include="Controllers\log\LogDataController.cs" />
     <Compile Include="Controllers\main\MainData.cs" />
     <Compile Include="Controllers\rundotnet\autocomplete\CsharpComplete.cs" />
     <Compile Include="Controllers\rundotnet\autocomplete\JavaComplete.cs" />
@@ -168,6 +169,13 @@
     </Compile>
     <Compile Include="Controllers\regex\RegexData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\LogData\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\LogData\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\csharpcolors.css" />
@@ -703,6 +711,7 @@
     <Content Include="Views\Login\Index.aspx" />
     <Content Include="Views\Login\Notifications.aspx" />
     <Content Include="Views\Login\UsersStuff.aspx" />
+    <Content Include="Views\LogData\Index.aspx" />
     <Content Include="Views\Main\Faq.aspx" />
     <Content Include="Views\Main\Index.aspx" />
     <Content Include="Views\RunDotNet\EditorControl.ascx" />

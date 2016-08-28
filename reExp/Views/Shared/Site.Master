@@ -206,14 +206,18 @@
                 |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Feedback){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Feedback)%>">Feedback</a>&nbsp;
                 |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Home){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Home)%>">About</a>&nbsp;  
                 <%if (SessionManager.IsUserInSession())
-                  {                      
+                {                      
                       %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.UsersStuff || currentPage == Utils.PagesEnum.Notifications){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.UsersStuff)%>"><%:SessionManager.UserName%></a>&nbsp;<span id="notifications"></span>
                         |&nbsp;<a class="notselectedlink" href="<%:Utils.GetUrl(Utils.PagesEnum.Logout)%>">Log out</a>&nbsp;<%
-                  }
-                  else
-                  {
-                      %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.Login){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a>&nbsp;<%
-                  } %>                
+                        if (SessionManager.IsAdmin)
+                        {%>
+                        |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Log){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Log)%>">Log</a>&nbsp;
+                        <%}
+                }
+                else
+                {
+                    %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.Login){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a>&nbsp;<%
+                }%>
             </td>
         </tr>
     </table>

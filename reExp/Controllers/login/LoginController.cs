@@ -101,7 +101,6 @@ namespace reExp.Controllers.login
 
             return View(data);
         }
-
         public ActionResult UsersStuff(int page = 0, string Query = null)
         {
             Compression.SetCompression();

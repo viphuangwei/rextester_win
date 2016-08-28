@@ -745,7 +745,7 @@ object Rextester extends App {
 
                 case LanguagesEnum.Nodejs:
                     return @"
-//nodejs 0.10.25
+//nodejs v6.4.0
 
 console.log(""Hello, World!"");";
                 case LanguagesEnum.Octave:

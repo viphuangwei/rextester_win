@@ -120,7 +120,7 @@
                 <li><code><a href="http://rextester.com/l/java_online_compiler">Java</a> - <a href="http://rextester.com/l/java">Oracle's implementation of Java, compiler version 1.8.0_72 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</a></code></li>
                 <li><code><a href="http://rextester.com/l/js_online_compiler">Javascript</a> - <a href="http://rextester.com/l/js">V8 3.31.1</a></code></li>
                 <li><code><a href="http://rextester.com/l/lua_online_compiler">Lua</a> - <a href="http://rextester.com/l/lua">lua 5.2.3</a></code></li>
-                <li><code><a href="http://rextester.com/l/nodejs_online_compiler">Node.js</a> - <a href="http://rextester.com/l/nodejs">nodejs 0.10.25</a></code></li>
+                <li><code><a href="http://rextester.com/l/nodejs_online_compiler">Node.js</a> - <a href="http://rextester.com/l/nodejs">nodejs v6.4.0</a></code></li>
                 <li><code><a href="http://rextester.com/l/objectivec_online_compiler">Objective-C</a> - <a href="http://rextester.com/l/objectivec">gcc 4.8.4 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</a></code></li>
                 <li><code><a href="http://rextester.com/l/octave_online_compiler">Octave</a> - <a href="http://rextester.com/l/octave">GNU Octave 3.8.1 (octave -q -f --no-window-system)</a></code></li>
                 <li><code><a href="http://rextester.com/l/pascal_online_compiler">Pascal</a> - <a href="http://rextester.com/l/pascal">fpc 2.6.2</a></code></li>
