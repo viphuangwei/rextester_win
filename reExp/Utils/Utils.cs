@@ -12,6 +12,7 @@ using System.Text;
 using System.Web.Security;
 using System.Configuration;
 using LinqDb;
+using System.Web.Hosting;
 
 namespace reExp.Utils
 {
@@ -260,7 +261,7 @@ namespace reExp.Utils
         {
             try
             {
-                ThreadPool.QueueUserWorkItem(f => Model.LogRun(data, input, compiler_args, result, lang, is_api, ConfigurationManager.AppSettings["LogPath"]));
+                HostingEnvironment.QueueBackgroundWorkItem(f => Model.LogRun(data, input, compiler_args, result, lang, is_api, ConfigurationManager.AppSettings["LogPath"]));
             }
             catch (Exception)
             { }
