@@ -341,7 +341,7 @@
               else
               { %>
                   <div style="width: 95%; margin-top:1em;">
-                        <textarea class="editor" spellcheck="false" cols="1000" id="Program" name="Program" rows="30" style="width: 100%;resize:none;"><%=Model.Program%></textarea>
+                        <textarea class="editor" spellcheck="false" cols="1000" id="Program" name="Program" rows="30" style="width: 100%;resize:none;"><%=HttpUtility.HtmlEncode(Model.Program)%></textarea>
                   </div>
               <%} %>
 
@@ -445,7 +445,7 @@
             <input id="IsLive" name="IsLive" type="hidden" value="<%:Model.IsLive%>"/>
             <% if(Model.IsLive && Model.EditorChoice == EditorsEnum.Codemirror)
                {%>
-                    <input id="InitialCode" name="InitialCode" type="hidden" value="<%:Model.Program%>"/>
+                    <input id="InitialCode" name="InitialCode" type="hidden" value="<%:HttpUtility.HtmlEncode(Model.Program)%>"/>
               <%}
             %>
         </div>
