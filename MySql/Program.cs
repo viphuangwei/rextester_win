@@ -28,14 +28,14 @@ namespace SqlServer
                 Console.Error.WriteLine("The following words are not allowed to appear together in one script: drop database rextester");
                 return;
             }
-            var regex1 = new Regex(@"start\s+transaction", RegexOptions.IgnoreCase);
-            var regex2 = new Regex(@"commit", RegexOptions.IgnoreCase);
-            var regex3 = new Regex(@"rollback", RegexOptions.IgnoreCase);
-            if (!string.IsNullOrEmpty(sql) && (regex1.IsMatch(sql) || regex2.IsMatch(sql) || regex3.IsMatch(sql)))
-            {
-                Console.Error.WriteLine("Transaction related keywords (start transaction, commit and rollback) are not permitted in code due to security reasons");
-                return;
-            }
+            //var regex1 = new Regex(@"start\s+transaction", RegexOptions.IgnoreCase);
+            //var regex2 = new Regex(@"commit", RegexOptions.IgnoreCase);
+            //var regex3 = new Regex(@"rollback", RegexOptions.IgnoreCase);
+            //if (!string.IsNullOrEmpty(sql) && (regex1.IsMatch(sql) || regex2.IsMatch(sql) || regex3.IsMatch(sql)))
+            //{
+            //    Console.Error.WriteLine("Transaction related keywords (start transaction, commit and rollback) are not permitted in code due to security reasons");
+            //    return;
+            //}
 
             Job job = new Job(sql, path);
             Thread t = new Thread(job.DoWork);
