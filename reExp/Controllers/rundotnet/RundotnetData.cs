@@ -640,26 +640,23 @@ print ""Hello World\n"";";
 @"--Oracle 11g Express Edition
 --please drop objects you've created at the end of the script 
 --or check for their existance before creating
---IMPORTANT: separate statements by ';'
---';' should not appear in comments (or appear in quotes) as it is acting as a delimiter
+--'\\' is a delimiter
 
-select banner as ""oracle version"" from v$version;"; 
+select banner as ""oracle version"" from v$version"; 
 
                 case LanguagesEnum.MySql:
                     return
 @"#MySQL 5.7.12
 #please drop objects you've created at the end of the script 
 #or check for their existance before creating
-#separate statements by ';'
-#';' should not appear in comments (or appear in quotes) as it is acting as a delimiter
+#'\\' is a delimiter
 
 select version() as 'mysql version'";
 
                 case LanguagesEnum.Postgresql:
                     return
 @"--PostgreSQL 9.5
---separate statements by ;
---';' should not appear in comments (or appear in quotes) as it is acting as a delimiter
+--'\\' is a delimiter
 
 select version() as postgresql_version";
 
