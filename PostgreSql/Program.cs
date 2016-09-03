@@ -22,21 +22,21 @@ namespace SqlServer
             {
                 sql = tr.ReadToEnd();
             }
-            Regex regex1 = new Regex(@"\[?sys\]?\.\[?databases\]?", RegexOptions.IgnoreCase);
-            Regex regex2 = new Regex(@"\[?sys\]?\.\[?sysdatabases\]?", RegexOptions.IgnoreCase);
-            if (!string.IsNullOrEmpty(sql) && (regex1.IsMatch(sql) || regex2.IsMatch(sql)))
-            {
-                Console.Error.WriteLine("[sys].[databases] and [sys].[sysdatabases] are not allowed to be used in code due to security reasons");
-                return;
-            }
-            regex1 = new Regex(@"begin\s+tran", RegexOptions.IgnoreCase);
-            regex2 = new Regex(@"commit", RegexOptions.IgnoreCase);
-            var regex3 = new Regex(@"rollback", RegexOptions.IgnoreCase);
-            if (!string.IsNullOrEmpty(sql) && (regex1.IsMatch(sql) || regex2.IsMatch(sql) || regex3.IsMatch(sql)))
-            {
-                Console.Error.WriteLine("Transaction related keywords (begin tran, commit and rollback) are not permitted in code due to security reasons");
-                return;
-            }
+            //Regex regex1 = new Regex(@"\[?sys\]?\.\[?databases\]?", RegexOptions.IgnoreCase);
+            //Regex regex2 = new Regex(@"\[?sys\]?\.\[?sysdatabases\]?", RegexOptions.IgnoreCase);
+            //if (!string.IsNullOrEmpty(sql) && (regex1.IsMatch(sql) || regex2.IsMatch(sql)))
+            //{
+            //    Console.Error.WriteLine("[sys].[databases] and [sys].[sysdatabases] are not allowed to be used in code due to security reasons");
+            //    return;
+            //}
+            //regex1 = new Regex(@"begin\s+tran", RegexOptions.IgnoreCase);
+            //regex2 = new Regex(@"commit", RegexOptions.IgnoreCase);
+            //var regex3 = new Regex(@"rollback", RegexOptions.IgnoreCase);
+            //if (!string.IsNullOrEmpty(sql) && (regex1.IsMatch(sql) || regex2.IsMatch(sql) || regex3.IsMatch(sql)))
+            //{
+            //    Console.Error.WriteLine("Transaction related keywords (begin tran, commit and rollback) are not permitted in code due to security reasons");
+            //    return;
+            //}
 
             Job job = new Job(sql, path);
             Thread t = new Thread(job.DoWork);
