@@ -112,7 +112,7 @@ namespace SqlServer
             if (!string.IsNullOrEmpty(text))
             {
                 text = "\n" + text + "\n";
-                Regex regex = new Regex(@";[\s\t\n\r]+", RegexOptions.IgnoreCase);
+                Regex regex = new Regex(@"\\{2}[\s\t\n\r]+", RegexOptions.IgnoreCase);
                 if (regex.IsMatch(text))
                 {
                     List<string> parts = regex.Split(text).Where(f => !string.IsNullOrEmpty(f.Trim())).ToList<string>();
