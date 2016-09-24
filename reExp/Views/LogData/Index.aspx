@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<reExp.Controllers.log.LogModel>"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Log
+	Log - <%=Model.Total %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Log</h2>
+    <h2>Log - <%=Model.Total %></h2>
     <form method="post">
     <table style="width:95%">
         <tr>
@@ -18,6 +18,12 @@
                     {%>
                        <option <%=Model.lang == (int)lang ? "selected" : "" %> value="<%=(int)lang%>"><%=lang.ToLanguage()%></option>
                     <%}%>
+                </select>
+                &nbsp;&nbsp;&nbsp;Is api:&nbsp;
+                <select id="api" name="api">
+                    <option <%=Model.api == 0 ? "selected" : "" %> value="0"></option>
+                    <option <%=Model.api == 1 ? "selected" : "" %> value="1">Yes</option>
+                    <option <%=Model.api == 2 ? "selected" : "" %> value="2">No</option>
                 </select>
                 &nbsp;&nbsp;&nbsp;From:&nbsp;
                 <input type="text" name="from" value="<%=Model.from%>"/>

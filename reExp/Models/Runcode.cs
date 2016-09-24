@@ -512,7 +512,7 @@ namespace reExp.Models
         {
             return Db.Table<LogEntry>().Where(f => f.Id == id).SelectEntity().FirstOrDefault();
         }
-        public static List<LogEntry> GetLog(int lang, DateTime? from, DateTime? to, string search)
+        public static List<LogEntry> GetLog(int lang, DateTime? from, DateTime? to, string search, int api, out int total)
         {
             var res = Db.Table<LogEntry>();
             if (lang != 0)
@@ -535,7 +535,15 @@ namespace reExp.Models
             {
                 res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
             }
-            return res.OrderByDescending(f => f.Time).Take(250).SelectEntity();
+            if (api == 1)
+            {
+                res.Where(f => f.Is_api == 1);
+            }
+            if (api == 2)
+            {
+                res.Where(f => f.Is_api == 0);
+            }
+            return res.OrderByDescending(f => f.Time).Take(50).SelectEntity(out total);
         }
         public static void LogRun(string data, string input, string compiler_args, string result, int lang, bool is_api, string log_path)
         {

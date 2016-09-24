@@ -251,7 +251,7 @@ namespace reExp.Utils
             try
             {
                 LogJob job = new LogJob(info, type);
-                ThreadPool.QueueUserWorkItem(f => job.DoWork());
+                HostingEnvironment.QueueBackgroundWorkItem(f => job.DoWork());
             }
             catch (Exception)
             { }

@@ -8,6 +8,8 @@ using System.Collections;
 using System.Web;
 using System.Text.RegularExpressions;
 using Oracle.ManagedDataAccess.Client;
+using System.Data;
+using Oracle.ManagedDataAccess.Types;
 
 namespace SqlServer
 {
@@ -61,8 +63,13 @@ namespace SqlServer
             this.path = path;
         }
 
-        void ShowResultSet(OracleDataReader reader)
+        void ShowResultSet(OracleDataReader reader, OracleCommand command)
         {
+            //it is included dbms_output
+            command.CommandText = "begin dbms_output.enable (32000); end;";
+            command.CommandType = CommandType.Text;
+            command.ExecuteNonQuery();
+
             bool headerPrinted = false;
             int count = 1;
             while (reader.Read())
@@ -104,6 +111,59 @@ namespace SqlServer
             }
             if (headerPrinted)
                 Console.WriteLine("</tbody></table>");
+
+
+            // create parameter objects for the anonymous pl/sql block
+            int NUM_TO_FETCH = 8;
+            OracleParameter p_lines = new OracleParameter("", OracleDbType.Varchar2, NUM_TO_FETCH, "", ParameterDirection.Output);
+            p_lines.CollectionType = OracleCollectionType.PLSQLAssociativeArray;
+            p_lines.ArrayBindSize = new int[NUM_TO_FETCH];
+            // set the bind size value for each element
+            for (int i = 0; i < NUM_TO_FETCH; i++)
+            {
+                p_lines.ArrayBindSize[i] = 32000;
+            }
+
+
+            // this is an input output parameter...
+            // on input it holds the number of lines requested to be fetched from the buffer
+            // on output it holds the number of lines actually fetched from the buffer
+            OracleParameter p_numlines = new OracleParameter("", OracleDbType.Decimal, "", ParameterDirection.InputOutput);
+            // set the number of lines to fetch
+            p_numlines.Value = NUM_TO_FETCH;
+            // set up command object and execute anonymous pl/sql block
+            command.CommandText = "begin dbms_output.get_lines(:1, :2); end;";
+            command.CommandType = CommandType.Text;
+            command.Parameters.Add(p_lines);
+            command.Parameters.Add(p_numlines);
+            command.ExecuteNonQuery();
+
+            // get the number of lines that were fetched (0 = no more lines in buffer)
+            int numLinesFetched = ((OracleDecimal)p_numlines.Value).ToInt32();
+
+            // as long as lines were fetched from the buffer...
+            while (numLinesFetched > 0)
+            {
+                // write the text returned for each element in the pl/sql
+                // associative array to the console window
+                for (int i = 0; i < numLinesFetched; i++)
+                {
+                    string out_string = (string)(p_lines.Value as OracleString[])[i];
+                    if (!string.IsNullOrEmpty(out_string))
+                    {
+                        Console.WriteLine(System.Web.HttpUtility.HtmlEncode(out_string));
+                    }
+                }
+
+                // re-execute the command to fetch more lines (if any remain)
+                command.ExecuteNonQuery();
+                // get the number of lines that were fetched (0 = no more lines in buffer)
+                numLinesFetched = ((OracleDecimal)p_numlines.Value).ToInt32();
+            }
+            // clean up
+
+            p_numlines.Dispose();
+            p_lines.Dispose();
         }
 
         List<string> GetCommands(string text)
@@ -147,6 +207,7 @@ namespace SqlServer
                     using (OracleTransaction sqlTran = conn.BeginTransaction())
                     {
                         command.Transaction = sqlTran;
+                        
                         OracleDataReader reader;
 
                         List<string> commands = GetCommands(com);
@@ -155,11 +216,35 @@ namespace SqlServer
                             command.CommandText = c;
                             using (reader = command.ExecuteReader())
                             {
-                                ShowResultSet(reader);
+                                ShowResultSet(reader, command);
                                 while (reader.NextResult())
-                                    ShowResultSet(reader);
+                                    ShowResultSet(reader, command);
                             }
                         }
+
+
+
+                        //string out_string;
+                        //int status = 0;
+                        //command.CommandText = "BEGIN DBMS_OUTPUT.GET_LINE (:out_string, :status); END;";
+                        //command.CommandType = CommandType.Text;
+                        //command.Parameters.Clear();
+                        //command.Parameters.Add("out_string", OracleDbType.Varchar2, 32000);
+                        //command.Parameters.Add("status", OracleDbType.Double);
+                        //command.Parameters[0].Direction = System.Data.ParameterDirection.Output;
+                        //command.Parameters[1].Direction = System.Data.ParameterDirection.Output;
+                        //command.ExecuteNonQuery();
+                        //out_string = command.Parameters[0].Value.ToString();
+                        //status = int.Parse(command.Parameters[1].Value.ToString());
+                        //if (!string.IsNullOrEmpty(out_string))
+                        //{
+                        //    Console.WriteLine(System.Web.HttpUtility.HtmlEncode(out_string));
+                        //}
+
+
+
+                        
+
                         //var stats = conn.RetrieveStatistics();
                         //using (TextWriter tw = new StreamWriter(path + ".stats"))
                         //{

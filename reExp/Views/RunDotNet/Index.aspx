@@ -445,7 +445,7 @@
             <input id="IsLive" name="IsLive" type="hidden" value="<%:Model.IsLive%>"/>
             <% if(Model.IsLive && Model.EditorChoice == EditorsEnum.Codemirror)
                {%>
-                    <input id="InitialCode" name="InitialCode" type="hidden" value="<%:HttpUtility.HtmlEncode(Model.Program)%>"/>
+                    <input id="InitialCode" name="InitialCode" type="hidden" value="<%:Model.Program%>"/>
               <%}
             %>
         </div>

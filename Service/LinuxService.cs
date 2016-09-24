@@ -32,11 +32,11 @@ namespace Service
 
                     if (bytes)
                     {
-                        if (res.Errors_Bytes != null)
+                        if (res.Errors_Bytes != null && res.Errors_Bytes.Length > 0)
                             res.Errors = System.Text.Encoding.Unicode.GetString(res.Errors_Bytes);
-                        if (res.Warnings_Bytes != null)
+                        if (res.Warnings_Bytes != null && res.Warnings_Bytes.Length > 0)
                             res.Warnings = System.Text.Encoding.Unicode.GetString(res.Warnings_Bytes);
-                        if (res.Output_Bytes != null)
+                        if (res.Output_Bytes != null && res.Output_Bytes.Length > 0)
                             res.Output = System.Text.Encoding.Unicode.GetString(res.Output_Bytes);
                     }
                     if (res.IsOutputCompressed)

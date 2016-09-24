@@ -23,7 +23,7 @@ namespace SqlServer
                 sql = tr.ReadToEnd();
             }
             //Regex regex1 = new Regex(@"drop\s+database", RegexOptions.IgnoreCase);
-            if (!string.IsNullOrEmpty(sql) && sql.Contains("drop") && sql.Contains("database") && sql.Contains("rextester"))
+            if (!string.IsNullOrEmpty(sql) && sql.ToLower().Contains("drop") && sql.ToLower().Contains("database") && sql.ToLower().Contains("rextester"))
             {
                 Console.Error.WriteLine("The following words are not allowed to appear together in one script: drop database rextester");
                 return;

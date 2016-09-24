@@ -26,7 +26,9 @@ namespace reExp.Controllers.log
             }
             else
             {
-                data.Entries = Model.GetLog(data.lang, data.from, data.to, data.search);
+                int total;
+                data.Entries = Model.GetLog(data.lang, data.from, data.to, data.search, data.api, out total);
+                data.Total = total;
             }
             return View(data);
         }
@@ -40,5 +42,7 @@ namespace reExp.Controllers.log
         public DateTime? to { get; set; }
         public string search { get; set; }
         public List<LogEntry> Entries { get; set; }
+        public int Total { get; set; }
+        public int api { get; set; }
     }
 }

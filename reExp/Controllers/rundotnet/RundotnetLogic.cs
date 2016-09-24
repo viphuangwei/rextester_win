@@ -787,7 +787,7 @@ namespace reExp.Controllers.rundotnet
             {
                 reExp.Utils.Log.LogInfo("Linux " + res.System_Error, "RunDotNet");
                 data.Errors.Add(res.System_Error);
-                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: system error", (int)data.LanguageChoice, data.IsApi);
+                Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: system error " + res.System_Error, (int)data.LanguageChoice, data.IsApi);
                 return data;
             }
             if (!string.IsNullOrEmpty(res.Errors))
@@ -795,7 +795,7 @@ namespace reExp.Controllers.rundotnet
                 data.Errors.Add(res.Errors);
                 if (!logged)
                 {
-                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: error", (int)data.LanguageChoice, data.IsApi);
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: error " + res.Errors, (int)data.LanguageChoice, data.IsApi);
                     logged = true;
                 }
             }
@@ -804,7 +804,7 @@ namespace reExp.Controllers.rundotnet
                 data.Errors.Add(res.Exit_Status);
                 if (!logged)
                 {
-                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: negative exit code", (int)data.LanguageChoice, data.IsApi);
+                    Utils.Log.LogCodeToDB(data.Program, data.Input, data.CompilerArgs, "Linux: negative exit code " + res.Exit_Status, (int)data.LanguageChoice, data.IsApi);
                     logged = true;
                 }
             }
