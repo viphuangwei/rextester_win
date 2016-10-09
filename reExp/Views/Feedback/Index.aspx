@@ -36,7 +36,7 @@
                 <table>
                     <tr>
                         <td>
-                            <%: Html.TextAreaFor(model => model.Message, 10, 60, null)%>
+                            <%: Html.TextAreaFor(model => model.Message, 10, 50, null)%>
                         </td>
                     </tr>
                    <%-- <tr>

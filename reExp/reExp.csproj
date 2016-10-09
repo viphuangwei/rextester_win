@@ -184,6 +184,9 @@
     <Content Include="Content\Google.png" />
     <Content Include="Content\javacolors.css" />
     <Content Include="Content\List.css" />
+    <Content Include="Content\mobile\bootstrap.css" />
+    <Content Include="Content\mobile\bootstrap.min.css" />
+    <Content Include="Content\mobile\Site.css" />
     <Content Include="Content\Schema.png" />
     <Content Include="Content\Tester.css" />
     <Content Include="Content\up.png" />
@@ -695,6 +698,21 @@
     <Content Include="Scripts\mdd_modal_background.png" />
     <Content Include="Scripts\mdd_styles.css" />
     <Content Include="Scripts\mdd_toolbar.png" />
+    <Content Include="Scripts\mobile\bootstrap.js" />
+    <Content Include="Scripts\mobile\bootstrap.min.js" />
+    <None Include="Scripts\mobile\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\mobile\jquery-1.10.2.js" />
+    <Content Include="Scripts\mobile\jquery-1.10.2.min.js" />
+    <None Include="Scripts\mobile\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\mobile\jquery.validate.js" />
+    <Content Include="Scripts\mobile\jquery.validate.min.js" />
+    <Content Include="Scripts\mobile\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\mobile\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mobile\jscroll.js" />
+    <Content Include="Scripts\mobile\modernizr-2.6.2.js" />
+    <Content Include="Scripts\mobile\respond.js" />
+    <Content Include="Scripts\mobile\respond.min.js" />
+    <None Include="Scripts\mobile\_references.js" />
     <Content Include="Scripts\sharejs_exampleserver.js" />
     <Content Include="Scripts\tabby-0.11.min.js" />
     <Content Include="Scripts\tmp.js" />
@@ -804,6 +822,7 @@
     <None Include="Scripts\editarea\edit_area_compressor.php" />
     <None Include="Scripts\editarea\edit_area_full.gz" />
     <None Include="Scripts\editarea\plugins\test\images\Thumbs.db" />
+    <Content Include="Scripts\mobile\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="executables\usercode\" />

@@ -12,7 +12,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/db.s3db">
-      <publishTime>09/17/2016 14:57:58</publishTime>
+      <publishTime>10/09/2016 17:35:27</publishTime>
     </File>
     <File Include="bin/BookSleeve.dll">
       <publishTime>05/07/2016 15:20:28</publishTime>
@@ -27,13 +27,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:33</publishTime>
     </File>
     <File Include="bin/GlobalUtils.dll">
-      <publishTime>09/17/2016 17:56:59</publishTime>
+      <publishTime>10/09/2016 18:19:39</publishTime>
     </File>
     <File Include="bin/LevelDB.NET.dll">
-      <publishTime>09/17/2016 15:28:22</publishTime>
+      <publishTime>09/24/2016 16:49:42</publishTime>
     </File>
     <File Include="bin/LinqDb.dll">
-      <publishTime>09/17/2016 15:28:22</publishTime>
+      <publishTime>09/24/2016 16:49:42</publishTime>
     </File>
     <File Include="bin/MarkdownDeep.dll">
       <publishTime>05/07/2016 15:20:24</publishTime>
@@ -45,10 +45,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 15:20:24</publishTime>
     </File>
     <File Include="bin/protobuf-net.dll">
-      <publishTime>09/17/2016 15:28:23</publishTime>
+      <publishTime>09/24/2016 16:49:43</publishTime>
     </File>
     <File Include="bin/reExp.dll">
-      <publishTime>09/17/2016 17:57:00</publishTime>
+      <publishTime>10/09/2016 18:20:01</publishTime>
     </File>
     <File Include="bin/reExp.pdb">
       <publishTime>06/29/2012 00:16:38</publishTime>
@@ -60,13 +60,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
     <File Include="bin/Service.dll">
-      <publishTime>09/17/2016 17:56:59</publishTime>
+      <publishTime>10/09/2016 18:19:55</publishTime>
     </File>
     <File Include="bin/Service.pdb">
       <publishTime>06/26/2012 23:43:24</publishTime>
     </File>
     <File Include="bin/Service.XmlSerializers.dll">
-      <publishTime>09/17/2016 17:56:59</publishTime>
+      <publishTime>10/09/2016 18:19:56</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.DLL">
       <publishTime>05/07/2016 15:20:28</publishTime>
@@ -109,6 +109,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/List.css">
       <publishTime>05/07/2016 15:20:25</publishTime>
+    </File>
+    <File Include="Content/mobile/bootstrap.css">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Content/mobile/bootstrap.min.css">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Content/mobile/Site.css">
+      <publishTime>10/09/2016 17:12:37</publishTime>
     </File>
     <File Include="Content/Schema.png">
       <publishTime>05/07/2016 15:20:25</publishTime>
@@ -249,13 +258,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 15:20:25</publishTime>
     </File>
     <File Include="Linqdb_32/LevelDB.NET.dll">
-      <publishTime>09/17/2016 15:28:22</publishTime>
+      <publishTime>09/24/2016 16:49:42</publishTime>
     </File>
     <File Include="Linqdb_32/LinqDb.dll">
-      <publishTime>09/17/2016 15:28:22</publishTime>
+      <publishTime>09/24/2016 16:49:42</publishTime>
     </File>
     <File Include="Linqdb_32/protobuf-net.dll">
-      <publishTime>09/17/2016 15:28:23</publishTime>
+      <publishTime>09/24/2016 16:49:43</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>05/07/2016 15:20:29</publishTime>
@@ -2342,6 +2351,45 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/MicrosoftMvcValidation.js">
       <publishTime>05/07/2016 15:20:25</publishTime>
     </File>
+    <File Include="Scripts/mobile/bootstrap.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/bootstrap.min.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/jquery-1.10.2.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/jquery-1.10.2.min.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/jquery-1.10.2.min.map">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/jquery.validate.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/jquery.validate.min.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/jquery.validate.unobtrusive.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/jquery.validate.unobtrusive.min.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/jscroll.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/modernizr-2.6.2.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/respond.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
+    <File Include="Scripts/mobile/respond.min.js">
+      <publishTime>03/03/2016 17:31:21</publishTime>
+    </File>
     <File Include="Scripts/sharejs_exampleserver.js">
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
@@ -2370,25 +2418,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/31/2016 00:44:44</publishTime>
     </File>
     <File Include="Views/Discussion/Index.aspx">
-      <publishTime>09/03/2016 15:10:37</publishTime>
+      <publishTime>10/09/2016 17:18:31</publishTime>
     </File>
     <File Include="Views/Discussion/RelatedControl.ascx">
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
     <File Include="Views/Feedback/Index.aspx">
-      <publishTime>05/07/2016 15:20:28</publishTime>
+      <publishTime>10/09/2016 17:32:36</publishTime>
     </File>
     <File Include="Views/Log/Index.aspx">
       <publishTime>08/27/2016 22:00:03</publishTime>
     </File>
     <File Include="Views/LogData/Index.aspx">
-      <publishTime>09/17/2016 17:49:01</publishTime>
+      <publishTime>09/17/2016 17:59:06</publishTime>
     </File>
     <File Include="Views/Login/CreateGoogleUser.aspx">
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
     <File Include="Views/Login/Index.aspx">
-      <publishTime>05/07/2016 15:20:28</publishTime>
+      <publishTime>10/09/2016 16:54:22</publishTime>
     </File>
     <File Include="Views/Login/Notifications.aspx">
       <publishTime>07/31/2016 00:06:35</publishTime>
@@ -2412,10 +2460,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2016 00:13:03</publishTime>
     </File>
     <File Include="Views/RunDotNet/Index.aspx">
-      <publishTime>09/03/2016 15:07:57</publishTime>
+      <publishTime>10/09/2016 17:31:38</publishTime>
     </File>
     <File Include="Views/Shared/Site.Master">
-      <publishTime>08/27/2016 18:09:02</publishTime>
+      <publishTime>10/09/2016 16:56:57</publishTime>
     </File>
     <File Include="Views/Tester/Index.aspx">
       <publishTime>05/07/2016 15:20:28</publishTime>
@@ -2433,7 +2481,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/29/2016 21:32:22</publishTime>
+      <publishTime>10/09/2016 18:20:05</publishTime>
     </File>
   </ItemGroup>
 </Project>

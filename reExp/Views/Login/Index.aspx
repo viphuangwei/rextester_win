@@ -9,13 +9,15 @@
     <h2>Login or register</h2>
     <% using (Html.BeginForm("Index", "login"))
        {%>
+    <%if (!Utils.IsMobile)
+        {%>
        <div class="formcontent">
            <table>
                <tr>
                     <td>
                         Login:<br/>
                         <%:Html.TextBoxFor(f => f.Name, new { spellcheck = "false" })%><br/>
-                        <%:Html.PasswordFor(f => f.Password, new { style = "margin-top:5px;"})%><br/>
+                        <%:Html.PasswordFor(f => f.Password, new { style = "margin-top:5px;" })%><br/>
                         <input id="Button" type="submit" value="Login"/>
                     </td>
                     <td>
@@ -24,7 +26,7 @@
                     <td>
                          Register:<br/>
                         <%:Html.TextBoxFor(f => f.RegName, new { spellcheck = "false" })%><br/>
-                        <%:Html.PasswordFor(f => f.RegPassword, new { style = "margin-top:5px;"})%><br/>
+                        <%:Html.PasswordFor(f => f.RegPassword, new { style = "margin-top:5px;" })%><br/>
                         <input id="Submit1" type="submit" value="Register"/>
                     </td>
                     <td>
@@ -40,6 +42,28 @@
                </tr>
            </table>   
         </div>    
+    <%}
+    else
+    {%>
+        <div>
+             Login:<br/>
+            <%:Html.TextBoxFor(f => f.Name, new { spellcheck = "false" })%><br/>
+            <%:Html.PasswordFor(f => f.Password, new { style = "margin-top:5px;" })%><br/>
+            <input id="Button" type="submit" value="Login"/>
+        </div>
+        <div>
+             Register:<br/>
+            <%:Html.TextBoxFor(f => f.RegName, new { spellcheck = "false" })%><br/>
+            <%:Html.PasswordFor(f => f.RegPassword, new { style = "margin-top:5px;" })%><br/>
+            <input id="Submit1" type="submit" value="Register"/>
+        </div>
+        <div>
+            Use your Google account:<br/>
+            <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=<%:GlobalUtils.TopSecret.Google_client_id%>&redirect_uri=<%:GlobalUtils.TopSecret.Google_callback_url%>&scope=https://www.googleapis.com/auth/userinfo.email&state=<%:Model.redirectInfo%>">
+            <img src="/Content/Google.png" alt="Login with Google account" title="Login with Google account"/>
+            </a>
+        </div>
+    <%} %>
         <input type="hidden" value="<%:Model.redirectInfo%>" name="redirectInfo" id="redirectInfo" />
     <%} %>
     <pre class="resultarea" id="Result"><%

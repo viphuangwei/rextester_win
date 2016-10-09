@@ -2,18 +2,25 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <title>
         <asp:ContentPlaceHolder ID="TitleContent" runat="server">
         </asp:ContentPlaceHolder>
     </title>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+    <%if (!Utils.IsMobile)
+    {%>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <%} else { %>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%} %>
     <asp:ContentPlaceHolder ID="MetaContent" runat="server">
     </asp:ContentPlaceHolder>
 
+    <%if (!Utils.IsMobile)
+    {%>
     <style type="text/css">
         body
         {
@@ -142,40 +149,81 @@
         }
         .CodeMirror {font-size: 13px}
     </style>
+
     <script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <%}else { %>
+
+        <link href="/Content/mobile/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/Content/mobile/Site.css" rel="stylesheet"/>
+        <script src="/Scripts/mobile/modernizr-2.6.2.js"></script>
+        <script src="/Scripts/mobile/jquery-1.10.2.min.js"></script>
+        <script src="/Scripts/mobile/bootstrap.min.js"></script>
+
+        <style type="text/css">
+            html, body{
+                margin:0px;
+                padding:0px;
+            }
+            pre.resultarea, code
+            {
+                font-family: "Consolas",monospace;
+                font-size: 14px;
+                white-space: pre-wrap;       /* css-3 */
+                white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+                white-space: -pre-wrap;      /* Opera 4-6 */
+                white-space: -o-pre-wrap;    /* Opera 7 */
+                word-wrap: break-word;       /* Internet Explorer 5.5+ */
+                width: 99%;
+            }
+            a.selectedlink
+            {
+                text-decoration: underline;
+            }
+            a.notselectedlink
+            {
+                color: #9966FF;
+            }
+            a.notselectedlink:hover
+            {
+                background: #9966FF;
+                color: White;
+            }
+
+            .sqloutput
+            {
+                border-style: none;    
+                border-collapse: collapse;
+            }
+            .sqloutput th, .sqloutput td
+            {
+                border-style: solid;
+                border-width: 1px;
+                border-color: Gray;
+                padding: 0 3px 0 3px;
+            }
+        </style>
+    <%} %>
+    
     <script type="text/javascript">
         <%if(SessionManager.IsUserInSession())
         {%>
-        $(document).ready(function () {
-            setTimeout(function() {
-                $.ajax({
-                    type: "get", url: "<%:Utils.BaseUrl+"login/getnotificationscount"%>",
-                        success: function (data, text) {
-                            var obj = jQuery.parseJSON(data);
-                            if (obj.Total > 0) {
-                                $("#notifications").replaceWith("<a href=\"<%:Utils.BaseUrl+"login/notifications"%>\" id=\"notifications\" style=\"background-color:red; color: white; padding-left:3px; padding-right:3px;text-decoration:none;\">" + obj.Total + "</a>");
-                            }
-                        },
-                        error: function (request, status, error) {
-                        },
-                        cache: false
-                    });
-            }, 1000)
+            $(document).ready(function () {
+                setTimeout(function() {
+                    $.ajax({
+                        type: "get", url: "<%:Utils.BaseUrl+"login/getnotificationscount"%>",
+                            success: function (data, text) {
+                                var obj = jQuery.parseJSON(data);
+                                if (obj.Total > 0) {
+                                    $("#notifications").replaceWith("<a href=\"<%:Utils.BaseUrl+"login/notifications"%>\" id=\"notifications\" style=\"background-color:red; color: white; padding-left:3px; padding-right:3px;text-decoration:none;\">" + obj.Total + "</a>");
+                                }
+                            },
+                            error: function (request, status, error) {
+                            },
+                            cache: false
+                        });
+                }, 1000)
 
-            });
-        <%}%>
-    </script>
-    <!-- Put the following javascript before the closing </head> tag. -->
-    <script type="text/javascript">
-        <%if(Utils.GetCurrentPage() == Utils.PagesEnum.Home)
-        {%>
-        (function () {
-            var cx = '017131087770067236583:tpyq17ei4jw';
-            var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-                '//www.google.com/cse/cse.js?cx=' + cx;
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-        })();
+                });
         <%}%>
     </script>
     <script type="text/javascript">
@@ -196,47 +244,73 @@
     <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
     </asp:ContentPlaceHolder>
     <%var currentPage = Utils.GetCurrentPage();%>
+    <%if(!Utils.IsMobile)
+    {%>
     <table style="width: 100%; padding-right: 2em">
         <tr>
             <td align="right">
-                <a <%if(currentPage == Utils.PagesEnum.Rundotnet){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run Code</a>&nbsp;
-                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Codewall){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code Wall</a>&nbsp;
-                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Users){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">Users</a>&nbsp;
-                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Tester || currentPage == Utils.PagesEnum.Replace || currentPage == Utils.PagesEnum.Reference || currentPage == Utils.PagesEnum.Diff) {%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Misc</a>&nbsp;
-                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Feedback){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Feedback)%>">Feedback</a>&nbsp;
-                |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Home){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Home)%>">About</a>&nbsp;  
+                <a <%if (currentPage == Utils.PagesEnum.Rundotnet){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run Code</a>&nbsp;
+                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Codewall){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code Wall</a>&nbsp;
+                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Users){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">Users</a>&nbsp;
+                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Tester || currentPage == Utils.PagesEnum.Replace || currentPage == Utils.PagesEnum.Reference || currentPage == Utils.PagesEnum.Diff){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Misc</a>&nbsp;
+                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Feedback){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Feedback)%>">Feedback</a>&nbsp;
+                |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Home){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Home)%>">About</a>&nbsp;  
                 <%if (SessionManager.IsUserInSession())
-                {                      
-                      %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.UsersStuff || currentPage == Utils.PagesEnum.Notifications){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.UsersStuff)%>"><%:SessionManager.UserName%></a>&nbsp;<span id="notifications"></span>
+                {
+                      %>|&nbsp;<a <%if (currentPage == Utils.PagesEnum.UsersStuff || currentPage == Utils.PagesEnum.Notifications){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.UsersStuff)%>"><%:SessionManager.UserName%></a>&nbsp;<span id="notifications"></span>
                         |&nbsp;<a class="notselectedlink" href="<%:Utils.GetUrl(Utils.PagesEnum.Logout)%>">Log out</a>&nbsp;<%
                         if (SessionManager.IsAdmin)
                         {%>
-                        |&nbsp;<a <%if(currentPage == Utils.PagesEnum.Log){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Log)%>">Log</a>&nbsp;
+                        |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Log){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Log)%>">Log</a>&nbsp;
                         <%}
-                }
-                else
-                {
-                    %>|&nbsp;<a <%if(currentPage == Utils.PagesEnum.Login){%>class="selectedlink"<%}else{%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a>&nbsp;<%
-                }%>
+                } else
+                {%>
+                    |&nbsp;<a <%if (currentPage == Utils.PagesEnum.Login){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a>&nbsp;
+                <%}%>
             </td>
         </tr>
     </table>
+    <%}else { %>
+        <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <a class="navbar-brand" href="/"><img src="/favicon.ico" style="margin-bottom:5px;"/>&nbsp;&nbsp;rextester</a>
+            </div>
 
-    
-    <%--<div style="float: right;width:165px;margin-top:54px;">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- rextester -->
-        <ins class="adsbygoogle"
-                style="display:inline-block;width:160px;height:600px"
-                data-ad-client="ca-pub-5295432873915987"
-                data-ad-slot="1390277153"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a <%if (currentPage == Utils.PagesEnum.Rundotnet){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run Code</a></li>
+                    <li><a <%if (currentPage == Utils.PagesEnum.Codewall){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code Wall</a></li>
+                    <li><a <%if (currentPage == Utils.PagesEnum.Users){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">Users</a></li>
+                    <li><a <%if (currentPage == Utils.PagesEnum.Tester || currentPage == Utils.PagesEnum.Replace || currentPage == Utils.PagesEnum.Reference || currentPage == Utils.PagesEnum.Diff){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Tester)%>">Misc</a></li>
+                    <li><a <%if (currentPage == Utils.PagesEnum.Feedback){%>class="selectedlink"<%} else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Feedback)%>">Feedback</a></li>
+                    <li><a <%if (currentPage == Utils.PagesEnum.Home) {%>class="selectedlink"<%} else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Home)%>">About</a></li>
+                    
+                    <%if (SessionManager.IsUserInSession())
+                    {
+                      %><li><a <%if (currentPage == Utils.PagesEnum.UsersStuff || currentPage == Utils.PagesEnum.Notifications){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.UsersStuff)%>"><%:SessionManager.UserName%></a><span id="notifications"></span></li>
+                        <li><a class="notselectedlink" href="<%:Utils.GetUrl(Utils.PagesEnum.Logout)%>">Log out</a></li>
+                        <%if (SessionManager.IsAdmin) {%>
+                            <li><a <%if (currentPage == Utils.PagesEnum.Log){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Log)%>">Log</a></li>
+                        <%}
+                    }
+                    else
+                    {
+                    %><li><a <%if (currentPage == Utils.PagesEnum.Login){%>class="selectedlink"<%}else {%>class="notselectedlink"<%}%> href="<%:Utils.GetUrl(Utils.PagesEnum.Login)%>">Login</a></li>
+                    <%}%>
+                </ul>
+            </div>
+
+        </div>
     </div>
-    <div style="overflow: hidden;">--%>
+    <%}%>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         </asp:ContentPlaceHolder>
-    <%--</div>--%>
 </body>
 </html>

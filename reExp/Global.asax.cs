@@ -173,15 +173,27 @@ namespace reExp
             }
         }
 
-        //protected void Application_BeginRequest(object sender, EventArgs ev)
+        protected void Application_BeginRequest(object sender, EventArgs ev)
+        {
+            if (Request.Url.Host.StartsWith("www", StringComparison.InvariantCultureIgnoreCase) && !Request.Url.IsLoopback)
+            {
+                Response.Clear();
+                Response.AddHeader("Location",
+                    String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Host.Substring(4), Request.Url.PathAndQuery)
+                    );
+                Response.StatusCode = 301;
+                Response.End();
+            }
+        }
+
+        //protected void Application_BeginRequest(object sender, EventArgs e)
         //{
-        //    if (Request.Url.Host.StartsWith("www", StringComparison.InvariantCultureIgnoreCase))
+        //    if (!Request.Url.Host.StartsWith("www") && !Request.Url.IsLoopback)
         //    {
-        //        Response.Clear();
-        //        Response.AddHeader("Location",
-        //            String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Host.Substring(4), Request.Url.PathAndQuery)
-        //            );
+        //        UriBuilder builder = new UriBuilder(Request.Url);
+        //        builder.Host = "www." + Request.Url.Host;
         //        Response.StatusCode = 301;
+        //        Response.AddHeader("Location", builder.ToString());
         //        Response.End();
         //    }
         //}

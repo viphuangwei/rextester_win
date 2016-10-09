@@ -125,6 +125,10 @@ namespace reExp.Controllers.rundotnet
                     data.LivesVersion = Model.IsLive(data.PrimaryGuid);
                 }
 
+                if(Utils.Utils.IsMobile)
+                {
+                    data.EditorChoice = EditorsEnum.Simple;
+                }
                 return View(data);
             }
 
@@ -294,6 +298,12 @@ namespace reExp.Controllers.rundotnet
 
             data.Program = data.GetInitialCode(data.LanguageChoice, data.EditorChoice);
             data.CompilerArgs = data.GetInitialCompilerArgs(data.LanguageChoice);
+
+            if (Utils.Utils.IsMobile)
+            {
+                data.EditorChoice = EditorsEnum.Simple;
+            }
+
             return View(data);
         }
         int maxChars = 300000;
@@ -510,6 +520,11 @@ namespace reExp.Controllers.rundotnet
             data.EditVisible = false;
             data.BackToForkVisible = code.IsPrimaryVersion;
             data.PrimaryGuid = code.PrimaryGuid == null ? data.CodeGuid : code.PrimaryGuid;
+
+            if (Utils.Utils.IsMobile)
+            {
+                data.EditorChoice = EditorsEnum.Simple;
+            }
 
             return View("Index", data);
         }

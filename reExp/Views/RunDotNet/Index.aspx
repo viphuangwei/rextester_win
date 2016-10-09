@@ -156,10 +156,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%if (!string.IsNullOrEmpty(Model.Title))
       {%>
+        <%if(!Utils.IsMobile)
+        {%>
             <h2 style="margin-top:0.5em; margin-bottom:0.5em; word-wrap: break-word;" title="<%:Model.Title%>"><%:Model.Title.Length > 70 ? Model.Title.Substring(0, 70) + "..." : Model.Title%></h2>
-    <%}
+        <%}%>
+     <%}
       else
       {%>
+            <%if(!Utils.IsMobile)
+            {%>
             <h2>
                 <%if (Model.LanguageChoice == LanguagesEnum.Nasm)
                 {
@@ -307,6 +312,7 @@
                 }%>
 
             </h2>
+            <%}%>
       <%} %>
     <%using (Html.BeginForm("Index", "rundotnet", FormMethod.Post, new {id = "mainForm"}))
       {%>
@@ -315,7 +321,9 @@
                 <tr>
                     <td align="left">
                         <span style="margin: 0 0.5em 0 0">Language:</span><%:Html.DropDownListFor(f => f.LanguageChoiceWrapper, Model.Languages)%>
+                        <%if(!Utils.IsMobile) {%>
                         <span style="margin: 0 0.5em 0 0.5em">Editor:</span><%:Html.DropDownListFor(f => f.EditorChoiceWrapper, Model.Editor)%>
+                        <%}%>
                     </td>
                 </tr>
             </table>
@@ -341,7 +349,7 @@
               else
               { %>
                   <div style="width: 95%; margin-top:1em;">
-                        <textarea class="editor" spellcheck="false" cols="1000" id="Program" name="Program" rows="30" style="width: 100%;resize:none;"><%=HttpUtility.HtmlEncode(Model.Program)%></textarea>
+                        <textarea class="editor" spellcheck="false" cols="1000" id="Program" name="Program" <%= !Utils.IsMobile ? @"rows=""30""" :  @"rows=""12"""%> style="width: 100%;resize:none;"><%=HttpUtility.HtmlEncode(Model.Program)%></textarea>
                   </div>
               <%} %>
 
@@ -1394,7 +1402,14 @@
                             {             
                                 var img_div = $(document.createElement('div'));
                                 var img = $(document.createElement('img'));
-                                img.attr('src', "data:image/png;base64," + obj.Files[key]).height(600).width(700);
+                                <%if (!Utils.IsMobile)
+                                {%>
+                                    img.attr('src', "data:image/png;base64," + obj.Files[key]).height(600).width(700);
+                                <%}
+                                else
+                                {%>
+                                    img.attr('src', "data:image/png;base64," + obj.Files[key]).height(300).width(300);
+                                <%} %>
                                 img.appendTo(img_div);
                                 img_div.appendTo($('#Files'));
                             }

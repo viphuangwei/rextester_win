@@ -21,7 +21,14 @@ namespace reExp.Utils
         private static readonly object globalLock = new object();
         private static readonly Random globalRandom = new Random();
 
-
+        public static bool IsMobile
+        {
+            get
+            {
+                return System.Web.HttpContext.Current.Request.Browser.IsMobileDevice;
+                //return true;
+            }
+        }
         public static bool IsIE
         {
             get
