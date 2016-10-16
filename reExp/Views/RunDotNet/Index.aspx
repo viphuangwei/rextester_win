@@ -323,6 +323,10 @@
                         <span style="margin: 0 0.5em 0 0">Language:</span><%:Html.DropDownListFor(f => f.LanguageChoiceWrapper, Model.Languages)%>
                         <%if(!Utils.IsMobile) {%>
                         <span style="margin: 0 0.5em 0 0.5em">Editor:</span><%:Html.DropDownListFor(f => f.EditorChoiceWrapper, Model.Editor)%>
+                        <%}
+                        else
+                        {%>
+                        <input type="hidden" name="EditorChoiceWrapper" id="EditorChoiceWrapper" value="3"/>
                         <%}%>
                     </td>
                 </tr>

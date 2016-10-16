@@ -517,19 +517,37 @@ namespace reExp.Models
             var res = Db.Table<LogEntry>();
             if (lang != 0)
             {
-                res.Where(f => f.Lang == (int)lang);
+                res.Search(f => f.Lang_string, lang.ToString());
             }
-            if (from != null && to != null)
+
+            if (from != null || to != null)
             {
-                res.Between(f => f.Time, (DateTime)from, (DateTime)to, BetweenBoundaries.BothInclusive);
-            }
-            else if (from != null)
-            {
-                res.Where(f => f.Time >= (DateTime)from);
-            }
-            else if (to != null)
-            {
-                res.Where(f => f.Time <= (DateTime)to);
+                if (from == null)
+                {
+                    var first = Db.Table<LogEntry>().OrderBy(f => f.Time).Take(1).Select(f => new { Time = f.Time }).FirstOrDefault();
+                    from = first == null ? DateTime.Now : first.Time;
+                }
+                if (to == null)
+                {
+                    var last = Db.Table<LogEntry>().OrderByDescending(f => f.Time).Take(1).Select(f => new { Time = f.Time }).FirstOrDefault();
+                    to = last == null ? DateTime.Now : last.Time;
+                }
+                if (((DateTime)to - (DateTime)from).TotalDays < 1)
+                {
+                    res.Between(f => f.Time, (DateTime)from, (DateTime)to, BetweenBoundaries.BothInclusive);
+                }
+                else
+                {
+                    var next = from.Value.AddDays(1);
+                    res.Between(f => f.Time, (DateTime)from, new DateTime(next.Year, next.Month, next.Day), BetweenBoundaries.BothInclusive);
+                    DateTime d;
+                    for (d = new DateTime(next.Year, next.Month, next.Day); d <= to.Value.AddDays(-1); d = d.AddDays(1))
+                    {
+                        res.Or().Search(f => f.Day_string, d.ToString("yyyyMMdd"));
+                    }
+                    d = d.AddDays(-1);
+                    res.Or().Between(f => f.Time, d, (DateTime)to, BetweenBoundaries.BothInclusive);
+                }
             }
             if (!string.IsNullOrEmpty(search))
             {
@@ -537,13 +555,14 @@ namespace reExp.Models
             }
             if (api == 1)
             {
-                res.Where(f => f.Is_api == 1);
+                res.Search(f => f.Is_api_string, "1");
             }
             if (api == 2)
             {
-                res.Where(f => f.Is_api == 0);
+                res.Search(f => f.Is_api_string, "0");
             }
-            return res.OrderByDescending(f => f.Time).Take(50).SelectEntity(out total);
+            
+            return res.OrderByDescending(f => f.Id).Take(50).SelectEntity(out total);
         }
         public static void LogRun(string data, string input, string compiler_args, string result, int lang, bool is_api, string log_path)
         {
@@ -559,7 +578,10 @@ namespace reExp.Models
                         Compiler_args = compiler_args,
                         Lang = lang,
                         Is_api = is_api ? 1 : 0,
-                        Time = DateTime.Now
+                        Lang_string = lang.ToString(),
+                        Is_api_string = is_api ? "1" : "0",
+                        Time = DateTime.Now,
+                        Day_string = DateTime.Now.ToString("yyyyMMdd")
                     };
                     Db.Table<LogEntry>().Save(entry);
                 }
@@ -766,7 +788,9 @@ namespace reExp.Models
         public int Lang { get; set; }
         public int Is_api { get; set; }
         public DateTime Time { get; set; }
-
+        public string Lang_string { get; set; }
+        public string Is_api_string { get; set; }
+        public string Day_string { get; set; }
     }
 
 
