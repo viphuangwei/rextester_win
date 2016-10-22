@@ -407,6 +407,10 @@
                         {%>
                         <span id="Args_label" style="margin-left: 0.5em;font-size: 0.85em; cursor:pointer;">[&nbsp;<span id="Expand_args_sign" style="font-size: 0.85em;">+</span>&nbsp;]&nbsp;Compiler args</span>
                         <%} %>
+                        <%if (Utils.IsMobile)
+                        {%>
+                        <input id="Wall" type="button" style="margin-left: 1em;" value="Put on a wall" />
+                        <%}%>
                         <%if (Model.ShowInput)
                         {%>
                         <span id="Input_label" style="margin-left: 0.5em;font-size: 0.85em; cursor:pointer;">[&nbsp;<span id="Expand_input_sign" style="font-size: 0.85em;"><%:(string.IsNullOrEmpty(Model.Input) || Model.IsLive) ? "+" : "-"%></span>&nbsp;]&nbsp;<span id="Expand_input_text">Show input</span></span>
@@ -432,12 +436,18 @@
                             <span  id="chat" style="font-size: 0.85em; margin-left:0.5em;cursor:pointer;">[&nbsp;<span id="chatsign" style="font-size: 0.85em;">+</span>&nbsp;]&nbsp;</span>
                             <%} %>
                          <%}%>
+                        <%if (!Utils.IsMobile)
+                        {%>
                         <input style="margin-left:1em;" id="Wall" type="button" value="Put on a wall" />
+                        <%}%>
                         <%if (Model.EditorChoice == EditorsEnum.Codemirror && !Model.IsLive)
                         {%>
                             <input title="Fullscreen (F11), Esc to exit" style="margin-left:1em;" id="Full" type="button" value="F"/>
                         <%}%>
+                        <%if (!Utils.IsMobile)
+                        {%>
                         <input style="margin-left:1em;" id="Help" type="button" value="?"/>
+                        <%} %>
                     </td>                  
                 </tr>
                 <tr>

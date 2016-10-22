@@ -27,13 +27,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2014 18:34:33</publishTime>
     </File>
     <File Include="bin/GlobalUtils.dll">
-      <publishTime>10/15/2016 21:06:42</publishTime>
+      <publishTime>10/18/2016 23:06:53</publishTime>
     </File>
     <File Include="bin/LevelDB.NET.dll">
       <publishTime>10/15/2016 21:59:07</publishTime>
     </File>
     <File Include="bin/LinqDb.dll">
-      <publishTime>10/16/2016 19:51:57</publishTime>
+      <publishTime>10/19/2016 21:41:28</publishTime>
     </File>
     <File Include="bin/MarkdownDeep.dll">
       <publishTime>05/07/2016 15:20:24</publishTime>
@@ -48,7 +48,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/15/2016 21:59:08</publishTime>
     </File>
     <File Include="bin/reExp.dll">
-      <publishTime>10/16/2016 19:53:10</publishTime>
+      <publishTime>10/22/2016 16:09:23</publishTime>
     </File>
     <File Include="bin/reExp.pdb">
       <publishTime>06/29/2012 00:16:38</publishTime>
@@ -60,13 +60,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
     <File Include="bin/Service.dll">
-      <publishTime>10/16/2016 19:52:46</publishTime>
+      <publishTime>10/22/2016 16:09:13</publishTime>
     </File>
     <File Include="bin/Service.pdb">
       <publishTime>06/26/2012 23:43:24</publishTime>
     </File>
     <File Include="bin/Service.XmlSerializers.dll">
-      <publishTime>10/16/2016 19:52:46</publishTime>
+      <publishTime>10/22/2016 16:09:13</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.DLL">
       <publishTime>05/07/2016 15:20:28</publishTime>
@@ -118,6 +118,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/mobile/Site.css">
       <publishTime>10/09/2016 17:12:37</publishTime>
+    </File>
+    <File Include="Content/mobile/site.min.css">
+      <publishTime>10/22/2016 14:00:58</publishTime>
     </File>
     <File Include="Content/Schema.png">
       <publishTime>05/07/2016 15:20:25</publishTime>
@@ -261,7 +264,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/15/2016 21:59:07</publishTime>
     </File>
     <File Include="Linqdb_32/LinqDb.dll">
-      <publishTime>10/16/2016 19:51:57</publishTime>
+      <publishTime>10/19/2016 21:41:28</publishTime>
     </File>
     <File Include="Linqdb_32/protobuf-net.dll">
       <publishTime>10/15/2016 21:59:08</publishTime>
@@ -2381,6 +2384,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/mobile/jscroll.js">
       <publishTime>03/03/2016 17:31:21</publishTime>
     </File>
+    <File Include="Scripts/mobile/mobile.min.js">
+      <publishTime>10/22/2016 14:04:36</publishTime>
+    </File>
     <File Include="Scripts/mobile/modernizr-2.6.2.js">
       <publishTime>03/03/2016 17:31:21</publishTime>
     </File>
@@ -2424,7 +2430,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
     <File Include="Views/Feedback/Index.aspx">
-      <publishTime>10/09/2016 17:32:36</publishTime>
+      <publishTime>10/17/2016 22:59:32</publishTime>
     </File>
     <File Include="Views/Log/Index.aspx">
       <publishTime>08/27/2016 22:00:03</publishTime>
@@ -2448,7 +2454,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
     <File Include="Views/Main/Index.aspx">
-      <publishTime>08/28/2016 16:03:39</publishTime>
+      <publishTime>10/22/2016 13:53:46</publishTime>
     </File>
     <File Include="Views/Reference/Index.aspx">
       <publishTime>05/07/2016 15:20:28</publishTime>
@@ -2460,10 +2466,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2016 00:13:03</publishTime>
     </File>
     <File Include="Views/RunDotNet/Index.aspx">
-      <publishTime>10/09/2016 17:31:38</publishTime>
+      <publishTime>10/17/2016 23:07:50</publishTime>
     </File>
     <File Include="Views/Shared/Site.Master">
-      <publishTime>10/09/2016 19:12:09</publishTime>
+      <publishTime>10/22/2016 15:10:45</publishTime>
     </File>
     <File Include="Views/Tester/Index.aspx">
       <publishTime>05/07/2016 15:20:28</publishTime>
@@ -2481,7 +2487,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 15:20:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/15/2016 21:09:18</publishTime>
+      <publishTime>10/22/2016 16:09:27</publishTime>
     </File>
   </ItemGroup>
 </Project>

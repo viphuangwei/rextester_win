@@ -134,6 +134,7 @@ namespace reExp.Utils
             return Utils.RandomString(true);
         }
 
+        public static Db db { get; set; }
         public static string BaseUrl = /*@"http://localhost:52512/";*/ @"http://rextester.com/";
         //public static string PathToFsc = @"C:\Program Files (x86)\Microsoft SDKs\F#\4.0\Framework\v4.0";
         public static string CurrentPath

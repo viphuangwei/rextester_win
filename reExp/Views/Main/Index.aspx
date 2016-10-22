@@ -4,13 +4,9 @@
     About rextester
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Search</h2>
     <div style="width: 95%;">
-        <!-- Place this tag where you want both of the search box and the search results to render -->
-        <gcse:search></gcse:search>
-        <br/>
         <h2>About</h2>
-        Rextester - some online tools for anyone who finds them useful. It was started as online .net regex tester.
+        Rextester - some online tools for anyone who finds them useful. It was started as <a href="http://rextester.com/tester">online .net regex tester</a>. Rextester stands for <b>r</b>egular <b>ex</b>pression <b>tester</b>.
         <br/>
         <a href="http://rextester.com/main/faq/">Short faq and troubleshooting.</a> <br/>
         <a href="https://groups.google.com/forum/#!forum/rextester">Discussion forum.</a><br/><br/>

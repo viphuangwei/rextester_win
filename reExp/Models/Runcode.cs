@@ -510,26 +510,45 @@ namespace reExp.Models
 
         public static LogEntry GetLogEntry(int id)
         {
-            return Db.Table<LogEntry>().Where(f => f.Id == id).SelectEntity().FirstOrDefault();
+            return Utils.Utils.db.Table<LogEntry>().Where(f => f.Id == id).SelectEntity().FirstOrDefault();
         }
         public static List<LogEntry> GetLog(int lang, DateTime? from, DateTime? to, string search, int api, out int total)
         {
-            var res = Db.Table<LogEntry>();
+            var res = Utils.Utils.db.Table<LogEntry>();
             if (lang != 0)
             {
-                res.Search(f => f.Lang_string, lang.ToString());
+                res.Where(f => f.Lang == lang);
             }
 
+            WorkOnDates(res, from, to);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
+            }
+            if (api == 1)
+            {
+                res.Where(f => f.Is_api == 1);
+            }
+            if (api == 2)
+            {
+                res.Where(f => f.Is_api == 0);
+            }
+            
+            return res.OrderByDescending(f => f.Id).Take(50).SelectEntity(out total);
+        }
+        static void WorkOnDates(LinqDbInternal.IDbQueryable<LogEntry> res, DateTime? from, DateTime? to)
+        {
             if (from != null || to != null)
             {
                 if (from == null)
                 {
-                    var first = Db.Table<LogEntry>().OrderBy(f => f.Time).Take(1).Select(f => new { Time = f.Time }).FirstOrDefault();
+                    var first = Utils.Utils.db.Table<LogEntry>().OrderBy(f => f.Time).Take(1).Select(f => new { Time = f.Time }).FirstOrDefault();
                     from = first == null ? DateTime.Now : first.Time;
                 }
                 if (to == null)
                 {
-                    var last = Db.Table<LogEntry>().OrderByDescending(f => f.Time).Take(1).Select(f => new { Time = f.Time }).FirstOrDefault();
+                    var last = Utils.Utils.db.Table<LogEntry>().OrderByDescending(f => f.Time).Take(1).Select(f => new { Time = f.Time }).FirstOrDefault();
                     to = last == null ? DateTime.Now : last.Time;
                 }
                 if (((DateTime)to - (DateTime)from).TotalDays < 1)
@@ -549,20 +568,6 @@ namespace reExp.Models
                     res.Or().Between(f => f.Time, d, (DateTime)to, BetweenBoundaries.BothInclusive);
                 }
             }
-            if (!string.IsNullOrEmpty(search))
-            {
-                res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
-            }
-            if (api == 1)
-            {
-                res.Search(f => f.Is_api_string, "1");
-            }
-            if (api == 2)
-            {
-                res.Search(f => f.Is_api_string, "0");
-            }
-            
-            return res.OrderByDescending(f => f.Id).Take(50).SelectEntity(out total);
         }
         public static void LogRun(string data, string input, string compiler_args, string result, int lang, bool is_api, string log_path)
         {
@@ -578,12 +583,10 @@ namespace reExp.Models
                         Compiler_args = compiler_args,
                         Lang = lang,
                         Is_api = is_api ? 1 : 0,
-                        Lang_string = lang.ToString(),
-                        Is_api_string = is_api ? "1" : "0",
                         Time = DateTime.Now,
                         Day_string = DateTime.Now.ToString("yyyyMMdd")
                     };
-                    Db.Table<LogEntry>().Save(entry);
+                    Utils.Utils.db.Table<LogEntry>().Save(entry);
                 }
                 catch (Exception e)
                 {
@@ -788,8 +791,6 @@ namespace reExp.Models
         public int Lang { get; set; }
         public int Is_api { get; set; }
         public DateTime Time { get; set; }
-        public string Lang_string { get; set; }
-        public string Is_api_string { get; set; }
         public string Day_string { get; set; }
     }
 

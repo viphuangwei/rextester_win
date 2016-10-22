@@ -59,7 +59,9 @@
                 <br/>
                         <a href="https://groups.google.com/forum/#!forum/rextester">Discussion forum</a><br/><br/>
 	        </div>      
+		<b>Note:</b> please provide your email in text if you expect an answer.
             </div>
+		
        <%}%>
        <%if (Model.IsResult)
         {%>

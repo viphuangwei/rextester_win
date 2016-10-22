@@ -149,12 +149,13 @@ namespace reExp
 
             reExp.Utils.Utils.RootFolder = Server.MapPath("~/");
             //System.Environment.SetEnvironmentVariable("FSHARP_BIN", Utils.Utils.PathToFsc);
-            Db.Init(ConfigurationManager.AppSettings["LogPath"]);
+
+            Utils.Utils.db = new Db(ConfigurationManager.AppSettings["LogPath"]);
         }
 
         protected void Application_End()
         {
-            Db.Dispose();
+            Utils.Utils.db.Dispose();
         }
 
         protected void Application_Error(object sender, EventArgs e)
