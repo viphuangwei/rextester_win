@@ -136,7 +136,7 @@ namespace reExp.Controllers.login
                                    })
                                    .ToList();
                 data.CurrentPage = 0;
-                data.TotalRecords = 10;
+                data.TotalRecords = data.Items.Count();
             }
 
             data.Wall_ID = Model.GetUserWallId();

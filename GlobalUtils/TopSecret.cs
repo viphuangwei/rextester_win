@@ -94,7 +94,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return @"day";
             }
         }
 

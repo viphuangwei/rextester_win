@@ -174,7 +174,7 @@ namespace reExp.Models
                                 Lang = data.LanguageChoice.ToLanguage(),
                                 UserId = uid,
                                 Title = data.Title,
-                                IsLive = live
+                                IsLive = live == true ? 1 : 0
                             });
                         });
                 }
@@ -198,7 +198,7 @@ namespace reExp.Models
                 Lang = c.Lang.ToLanguage(),
                 UserId = (int)c.UserId,
                 Text = chat,
-                IsLive = true,
+                IsLive = 1,
                 Title = c.Title
             });
         }
@@ -537,7 +537,7 @@ namespace reExp.Models
             
             return res.OrderByDescending(f => f.Id).Take(50).SelectEntity(out total);
         }
-        static void WorkOnDates(LinqDbInternal.IDbQueryable<LogEntry> res, DateTime? from, DateTime? to)
+        static void WorkOnDates(ILinqDbQueryable<LogEntry> res, DateTime? from, DateTime? to)
         {
             if (from != null || to != null)
             {

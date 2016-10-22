@@ -7,123 +7,141 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using LinqDb;
 
 namespace Jobs
 {
     public class Elastic
     {
+        static Db db = new Db(@"C:\inetpub\wwwroot\rextester\search");
+
+        static int i = 0;
         public static void PutUserItem(UsersItem item)
         {
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            ser.MaxJsonLength = Int32.MaxValue;
-            string data = ser.Serialize(item);
-            using (var client = new WebClient())
+            //JavaScriptSerializer ser = new JavaScriptSerializer();
+            //ser.MaxJsonLength = Int32.MaxValue;
+            //string data = ser.Serialize(item);
+            //using (var client = new WebClient())
+            //{
+            //    client.Encoding = Encoding.UTF8;
+            //    client.UploadString(TopSecret.ElasticUrl + item.UserId + "/" + item.ID, "PUT", data);
+            //}
+            db.Table<UsersItem>().Save(item);
+            i++;
+            if (i % 1000 == 0)
             {
-                client.Encoding = Encoding.UTF8;
-                client.UploadString(TopSecret.ElasticUrl + item.UserId + "/" + item.ID, "PUT", data);
+                Console.WriteLine(i);
             }
         }
         public void Do()
         {
+            try
             {
-                var s = @"select u.id as user_id, u.name, c.code, c.guid, c.title, c.lang, c.date, uc.type
+                {
+                    var s = @"select u.id as user_id, u.name, c.code, c.guid, c.title, c.lang, c.date, uc.type
                           from userscode uc
                                 inner join code c on uc.code_id = c.id
                                 inner join users u on c.user_id = u.id";
 
-                List<UsersItem> wallsCode = new List<UsersItem>();
-                var res = DB.ExecuteQuery(s, new List<SQLiteParameter>());
-                foreach (var wcode in res)
-                {
-
-                    wallsCode.Add(new UsersItem()
+                    List<UsersItem> wallsCode = new List<UsersItem>();
+                    var res = DB.ExecuteQuery(s, new List<SQLiteParameter>());
+                    foreach (var wcode in res)
                     {
-                        Title = (wcode["title"] == DBNull.Value ? null : (string)wcode["title"]),
-                        Code = (string)wcode["code"],
-                        Lang = Helpers.ToLanguage((Helpers.LanguagesEnum)Convert.ToInt32(wcode["lang"])),
-                        Guid = (string)wcode["guid"],
-                        UserId = Convert.ToInt32(wcode["user_id"]),
-                        ID = "code_" + (string)wcode["guid"],
-                        Date = Convert.ToDateTime(wcode["date"]),
-                        IsLive = (wcode["type"]+"") == "3"
-                    });
+
+                        wallsCode.Add(new UsersItem()
+                        {
+                            Title = (wcode["title"] == DBNull.Value ? null : (string)wcode["title"]),
+                            Code = (string)wcode["code"],
+                            Lang = Helpers.ToLanguage((Helpers.LanguagesEnum)Convert.ToInt32(wcode["lang"])),
+                            Guid = (string)wcode["guid"],
+                            UserId = Convert.ToInt32(wcode["user_id"]),
+                            ID = "code_" + (string)wcode["guid"],
+                            Date = Convert.ToDateTime(wcode["date"]),
+                            IsLive = (wcode["type"] + "") == "3" ? 1 : 0
+                        });
+                    }
+
+                    foreach (var r in wallsCode)
+                    {
+                        PutUserItem(r);
+                    }
                 }
 
-                foreach (var r in wallsCode)
                 {
-                    PutUserItem(r);
-                }
-            }
-
-            {
-                var s = @"select u.id as user_id, u.name, r.regex, r.text, r.guid, r.date
+                    var s = @"select u.id as user_id, u.name, r.regex, r.text, r.guid, r.date
                       from regex r
                             inner join users u on r.user_id = u.id";
 
-                List<UsersItem> wallsCode = new List<UsersItem>();
-                var res = DB.ExecuteQuery(s, new List<SQLiteParameter>());
-                foreach (var wcode in res)
-                {
-                    wallsCode.Add(new UsersItem()
+                    List<UsersItem> wallsCode = new List<UsersItem>();
+                    var res = DB.ExecuteQuery(s, new List<SQLiteParameter>());
+                    foreach (var wcode in res)
                     {
-                        Regex = (wcode["regex"] == DBNull.Value ? null : (string)wcode["regex"]),
-                        Text = (wcode["text"] == DBNull.Value ? null : (string)wcode["text"]),
-                        Guid = (string)wcode["guid"],
-                        UserId = Convert.ToInt32(wcode["user_id"]),
-                        ID = "regex_" + (string)wcode["guid"],
-                        Date = Convert.ToDateTime(wcode["date"])
-                    });
+                        wallsCode.Add(new UsersItem()
+                        {
+                            Regex = (wcode["regex"] == DBNull.Value ? null : (string)wcode["regex"]),
+                            Text = (wcode["text"] == DBNull.Value ? null : (string)wcode["text"]),
+                            Guid = (string)wcode["guid"],
+                            UserId = Convert.ToInt32(wcode["user_id"]),
+                            ID = "regex_" + (string)wcode["guid"],
+                            Date = Convert.ToDateTime(wcode["date"])
+                        });
+                    }
+
+                    foreach (var r in wallsCode)
+                    {
+                        PutUserItem(r);
+                    }
+
                 }
-                
-                foreach (var r in wallsCode)
+
                 {
-                    PutUserItem(r);
-                }
-
-            }
-
-            {
-                var s = @"select u.id as user_id, u.name, r.regex, r.replacement, r.text, r.guid, r.date
+                    var s = @"select u.id as user_id, u.name, r.regex, r.replacement, r.text, r.guid, r.date
                           from regexreplace r
                                 inner join users u on r.user_id = u.id";
 
-                List<UsersItem> wallsCode = new List<UsersItem>();
-                var res = DB.ExecuteQuery(s, new List<SQLiteParameter>());
-                foreach (var wcode in res)
-                {
-                    wallsCode.Add(new UsersItem()
+                    List<UsersItem> wallsCode = new List<UsersItem>();
+                    var res = DB.ExecuteQuery(s, new List<SQLiteParameter>());
+                    foreach (var wcode in res)
                     {
-                        Regex = (wcode["regex"] == DBNull.Value ? null : (string)wcode["regex"]),
-                        Replace = (wcode["replacement"] == DBNull.Value ? null : (string)wcode["replacement"]),
-                        Text = (wcode["text"] == DBNull.Value ? null : (string)wcode["text"]),
-                        Guid = (string)wcode["guid"],
-                        UserId = Convert.ToInt32(wcode["user_id"]),
-                        ID = "regex_r_" + (string)wcode["guid"],
-                        Date = Convert.ToDateTime(wcode["date"])
-                    });
-                }
+                        wallsCode.Add(new UsersItem()
+                        {
+                            Regex = (wcode["regex"] == DBNull.Value ? null : (string)wcode["regex"]),
+                            Replace = (wcode["replacement"] == DBNull.Value ? null : (string)wcode["replacement"]),
+                            Text = (wcode["text"] == DBNull.Value ? null : (string)wcode["text"]),
+                            Guid = (string)wcode["guid"],
+                            UserId = Convert.ToInt32(wcode["user_id"]),
+                            ID = "regex_r_" + (string)wcode["guid"],
+                            Date = Convert.ToDateTime(wcode["date"])
+                        });
+                    }
 
-                foreach (var r in wallsCode)
-                {
-                    PutUserItem(r);
-                }
+                    foreach (var r in wallsCode)
+                    {
+                        PutUserItem(r);
+                    }
 
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
-    }
 
-    public class UsersItem
-    {
-        public string ID { get; set; }
-        public int UserId { get; set; }
-        public string Title { get; set; }
-        public string Code { get; set; }
-        public string Lang { get; set; }
-        public string Guid { get; set; }
-        public string Regex { get; set; }
-        public string Replace { get; set; }
-        public string Text { get; set; }
-        public DateTime Date { get; set; }
-        public bool? IsLive { get; set; }
+        public class UsersItem
+        {
+            public int Id { get; set; }
+            public string ID { get; set; }
+            public int UserId { get; set; }
+            public string Title { get; set; }
+            public string Code { get; set; }
+            public string Lang { get; set; }
+            public string Guid { get; set; }
+            public string Regex { get; set; }
+            public string Replace { get; set; }
+            public string Text { get; set; }
+            public DateTime Date { get; set; }
+            public int? IsLive { get; set; }
+        }
     }
 }

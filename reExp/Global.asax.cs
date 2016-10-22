@@ -151,11 +151,13 @@ namespace reExp
             //System.Environment.SetEnvironmentVariable("FSHARP_BIN", Utils.Utils.PathToFsc);
 
             Utils.Utils.db = new Db(ConfigurationManager.AppSettings["LogPath"]);
+            Utils.Utils.search_db = new Db(ConfigurationManager.AppSettings["SearchPath"]);
         }
 
         protected void Application_End()
         {
             Utils.Utils.db.Dispose();
+            Utils.Utils.search_db.Dispose();
         }
 
         protected void Application_Error(object sender, EventArgs e)
