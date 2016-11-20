@@ -147,6 +147,16 @@
             border-color: Gray;
             padding: 0 3px 0 3px;
         }
+        .carbon-text {
+            color:white;
+            text-align:justify;
+            text-decoration:none;
+        }
+        .carbon-poweredby {
+            color:white;
+            display: block;
+            text-decoration:none;
+        }
         .CodeMirror {font-size: 13px}
     </style>
 
@@ -199,6 +209,7 @@
                 border-color: Gray;
                 padding: 0 3px 0 3px;
             }
+
         </style>
     <%} %>
     
@@ -308,6 +319,12 @@
         </div>
     </div>
     <%}%>
+    <%if(!Utils.IsMobile)
+    {%>
+        <div style="background-color:mediumpurple;color:mediumpurple; position:relative;margin-top:105px;margin-bottom:-3000px;z-index:1000;float:right;width:130px;font-size:14px;">
+            <script async type="text/javascript" src="<%=GlobalUtils.TopSecret.CarbonAds%>" id="_carbonads_js"></script>
+        </div>
+     <%}%>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         </asp:ContentPlaceHolder>
 </body>

@@ -489,6 +489,10 @@
                     {%>
                     <a class="smalllink" href="<%:Utils.BaseUrl+Model.CodeGuid %>">fork mode</a>&nbsp;<span class="smalllink">|</span>&nbsp;
                     <%} %>
+                    <%if(Model.IsLive && (Model.User_Id == null || Model.User_Id == SessionManager.UserId))
+                    {%>
+                    <a class="smalllink" title="remove live session together with data" id="delete_link" href="#">delete</a>&nbsp;<span class="smalllink">|</span>&nbsp;
+                    <%} %>
                     <a class="smalllink" href="<%:Utils.BaseUrl+"history"+"/"+ Model.PrimaryGuid %>">history</a>
                     <%if(Model.IsOnAWall)
                     {%>

@@ -79,6 +79,12 @@ namespace reExp
                new { controller = "RunDotNet", action = "GetLiveCode" },
                new { savedNr = @"[A-Za-z]+\d+" }
             );
+            routes.MapRoute(
+               null,
+               "delete/{savedNr}",
+               new { controller = "RunDotNet", action = "DeleteLiveCode" },
+               new { savedNr = @"[A-Za-z]+\d+" }
+            );
 
             routes.MapRoute(
                null,

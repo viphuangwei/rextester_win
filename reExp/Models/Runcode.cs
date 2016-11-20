@@ -321,6 +321,18 @@ namespace reExp.Models
             }
         }
 
+        public static void DeleteLiveCode(string guid)
+        {
+            try
+            {
+                DB.DB.Delete_Code_Get(guid);
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, "error");
+            }
+        }
+
         public static Code GetCode(string guid, bool incrementViews = true)
         {
             try

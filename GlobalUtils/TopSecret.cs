@@ -94,7 +94,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"day";
+                return @"";
             }
         }
 
@@ -131,6 +131,13 @@ namespace GlobalUtils
         }
 
         public static string ElasticUrl
+        {
+            get
+            {
+                return @"";
+            }
+        }
+        public static string CarbonAds
         {
             get
             {

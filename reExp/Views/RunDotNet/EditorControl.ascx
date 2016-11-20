@@ -338,6 +338,16 @@
                     $("#UsersCount").replaceWith("<span id=\"UsersCount\">" + snap.numChildren() + "</span>");
                 });
 
+
+                $('#delete_link').on('click', function () {
+                    var a = confirm('Are you sure?');
+                    if (a) {
+                        firepadRef.remove();
+                        firepadChatRef.remove();
+                        window.location = "<%:Utils.BaseUrl+"delete"+"/"+Model.PrimaryGuid%>";
+                    }
+                });
+
             <%} %>
         });
     //]]>

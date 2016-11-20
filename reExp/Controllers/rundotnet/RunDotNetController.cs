@@ -492,6 +492,14 @@ namespace reExp.Controllers.rundotnet
         }
 
         [HttpGet]
+        public RedirectResult DeleteLiveCode(string savedNr)
+        {
+            Compression.SetCompression();
+            Model.DeleteLiveCode(savedNr);
+            return Redirect("/");
+        }
+
+        [HttpGet]
         [ValidateInput(false)]
         public ViewResult GetEditCode(RundotnetData data, string savedNr)
         {

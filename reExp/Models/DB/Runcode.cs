@@ -342,6 +342,26 @@ namespace reExp.Models.DB
             return ExecuteQuery(query, pars);
         }
 
+        public static void Delete_Code_Get(string guid)
+        {
+            string query = @"select lc.id from Code c inner join LiveCode lc on lc.code_id = c.id where c.guid = @Guid";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("Guid", guid));
+            var res = ExecuteQuery(query, pars);
+
+            int? id = res[0]["id"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["id"]);
+
+            if (id == null)
+            {
+                return;
+            }
+
+            query = @"delete from LiveCode where id = @Id";
+            pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("Id", id));
+            ExecuteNonQuery(query, pars);
+        }
+
         public static List<Dictionary<string, object>> Code_Get(string guid)
         {
             string query = @"select c.*, v.id as 'version_id', p.guid as 'primary_guid'
