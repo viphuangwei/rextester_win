@@ -109,7 +109,8 @@ namespace reExp.Controllers.rundotnet
                     this.LanguageChoice == LanguagesEnum.Python3 ||
                     this.LanguageChoice == LanguagesEnum.Octave ||
                     this.LanguageChoice == LanguagesEnum.R ||
-                    this.LanguageChoice == LanguagesEnum.Tcl)
+                    this.LanguageChoice == LanguagesEnum.Tcl ||
+                    this.LanguageChoice == LanguagesEnum.ClientSide)
 
                     return true;
                 else
@@ -120,7 +121,7 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if (this.LanguageChoice == LanguagesEnum.SqlServer || this.LanguageChoice == LanguagesEnum.MySql || this.LanguageChoice == LanguagesEnum.Postgresql || this.LanguageChoice == LanguagesEnum.Oracle)
+                if (this.LanguageChoice == LanguagesEnum.SqlServer || this.LanguageChoice == LanguagesEnum.MySql || this.LanguageChoice == LanguagesEnum.Postgresql || this.LanguageChoice == LanguagesEnum.Oracle || this.LanguageChoice == LanguagesEnum.ClientSide)
                     return false;
                 else
                     return true;
@@ -241,6 +242,11 @@ namespace reExp.Controllers.rundotnet
                     {
                         Text = "C (vc)",
                         Value = ((int)LanguagesEnum.VC).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Client Side",
+                        Value = ((int)LanguagesEnum.ClientSide).ToString()
                     },
                     new SelectListItem()
                     {
@@ -778,6 +784,39 @@ print(""Hello, world!"")
 
 puts ""Hello, world!""
 ";
+                case LanguagesEnum.ClientSide:
+                    return @"<!--This code runs in your browser. If you want to see errors, examine them in your browser's developer console (usually invoked with F12)-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello, world!</title>
+	<meta charset=""utf-8"" />
+    <style type = ""text/css"" >
+        body { font - family: Arial; }
+        pre { font - family: ""Consolas"",monospace; font - size: 14px; white - space: pre - wrap; word - wrap: break-word; width: 99 %; }
+    </style>
+    <script language=""javascript"" type=""text/javascript"" src=""http://code.jquery.com/jquery-latest.min.js""></script>
+    <script type = ""text/javascript"">
+        $(document).ready(function() {
+            printSentence(""result"", ""Hello, world!"");
+        });
+        function printSentence(id, sentence) {
+            for (var i = 0; i < sentence.length; i++)
+            {
+                (function(index) {
+                    setTimeout(function() {
+                        document.getElementById(id).innerHTML += sentence[index];
+                    }, 50 * i);
+                })(i);
+            }
+        }
+    </script>
+</head>
+<body>
+    <pre id = ""result"" ></pre>
+</body>
+</html>";
+
                 default:
                     return @"";
             }

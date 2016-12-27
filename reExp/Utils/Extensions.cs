@@ -84,6 +84,8 @@ namespace reExp.Utils
                     return "R";
                 case LanguagesEnum.Tcl:
                     return "Tcl";
+                case LanguagesEnum.ClientSide:
+                    return "Client Side";
                 default:
                     return "Unknown";
             }

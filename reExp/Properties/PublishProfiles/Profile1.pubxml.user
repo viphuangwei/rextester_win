@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
-    <TimeStampOfAssociatedLegacyPublishXmlFile>2016-05-07T15:20:29.0258626+03:00</TimeStampOfAssociatedLegacyPublishXmlFile>
+    <TimeStampOfAssociatedLegacyPublishXmlFile>2016-12-24T14:00:45.0408779+02:00</TimeStampOfAssociatedLegacyPublishXmlFile>
     <_PublishTargetUrl>C:\Users\renbo\Desktop\app</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>

@@ -40,7 +40,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return "";
             }
             return guid;
@@ -69,7 +69,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new Regexpr();
             }
         }
@@ -105,7 +105,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return "";
             }
             return guid;
@@ -135,7 +135,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new RegexReplace();
             }
         }

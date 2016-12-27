@@ -45,7 +45,7 @@ namespace reExp.Controllers.regex
             }
             catch (Exception e)
             {
-                reExp.Utils.Log.LogInfo(e.Message+" \n"+e.StackTrace +" \n", "ERROR_IN_LOGIC");
+                reExp.Utils.Log.LogInfo(e.Message+" \n"+e.StackTrace +" \n", e, "ERROR_IN_LOGIC");
                 return "Error occurred. We'll examine why.";
             }
         }
@@ -103,7 +103,7 @@ namespace reExp.Controllers.regex
             }
             catch (Exception e)
             {
-                reExp.Utils.Log.LogInfo(e.Message + " \n" + e.StackTrace, "ERROR_IN_LOGIC");
+                reExp.Utils.Log.LogInfo(e.Message + " \n" + e.StackTrace, e, "ERROR_IN_LOGIC");
                 Result = "Error occurred. We'll examine why.";
                 return;
             }

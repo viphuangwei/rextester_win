@@ -37,7 +37,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new List<SavedItem>();
             }
         }
@@ -60,7 +60,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error while removing item");
+                Utils.Log.LogInfo(e.Message, e, "error while removing item");
                 return false;
             }
         }
@@ -72,7 +72,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return 0;
             }
         }
@@ -96,7 +96,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new Registering() { Error = e.Message };
             }
         }
@@ -115,7 +115,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new Registering() { Error = e.Message };
             }
         }
@@ -127,18 +127,24 @@ namespace reExp.Models
                 string hashedPass = Utils.EncryptionUtils.CreateMD5Hash(password);
                 var res = DB.DB.GetUser(name);
                 if (res.Count == 0)
+                {
                     return new User() { NoSuchUser = true };
-
-                if ((string)res[0]["password"] != hashedPass)
+                }
+                if (res[0]["password"] == DBNull.Value)
+                {
                     return new User() { BadPassword = true };
-
+                }
+                if ((string)res[0]["password"] != hashedPass)
+                {
+                    return new User() { BadPassword = true };
+                }
                 //set data to session
                 SessionManager.SetAuthentication(name);
                 return new User() { Name = name };
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new User() { Error = e.Message };
             }
         }
@@ -155,7 +161,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }
@@ -199,7 +205,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }
@@ -216,7 +222,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }

@@ -84,7 +84,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "redis insert error");
+                Utils.Log.LogInfo(e.Message, e, "redis insert error");
             }
         }
 
@@ -113,7 +113,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "redis get error");
+                Utils.Log.LogInfo(e.Message, e, "redis get error");
                 return null;
             }
         }
@@ -126,7 +126,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
             }
         }
         public static Dictionary<string, long> GetLangCounter()
@@ -138,7 +138,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new Dictionary<string, long>(); ;
             }  
         }
@@ -181,7 +181,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return "";    
             }
             return guid;
@@ -236,7 +236,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
             }
         }
 
@@ -249,7 +249,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return false;
             }
         }
@@ -275,7 +275,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new List<Version>();
             }
         }
@@ -288,7 +288,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
             }
         }
 
@@ -316,7 +316,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }
@@ -329,7 +329,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
             }
         }
 
@@ -377,7 +377,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }
@@ -416,7 +416,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }
@@ -435,7 +435,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return false;
             }
         }
@@ -452,7 +452,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }
@@ -472,7 +472,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return false;
             }
         }
@@ -495,7 +495,7 @@ namespace reExp.Models
                 }
                 catch (Exception e)
                 {
-                    Utils.Log.LogInfo(e.Message, "error");
+                    Utils.Log.LogInfo(e.Message, e, "error");
                     return new UserProfile() { EditorChoice = EditorsEnum.Codemirror, LanguageChoice = LanguagesEnum.CSharp };
                 }
             }
@@ -515,7 +515,7 @@ namespace reExp.Models
                 }
                 catch (Exception e)
                 {
-                    Utils.Log.LogInfo(e.Message, "error");
+                    Utils.Log.LogInfo(e.Message, e, "error");
                 }
             }
         }
@@ -524,7 +524,36 @@ namespace reExp.Models
         {
             return Utils.Utils.db.Table<LogEntry>().Where(f => f.Id == id).SelectEntity().FirstOrDefault();
         }
-        public static List<LogEntry> GetLog(int lang, DateTime? from, DateTime? to, string search, int api, out int total)
+        public static Dictionary<string, KeyValuePair<int, int>> GetLogStats(DateTime? from, DateTime? to, string search, int api, int date_range, out int total)
+        {
+            var res = Utils.Utils.db.Table<LogEntry>();
+
+            WorkOnDates(res, date_range, from, to);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
+            }
+            if (api == 1)
+            {
+                res.Where(f => f.Is_api == 1);
+            }
+            if (api == 2)
+            {
+                res.Where(f => f.Is_api == 0);
+            }
+
+            var val = res.Select(f => new { f.Lang, f.Is_success });
+            total = val.Count();
+            var ret = new Dictionary<string, KeyValuePair<int, int>>();
+            foreach (var gr in val.GroupBy(f => f.Lang))
+            {
+                ret[((LanguagesEnum)gr.Key).ToLanguage()] = new KeyValuePair<int, int>(gr.Count(), gr.Count(z => z.Is_success == 1));
+            }
+            
+            return ret;
+        }
+        public static Dictionary<string, KeyValuePair<int, int>> GetLangLogStats(int lang, DateTime? from, DateTime? to, string search, int api, int date_range)
         {
             var res = Utils.Utils.db.Table<LogEntry>();
             if (lang != 0)
@@ -532,7 +561,40 @@ namespace reExp.Models
                 res.Where(f => f.Lang == lang);
             }
 
-            WorkOnDates(res, from, to);
+            WorkOnDates(res, date_range, from, to);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
+            }
+            if (api == 1)
+            {
+                res.Where(f => f.Is_api == 1);
+            }
+            if (api == 2)
+            {
+                res.Where(f => f.Is_api == 0);
+            }
+
+            var val = res.OrderByDescending(f => f.Id).Select(f => new { f.Time, f.Is_success });
+
+            var ret = new Dictionary<string, KeyValuePair<int, int>>();
+            foreach (var gr in val.GroupBy(f => Convert.ToDateTime(f.Time).ToString("yyyy-MM-dd")))
+            {
+                ret[gr.Key] = new KeyValuePair<int, int>(gr.Count(), gr.Count(z => z.Is_success == 1));
+            }
+            return ret;
+        }
+        public static List<LogEntry> GetLog(int lang, DateTime? from, DateTime? to, string search, int api, int date_range, out int total)
+        {
+            //Utils.Utils.db.Replicate(@"C:\inetpub\wwwroot\rextester\back\log");
+            var res = Utils.Utils.db.Table<LogEntry>();
+            if (lang != 0)
+            {
+                res.Where(f => f.Lang == lang);
+            }
+
+            WorkOnDates(res, date_range, from, to);
 
             if (!string.IsNullOrEmpty(search))
             {
@@ -549,8 +611,23 @@ namespace reExp.Models
             
             return res.OrderByDescending(f => f.Id).Take(50).SelectEntity(out total);
         }
-        static void WorkOnDates(ILinqDbQueryable<LogEntry> res, DateTime? from, DateTime? to)
+        static void WorkOnDates(ILinqDbQueryable<LogEntry> res, int range, DateTime? from, DateTime? to)
         {
+            if (range == 0)
+            {
+                from = DateTime.Now.AddDays(-1);
+                to = DateTime.Now;
+            }
+            else if (range == 1)
+            {
+                from = DateTime.Now.AddDays(-7);
+                to = DateTime.Now;
+            }
+            else if (range == 2)
+            {
+                from = DateTime.Now.AddMonths(-1);
+                to = DateTime.Now;
+            }
             if (from != null || to != null)
             {
                 if (from == null)
@@ -581,7 +658,7 @@ namespace reExp.Models
                 }
             }
         }
-        public static void LogRun(string data, string input, string compiler_args, string result, int lang, bool is_api, string log_path)
+        public static void LogRun(string data, string input, string compiler_args, string result, int lang, bool is_api, string log_path, bool is_success)
         {
             try
             {
@@ -596,13 +673,15 @@ namespace reExp.Models
                         Lang = lang,
                         Is_api = is_api ? 1 : 0,
                         Time = DateTime.Now,
-                        Day_string = DateTime.Now.ToString("yyyyMMdd")
+                        Day_string = DateTime.Now.ToString("yyyyMMdd"),
+                        Is_success = is_success ? 1 : 0
                     };
                     Utils.Utils.db.Table<LogEntry>().Save(entry);
                 }
                 catch (Exception e)
                 {
-                    File.WriteAllText(Path.Combine(log_path, "err.txt"), e.Message + Environment.NewLine + e.StackTrace + Environment.NewLine + data+"|"+input+"|"+compiler_args+"|"+result+"|"+lang+"|"+is_api);
+                    //File.WriteAllText(Path.Combine(log_path, "err.txt"), e.Message + Environment.NewLine + e.StackTrace + Environment.NewLine + data+"|"+input+"|"+compiler_args+"|"+result+"|"+lang+"|"+is_api);
+                    Log.LogInfo("error while loging code run", e, "log error");
                 }
                 Model.IncrementLangCounter(data, input, compiler_args, result, lang, is_api);
             }
@@ -804,6 +883,7 @@ namespace reExp.Models
         public int Is_api { get; set; }
         public DateTime Time { get; set; }
         public string Day_string { get; set; }
+        public int Is_success { get; set; }
     }
 
 

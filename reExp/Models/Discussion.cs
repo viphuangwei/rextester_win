@@ -29,7 +29,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new List<Comment>();
             }
         }
@@ -52,7 +52,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }
@@ -83,7 +83,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
             }
         }
 
@@ -112,7 +112,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return 0;
             }
         }
@@ -137,7 +137,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
             }
         }
         public static void DeleteComment(Comment comment)
@@ -148,7 +148,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
             }
         }
 
@@ -166,7 +166,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new List<RelatedEntry>();
             }
         }

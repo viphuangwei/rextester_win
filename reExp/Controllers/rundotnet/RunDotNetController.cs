@@ -277,6 +277,10 @@ namespace reExp.Controllers.rundotnet
                 {
                     data.LanguageChoice = LanguagesEnum.VB;
                 }
+                else if (lang_title.ToLower() == "client_side" || lang_title.ToLower() == "jsfiddle")
+                {
+                    data.LanguageChoice = LanguagesEnum.ClientSide;
+                }
                 else
                 {
                     data.LanguageChoice = LanguagesEnum.CSharp;

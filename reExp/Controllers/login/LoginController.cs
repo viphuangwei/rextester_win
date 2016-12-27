@@ -220,7 +220,7 @@ namespace reExp.Controllers.login
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "google login error");
+                Utils.Log.LogInfo(null, e, "google login error");
                 return View("Index", new LoginData() { IsError = true, Error = "Error occured. Try again later.", redirectInfo = result.state });
             }
         }

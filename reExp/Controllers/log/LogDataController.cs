@@ -26,8 +26,22 @@ namespace reExp.Controllers.log
             }
             else
             {
-                int total;
-                data.Entries = Model.GetLog(data.lang, data.from, data.to, data.search, data.api, out total);
+                int total = 0;
+                if (data.View == 0)
+                {
+                    data.Entries = Model.GetLog(data.lang, data.from, data.to, data.search, data.api, data.Date_range, out total);
+                }
+                else
+                {
+                    if (data.lang == 0)
+                    {
+                        data.Languages_runs = Model.GetLogStats(data.from, data.to, data.search, data.api, data.Date_range, out total);
+                    }
+                    else
+                    {
+                        data.Language_runs = Model.GetLangLogStats(data.lang, data.from, data.to, data.search, data.api, data.Date_range);
+                    }
+                }
                 data.Total = total;
             }
             return View(data);
@@ -44,5 +58,9 @@ namespace reExp.Controllers.log
         public List<LogEntry> Entries { get; set; }
         public int Total { get; set; }
         public int api { get; set; }
+        public int Date_range { get; set; }
+        public int View { get; set; }
+        public Dictionary<string, KeyValuePair<int, int>> Languages_runs { get; set;}
+        public Dictionary<string, KeyValuePair<int, int>> Language_runs { get; set; }
     }
 }

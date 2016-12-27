@@ -313,6 +313,13 @@
           mode = "text/x-tcl";
           js.Add("mode/tcl/tcl.js");
           break;
+      case LanguagesEnum.ClientSide:
+          mode = "text/html";
+          js.Add("mode/htmlmixed/htmlmixed.js");
+          js.Add("mode/xml/xml.js");
+          js.Add("mode/javascript/javascript.js");
+          js.Add("mode/css/css.js");       
+          break;
   }
   foreach(var j in js)
   {

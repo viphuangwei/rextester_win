@@ -33,7 +33,7 @@ namespace reExp.Controllers.rundotnet
             }
             catch (Exception e)
             {
-                reExp.Utils.Log.LogInfo("Error while shrinking db. " + e.Message, "RunSqlServer");
+                reExp.Utils.Log.LogInfo("Error while shrinking db. " + e.Message, e, "RunSqlServer");
             }
         }
     }

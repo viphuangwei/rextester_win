@@ -34,7 +34,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return new List<Code>();
             }
         }
@@ -47,7 +47,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return 0;
             }
         }
@@ -63,7 +63,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return false;
             }
         }
@@ -78,7 +78,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error");
+                Utils.Log.LogInfo(e.Message, e, "error");
                 return null;
             }
         }
@@ -92,7 +92,7 @@ namespace reExp.Models
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, "error while removing codewall item");
+                Utils.Log.LogInfo(e.Message, e, "error while removing codewall item");
                 return false;
             }
         }

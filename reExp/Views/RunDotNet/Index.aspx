@@ -147,6 +147,10 @@
                 {
                     %>compile vb online <%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.ClientSide)
+                {
+                    %>run javascript fiddle online<%
+                }
                 else
                 {
                     %>compile c# online<%
@@ -305,6 +309,10 @@
                 else if (Model.LanguageChoice == LanguagesEnum.VB)
                 {
                     %>compile vb online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.ClientSide)
+                {
+                    %>run javascript fiddle online<%
                 }
                 else
                 {
@@ -519,18 +527,26 @@
             %><%if(Model.LanguageChoice != LanguagesEnum.Prolog) {%><pre style="color: Red" class="resultarea">Error(s)<%:Model.IsInterpreted ? ", warning(s)" : ""%>:</pre><%}%><pre id="ErrorSpan" class="resultarea"><%:Model.WholeError%></pre><%  
         }                   
     %></div> 
-    <pre id="Result" class="resultarea"><%
-        if (Model.IsOutputInHtml)
-        {
-            %><%=Model.Output%><%
-        }
-        else
-        {
-            %><%:Model.Output%><%
-        }
-    %></pre>
-    <pre id="Files"></pre>
-    
+
+    <%if(Model.LanguageChoice != LanguagesEnum.ClientSide)
+    {%>
+        <pre id="Result" class="resultarea"><%
+            if (Model.IsOutputInHtml)
+            {
+                %><%=Model.Output%><%
+            }
+            else
+            {
+                %><%:Model.Output%><%
+            }
+        %></pre>
+        <pre id="Files"></pre>
+    <%}
+    else
+    {%>
+        <%--iframe--%>    
+        <iframe style="width:100%;" name="ifr" id="ifr" frameBorder="0"></iframe>
+    <%} %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
     <%if (Model.LanguageChoice == LanguagesEnum.Nasm)
@@ -672,6 +688,10 @@
                 else if (Model.LanguageChoice == LanguagesEnum.VB)
                 {
                     %><meta name="Keywords" content="compile vb online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.ClientSide)
+                {
+                    %><meta name="Keywords" content="run javascript fiddle online" /><%
                 }
                 else
                 {
@@ -823,6 +843,10 @@
                 {
                     %><meta name="Description" content="compile vb online" /><%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.ClientSide)
+                {
+                    %><meta name="Keywords" content="run javascript fiddle online" /><%
+                }
                 else
                 {
                     %><meta name="Description" content="compile c# online" /><%
@@ -906,7 +930,6 @@
         }%>
 
         $(document).ready(function () {
-                    
             <%if(Model.ShowInput) 
             {%>
             $("#Input_label").click(function() {
@@ -1248,6 +1271,10 @@
                 {
                     act = "/l/visual_basic_online_compiler";
                 }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.ClientSide%>)
+                {
+                    act = "/l/client_side";
+                }
                 else
                 {
                     act = "/l/csharp_online_compiler";
@@ -1260,6 +1287,7 @@
                 $("#WholeError").val('');
                 $("#WholeWarning").val('');
                 $("#StatsToSave").val('');
+                $("#Title").val('');
                 $("#mainForm").submit();
             };
 
@@ -1370,7 +1398,30 @@
             <%} %>
         };
 
-        function Run () {
+        function RunClientSide () {
+            $('html, body').animate({ scrollTop: $("#Link").offset().top }, 500);
+            $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\"></pre>");
+            $("#Warning").replaceWith("<div id=\"Warning\"></div>");
+            $("#Error").replaceWith("<div id=\"Error\"></div>");
+
+            <%if(Model.EditorChoice == EditorsEnum.Codemirror) 
+            {
+                %>$("#Program").val(GlobalEditor.getValue());<%
+            }
+            else if(Model.EditorChoice == EditorsEnum.Editarea)
+            {
+                %>$("#Program").val(editAreaLoader.getValue("Program"));<%
+            }%>
+
+            $("#ifr").replaceWith("<iframe style=\"width:100%;height:600px;\" name=\"ifr\" id=\"ifr\" frameBorder=\"0\" sandbox=\"allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-modals allow-forms\" allowtransparency=\"true\"></iframe>");
+            var iframe = document.getElementById('ifr');
+            iframe = iframe.contentWindow || ( iframe.contentDocument.document || iframe.contentDocument);
+            iframe.document.open();
+            iframe.document.write($("#Program").val());
+            iframe.document.close();
+        }
+        function RunNonCS()
+        {
             $('html, body').animate({ scrollTop: $("#Link").offset().top }, 500);
 
             $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Working...</pre>");
@@ -1422,11 +1473,11 @@
                                 var img = $(document.createElement('img'));
                                 <%if (!Utils.IsMobile)
                                 {%>
-                                    img.attr('src', "data:image/png;base64," + obj.Files[key]).height(600).width(700);
+                                img.attr('src', "data:image/png;base64," + obj.Files[key]).height(600).width(700);
                                 <%}
                                 else
                                 {%>
-                                    img.attr('src', "data:image/png;base64," + obj.Files[key]).height(300).width(300);
+                                img.attr('src', "data:image/png;base64," + obj.Files[key]).height(300).width(300);
                                 <%} %>
                                 img.appendTo(img_div);
                                 img_div.appendTo($('#Files'));
@@ -1436,6 +1487,16 @@
 
                         $('html, body').animate({ scrollTop: $("#Run").offset().top }, 500);
                     }, 'text');
+        }
+
+        function Run () {
+            <%if(Model.LanguageChoice == LanguagesEnum.ClientSide)
+            {%>
+                RunClientSide();
+            <%} else
+            {%>
+                RunNonCS();
+            <%} %>
         };
 
         <% if(Model.IsIntellisense)

@@ -89,14 +89,14 @@ namespace reExp.Controllers.feedback
                 }
                 else
                 {*/
-                    Log.LogInfo(feedback.Message, "FEEDBACK");
+                    Log.LogInfo(feedback.Message, null, "FEEDBACK");
                     feedback.Succeeded = true;
                     return View(feedback);
                 /*}*/
             }
             catch (Exception e)
             {
-                Log.LogInfo(e.Message, "FEEDBACK_ERROR");
+                Log.LogInfo(e.Message, null, "FEEDBACK_ERROR");
                 feedback.Succeeded = false;
                 feedback.ErrorMessage = "Oops. Something went wrong by our fault. Please try again.";
                 //ResetFeedback(feedback);

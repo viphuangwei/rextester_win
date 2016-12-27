@@ -36,7 +36,7 @@ namespace reExp.Utils
             }
             catch (Exception e)
             {
-                Log.LogInfo(e.Message, "error while putting to search index");
+                Log.LogInfo(e.Message, e, "error while putting to search index");
             }
         }
 
@@ -65,7 +65,7 @@ namespace reExp.Utils
             }
             catch (Exception e)
             {
-                Log.LogInfo(e.Message, "error while deleting search index");
+                Log.LogInfo(e.Message, e, "error while deleting search index");
             }
         }
 

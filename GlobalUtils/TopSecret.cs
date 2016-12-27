@@ -15,6 +15,7 @@ namespace GlobalUtils
                 return "";
             }
         }
+
         public static string FeedbackToAdress
         {
             get
@@ -22,6 +23,7 @@ namespace GlobalUtils
                 return "";
             }
         }
+
         public static string EmailUser
         {
             get
@@ -29,6 +31,7 @@ namespace GlobalUtils
                 return "";
             }
         }
+
         public static string EmailPass
         {
             get
@@ -36,6 +39,7 @@ namespace GlobalUtils
                 return "";
             }
         }
+
         public static string EncryptionKey
         {
             get
@@ -48,7 +52,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -56,7 +60,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -64,7 +68,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -72,21 +76,23 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
+
         public static string Service_pass
         {
             get
             {
-                return @"";
+                return "";
             }
         }
+
         public static string Linux_user
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -94,7 +100,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -102,7 +108,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -110,7 +116,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -118,7 +124,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -126,7 +132,7 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
 
@@ -134,14 +140,15 @@ namespace GlobalUtils
         {
             get
             {
-                return @"";
+                return "";
             }
         }
+
         public static string CarbonAds
         {
             get
             {
-                return @"";
+                return "";
             }
         }
     }

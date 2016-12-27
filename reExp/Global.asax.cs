@@ -177,7 +177,7 @@ namespace reExp
             }
             else
             {
-                reExp.Utils.Log.LogInfo(DateTime.Now + " \n" + exception.Message + " \n" + exception.StackTrace, "ERROR");
+                reExp.Utils.Log.LogInfo(DateTime.Now + " \n" + exception.Message + " \n" + exception.StackTrace, exception, "ERROR");
                 Response.Redirect("~/Error/Unknown");
             }
         }

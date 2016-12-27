@@ -255,10 +255,22 @@ namespace reExp.Utils
 
     public class Log
     {
-        public static void LogInfo(string info, string type)
+        public static void LogInfo(string info, Exception ex, string type)
         {
             try
             {
+                info += " ";
+                if (ex != null)
+                {
+                    if (ex.InnerException != null)
+                    {
+                        info += ex.InnerException.Message + " " + ex.InnerException.StackTrace;
+                    }
+                    else
+                    {
+                        info += ex.Message + " " + ex.StackTrace;
+                    }
+                }
                 LogJob job = new LogJob(info, type);
                 HostingEnvironment.QueueBackgroundWorkItem(f => job.DoWork());
                 //ThreadPool.QueueUserWorkItem(f => job.DoWork());
@@ -267,11 +279,11 @@ namespace reExp.Utils
             { }
         }
 
-        public static void LogCodeToDB(string data, string input, string compiler_args, string result, int lang, bool is_api)
+        public static void LogCodeToDB(string data, string input, string compiler_args, string result, int lang, bool is_api, bool is_success)
         {
             try
             {
-                HostingEnvironment.QueueBackgroundWorkItem(f => Model.LogRun(data, input, compiler_args, result, lang, is_api, ConfigurationManager.AppSettings["LogPath"]));
+                HostingEnvironment.QueueBackgroundWorkItem(f => Model.LogRun(data, input, compiler_args, result, lang, is_api, ConfigurationManager.AppSettings["LogPath"], is_success));
                 //ThreadPool.QueueUserWorkItem(f => Model.LogRun(data, input, compiler_args, result, lang, is_api, ConfigurationManager.AppSettings["LogPath"]));
             }
             catch (Exception)
@@ -541,6 +553,7 @@ namespace reExp.Utils
         MySql = 33,
         Postgresql = 34,
         Oracle = 35,
+        ClientSide = 36,
         Unknown = 0
     }
 }

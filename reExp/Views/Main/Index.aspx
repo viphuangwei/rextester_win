@@ -101,6 +101,8 @@
             <ul>
                 <li><code><a href="http://rextester.com/l/cpp_online_compiler_visual">C++ (vc++)</a> and <a href="http://rextester.com/l/c_online_compiler_visual">C</a> - <a href="http://rextester.com/l/vcpp">Microsoft (R) C/C++ Optimizing Compiler Version 19.00.23506 for x86</a></code></li>
             </ul>
+            <br/><b style="color:Gray">Client Side</b><br/>
+            This option allows you to create full javascript/css/html fiddle that runs in your browser. The result is displayed in a separate iframe. You can use anything that runs on a client side. Errors are examined in your browser's developer console.<br/>
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
             <ul>

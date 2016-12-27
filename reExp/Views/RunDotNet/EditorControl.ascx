@@ -191,6 +191,14 @@
           syntax = "tcl";
           js = "mode/tcl/tcl.js";
           break;
+        case LanguagesEnum.ClientSide:
+          mode = "text/html";
+          syntax = "html";
+          js = "mode/htmlmixed/htmlmixed.js";
+          additionalJs.Add("mode/xml/xml.js");
+          additionalJs.Add("mode/javascript/javascript.js");
+          additionalJs.Add("mode/css/css.js");       
+          break;
   }
 %>
 <%if(Model.EditorChoice == EditorsEnum.Codemirror) 
