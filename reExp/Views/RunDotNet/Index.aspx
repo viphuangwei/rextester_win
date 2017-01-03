@@ -904,6 +904,15 @@
                   });
 
                   $("#Program").keydown(function(e){
+                    <%if (!Model.IsLive)
+                    {%>
+                              if(!has_changes){
+                                  window.onbeforeunload = function() {
+                                      return 'Current changes will be lost, continue?';
+                                  };
+                                  has_changes = true;
+                              }
+                    <%}%>
                       // Enter was pressed without shift key
                       if (e.keyCode == 13 && e.shiftKey)
                       {
@@ -924,6 +933,7 @@
     <%} %>
     <script type="text/javascript">
         //<![CDATA[
+        var has_changes = false;
         <%if(Model.EditorChoice ==  EditorsEnum.Codemirror)
         {
             %>var GlobalEditor;<%
@@ -1127,8 +1137,44 @@
             });
             $("#EditorChoiceWrapper").change(function () {
                 Reload();
-            });            
+            });       
+            
+            <%if (!Model.IsLive && Model.EditorChoice == EditorsEnum.Editarea)
+            {%>
+                window.onbeforeunload = function() {
+                    return 'Current changes will be lost, continue?';
+                };
+            <%}%>
+
+            var AreYouSure = function() {
+                <%if (Model.EditorChoice == EditorsEnum.Codemirror || Model.EditorChoice == EditorsEnum.Simple)
+                {
+                    %>if (has_changes) {
+                        return confirm('Current changes will be lost, continue?');                
+                    } else 
+                    {
+                        return true;
+                    }<%
+                }
+                else 
+                {
+                    %>return confirm('Current changes will be lost, continue?');<%
+                }%>
+            }
             var Reload = function () {
+
+                <%if (!Model.IsLive)
+                {%>
+                    if(!AreYouSure())
+                    {
+                        $("#LanguageChoiceWrapper").val("<%=Model.LanguageChoiceWrapper%>");
+                        $("#EditorChoiceWrapper").val("<%=Model.EditorChoiceWrapper%>");
+                        return;
+                    }
+                <%}%>
+
+                window.onbeforeunload = null;
+
                 var act = "";
 
                 if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Nasm%>)
@@ -1532,6 +1578,15 @@
         
 
         function keyEvent(cm, e) {
+            <%if (!Model.IsLive)
+            {%>
+                if(!has_changes){
+                    window.onbeforeunload = function() {
+                        return 'Current changes will be lost, continue?';
+                    };
+                    has_changes = true;
+                }
+            <%}%>
             // Hook into F8 (and F5)
             if ((e.keyCode == 116 || e.keyCode == 119) && e.type == 'keydown') {
                 e.stop();                

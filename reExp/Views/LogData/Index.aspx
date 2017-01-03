@@ -77,7 +77,7 @@
                                     <%: title.BeginningOfString()%>
                                 </a>
                                 <br/>
-                                <div class="sub"><i><%:((LanguagesEnum)snippet.Lang).ToLanguage()%></i>, <i><%:snippet.Is_api == 1 ? "api, " : ""%></i><i><%:snippet.Result%></i>, <%:snippet.Time%>, <%:DateTime.SpecifyKind(snippet.Time, DateTimeKind.Unspecified).ToUniversalTime().TimeAgo()%>
+                                <div class="sub"><i><%:snippet.Id%></i>&nbsp;&nbsp;&nbsp;<i><%:((LanguagesEnum)snippet.Lang).ToLanguage()%></i>, <i><%:snippet.Is_api == 1 ? "api, " : ""%></i><i><%:snippet.Result%></i>, <%:snippet.Time%>, <%:DateTime.SpecifyKind(snippet.Time, DateTimeKind.Unspecified).ToUniversalTime().TimeAgo()%>
                                 </div>
                             </div>
                         </div>

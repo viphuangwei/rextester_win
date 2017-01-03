@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LinqDb;
 using System.IO;
+using System.Collections.Concurrent;
 
 namespace reExp.Models
 {
@@ -519,97 +520,224 @@ namespace reExp.Models
                 }
             }
         }
+        public static object _cache_lock = new object();
+        public static ConcurrentDictionary<int, byte[]>  log_cache { get; set;}
 
+        public static void InitLogCache()
+        {
+            lock(_cache_lock)
+            {
+                if (log_cache == null)
+                {
+                    try
+                    {
+                        Utils.Log.LogInfo("init log start", null, "init log start");
+                        log_cache = new ConcurrentDictionary<int, byte[]>(1, Utils.Utils.db.Table<LogEntry>().Count() + 1000000);
+                        var val = Utils.Utils.db.Table<LogEntry>().Select(f => new { f.Id, f.Lang, f.Time, f.Is_success });
+                        foreach (var item in val)
+                        {
+                            log_cache[item.Id] = GetLogCacheItem(item.Lang, item.Time, item.Is_success);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Utils.Log.LogInfo("init log error", ex, "init log error");
+                    }
+                    finally
+                    {
+                        Utils.Log.LogInfo("init log end", null, "init log end");
+                    }
+                }
+
+            }
+        }
+
+        static byte[] GetLogCacheItem(int lang, DateTime time, int success)
+        {
+            var bytes = new byte[5];
+            bytes[0] = (byte)lang;
+            bytes[1] = (byte)success;
+            bytes[2] = (byte)(time.Year - 2000);
+            bytes[3] = (byte)time.Month;
+            bytes[4] = (byte)time.Day;
+
+            return bytes;
+        }
+        static object[] GetLogCacheValue(byte[] item)
+        {
+            var res = new object[3];
+            res[0] = (int)item[0];
+            res[1] = (int)item[1];
+            res[2] = new DateTime(2000 + (int)item[2], (int)item[3], (int)item[4]);
+            return res;
+        }
         public static LogEntry GetLogEntry(int id)
         {
-            return Utils.Utils.db.Table<LogEntry>().Where(f => f.Id == id).SelectEntity().FirstOrDefault();
+            try
+            {
+                InitLogCache();
+                return Utils.Utils.db.Table<LogEntry>().Where(f => f.Id == id).SelectEntity().FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Log.LogInfo("error getting log", e, "1");
+                return new LogEntry();
+            }
         }
         public static Dictionary<string, KeyValuePair<int, int>> GetLogStats(DateTime? from, DateTime? to, string search, int api, int date_range, out int total)
         {
-            var res = Utils.Utils.db.Table<LogEntry>();
+            try
+            {
+                InitLogCache();
 
-            WorkOnDates(res, date_range, from, to);
+                var res = Utils.Utils.db.Table<LogEntry>();
 
-            if (!string.IsNullOrEmpty(search))
-            {
-                res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
-            }
-            if (api == 1)
-            {
-                res.Where(f => f.Is_api == 1);
-            }
-            if (api == 2)
-            {
-                res.Where(f => f.Is_api == 0);
-            }
+                WorkOnDates(res, date_range, from, to);
 
-            var val = res.Select(f => new { f.Lang, f.Is_success });
-            total = val.Count();
-            var ret = new Dictionary<string, KeyValuePair<int, int>>();
-            foreach (var gr in val.GroupBy(f => f.Lang))
-            {
-                ret[((LanguagesEnum)gr.Key).ToLanguage()] = new KeyValuePair<int, int>(gr.Count(), gr.Count(z => z.Is_success == 1));
+                if (!string.IsNullOrEmpty(search))
+                {
+                    res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
+                }
+                if (api == 1)
+                {
+                    res.Search(f => f.Is_api_string_, "1");
+                }
+                if (api == 2)
+                {
+                    res.Search(f => f.Is_api_string_, "0");
+                }
+
+                var ids = res.GetIds();
+                if (!ids.AllIds)
+                {
+                    var val = ids.Ids
+                                 .Select(id => new { ob = GetLogCacheValue(log_cache[id]) })
+                                 .Select(f => new { Lang = (int)f.ob[0], Is_success = (int)f.ob[1] });
+
+                    total = val.Count();
+                    var ret = new Dictionary<string, KeyValuePair<int, int>>();
+                    foreach (var gr in val.GroupBy(f => f.Lang))
+                    {
+                        ret[((LanguagesEnum)gr.Key).ToLanguage()] = new KeyValuePair<int, int>(gr.Count(), gr.Count(z => z.Is_success == 1));
+                    }
+                    return ret;
+                }
+                else
+                {
+                    var val = log_cache.Select(f => new { ob = GetLogCacheValue(f.Value) })
+                                       .Select(f => new { Lang = (int)f.ob[0], Is_success = (int)f.ob[1] });
+
+                    total = val.Count();
+                    var ret = new Dictionary<string, KeyValuePair<int, int>>();
+                    foreach (var gr in val.GroupBy(f => f.Lang))
+                    {
+                        ret[((LanguagesEnum)gr.Key).ToLanguage()] = new KeyValuePair<int, int>(gr.Count(), gr.Count(z => z.Is_success == 1));
+                    }
+                    return ret;
+                }
             }
-            
-            return ret;
+            catch (Exception e)
+            {
+                Log.LogInfo("error getting log", e, "2");
+                total = 0;
+                return new Dictionary<string, KeyValuePair<int, int>>();
+            }
         }
         public static Dictionary<string, KeyValuePair<int, int>> GetLangLogStats(int lang, DateTime? from, DateTime? to, string search, int api, int date_range)
         {
-            var res = Utils.Utils.db.Table<LogEntry>();
-            if (lang != 0)
-            {
-                res.Where(f => f.Lang == lang);
-            }
+            try
+            { 
+                InitLogCache();
 
-            WorkOnDates(res, date_range, from, to);
+                var res = Utils.Utils.db.Table<LogEntry>();
+                if (lang != 0)
+                {
+                    res.Search(f => f.Lang_string_, lang.ToString());
+                }
 
-            if (!string.IsNullOrEmpty(search))
-            {
-                res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
-            }
-            if (api == 1)
-            {
-                res.Where(f => f.Is_api == 1);
-            }
-            if (api == 2)
-            {
-                res.Where(f => f.Is_api == 0);
-            }
+                WorkOnDates(res, date_range, from, to);
 
-            var val = res.OrderByDescending(f => f.Id).Select(f => new { f.Time, f.Is_success });
+                if (!string.IsNullOrEmpty(search))
+                {
+                    res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
+                }
+                if (api == 1)
+                {
+                    res.Search(f => f.Is_api_string_, "1");
+                }
+                if (api == 2)
+                {
+                    res.Search(f => f.Is_api_string_, "0");
+                }
 
-            var ret = new Dictionary<string, KeyValuePair<int, int>>();
-            foreach (var gr in val.GroupBy(f => Convert.ToDateTime(f.Time).ToString("yyyy-MM-dd")))
-            {
-                ret[gr.Key] = new KeyValuePair<int, int>(gr.Count(), gr.Count(z => z.Is_success == 1));
+                var ids = res.GetIds();
+                if (!ids.AllIds)
+                {
+                    var val = ids.Ids
+                                 .Select(id => new { ob = GetLogCacheValue(log_cache[id]) })
+                                 .Select(f => new { Time = (DateTime)f.ob[2], Is_success = (int)f.ob[1] });
+
+                    var ret = new Dictionary<string, KeyValuePair<int, int>>();
+                    foreach (var gr in val.GroupBy(f => f.Time))
+                    {
+                        ret[gr.Key.ToString("yyyy-MM-dd")] = new KeyValuePair<int, int>(gr.Count(), gr.Count(z => z.Is_success == 1));
+                    }
+                    return ret;
+                }
+                else
+                {
+                    var val = log_cache.Select(f => new { ob = GetLogCacheValue(f.Value) })
+                                       .Select(f => new { Time = (DateTime)f.ob[2], Is_success = (int)f.ob[1] });
+
+                    var ret = new Dictionary<string, KeyValuePair<int, int>>();
+                    foreach (var gr in val.GroupBy(f => f.Time))
+                    {
+                        ret[gr.Key.ToString("yyyy-MM-dd")] = new KeyValuePair<int, int>(gr.Count(), gr.Count(z => z.Is_success == 1));
+                    }
+                    return ret;
+                }
             }
-            return ret;
+            catch (Exception e)
+            {
+                Log.LogInfo("error getting log", e, "3");
+                return new Dictionary<string, KeyValuePair<int, int>>();
+            }
         }
         public static List<LogEntry> GetLog(int lang, DateTime? from, DateTime? to, string search, int api, int date_range, out int total)
         {
-            //Utils.Utils.db.Replicate(@"C:\inetpub\wwwroot\rextester\back\log");
-            var res = Utils.Utils.db.Table<LogEntry>();
-            if (lang != 0)
-            {
-                res.Where(f => f.Lang == lang);
-            }
+            try
+            { 
+                InitLogCache();
 
-            WorkOnDates(res, date_range, from, to);
+                var res = Utils.Utils.db.Table<LogEntry>();
+                if (lang != 0)
+                {
+                    res.Search(f => f.Lang_string_, lang.ToString());
+                }
 
-            if (!string.IsNullOrEmpty(search))
-            {
-                res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
-            }
-            if (api == 1)
-            {
-                res.Where(f => f.Is_api == 1);
-            }
-            if (api == 2)
-            {
-                res.Where(f => f.Is_api == 0);
-            }
+                WorkOnDates(res, date_range, from, to);
+
+                if (!string.IsNullOrEmpty(search))
+                {
+                    res.Search(f => f.Data, search).Or().Search(f => f.Result, search).Or().Search(f => f.Input, search);
+                }
+                if (api == 1)
+                {
+                    res.Search(f => f.Is_api_string_, "1");
+                }
+                if (api == 2)
+                {
+                    res.Search(f => f.Is_api_string_, "0");
+                }
             
-            return res.OrderByDescending(f => f.Id).Take(50).SelectEntity(out total);
+                return res.OrderByDescending(f => f.Time).Take(50).SelectEntity(out total);
+            }
+            catch (Exception e)
+            {
+                Log.LogInfo("error getting log", e, "4");
+                total = 0;
+                return new List<LogEntry>();
+            }
         }
         static void WorkOnDates(ILinqDbQueryable<LogEntry> res, int range, DateTime? from, DateTime? to)
         {
@@ -660,10 +788,9 @@ namespace reExp.Models
         }
         public static void LogRun(string data, string input, string compiler_args, string result, int lang, bool is_api, string log_path, bool is_success)
         {
-            try
-            {
                 try
                 {
+                    InitLogCache();
                     var entry = new LogEntry()
                     {
                         Data = data,
@@ -674,19 +801,20 @@ namespace reExp.Models
                         Is_api = is_api ? 1 : 0,
                         Time = DateTime.Now,
                         Day_string = DateTime.Now.ToString("yyyyMMdd"),
-                        Is_success = is_success ? 1 : 0
+                        Is_success = is_success ? 1 : 0,
+                        Lang_string_ = lang.ToString(),
+                        Is_api_string_ = is_api ? "1" : "0",
                     };
                     Utils.Utils.db.Table<LogEntry>().Save(entry);
+
+                    log_cache[entry.Id] = GetLogCacheItem(entry.Lang, entry.Time, entry.Is_success);
+
                 }
                 catch (Exception e)
                 {
-                    //File.WriteAllText(Path.Combine(log_path, "err.txt"), e.Message + Environment.NewLine + e.StackTrace + Environment.NewLine + data+"|"+input+"|"+compiler_args+"|"+result+"|"+lang+"|"+is_api);
                     Log.LogInfo("error while loging code run", e, "log error");
                 }
                 Model.IncrementLangCounter(data, input, compiler_args, result, lang, is_api);
-            }
-            catch (Exception)
-            { }
         }
     }
 
@@ -884,6 +1012,8 @@ namespace reExp.Models
         public DateTime Time { get; set; }
         public string Day_string { get; set; }
         public int Is_success { get; set; }
+        public string Lang_string_ { get; set; }
+        public string Is_api_string_ { get; set; }
     }
 
 

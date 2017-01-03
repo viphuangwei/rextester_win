@@ -273,7 +273,6 @@ namespace reExp.Utils
                 }
                 LogJob job = new LogJob(info, type);
                 HostingEnvironment.QueueBackgroundWorkItem(f => job.DoWork());
-                //ThreadPool.QueueUserWorkItem(f => job.DoWork());
             }
             catch (Exception)
             { }
@@ -284,10 +283,11 @@ namespace reExp.Utils
             try
             {
                 HostingEnvironment.QueueBackgroundWorkItem(f => Model.LogRun(data, input, compiler_args, result, lang, is_api, ConfigurationManager.AppSettings["LogPath"], is_success));
-                //ThreadPool.QueueUserWorkItem(f => Model.LogRun(data, input, compiler_args, result, lang, is_api, ConfigurationManager.AppSettings["LogPath"]));
             }
-            catch (Exception)
-            { }
+            catch (Exception ex)
+            {
+                Log.LogInfo("error while launching log thread", ex, "log thread error");
+            }
         }
     }
 
