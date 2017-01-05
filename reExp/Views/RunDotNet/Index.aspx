@@ -465,6 +465,8 @@
                 </tr>
             </table>
 
+            <input id="Privacy" name="Privacy" type="hidden"/>
+            <input id="PrivacyUsers" name="PrivacyUsers" type="hidden"/>
             <input id="Title" name="Title" type="hidden"/>
             <input id="SavedOutput" name="SavedOutput" type="hidden"/>
             <input id="WholeError" name="WholeError" type="hidden"/>
@@ -1032,7 +1034,7 @@
 
             $("#Save").click(function () {
 
-                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Title:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>&nbsp;&nbsp;<br/><br/>&nbsp;&nbsp;&nbsp;<input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
+                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Title:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>" + <% if (SessionManager.IsUserInSession() && !Model.IsLive && !Model.IsInEditMode) {%>  "<br/><br/>Privacy options:<br/><input checked=\"checked\" id=\"privacyInput\" name=\"privacyInput\" type=\"radio\" value=\"1\" /> &nbsp;&nbsp; Everyone can see, only me can edit<br/><input id=\"privacyInput\" name=\"privacyInput\" type=\"radio\" value=\"2\" /> &nbsp;&nbsp; Everyone can see, everyone can edit<br/><input id=\"privacyInput\" name=\"privacyInput\" type=\"radio\" value=\"3\" /> &nbsp;&nbsp; Me and these users can see and edit (coma-separated user names):&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"privacyUsersInput\"/><br/><input id=\"privacyInput\" name=\"privacyInput\" type=\"radio\" value=\"4\" /> &nbsp;&nbsp; Only me can see and edit" <%} else {%> "" <%}%> + "<br/><br/>&nbsp;&nbsp;&nbsp;<input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
                 $("#titleInput").focus();
                 $('html, body').animate({ scrollTop: $("#Run").offset().top }, 200);
                 $("#OKButton").click(function() {
@@ -1047,6 +1049,8 @@
                         return;
                     }
                     $("#Title").val($("#titleInput").val());
+                    $("#Privacy").val($('input[name=privacyInput]:checked').val());
+                    $("#PrivacyUsers").val($("#privacyUsersInput").val());
                     
                     <%if(Model.IsOutputInHtml) 
                     {%>
@@ -1064,7 +1068,7 @@
                 
             });
             $("#Wall").click(function () {
-                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Title:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>&nbsp;&nbsp;<br/><br/>Choose the wall:<br/>&nbsp;&nbsp;<input type=\"radio\" name=\"wall_group\" value=\"1\" checked>&nbsp;My wall<br/>&nbsp;&nbsp;<input type=\"radio\" name=\"wall_group\" value=\"2\">&nbsp;Code wall<br/><br/><input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
+                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Title:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>&nbsp;&nbsp;<br/><br/>Choose the wall:<br/><input type=\"radio\" name=\"wall_group\" value=\"1\" checked>&nbsp;My wall<br/><input type=\"radio\" name=\"wall_group\" value=\"2\">&nbsp;Code wall"  + <% if (SessionManager.IsUserInSession()) {%>  "<br/><br/>Privacy options:<br/><input checked=\"checked\" id=\"privacyInput\" name=\"privacyInput\" type=\"radio\" value=\"1\" /> &nbsp;&nbsp; Everyone can see, only me can edit<br/><input id=\"privacyInput\" name=\"privacyInput\" type=\"radio\" value=\"2\" /> &nbsp;&nbsp; Everyone can see, everyone can edit" <%} else {%> "" <%}%> +  "<br/><br/><input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
                 $("#titleInput").focus();
                 $('html, body').animate({ scrollTop: $("#Run").offset().top }, 200);
                 $("#OKButton").click(function() {
@@ -1079,6 +1083,7 @@
                         return;
                     }
                     $("#Title").val($("#titleInput").val());
+                    $("#Privacy").val($('input[name=privacyInput]:checked').val());
                     <%if(Model.IsOutputInHtml) 
                     {%>
                     $("#SavedOutput").val($("#Result").html());
@@ -1099,7 +1104,7 @@
             {%>
             $("#Live").click(function () {
 
-                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Title:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>&nbsp;&nbsp;<br/><br/>&nbsp;&nbsp;&nbsp;<input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
+                $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Title:<br/><br/>&nbsp;&nbsp;&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"titleInput\"/>"+ <% if (SessionManager.IsUserInSession()) {%>  "<br/><br/>Privacy options:<br/><input id=\"privacyInput\" checked=\"checked\" name=\"privacyInput\" type=\"radio\" value=\"2\" /> &nbsp;&nbsp; Everyone can see and edit<br/><input id=\"privacyInput\" name=\"privacyInput\" type=\"radio\" value=\"3\" /> &nbsp;&nbsp; Me and these users can see and edit (coma-separated user names):&nbsp;<input style=\"border-style:solid;border-width:1px;border-color:#FF9900;\" size=\"100\" type=\"text\" id=\"privacyUsersInput\"/><br/><input id=\"privacyInput\" name=\"privacyInput\" type=\"radio\" value=\"4\" /> &nbsp;&nbsp; Only me can see and edit" <%} else {%> "" <%}%> +"<br/><br/>&nbsp;&nbsp;&nbsp;<input type=\"button\" id=\"OKButton\" value=\"Ok\"/>&nbsp;&nbsp;&nbsp;<span style=\"color:red\" id=\"titleError\"></span><br/><br/><br/></pre>");
                 $("#titleInput").focus();
                 $('html, body').animate({ scrollTop: $("#Run").offset().top }, 200);
                 $("#OKButton").click(function() {
@@ -1114,7 +1119,9 @@
                         return;
                     }
                     $("#Title").val($("#titleInput").val());
-                    
+                    $("#Privacy").val($('input[name=privacyInput]:checked').val());
+                    $("#PrivacyUsers").val($("#privacyUsersInput").val());
+
                     <%if(Model.IsOutputInHtml) 
                     {%>
                     $("#SavedOutput").val($("#Result").html());
@@ -1375,7 +1382,9 @@
                                 $("#Error").replaceWith("<div id=\"Error\"><pre style=\"color: Red\" class=\"resultarea\">Error:</pre><pre id=\"ErrorSpan\" class=\"resultarea\"></pre></div>");
                                 $("#ErrorSpan").text(obj.Errors.replace(/\r/g, ""));
                                 return;
-                            }                    
+                            }     
+                            has_changes = false;               
+                            window.onbeforeunload = null;
                             if(obj.Updated == true)
                                 <%if(Model.IsLive) 
                                 {%>

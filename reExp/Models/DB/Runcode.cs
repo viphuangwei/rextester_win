@@ -99,6 +99,11 @@ namespace reExp.Models.DB
             pars.Add(new SQLiteParameter("NewGuid", newguid));
             ExecuteNonQuery(query, pars);
 
+            string old_id = ExecuteQuery("select id from Code where guid = '" + oldguid + "'", new List<SQLiteParameter>())[0]["id"].ToString();
+            string new_id = ExecuteQuery("select id from Code where guid = '" + newguid + "'", new List<SQLiteParameter>())[0]["id"].ToString();
+            query = @"insert into codeprivacy(code_id, rights, users) select " + new_id + ", rights, users from codeprivacy where code_id = " + old_id;
+            ExecuteNonQuery(query, new List<SQLiteParameter>());
+
             query = @"update Code
                       set code = @Code, input = @Input, output = @Output, compiler_args= @Args, error = @Error, warning = @Warning, show_warnings = @Show_warnings, status = @Status, stats = @Stats, user_id = @User_id, date = DATETIME('now'), title = @Title
                       where guid = @OldGuid";
@@ -184,6 +189,13 @@ namespace reExp.Models.DB
             pars.Add(new SQLiteParameter("Stats", stats));
             pars.Add(new SQLiteParameter("Title", title));
             ExecuteNonQuery(query, pars);
+
+
+            string old_id = ExecuteQuery("select id from Code where guid = '" + oldguid + "'", new List<SQLiteParameter>())[0]["id"].ToString();
+            string new_id = ExecuteQuery("select id from Code where guid = '" + newguid + "'", new List<SQLiteParameter>())[0]["id"].ToString();
+            query = @"insert into codeprivacy(code_id, rights, users) select " + new_id + ", rights, users from codeprivacy where code_id = " + old_id;
+            ExecuteNonQuery(query, new List<SQLiteParameter>());
+
 
             query = @"insert into Versions(primary_code_id, snapshot_code_id, time_created)
                       values((select id from Code where guid = @OldGuid), (select id from Code where guid = @NewGuid), DATETIME('now'))";
@@ -325,6 +337,25 @@ namespace reExp.Models.DB
             }
         }
 
+        public static List<Dictionary<string, object>> GetRights(string guid)
+        {
+            string query = @"select p.rights, p.users, c.user_id
+                             from codeprivacy p
+                                  inner join code c on p.code_id = c.id
+                             where c.guid = @Guid";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("Guid", guid));
+            return ExecuteQuery(query, pars);
+        }
+        public static void Privacy_Info_Insert(string privacy_option, string privacy_users, string guid)
+        {
+            var query = @"insert into codeprivacy(code_id, rights, users) select id, @Rights, @Users from code where guid = @Guid";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("Guid", guid));
+            pars.Add(new SQLiteParameter("Rights", Convert.ToInt32(privacy_option)));
+            pars.Add(new SQLiteParameter("Users", privacy_users == null ? DBNull.Value : (object)privacy_users));
+            ExecuteNonQuery(query, pars);
+        }
         public static void Live_Code_Insert(string guid, string version_token)
         {
             string query = @"insert into LiveCode(code_id, version_token) values((select id from Code where guid = @Guid), @Version_token)";

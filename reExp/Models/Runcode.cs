@@ -30,94 +30,94 @@ namespace reExp.Models
             public string WholeOutput { get; set; }
             public string RunStatus { get; set; }
         }
-        static RedisConnection redis_conn = null;
-        static object redis_lock = new object();
-        public static RedisConnection RedisConnection
-        {
-            get
-            {
-                lock (redis_lock)
-                {
-                    if (redis_conn == null)
-                    {
-                        redis_conn = new RedisConnection("localhost");
-                    }
-                    if (redis_conn.State != RedisConnectionBase.ConnectionState.Open)
-                    {
-                        redis_conn.Open().Wait();
-                    }
-                }
-                return redis_conn;
-            }
-        }
-        public static int redis_db = 0;
-        public static void InsertRundotnetDataToRedis(RundotnetData data)
-        {
-            try
-            {
-                if (data.LanguageChoice == LanguagesEnum.Octave)
-                    return;
+        //static RedisConnection redis_conn = null;
+        //static object redis_lock = new object();
+        //public static RedisConnection RedisConnection
+        //{
+        //    get
+        //    {
+        //        lock (redis_lock)
+        //        {
+        //            if (redis_conn == null)
+        //            {
+        //                redis_conn = new RedisConnection("localhost");
+        //            }
+        //            if (redis_conn.State != RedisConnectionBase.ConnectionState.Open)
+        //            {
+        //                redis_conn.Open().Wait();
+        //            }
+        //        }
+        //        return redis_conn;
+        //    }
+        //}
+        //public static int redis_db = 0;
+        //public static void InsertRundotnetDataToRedis(RundotnetData data)
+        //{
+        //    try
+        //    {
+        //        if (data.LanguageChoice == LanguagesEnum.Octave)
+        //            return;
 
-                var conn = RedisConnection;
-                JavaScriptSerializer json = new JavaScriptSerializer();
-                string key = json.Serialize(new RedisData() 
-                    {
-                        Program = data.Program,
-                        Input = data.Input,
-                        Args = data.CompilerArgs,
-                        LanguageChoice = (int)data.LanguageChoice
-                    });
-                key = Utils.EncryptionUtils.CreateMD5Hash(key);
-                string val = json.Serialize(new RedisData() 
-                    { 
-                        Program = data.Program, 
-                        Input = data.Input, 
-                        Args = data.CompilerArgs, 
-                        LanguageChoice = (int)data.LanguageChoice,
-                        WholeError = data.WholeError,
-                        WholeWarning = data.WholeWarning,
-                        WholeOutput = data.Output,
-                        RunStatus = data.RunStats
-                    });
-                val = GlobalUtils.Utils.Compress(val);
-                conn.Strings.Set(redis_db, new Dictionary<string, byte[]>() { { key, Encoding.UTF8.GetBytes(val) } }).Wait();
-                conn.Keys.Expire(redis_db, key, 24 * 60 * 60);
-            }
-            catch (Exception e)
-            {
-                Utils.Log.LogInfo(e.Message, e, "redis insert error");
-            }
-        }
+        //        var conn = RedisConnection;
+        //        JavaScriptSerializer json = new JavaScriptSerializer();
+        //        string key = json.Serialize(new RedisData() 
+        //            {
+        //                Program = data.Program,
+        //                Input = data.Input,
+        //                Args = data.CompilerArgs,
+        //                LanguageChoice = (int)data.LanguageChoice
+        //            });
+        //        key = Utils.EncryptionUtils.CreateMD5Hash(key);
+        //        string val = json.Serialize(new RedisData() 
+        //            { 
+        //                Program = data.Program, 
+        //                Input = data.Input, 
+        //                Args = data.CompilerArgs, 
+        //                LanguageChoice = (int)data.LanguageChoice,
+        //                WholeError = data.WholeError,
+        //                WholeWarning = data.WholeWarning,
+        //                WholeOutput = data.Output,
+        //                RunStatus = data.RunStats
+        //            });
+        //        val = GlobalUtils.Utils.Compress(val);
+        //        conn.Strings.Set(redis_db, new Dictionary<string, byte[]>() { { key, Encoding.UTF8.GetBytes(val) } }).Wait();
+        //        conn.Keys.Expire(redis_db, key, 24 * 60 * 60);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Utils.Log.LogInfo(e.Message, e, "redis insert error");
+        //    }
+        //}
 
-        public static RedisData GetRundotnetDataFromRedis(RundotnetData data)
-        {
-            try
-            {
-                if (data.LanguageChoice == LanguagesEnum.Octave)
-                    return null;
+        //public static RedisData GetRundotnetDataFromRedis(RundotnetData data)
+        //{
+        //    try
+        //    {
+        //        if (data.LanguageChoice == LanguagesEnum.Octave)
+        //            return null;
                 
-                var conn = RedisConnection;
-                JavaScriptSerializer json = new JavaScriptSerializer();
-                string key = json.Serialize(new RedisData()
-                {
-                    Program = data.Program,
-                    Input = data.LanguageChoice == LanguagesEnum.Prolog ? data.Input + "\nhalt." : data.Input,
-                    Args = data.CompilerArgs,
-                    LanguageChoice = (int)data.LanguageChoice
-                });
-                key = Utils.EncryptionUtils.CreateMD5Hash(key);
-                var bytes = conn.Strings.Get(redis_db, key).Result;
-                if (bytes == null)
-                    return null;
-                string val = Encoding.UTF8.GetString(bytes);
-                return json.Deserialize<RedisData>(GlobalUtils.Utils.Decompress(val));
-            }
-            catch (Exception e)
-            {
-                Utils.Log.LogInfo(e.Message, e, "redis get error");
-                return null;
-            }
-        }
+        //        var conn = RedisConnection;
+        //        JavaScriptSerializer json = new JavaScriptSerializer();
+        //        string key = json.Serialize(new RedisData()
+        //        {
+        //            Program = data.Program,
+        //            Input = data.LanguageChoice == LanguagesEnum.Prolog ? data.Input + "\nhalt." : data.Input,
+        //            Args = data.CompilerArgs,
+        //            LanguageChoice = (int)data.LanguageChoice
+        //        });
+        //        key = Utils.EncryptionUtils.CreateMD5Hash(key);
+        //        var bytes = conn.Strings.Get(redis_db, key).Result;
+        //        if (bytes == null)
+        //            return null;
+        //        string val = Encoding.UTF8.GetString(bytes);
+        //        return json.Deserialize<RedisData>(GlobalUtils.Utils.Decompress(val));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Utils.Log.LogInfo(e.Message, e, "redis get error");
+        //        return null;
+        //    }
+        //}
 
         public static void IncrementLangCounter(string data, string input, string compiler_args, string result, int lang, bool is_api)
         {
@@ -152,6 +152,75 @@ namespace reExp.Models
         {
             DB.DB.Log_Info_Insert(info, type);
         }
+
+        public static byte[] GetCodeRights(string guid) //[0] read, [1] edit
+        {
+            try
+            {
+                var res = DB.DB.GetRights(guid);
+                if (res.Count() == 0 || res[0]["rights"] + "" == "2") //everyone everything
+                {
+                    return new byte[2] { 1, 1 };
+                }
+                if (res[0]["rights"] + "" == "1") //me - everything, others - read
+                {
+                    if (SessionManager.IsUserInSession() && SessionManager.UserId + "" == res[0]["user_id"] + "")
+                    {
+                        return new byte[2] { 1, 1 };
+                    }
+                    else
+                    {
+                        return new byte[2] { 1, 0 };
+                    }
+                }
+                if (res[0]["rights"] + "" == "3") //just me and some users
+                {
+                    if (SessionManager.IsUserInSession() && SessionManager.UserId + "" == res[0]["user_id"] + "")
+                    {
+                        return new byte[2] { 1, 1 };
+                    }
+                    else
+                    {
+                        if (SessionManager.IsUserInSession())
+                        {
+                            var users = res[0]["users"] + "";
+                            var list = users.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(f => f.Trim().ToLower())
+                                            .ToList();
+                            if (list.Contains(SessionManager.UserName.Trim().ToLower()))
+                            {
+                                return new byte[2] { 1, 1 };
+                            }
+                            else
+                            {
+                                return new byte[2] { (byte)0, (byte)0 };
+                            }
+                        }
+                        else
+                        {
+                            return new byte[2] { (byte)0, (byte)0 };
+                        }
+                    }
+                }
+                if (res[0]["rights"] + "" == "4") //just me
+                {
+                    if (SessionManager.IsUserInSession() && SessionManager.UserId + "" == res[0]["user_id"] + "")
+                    {
+                        return new byte[2] { 1, 1 };
+                    }
+                    else
+                    {
+                        return new byte[2] { 0, 0 };
+                    }
+                }
+                return new byte[2] { (byte)0, (byte)0 };
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, e, "get rights error");
+                return new byte[2] { (byte)0, (byte)0 };
+            }
+        }
       
         public static string SaveCode(RundotnetData data, bool wall = false, bool live = false, bool personal = false)
         {
@@ -160,6 +229,15 @@ namespace reExp.Models
             try
             {
                 DB.DB.Code_Insert(data.Title, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, Convert.ToInt32(data.LanguageChoice), Convert.ToInt32(data.EditorChoice), guid, SessionManager.UserId, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave, wall, live, personal);
+
+                if (data.Privacy != null && data.Privacy != "2")
+                {
+                    if (!string.IsNullOrEmpty(data.PrivacyUsers) && data.Privacy == "3" && SessionManager.IsUserInSession())
+                    {
+                        data.PrivacyUsers += "," + SessionManager.UserName;
+                    }
+                    DB.DB.Privacy_Info_Insert(data.Privacy, data.PrivacyUsers, guid);
+                }
 
                 if (SessionManager.IsUserInSession())
                 {
@@ -209,8 +287,13 @@ namespace reExp.Models
             var guid = Utils.Utils.GetGuid();
             try
             {
-                if (data.IsLive)
+                var rights = GetCodeRights(data.CodeGuid);
+                if (rights[1] == (byte)0)
                 {
+                    return;
+                }
+                if (data.IsLive)
+                {                    
                     DB.DB.Live_Code_Update(guid, data.Program, data.Input, data.SavedOutput, data.CompilerArgs, data.CodeGuid, data.WholeError, data.WholeWarning, data.ShowWarnings, (int)data.Status, data.StatsToSave, data.Title);
                 }
                 else
@@ -297,6 +380,11 @@ namespace reExp.Models
         {
             try
             {
+                var rights = GetCodeRights(guid);
+                if (rights[0] == (byte)0)
+                {
+                    return null;
+                }
                 var res = DB.DB.Live_Code_Get(guid);
                 if (res.Count != 0)
                     return new Code()
@@ -338,6 +426,11 @@ namespace reExp.Models
         {
             try
             {
+                var rights = GetCodeRights(guid);
+                if (rights[0] == (byte)0)
+                {
+                    return null;
+                }
                 Code code = null;
                 var res = DB.DB.Code_Get(guid);
                 if (res.Count != 0)

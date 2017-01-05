@@ -508,6 +508,11 @@ namespace reExp.Controllers.rundotnet
         public ViewResult GetEditCode(RundotnetData data, string savedNr)
         {
             Compression.SetCompression();
+            var rights = Model.GetCodeRights(savedNr);
+            if (rights[1] == (byte)0)
+            {
+                throw new HttpException(404, "not found");
+            }
             var code = Model.GetCode(savedNr, false);
             if (code == null)
             {

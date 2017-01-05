@@ -935,5 +935,15 @@ puts ""Hello, world!""
             get;
             set;
         }
+        public string Privacy
+        {
+            get;
+            set;
+        }
+        public string PrivacyUsers
+        {
+            get;
+            set;
+        }
     }
 }
