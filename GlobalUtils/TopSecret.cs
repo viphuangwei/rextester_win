@@ -47,7 +47,27 @@ namespace GlobalUtils
                 return "";
             }
         }
-
+        public static string Facebook_client_id
+        {
+            get
+            {
+                return "";
+            }
+        }
+        public static string Facebook_callback_url
+        {
+            get
+            {
+                return "";
+            }
+        }
+        public static string Facebook_client_secret
+        {
+            get
+            {
+                return "";
+            }
+        }
         public static string Google_client_id
         {
             get

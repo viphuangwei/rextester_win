@@ -158,7 +158,72 @@ namespace reExp.Controllers.login
             return this.RedirectToAction("Index");
         }
 
+        public ActionResult oauth2callback_facebook(GoogleResult result)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(result.error))
+                {
+                    return View("Index", new LoginData() { IsError = true, Error = string.Format("Error occured ({0}). Try again later.", result.error), redirectInfo = result.state });
+                }
 
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://graph.facebook.com/v2.8/oauth/access_token");
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                using (TextWriter tw = new StreamWriter(request.GetRequestStream()))
+                {
+                    tw.Write(string.Format("code={0}&client_id={1}&client_secret={2}&redirect_uri={3}",
+                             result.code, GlobalUtils.TopSecret.Facebook_client_id, GlobalUtils.TopSecret.Facebook_client_secret, GlobalUtils.TopSecret.Facebook_callback_url));
+                }
+                string json = null;
+                using (TextReader tr = new StreamReader(request.GetResponse().GetResponseStream()))
+                {
+                    json = tr.ReadToEnd();
+                }
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Dictionary<string, object> res = (Dictionary<string, object>)js.Deserialize(json, typeof(Dictionary<string, object>));
+
+                GoogleResult gr = new GoogleResult()
+                {
+                    access_token = (string)res["access_token"],
+                    //id_token = (string)res["id_token"],
+                    expires_in = (int)res["expires_in"],
+                    token_type = (string)res["token_type"]
+                };
+
+                request = (HttpWebRequest)HttpWebRequest.Create(string.Format("https://graph.facebook.com/debug_token?access_token={0}|{1}&input_token={2}", GlobalUtils.TopSecret.Facebook_client_id, GlobalUtils.TopSecret.Facebook_client_secret, gr.access_token));
+                request.Method = "GET";
+                using (TextReader tr = new StreamReader(request.GetResponse().GetResponseStream()))
+                {
+                    json = tr.ReadToEnd();
+                }
+                var nres = (Dictionary<string, Dictionary<string, object>>)js.Deserialize(json, typeof(Dictionary<string, Dictionary<string, object>>));
+                
+                var facebook_user_id = (string)nres["data"]["user_id"];
+
+                var hash = "fb_" + Utils.EncryptionUtils.CreateMD5Hash(facebook_user_id);
+                var name = Model.IsGoogleAccountCreated(hash);
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    SessionManager.SetAuthentication(name);
+                    if (!string.IsNullOrEmpty(result.state))
+                        return this.Redirect(Utils.Utils.BaseUrl + result.state);
+                    else
+                        return this.RedirectToAction("UsersStuff");
+                }
+                else
+                {
+                    return View("CreateGoogleUser", new GoogleUser() { EmailHash = hash, redirectInfo = result.state });
+                }
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(null, e, "facebook login error");
+                return View("Index", new LoginData() { IsError = true, Error = "Error occured. Try again later.", redirectInfo = result.state });
+            }
+        }
         public ActionResult oauth2callback(GoogleResult result)
         {
             try

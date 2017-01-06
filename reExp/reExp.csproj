@@ -185,6 +185,7 @@
     <Content Include="Content\csharpcolors.css" />
     <Content Include="Content\down.png" />
     <Content Include="Content\downvoted.png" />
+    <Content Include="Content\Facebook.png" />
     <Content Include="Content\Google.png" />
     <Content Include="Content\javacolors.css" />
     <Content Include="Content\List.css" />

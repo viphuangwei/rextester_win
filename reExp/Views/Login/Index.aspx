@@ -33,10 +33,16 @@
                         <div style="padding-left:5em; padding-right:5em;">Or</div>
                     </td>
                     <td>
-                    
-                         Use your Google account:<br/>
                          <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=<%:GlobalUtils.TopSecret.Google_client_id%>&redirect_uri=<%:GlobalUtils.TopSecret.Google_callback_url%>&scope=https://www.googleapis.com/auth/userinfo.email&state=<%:Model.redirectInfo%>">
                             <img src="/Content/Google.png" alt="Login with Google account" title="Login with Google account"/>
+                         </a>
+                    </td>
+                   <td>
+                        <div style="padding-left:5em; padding-right:5em;">Or</div>
+                    </td>
+                    <td>
+                         <a href="https://www.facebook.com/v2.8/dialog/oauth?response_type=code&client_id=<%:GlobalUtils.TopSecret.Facebook_client_id%>&redirect_uri=<%:GlobalUtils.TopSecret.Facebook_callback_url%>&state=<%:Model.redirectInfo%>">
+                            <img src="/Content/Facebook.png" alt="Login with Facebook account" title="Login with Facebook account"/>
                          </a>
                     </td>
                </tr>
@@ -58,9 +64,13 @@
             <input id="Submit1" type="submit" value="Register"/>
         </div>
         <div>
-            Use your Google account:<br/>
             <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=<%:GlobalUtils.TopSecret.Google_client_id%>&redirect_uri=<%:GlobalUtils.TopSecret.Google_callback_url%>&scope=https://www.googleapis.com/auth/userinfo.email&state=<%:Model.redirectInfo%>">
-            <img src="/Content/Google.png" alt="Login with Google account" title="Login with Google account"/>
+                <img src="/Content/Google.png" alt="Login with Google account" title="Login with Google account"/>
+            </a>
+        </div>
+        <div>
+            <a href="https://www.facebook.com/v2.8/dialog/oauth?response_type=code&client_id=<%:GlobalUtils.TopSecret.Facebook_client_id%>&redirect_uri=<%:GlobalUtils.TopSecret.Facebook_callback_url%>&state=<%:Model.redirectInfo%>">
+                <img src="/Content/Facebook.png" alt="Login with Facebook account" title="Login with Facebook account"/>
             </a>
         </div>
     <%} %>
