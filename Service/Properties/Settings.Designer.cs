@@ -26,7 +26,7 @@ namespace Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://92.51.147.212/Service.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://83.169.3.96/Service.asmx")]
         public string Service_linux_Service {
             get {
                 return ((string)(this["Service_linux_Service"]));

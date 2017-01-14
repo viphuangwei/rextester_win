@@ -86,6 +86,18 @@ namespace reExp.Utils
                     return "Tcl";
                 case LanguagesEnum.ClientSide:
                     return "Client Side";
+                case LanguagesEnum.Swift:
+                    return "Swift";
+                case LanguagesEnum.Bash:
+                    return "Bash";
+                case LanguagesEnum.Ada:
+                    return "Ada";
+                case LanguagesEnum.Erlang:
+                    return "Erlang";
+                case LanguagesEnum.Elixir:
+                    return "Elixir";
+                case LanguagesEnum.Ocaml:
+                    return "Ocaml";
                 default:
                     return "Unknown";
             }

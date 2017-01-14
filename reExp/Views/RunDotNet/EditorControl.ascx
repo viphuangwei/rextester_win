@@ -191,7 +191,7 @@
           syntax = "tcl";
           js = "mode/tcl/tcl.js";
           break;
-        case LanguagesEnum.ClientSide:
+      case LanguagesEnum.ClientSide:
           mode = "text/html";
           syntax = "html";
           js = "mode/htmlmixed/htmlmixed.js";
@@ -199,6 +199,36 @@
           additionalJs.Add("mode/javascript/javascript.js");
           additionalJs.Add("mode/css/css.js");       
           break;
+      case LanguagesEnum.Swift:
+          mode = "text/x-swift";
+          syntax = "swift";
+          js = "mode/swift/swift.js";
+          break;
+      case LanguagesEnum.Bash:
+          mode = "text/x-sh";
+          syntax = "shell";
+          js = "mode/shell/shell.js";
+          break;
+      case LanguagesEnum.Ada:
+         mode = "text/x-ada";
+         syntax = "ada";
+         js = "mode/ada/ada.js";
+         break;
+      case LanguagesEnum.Erlang:
+        mode = "text/x-erlang";
+        syntax = "erlang";
+        js = "mode/erlang/erlang.js";
+        break;
+      case LanguagesEnum.Elixir:
+        mode = "text/x-elixir";
+        syntax = "elixir";
+        js = "mode/elixir/elixir.js";
+        break;
+      case LanguagesEnum.Ocaml:
+        mode = "text/x-ocaml";
+        syntax = "ocaml";
+        js = "mode/ocaml/ocaml.js";
+        break;
   }
 %>
 <%if(Model.EditorChoice == EditorsEnum.Codemirror) 

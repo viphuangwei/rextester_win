@@ -281,6 +281,30 @@ namespace reExp.Controllers.rundotnet
                 {
                     data.LanguageChoice = LanguagesEnum.ClientSide;
                 }
+                else if (lang_title.ToLower() == "swift_online_compiler" || lang_title.ToLower() == "swift")
+                {
+                    data.LanguageChoice = LanguagesEnum.Swift;
+                }
+                else if (lang_title.ToLower() == "bash_online_compiler" || lang_title.ToLower() == "bash")
+                {
+                    data.LanguageChoice = LanguagesEnum.Bash;
+                }
+                else if (lang_title.ToLower() == "ada_online_compiler" || lang_title.ToLower() == "ada")
+                {
+                    data.LanguageChoice = LanguagesEnum.Ada;
+                }
+                else if (lang_title.ToLower() == "erlang_online_compiler" || lang_title.ToLower() == "erlang")
+                {
+                    data.LanguageChoice = LanguagesEnum.Erlang;
+                }
+                else if (lang_title.ToLower() == "elixir_online_compiler" || lang_title.ToLower() == "elixir")
+                {
+                    data.LanguageChoice = LanguagesEnum.Elixir;
+                }
+                else if (lang_title.ToLower() == "ocaml_online_compiler" || lang_title.ToLower() == "ocaml")
+                {
+                    data.LanguageChoice = LanguagesEnum.Ocaml;
+                }
                 else
                 {
                     data.LanguageChoice = LanguagesEnum.CSharp;

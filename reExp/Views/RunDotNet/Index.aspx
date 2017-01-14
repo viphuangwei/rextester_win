@@ -151,6 +151,26 @@
                 {
                     %>run javascript fiddle online<%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.Swift)
+                {
+                    %>compile swift online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Bash)
+                {
+                    %>run bash online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Ada)
+                {
+                    %>compile ada online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Java)
+                {
+                    %>compile erlang online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Elixir)
+                {
+                    %>run elixir online <%
+                }
                 else
                 {
                     %>compile c# online<%
@@ -313,6 +333,26 @@
                 else if (Model.LanguageChoice == LanguagesEnum.ClientSide)
                 {
                     %>run javascript fiddle online<%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Swift)
+                {
+                    %>compile swift online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Bash)
+                {
+                    %>run bash online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Ada)
+                {
+                    %>compile ada online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Erlang)
+                {
+                    %>compile erlang online <%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Elixir)
+                {
+                    %>run elixir online <%
                 }
                 else
                 {
@@ -695,6 +735,26 @@
                 {
                     %><meta name="Keywords" content="run javascript fiddle online" /><%
                 }
+                else if (Model.LanguageChoice == LanguagesEnum.Swift)
+                {
+                    %><meta name="Keywords" content="compile swift online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Bash)
+                {
+                    %><meta name="Keywords" content="run bash online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Ada)
+                {
+                    %><meta name="Keywords" content="compile ada online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Erlang)
+                {
+                    %><meta name="Keywords" content="compile erlang online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Elixir)
+                {
+                    %><meta name="Keywords" content="run elixir online" /><%
+                }
                 else
                 {
                     %><meta name="Keywords" content="compile c# online" /><%
@@ -848,6 +908,26 @@
                 else if (Model.LanguageChoice == LanguagesEnum.ClientSide)
                 {
                     %><meta name="Keywords" content="run javascript fiddle online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Swift)
+                {
+                    %><meta name="Keywords" content="compile swift online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Bash)
+                {
+                    %><meta name="Description" content="run bash online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Ada)
+                {
+                    %><meta name="Description" content="compile ada online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Erlang)
+                {
+                    %><meta name="Description" content="compile erlang online" /><%
+                }
+                else if (Model.LanguageChoice == LanguagesEnum.Elixir)
+                {
+                    %><meta name="Description" content="run elixir online" /><%
                 }
                 else
                 {
@@ -1328,6 +1408,30 @@
                 {
                     act = "/l/client_side";
                 }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Swift%>)
+                {
+                    act = "/l/swift_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Bash%>)
+                {
+                    act = "/l/bash_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Ada%>)
+                {
+                    act = "/l/ada_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Erlang%>)
+                {
+                    act = "/l/erlang_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Elixir%>)
+                {
+                    act = "/l/elixir_online_compiler";
+                }
+                else if ($("#LanguageChoiceWrapper").val() == <%=(int)LanguagesEnum.Ocaml%>)
+                {
+                    act = "/l/ocaml_online_compiler";
+                }
                 else
                 {
                     act = "/l/csharp_online_compiler";
@@ -1447,7 +1551,7 @@
                             $("#ErrorSpan").text(obj.Errors.replace(/\r/g, ""));
                             return;
                         }                        
-                        $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Permanent live session created at <a href=\""+obj.Url+"\">"+obj.Url+"</a>\nAnyone who visits this link can edit code and see changes that others make in real-time.</pre>");
+                        $("#Link").replaceWith("<pre id=\"Link\" class=\"resultarea\">Permanent live session created at <a href=\""+obj.Url+"\">"+obj.Url+"</a>\nAnyone who has rights to visit this link can edit code and see changes that others make in real-time.</pre>");
                     }, 'text');       
             }
             <%} %>

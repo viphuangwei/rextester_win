@@ -554,6 +554,12 @@ namespace reExp.Utils
         Postgresql = 34,
         Oracle = 35,
         ClientSide = 36,
+        Swift = 37,
+        Bash = 38,
+        Ada = 39,
+        Erlang = 40,
+        Elixir = 41,
+        Ocaml = 42,
         Unknown = 0
     }
 }

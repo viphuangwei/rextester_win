@@ -36,7 +36,7 @@
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Reference)%>">Regex reference</a> - short regex reference.<br />
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Diff)%>">Diff checker</a> - find difference between two text fragments.<br />
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Rundotnet)%>">Run code</a> - online compiling and execution for some languages.
-            <br/><br/><b style="color:Gray">C#, Visual basic, F#</b><br/>
+            <br/><br/><b style="color:Gray">C#, Visual basic</b><br/>
             .Net framework v. 4.5 is used. Your code will be given max 5 sec of cpu time and limited memory (~150 Mb). Also your code will run in an appdomain with basic execution, reflection, thread control and web privileges only.<br/>
             The entry point for your code is given Main method in type Program in namespace Rextester. <b>This entry point shouldn't be changed.</b>
             Types from following assemblies are available:
@@ -58,22 +58,11 @@
                 <li><code>Newtonsoft.Json.dll</code></li>
                 <li><code><a href="http://rextester.com/feedback/">Let us know if you need more.</a></code></li>
             </ul>
-            For F# additional assemblies are included:
-             <ul>
-                <li><code>FSharp.Core.dll</code></li>
-                <li><code>FSharp.Powerpack.dll</code></li>
-                <li><code>FSharp.PowerPack.Compatibility.dll</code></li>
-                <li><code>FSharp.PowerPack.Linq.dll</code></li>
-                <li><code>FSharp.PowerPack.Metadata.dll</code></li>
-                <li><code>FSharp.PowerPack.Parallel.Seq.dll</code></li>
-            </ul>
             If you found security breaches and can break something in some way - we would appreciate your feedback on this.
             <br/>Compiler versions:
             <ul>
                 <li><code><a href="http://rextester.com/l/csharp_online_compiler">C#</a> - <a href="http://rextester.com/l/csharp">Microsoft (R) Visual C# Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5</a></code></li>
-                <li><code><a href="http://rextester.com/l/visual_basic_online_compiler">Visual Basic</a> - <a href="http://rextester.com/l/vb">Microsoft (R) Visual Basic Compiler version 11.0.50709.17929</a></code></li>
-                <li><code><a href="http://rextester.com/l/fsharp_online_compiler">F#</a> - <a href="http://rextester.com/l/fsharp">Microsoft (R) F# Compiler version 11.0.50727.1</a></code></li>
-            </ul>
+                <li><code><a href="http://rextester.com/l/visual_basic_online_compiler">Visual Basic</a> - <a href="http://rextester.com/l/vb">Microsoft (R) Visual Basic Compiler version 11.0.50709.17929</a></code></li>            </ul>
             <br/><b style="color:Gray">Sql Server</b><br/>
             <a href="http://rextester.com/l/sql_server_online_compiler">Sql Server</a> <a href="http://rextester.com/l/sql_server">2014 Express Edition</a> is used. There is only one database that queries run against. Queries executed on behalf database owner so all sort of actions are allowed including DDL queries.
             However, all actions run in transaction which is rolled back immediately after execution is over. This way any desired objects may be built, populated with data and worked on within the scope 
@@ -106,31 +95,38 @@
             <br/><b style="color:Gray">Java, Python, C, C++ and others</b><br/>
             These languages run on linux. For some languages compiler parameters could be supplied. Here are compiler versions (you can always check by <a href="http://rextester.com/CLSPB84560">running commands on a server</a>):
             <ul>
-                <li><code><a href="http://rextester.com/l/nasm_online_compiler">Assembly</a> - <a href="http://rextester.com/l/nasm">nasm 2.10.9</a></code></li>
-                <li><code><a href="http://rextester.com/l/cpp_online_compiler_gcc">C++ (gcc)</a> - <a href="http://rextester.com/l/gcc">g++  4.9.3 (g++ -Wall -std=c++11 -O2)</a></code></li>
-                <li><code><a href="http://rextester.com/l/cpp_online_compiler_clang">C++ (clang)</a> - <a href="http://rextester.com/l/clang">clang 3.7.0 (clang++ -Wall -std=c++11 -O2)</a></code></li>
-                <li><code><a href="http://rextester.com/l/c_online_compiler_gcc">C (gcc)</a> - <a href="http://rextester.com/l/c_gcc">gcc 4.9.3 (gcc -Wall -std=gnu99 -O2)</a></code></li>
-                <li><code><a href="http://rextester.com/l/c_online_compiler_clang">C (clang)</a> - <a href="http://rextester.com/l/c_clang">clang 3.7.0 (clang -Wall -std=gnu99 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/ada_online_compiler">Ada</a> - <a href="http://rextester.com/l/ada">GNAT 4.9.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/nasm_online_compiler">Assembly</a> - <a href="http://rextester.com/l/nasm">nasm 2.11.08</a></code></li>
+                <li><code><a href="http://rextester.com/l/bash_online_compiler">Bash</a> - <a href="http://rextester.com/l/bash">GNU bash, version 4.3.46</a></code></li>
+                <li><code><a href="http://rextester.com/l/cpp_online_compiler_gcc">C++ (gcc)</a> - <a href="http://rextester.com/l/gcc">g++  5.4.0 (g++ -Wall -std=c++11 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/cpp_online_compiler_clang">C++ (clang)</a> - <a href="http://rextester.com/l/clang">clang 3.8.0 (clang++ -Wall -std=c++11 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/c_online_compiler_gcc">C (gcc)</a> - <a href="http://rextester.com/l/c_gcc">gcc 5.4.0 (gcc -Wall -std=gnu99 -O2)</a></code></li>
+                <li><code><a href="http://rextester.com/l/c_online_compiler_clang">C (clang)</a> - <a href="http://rextester.com/l/c_clang">clang 3.8.0 (clang -Wall -std=gnu99 -O2)</a></code></li>
                 <li><code><a href="http://rextester.com/l/common_lisp_online_compiler">Common Lisp</a> - <a href="http://rextester.com/l/clisp">gnu clisp 2.49</a></code></li>
-                <li><code><a href="http://rextester.com/l/d_online_compiler">D</a> - <a href="http://rextester.com/l/d">DMD64 D Compiler v2.49</a></code></li>
-                <li><code><a href="http://rextester.com/l/go_online_compiler">Go</a> - <a href="http://rextester.com/l/go">go 1.2.</a></code></li>
-                <li><code><a href="http://rextester.com/l/haskell_online_compiler">Haskell</a> - <a href="http://rextester.com/l/haskell">ghc 8.0.1</a></code></li>
-                <li><code><a href="http://rextester.com/l/java_online_compiler">Java</a> - <a href="http://rextester.com/l/java">Oracle's implementation of Java, compiler version 1.8.0_72 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</a></code></li>
-                <li><code><a href="http://rextester.com/l/js_online_compiler">Javascript</a> - <a href="http://rextester.com/l/js">V8 3.31.1</a></code></li>
-                <li><code><a href="http://rextester.com/l/lua_online_compiler">Lua</a> - <a href="http://rextester.com/l/lua">lua 5.2.3</a></code></li>
-                <li><code><a href="http://rextester.com/l/nodejs_online_compiler">Node.js</a> - <a href="http://rextester.com/l/nodejs">nodejs v6.4.0</a></code></li>
-                <li><code><a href="http://rextester.com/l/objectivec_online_compiler">Objective-C</a> - <a href="http://rextester.com/l/objectivec">gcc 4.8.4 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</a></code></li>
-                <li><code><a href="http://rextester.com/l/octave_online_compiler">Octave</a> - <a href="http://rextester.com/l/octave">GNU Octave 3.8.1 (octave -q -f --no-window-system)</a></code></li>
-                <li><code><a href="http://rextester.com/l/pascal_online_compiler">Pascal</a> - <a href="http://rextester.com/l/pascal">fpc 2.6.2</a></code></li>
-                <li><code><a href="http://rextester.com/l/perl_online_compiler">Perl</a> - <a href="http://rextester.com/l/perl">perl 5.18.2 (perl -w)</a></code></li>
-                <li><code><a href="http://rextester.com/l/php_online_compiler">Php</a> - <a href="http://rextester.com/l/php">php 5.5.9</a></code></li>
-                <li><code><a href="http://rextester.com/l/prolog_online_compiler">Prolog</a> - <a href="http://rextester.com/l/prolog">swi-prolog 6.6.4</a></code></li>
-                <li><code><a href="http://rextester.com/l/python_online_compiler">Python</a> - <a href="http://rextester.com/l/python">python 2.7.6</a></code></li>
-                <li><code><a href="http://rextester.com/l/python3_online_compiler">Python 3</a> - <a href="http://rextester.com/l/python3">python 3.4.3</a></code></li>
-                <li><code><a href="http://rextester.com/l/r_online_compiler">R</a> - <a href="http://rextester.com/l/r">R version 3.0.2</a></code></li>
-                <li><code><a href="http://rextester.com/l/ruby_online_compiler">Ruby</a> - <a href="http://rextester.com/l/ruby">ruby 1.9.3  (ruby -w -W1)</a></code></li>
+                <li><code><a href="http://rextester.com/l/d_online_compiler">D</a> - <a href="http://rextester.com/l/d">DMD64 D Compiler v2.072.2</a></code></li>
+                <li><code><a href="http://rextester.com/l/elixir_online_compiler">Elixir</a> - <a href="http://rextester.com/l/elixir">Elixir 1.1.0</a></code></li>
+                <li><code><a href="http://rextester.com/l/erlang_online_compiler">Erlang</a> - <a href="http://rextester.com/l/erlang">Erlang 7.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/fsharp_online_compiler">F#</a> - <a href="http://rextester.com/l/fsharp">F# Compiler for F# 4.0 (Open Source Edition), Mono 4.2.1</a></code></li>
+                <li><code><a href="http://rextester.com/l/go_online_compiler">Go</a> - <a href="http://rextester.com/l/go">go 1.6.2</a></code></li>
+                <li><code><a href="http://rextester.com/l/haskell_online_compiler">Haskell</a> - <a href="http://rextester.com/l/haskell">ghc 7.10.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/java_online_compiler">Java</a> - <a href="http://rextester.com/l/java">1.8.0_111 (javac -Xlint -encoding UTF-8 &nbsp;|&nbsp; java -Xmx256m -Dfile.encoding=UTF-8)</a></code></li>
+                <li><code><a href="http://rextester.com/l/js_online_compiler">Javascript</a> - <a href="http://rextester.com/l/js">JavaScript-C24.2.0 (SpiderMonkey)</a></code></li>
+                <li><code><a href="http://rextester.com/l/lua_online_compiler">Lua</a> - <a href="http://rextester.com/l/lua">lua 5.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/nodejs_online_compiler">Node.js</a> - <a href="http://rextester.com/l/nodejs">nodejs v4.2.6</a></code></li>
+                <li><code><a href="http://rextester.com/l/objectivec_online_compiler">Objective-C</a> - <a href="http://rextester.com/l/objectivec">gcc 5.4.0 (gcc `gnustep-config --objc-flags` -lobjc -lgnustep-base)</a></code></li>
+                 <li><code><a href="http://rextester.com/l/ocaml_online_compiler">Ocaml</a> - <a href="http://rextester.com/l/ocaml">Ocaml 4.02.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/octave_online_compiler">Octave</a> - <a href="http://rextester.com/l/octave">GNU Octave 4.0.0 (octave -q -f --no-window-system)</a></code></li>
+                <li><code><a href="http://rextester.com/l/pascal_online_compiler">Pascal</a> - <a href="http://rextester.com/l/pascal">fpc 3.0.0</a></code></li>
+                <li><code><a href="http://rextester.com/l/perl_online_compiler">Perl</a> - <a href="http://rextester.com/l/perl">perl 5.22.1 (perl -w)</a></code></li>
+                <li><code><a href="http://rextester.com/l/php_online_compiler">Php</a> - <a href="http://rextester.com/l/php">php 7.0.8</a></code></li>
+                <li><code><a href="http://rextester.com/l/prolog_online_compiler">Prolog</a> - <a href="http://rextester.com/l/prolog">swi-prolog 7.2.3</a></code></li>
+                <li><code><a href="http://rextester.com/l/python_online_compiler">Python</a> - <a href="http://rextester.com/l/python">python 2.7.12</a></code></li>
+                <li><code><a href="http://rextester.com/l/python3_online_compiler">Python 3</a> - <a href="http://rextester.com/l/python3">python3 3.5.2</a></code></li>
+                <li><code><a href="http://rextester.com/l/r_online_compiler">R</a> - <a href="http://rextester.com/l/r">R version 3.3.2</a></code></li>
+                <li><code><a href="http://rextester.com/l/ruby_online_compiler">Ruby</a> - <a href="http://rextester.com/l/ruby">ruby 2.3.1  (ruby -w -W1)</a></code></li>
                 <li><code><a href="http://rextester.com/l/scala_online_compiler">Scala</a> - <a href="http://rextester.com/l/scala">scala 2.11.7 (fsc -deprecation -unchecked -encoding UTF-8 &nbsp;|&nbsp; scala -Dfile.encoding=UTF-8)</a></code></li>
-                <li><code><a href="http://rextester.com/l/scheme_online_compiler">Scheme</a> - <a href="http://rextester.com/l/scheme">guile 2.0.9</a></code></li>
+                <li><code><a href="http://rextester.com/l/scheme_online_compiler">Scheme</a> - <a href="http://rextester.com/l/scheme">guile 2.0.11</a></code></li>
+                <li><code><a href="http://rextester.com/l/swift_online_compiler">Swift</a> - <a href="http://rextester.com/l/swift">swift 3.0.0</a></code></li>
                 <li><code><a href="http://rextester.com/l/tcl_online_compiler">Tcl</a> - <a href="http://rextester.com/l/tcl">tclsh 8.6</a></code></li>
             </ul> 
             Your code will be run on behalf special user and group. Also your code will be executed from Python wrapper which sets various limits to the process. It does so
@@ -155,8 +151,7 @@
             Write code so that others see this real-time. Every participant can make changes and see changes made by others. We use <a href="http://www.firepad.io">Firepad</a> and <a href="https://www.firebase.com/">Firebase</a>.
             <br/><br/>
             <b style="color:Gray">Credit</b><br/>
-            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>, <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/>
-            Code completion is achieved using <a href="http://eclim.org/">eclipse and eclim</a> as well as <a href="https://github.com/Valloric/YouCompleteMe">youcompleteme</a>.<br /><br />
+            Special thanks goes to people behind <a href="http://codemirror.net/">CodeMirror</a>, <a href="http://www.cdolivet.com/editarea/">Edit area</a>, <a href="http://en.wikipedia.org/wiki/Microsoft_Roslyn">Roslyn</a>, <a href="http://www.toptensoftware.com/markdowndeep/">MarkdownDeep</a>, <a href="http://www.firepad.io">Firepad (and Firebase)</a> and <a href="http://code.google.com/p/coderev/">Coderev</a>.<br/><br />
             <b style="color:Gray">Code wall</b><br/>
             <a href="<%:Utils.GetUrl(Utils.PagesEnum.Codewall)%>">Code wall</a> as well as <a href="<%:Utils.GetUrl(Utils.PagesEnum.Users)%>">personal code walls</a> - place code on a wall for public display. These entries will be crawled by search engines, so one 
             possible use is to put there scripts that you may need for easy access later. For example, whenever I need a sql script for searching database definitions I simply search for <a href="https://www.google.com/search?q=sql+definition+rextester">'sql definition rextester'</a> and there is my script (it seems that code wall is 
@@ -260,6 +255,12 @@
     MySQL = 33
     PostgreSQL = 34
     Oracle = 35
+    Swift = 37
+    Bash = 38
+    Ada = 39
+    Erlang = 40
+    Elixir = 41
+    Ocaml = 42
 </pre>
             
             <br/>

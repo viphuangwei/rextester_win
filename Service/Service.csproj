@@ -171,10 +171,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Service_postgres_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://92.51.147.212/Service.asmx">
+    <WebReferenceUrl Include="http://83.169.3.96/Service.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\linux\</RelPath>
-      <UpdateFromURL>http://92.51.147.212/Service.asmx</UpdateFromURL>
+      <UpdateFromURL>http://83.169.3.96/Service.asmx%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -193,9 +193,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Service_win_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\linux\Service.disco" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GlobalUtils\GlobalUtils.csproj">

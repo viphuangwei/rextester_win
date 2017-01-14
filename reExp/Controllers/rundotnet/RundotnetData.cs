@@ -69,11 +69,11 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if ((this.LanguageChoice == LanguagesEnum.CSharp ||
-                    /*this.LanguageChoice == LanguagesEnum.Java ||*/
+                if ((this.LanguageChoice == LanguagesEnum.CSharp /*||
+                    this.LanguageChoice == LanguagesEnum.Java ||
                     this.LanguageChoice == LanguagesEnum.CPP ||
                     this.LanguageChoice == LanguagesEnum.VCPP ||
-                    this.LanguageChoice == LanguagesEnum.CPPClang /*||
+                    this.LanguageChoice == LanguagesEnum.CPPClang ||
                     this.LanguageChoice == LanguagesEnum.Python*/) && this.EditorChoice == EditorsEnum.Codemirror)
                 {
                     return true;
@@ -110,7 +110,9 @@ namespace reExp.Controllers.rundotnet
                     this.LanguageChoice == LanguagesEnum.Octave ||
                     this.LanguageChoice == LanguagesEnum.R ||
                     this.LanguageChoice == LanguagesEnum.Tcl ||
-                    this.LanguageChoice == LanguagesEnum.ClientSide)
+                    this.LanguageChoice == LanguagesEnum.ClientSide ||
+                    this.LanguageChoice == LanguagesEnum.Bash ||
+                    this.LanguageChoice == LanguagesEnum.Elixir)
 
                     return true;
                 else
@@ -205,8 +207,18 @@ namespace reExp.Controllers.rundotnet
                 {
                     new SelectListItem()
                     {
+                        Text = "Ada",
+                        Value = ((int)LanguagesEnum.Ada).ToString()
+                    },
+                    new SelectListItem()
+                    {
                         Text = "Assembly",
                         Value = ((int)LanguagesEnum.Nasm).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Bash",
+                        Value = ((int)LanguagesEnum.Bash).ToString()
                     },
                     new SelectListItem()
                     {
@@ -260,6 +272,16 @@ namespace reExp.Controllers.rundotnet
                     },
                     new SelectListItem()
                     {
+                        Text = "Elixir",
+                        Value = ((int)LanguagesEnum.Elixir).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Erlang",
+                        Value = ((int)LanguagesEnum.Erlang).ToString()
+                    },
+                    new SelectListItem()
+                    {
                         Text = "F#",
                         Value = ((int)LanguagesEnum.FSharp).ToString()
                     },
@@ -297,6 +319,11 @@ namespace reExp.Controllers.rundotnet
                     {
                         Text = "Node.js",
                         Value = ((int)LanguagesEnum.Nodejs).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Ocaml",
+                        Value = ((int)LanguagesEnum.Ocaml).ToString()
                     },
                     new SelectListItem()
                     {
@@ -372,6 +399,11 @@ namespace reExp.Controllers.rundotnet
                     {
                         Text = "Sql Server",
                         Value = ((int)LanguagesEnum.SqlServer).ToString()
+                    },
+                    new SelectListItem()
+                    {
+                        Text = "Swift",
+                        Value = ((int)LanguagesEnum.Swift).ToString()
                     },
                     new SelectListItem()
                     {
@@ -495,19 +527,14 @@ Namespace Rextester
 End Namespace";
                 case LanguagesEnum.FSharp:
                     return
-@"//Rextester.Program.Main is the entry point for your code. Don't change it.
-//Compiler version 11.0.50727.1 for Microsoft (R) .NET Framework 4.5
+@"//F# Compiler for F# 4.0 (Open Source Edition), Mono 4.2.1
 
-namespace Rextester
-module Program =
-    open System
-    let Main(args : string[]) =
-        //Your code goes here
-        Console.WriteLine(""Hello, world!"")";
+open System
+printfn ""Hello, World!""";
                 case LanguagesEnum.Java:
                     return
 @"//'main' method must be in a class 'Rextester'.
-//Compiler version 1.8.0_72
+//Compiler version 1.8.0_111
 
 import java.util.*;
 import java.lang.*;
@@ -521,19 +548,19 @@ class Rextester
 }";
                 case LanguagesEnum.Python:
                     return
-@"#python 2.7.6
+@"#python 2.7.12
 
 print ""Hello, world!""
 ";
                 case LanguagesEnum.Python3:
                     return
-@"#python 3.4.3
+@"#python 3.5.2
 
 print (""Hello, world!"")
 ";
                 case LanguagesEnum.C:
                     return
-@"//gcc 4.9.3
+@"//gcc 5.4.0
 
 #include  <stdio.h>
 
@@ -544,7 +571,7 @@ int main(void)
 }";
                 case LanguagesEnum.CClang:
                     return
-@"//clang 3.7.0
+@"//clang 3.8.0
 
 #include  <stdio.h>
 
@@ -555,7 +582,7 @@ int main(void)
 }";
                 case LanguagesEnum.CPP:
                     return
-@"//g++  4.9.3
+@"//g++  5.4.0
 
 #include <iostream>
 
@@ -566,7 +593,7 @@ int main()
 
                 case LanguagesEnum.CPPClang:
                     return
-@"//clang 3.7.0
+@"//clang 3.8.0
 
 #include <iostream>
 
@@ -598,7 +625,7 @@ int main(void)
 
                 case LanguagesEnum.Php:
                     return
-@"<?php //php 5.5.9
+@"<?php //php 7.0.8
 
     echo ""Hello, world! ""
     
@@ -606,7 +633,7 @@ int main(void)
 
                 case LanguagesEnum.Pascal:
                     return
-@"//fpc 2.6.2
+@"//fpc 3.0.0
 
 program HelloWorld;
 
@@ -616,7 +643,7 @@ end.
 ";
                 case LanguagesEnum.ObjectiveC:
                     return
-@"//gcc 4.8.4
+@"//gcc 5.0.4
 
 #import <stdio.h>
  
@@ -627,17 +654,17 @@ int main(void)
 }";
                 case LanguagesEnum.Haskell:
                     return
-@"--ghc 8.0.1 /opt/ghc/8.0.1/lib/ghc-8.0.0.20160127/
+@"--ghc 7.10
 
 main = print $ ""Hello, world!""";
                 case LanguagesEnum.Ruby:
                     return
-@"#ruby 1.9.3 
+@"#ruby 2.3.1 
 
 puts ""Hello, world!""";
                 case LanguagesEnum.Perl:
                     return
-@"#perl 5.18.2 
+@"#perl 5.22.1 
 
 print ""Hello World\n"";";
    
@@ -675,13 +702,13 @@ select @@version as 'sql server version'";
 
                 case LanguagesEnum.Lua:
                     return
-@"--lua 5.2.3
+@"--lua 5.3
 
 print (""Hello, World!"")";
 
                 case LanguagesEnum.Nasm:
                     return
-@";nasm 2.10.9
+@";nasm 2.11.08
 
 section .data
     hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
@@ -703,13 +730,13 @@ _start:
 	int 80h;";
                 case LanguagesEnum.Javascript:
                     return @"
-//V8 3.31.1
+//JavaScript-C24.2.0 (SpiderMonkey)
 
 print(""Hello, world!"")";
 
                 case LanguagesEnum.Lisp:
                     return @"
-;gnu dmd 2.49
+;gnu clisp 2.49
 
 (print ""Hello, world!"")";
 
@@ -717,13 +744,13 @@ print(""Hello, world!"")";
                     return @"
 %commands to the interpreter are submitted from stdin input ('show input' box below)
 %'halt.' will be automatically appended to stdin input.
-%swi-prolog 6.6.4
+%swi-prolog 7.2.3
 
 program :- write('Hello, world!').
 :- program.";
                 case LanguagesEnum.Go:
                     return @"
-//go 1.2.1
+//go 1.6.2
 
 package main  
 import ""fmt"" 
@@ -742,20 +769,20 @@ object Rextester extends App {
  }";
                 case LanguagesEnum.Scheme:
                     return @"
-;guile 2.0.9
+;guile 2.0.11
 
 (display ""Hello, World!"")";
 
                 case LanguagesEnum.Nodejs:
                     return @"
-//nodejs v6.4.0
+//nodejs v4.2.6
 
 console.log(""Hello, World!"");";
                 case LanguagesEnum.Octave:
                     return
 @"%To view plots after 'plot' (and other plot-producing commands) this command must follow: 'print -dpng some_unique_plot_name.png;'
 %It exports current plot to png image which then is sent to your browser
-%GNU Octave 3.8.1
+%GNU Octave 4.0.0
 
 x=1:0.1:10;
 plot(x, sin(x));
@@ -763,7 +790,7 @@ print -dpng some_name.png;
 ";
                 case LanguagesEnum.D:
                     return
-@"//DMD64 D Compiler v2.070
+@"//DMD64 D Compiler 2.072.2
 
 import std.stdio;
  
@@ -774,7 +801,7 @@ void main()
 
                 case LanguagesEnum.R:
                     return
-@"#R version 3.0.2 
+@"#R version 3.3.2 
   
 print(""Hello, world!"")
 ";
@@ -816,6 +843,51 @@ puts ""Hello, world!""
     <pre id = ""result"" ></pre>
 </body>
 </html>";
+                case LanguagesEnum.Swift:
+                    return
+@"//swift 3.0.2
+
+print(""Hello, world!"")";
+                case LanguagesEnum.Bash:
+                    return
+@"#!/bin/bash
+# GNU bash, version 4.3.46
+
+echo ""Hello, world!"";
+";
+                case LanguagesEnum.Ada:
+                    return
+@"--GNAT 4.9.3
+
+with Ada.Text_IO; use Ada.Text_IO;
+procedure Hello is
+begin
+    Put_Line (""Hello, world!"");
+end Hello;";
+                case LanguagesEnum.Erlang:
+                    return
+@"%Erlang 7.3
+%dont change first 3 lines
+
+-module(source).
+	-export([entry_point/0]).
+
+	entry_point() ->
+		io:fwrite(""Hello, world\n"").
+";
+
+                case LanguagesEnum.Elixir:
+                    return
+@"#Elixir 1.1.0
+
+IO.puts ""Hello, world!""
+";
+                case LanguagesEnum.Ocaml:
+                    return
+@"(*The OCaml compiler, version 4.02.3*)
+
+print_string ""Hello, world!\n"";;
+";
 
                 default:
                     return @"";

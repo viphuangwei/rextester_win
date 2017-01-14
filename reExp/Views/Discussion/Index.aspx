@@ -320,6 +320,30 @@
           js.Add("mode/javascript/javascript.js");
           js.Add("mode/css/css.js");       
           break;
+       case LanguagesEnum.Swift:
+          mode = "text/x-swift";
+          js.Add("mode/swift/swift.js");
+          break;
+      case LanguagesEnum.Bash:
+          mode = "text/x-sh";
+          js.Add("mode/shell/shell.js");
+          break;
+      case LanguagesEnum.Ada:
+         mode = "text/x-ada";
+         js.Add("mode/ada/ada.js");
+         break;
+      case LanguagesEnum.Erlang:
+        mode = "text/x-erlang";
+        js.Add("mode/erlang/erlang.js");
+        break;
+      case LanguagesEnum.Elixir:
+        mode = "text/x-elixir";
+        js.Add("mode/elixir/elixir.js");
+        break;
+      case LanguagesEnum.Ocaml:
+        mode = "text/x-ocaml";
+        js.Add("mode/ocaml/ocaml.js");
+        break;
   }
   foreach(var j in js)
   {

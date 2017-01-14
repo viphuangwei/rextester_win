@@ -339,6 +339,7 @@
     <Content Include="Scripts\codemirror3\keymap\vim.js" />
     <Content Include="Scripts\codemirror3\lib\codemirror.css" />
     <Content Include="Scripts\codemirror3\lib\codemirror.js" />
+    <Content Include="Scripts\codemirror3\mode\ada\ada.js" />
     <Content Include="Scripts\codemirror3\mode\apl\apl.js" />
     <Content Include="Scripts\codemirror3\mode\apl\index.html" />
     <Content Include="Scripts\codemirror3\mode\asterisk\asterisk.js" />
@@ -370,6 +371,7 @@
     <Content Include="Scripts\codemirror3\mode\ecl\index.html" />
     <Content Include="Scripts\codemirror3\mode\eiffel\eiffel.js" />
     <Content Include="Scripts\codemirror3\mode\eiffel\index.html" />
+    <Content Include="Scripts\codemirror3\mode\elixir\elixir.js" />
     <Content Include="Scripts\codemirror3\mode\erlang\erlang.js" />
     <Content Include="Scripts\codemirror3\mode\erlang\index.html" />
     <Content Include="Scripts\codemirror3\mode\fortran\fortran.js" />
@@ -478,6 +480,7 @@
     <Content Include="Scripts\codemirror3\mode\stex\index.html" />
     <Content Include="Scripts\codemirror3\mode\stex\stex.js" />
     <Content Include="Scripts\codemirror3\mode\stex\test.js" />
+    <Content Include="Scripts\codemirror3\mode\swift\swift.js" />
     <Content Include="Scripts\codemirror3\mode\tcl\index.html" />
     <Content Include="Scripts\codemirror3\mode\tcl\tcl.js" />
     <Content Include="Scripts\codemirror3\mode\tiddlywiki\index.html" />
@@ -652,6 +655,7 @@
     <Content Include="Scripts\editarea\plugins\test\test2.js" />
     <Content Include="Scripts\editarea\regexp.js" />
     <Content Include="Scripts\editarea\reg_syntax.js" />
+    <Content Include="Scripts\editarea\reg_syntax\ada.js" />
     <Content Include="Scripts\editarea\reg_syntax\basic.js" />
     <Content Include="Scripts\editarea\reg_syntax\brainfuck.js" />
     <Content Include="Scripts\editarea\reg_syntax\c.js" />
@@ -660,6 +664,8 @@
     <Content Include="Scripts\editarea\reg_syntax\cpp.js" />
     <Content Include="Scripts\editarea\reg_syntax\csharp.js" />
     <Content Include="Scripts\editarea\reg_syntax\css.js" />
+    <Content Include="Scripts\editarea\reg_syntax\elixir.js" />
+    <Content Include="Scripts\editarea\reg_syntax\erlang.js" />
     <Content Include="Scripts\editarea\reg_syntax\fsharp.js" />
     <Content Include="Scripts\editarea\reg_syntax\go.js" />
     <Content Include="Scripts\editarea\reg_syntax\haskell.js" />
@@ -667,6 +673,7 @@
     <Content Include="Scripts\editarea\reg_syntax\java.js" />
     <Content Include="Scripts\editarea\reg_syntax\js.js" />
     <Content Include="Scripts\editarea\reg_syntax\lua.js" />
+    <Content Include="Scripts\editarea\reg_syntax\ocaml.js" />
     <Content Include="Scripts\editarea\reg_syntax\oracle.js" />
     <Content Include="Scripts\editarea\reg_syntax\postgres.js" />
     <Content Include="Scripts\editarea\reg_syntax\nasm.js" />
@@ -681,7 +688,9 @@
     <Content Include="Scripts\editarea\reg_syntax\ruby.js" />
     <Content Include="Scripts\editarea\reg_syntax\scala.js" />
     <Content Include="Scripts\editarea\reg_syntax\scheme.js" />
+    <Content Include="Scripts\editarea\reg_syntax\shell.js" />
     <Content Include="Scripts\editarea\reg_syntax\sql.js" />
+    <Content Include="Scripts\editarea\reg_syntax\swift.js" />
     <Content Include="Scripts\editarea\reg_syntax\tcl.js" />
     <Content Include="Scripts\editarea\reg_syntax\mysql.js" />
     <Content Include="Scripts\editarea\reg_syntax\tsql.js" />

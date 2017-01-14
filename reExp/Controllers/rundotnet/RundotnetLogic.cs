@@ -20,12 +20,6 @@ namespace reExp.Controllers.rundotnet
             {
                 return RunDotNet(data);
             }
-            else if (data.LanguageChoice == LanguagesEnum.FSharp)
-            {
-                data.RunStats = "";
-                data.Errors = new List<string>() { "F# is no longer supported on rextester." };
-                return data;
-            }
             else if (data.LanguageChoice == LanguagesEnum.SqlServer)
             {
                 return RunSqlServer(data);
@@ -770,6 +764,28 @@ namespace reExp.Controllers.rundotnet
                 case LanguagesEnum.Tcl:
                     lang = Service.linux.Languages.Tcl;
                     break;
+                case LanguagesEnum.Swift:
+                    lang = Service.linux.Languages.Swift;
+                    break;
+                case LanguagesEnum.FSharp:
+                    lang = Service.linux.Languages.FSharp;
+                    break;
+                case LanguagesEnum.Bash:
+                    lang = Service.linux.Languages.Bash;
+                    break;
+                case LanguagesEnum.Ada:
+                    lang = Service.linux.Languages.Ada;
+                    break;
+                case LanguagesEnum.Erlang:
+                    lang = Service.linux.Languages.Erlang;
+                    break;
+                case LanguagesEnum.Elixir:
+                    lang = Service.linux.Languages.Elixir;
+                    break;
+                case LanguagesEnum.Ocaml:
+                    lang = Service.linux.Languages.Ocaml;
+                    break;
+
                 default:
                     break;
             }
