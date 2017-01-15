@@ -52,7 +52,7 @@ namespace reExp.Controllers.discussion
             data.Code = code.Program;
             data.Date = code.Date;
             data.Language = code.Lang;
-
+            data.UserId = code.UserId;
             data.Comments = Model.GetComments(data.Guid);
 
             var md = new MarkdownDeep.Markdown();

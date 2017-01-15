@@ -377,12 +377,12 @@
                 });
 
 
-                $('#delete_link').on('click', function () {
+                $('#delete_live_link').on('click', function () {
                     var a = confirm('Are you sure?');
                     if (a) {
                         firepadRef.remove();
                         firepadChatRef.remove();
-                        window.location = "<%:Utils.BaseUrl+"delete"+"/"+Model.PrimaryGuid%>";
+                        window.location = "<%:Utils.BaseUrl+"delete_live"+"/"+Model.PrimaryGuid%>";
                     }
                 });
 

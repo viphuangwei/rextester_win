@@ -414,11 +414,33 @@ namespace reExp.Models
         {
             try
             {
-                DB.DB.Delete_Code_Get(guid);
+                var code = Model.GetCode(guid);
+                if (code.UserId != SessionManager.UserId)
+                {
+                    return;
+                }
+                DB.DB.Delete_Code_Live(guid);
             }
             catch (Exception e)
             {
-                Utils.Log.LogInfo(e.Message, e, "error");
+                Utils.Log.LogInfo(e.Message, e, "error deleting live");
+            }
+        }
+
+        public static void DeleteCode(string guid)
+        {
+            try
+            {
+                var code = Model.GetCode(guid);
+                if (code.UserId != SessionManager.UserId)
+                {
+                    return;
+                }
+                DB.DB.Delete_Code(guid);
+            }
+            catch (Exception e)
+            {
+                Utils.Log.LogInfo(e.Message, e, "error deleting code");
             }
         }
 
@@ -503,6 +525,7 @@ namespace reExp.Models
                         IsPrimaryVersion = (res[0]["version_id"] == DBNull.Value ? true : false),
                         PrimaryGuid = (res[0]["primary_guid"] == DBNull.Value ? null : (string)res[0]["primary_guid"]),
                         Date = (DateTime)res[0]["date"],
+                        UserId = res[0]["user_id"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["user_id"]),
                         ID = Convert.ToInt32(res[0]["id"])
                     };
                 else

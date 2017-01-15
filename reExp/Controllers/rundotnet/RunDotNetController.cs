@@ -114,6 +114,7 @@ namespace reExp.Controllers.rundotnet
                 data.RunStats = code.Stats;
                 data.CodeGuid = code.Guid;
                 data.Votes = code.Votes;
+                data.User_Id = code.UserId;
 
                 data.IsInEditMode = false;
                 data.EditVisible = code.IsPrimaryVersion;
@@ -526,6 +527,13 @@ namespace reExp.Controllers.rundotnet
             Model.DeleteLiveCode(savedNr);
             return Redirect("/");
         }
+        [HttpGet]
+        public RedirectResult DeleteCode(string savedNr)
+        {
+            Compression.SetCompression();
+            Model.DeleteCode(savedNr);
+            return Redirect("/");
+        }
 
         [HttpGet]
         [ValidateInput(false)]
@@ -556,6 +564,7 @@ namespace reExp.Controllers.rundotnet
             data.CodeGuid = code.Guid;
             data.IsSaved = true;
             data.Votes = code.Votes;
+            data.User_Id = code.UserId;
 
             data.IsInEditMode = code.IsPrimaryVersion;
             data.EditVisible = false;

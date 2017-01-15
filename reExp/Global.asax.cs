@@ -81,8 +81,14 @@ namespace reExp
             );
             routes.MapRoute(
                null,
-               "delete/{savedNr}",
+               "delete_live/{savedNr}",
                new { controller = "RunDotNet", action = "DeleteLiveCode" },
+               new { savedNr = @"[A-Za-z]+\d+" }
+            );
+            routes.MapRoute(
+               null,
+               "delete/{savedNr}",
+               new { controller = "RunDotNet", action = "DeleteCode" },
                new { savedNr = @"[A-Za-z]+\d+" }
             );
 

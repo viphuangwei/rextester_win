@@ -541,8 +541,12 @@
                     <%} %>
                     <%if(Model.IsLive && (Model.User_Id == null || Model.User_Id == SessionManager.UserId))
                     {%>
-                    <a class="smalllink" title="remove live session together with data" id="delete_link" href="#">delete</a>&nbsp;<span class="smalllink">|</span>&nbsp;
-                    <%} %>
+                    <a class="smalllink" title="permanently delete live session together with data" id="delete_live_link" href="#">delete</a>&nbsp;<span class="smalllink">|</span>&nbsp;
+                    <%}
+                    else if(!Model.IsLive && Model.PrimaryGuid == Model.CodeGuid && Model.User_Id == SessionManager.UserId)
+                    {%>
+                    <a class="smalllink" title="permanently delete code snippet with related data" id="delete_link" href="#">delete</a>&nbsp;<span class="smalllink">|</span>&nbsp;
+                    <%}%>
                     <a class="smalllink" href="<%:Utils.BaseUrl+"history"+"/"+ Model.PrimaryGuid %>">history</a>
                     <%if(Model.IsOnAWall)
                     {%>
@@ -1022,6 +1026,14 @@
         }%>
 
         $(document).ready(function () {
+
+            $('#delete_link').on('click', function () {
+                var a = confirm('Are you sure?');
+                if (a) {
+                    window.location = "<%:Utils.BaseUrl+"delete"+"/"+Model.PrimaryGuid%>";
+                }
+            });
+
             <%if(Model.ShowInput) 
             {%>
             $("#Input_label").click(function() {

@@ -373,9 +373,9 @@ namespace reExp.Models.DB
             return ExecuteQuery(query, pars);
         }
 
-        public static void Delete_Code_Get(string guid)
+        public static void Delete_Code_Live(string guid)
         {
-            string query = @"select lc.id from Code c inner join LiveCode lc on lc.code_id = c.id where c.guid = @Guid";
+            string query = @"select c.id as pid, lc.id as id from Code c inner join LiveCode lc on lc.code_id = c.id where c.guid = @Guid";
             var pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("Guid", guid));
             var res = ExecuteQuery(query, pars);
@@ -391,8 +391,85 @@ namespace reExp.Models.DB
             pars = new List<SQLiteParameter>();
             pars.Add(new SQLiteParameter("Id", id));
             ExecuteNonQuery(query, pars);
+
+            int? pid = res[0]["pid"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["pid"]);
+
+            if (pid == null)
+            {
+                return;
+            }
+
+            Delete_Code_Helper((int)pid);
         }
 
+        public static void Delete_Code(string guid)
+        {
+            string query = @"select c.id from Code c where c.guid = @Guid";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("Guid", guid));
+            var res = ExecuteQuery(query, pars);
+
+            int? id = res[0]["id"] == DBNull.Value ? null : (int?)Convert.ToInt32(res[0]["id"]);
+
+            if (id == null)
+            {
+                return;
+            }
+
+            Delete_Code_Helper((int)id);
+        }
+
+        public static void Delete_Code_Helper(int pid)
+        {
+            var query = @"delete from CodeOnWalls where code_id = @pid";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("pid", pid));
+            ExecuteNonQuery(query, pars);
+
+
+            query = @"delete from codeprivacy where code_id = @pid";
+            pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("pid", pid));
+            ExecuteNonQuery(query, pars);
+
+            query = @"delete from comments where code_id = @pid";
+            pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("pid", pid));
+            ExecuteNonQuery(query, pars);
+
+            query = @"delete from userscode where code_id = @pid";
+            pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("pid", pid));
+            ExecuteNonQuery(query, pars);
+
+            query = @"select snapshot_code_id from versions where primary_code_id = @pid";
+            pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("pid", pid));
+            var snapshots = ExecuteQuery(query, pars);
+            foreach (var r in snapshots)
+            {
+                int sid = Convert.ToInt32(r["snapshot_code_id"]);
+                query = @"delete from Code where id = @sid";
+                pars = new List<SQLiteParameter>();
+                pars.Add(new SQLiteParameter("sid", sid));
+                ExecuteNonQuery(query, pars);
+            }
+
+            query = @"delete from versions where primary_code_id = @pid";
+            pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("pid", pid));
+            ExecuteNonQuery(query, pars);
+
+            query = @"delete from wall where code_id = @pid";
+            pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("pid", pid));
+            ExecuteNonQuery(query, pars);
+
+            query = @"delete from Code where id = @pid";
+            pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("pid", pid));
+            ExecuteNonQuery(query, pars);
+        }
         public static List<Dictionary<string, object>> Code_Get(string guid)
         {
             string query = @"select c.*, v.id as 'version_id', p.guid as 'primary_guid'
