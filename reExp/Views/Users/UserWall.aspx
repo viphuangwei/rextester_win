@@ -112,7 +112,13 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
     <meta name="Keywords" content="online compiler" />
     <meta name="Description" content="run code online" />
+    <%if (!SessionManager.IsDarkTheme)
+    {%>
     <link rel="Stylesheet" href="/Content/List.css" />
+    <%}
+    else { %>
+     <link rel="Stylesheet" href="/Content/ListDark.css" />
+    <%} %>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">

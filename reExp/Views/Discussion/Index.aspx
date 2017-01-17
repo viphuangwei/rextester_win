@@ -10,7 +10,15 @@
     <table style="width:100%;">
         <tr>
             <td colspan="2">
-                <pre id="output" class="cm-s-default"></pre>
+            <%if (SessionManager.IsDarkTheme)
+             {%> 
+                <pre id="output" class="cm-s-ambiance"></pre>
+            <%}
+            else
+            {%>
+                <pre id="output" class="cm-s-default"></pre>      
+            <%}%>
+                
             </td>
         </tr>
         <%if(Model.ShowComments)
@@ -144,7 +152,16 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
-    <link rel="stylesheet" href="/Scripts/codemirror3/lib/codemirror.css" />
+    <%if (SessionManager.IsDarkTheme)
+     {%> 
+        <link rel="stylesheet" href="/Scripts/codemirror3/lib/codemirror.css" />
+        <link rel="stylesheet" href="/Scripts/codemirror3/theme/ambiance.css"/>
+    <%}
+    else
+    {%>
+        <link rel="stylesheet" href="/Scripts/codemirror3/lib/codemirror.css"/>        
+    <%}%>
+    
     <link rel="stylesheet" href="/Scripts/codemirror3/doc/docs2.css" />
     <link rel="stylesheet" href="/Scripts/mdd_styles.css" /> 
 
@@ -354,10 +371,10 @@
     { %>
     <script>
         //<![CDATA[
-        $(document).ready(function () {
-            CodeMirror.runMode(document.getElementById("code").value, "<%:mode%>",
-                               document.getElementById("output"));
+        $(document).ready(function () {            
 
+        CodeMirror.runMode(document.getElementById("code").value, "<%:mode%>",
+                                       document.getElementById("output"));
 
             $("textarea.mdd_editor").MarkdownDeep({
                 help_location: "../../Scripts/mdd_help.htm",

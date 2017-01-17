@@ -7,6 +7,10 @@
   border-bottom: solid 1px #CCCCCC;
   border-top: solid 1px #CCCCCC;
   border-right: solid 1px #CCCCCC;
+  /* for dark  
+  border-bottom: solid 1px #1a1a1a;
+  border-top: solid 1px #1a1a1a;
+  border-right: solid 1px #1a1a1a;*/
 }
 .CodeMirror-scroll {
   /* Set scrolling behaviour here */

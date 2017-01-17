@@ -136,7 +136,7 @@ namespace reExp.Utils
 
         public static Db db { get; set; }
         public static Db search_db { get; set; }
-        public static string BaseUrl = /*@"http://localhost:52512/";*/ @"http://rextester.com/";
+        public static string BaseUrl = @"http://localhost:52512/"; /*@"http://rextester.com/";*/
         //public static string PathToFsc = @"C:\Program Files (x86)\Microsoft SDKs\F#\4.0\Framework\v4.0";
         public static string CurrentPath
         {
@@ -180,6 +180,8 @@ namespace reExp.Utils
                     return BaseUrl + "main/faq";
                 case PagesEnum.Log:
                     return BaseUrl + "logdata";
+                case PagesEnum.Theme:
+                    return BaseUrl + "theme";
                 default:
                     return BaseUrl;
             }
@@ -193,9 +195,9 @@ namespace reExp.Utils
             {
                 string page = parts[parts.Length - 1].ToLower();
 
-                if (pagePath.Trim('/').ToLower().Trim() == "tester")
+                if (pagePath.Trim('/').ToLower().Trim() == "tester" || parts.Length == 2 && parts[0] == "tester")
                     return PagesEnum.Tester;
-                if (pagePath.Trim('/').ToLower().Trim() == "replace")
+                if (pagePath.Trim('/').ToLower().Trim() == "replace" || parts.Length == 2 && parts[0] == "replace")
                     return PagesEnum.Replace;
                 if (pagePath.Trim('/').ToLower().Trim() == "reference")
                     return PagesEnum.Reference;
@@ -249,6 +251,7 @@ namespace reExp.Utils
             Users,
             Notifications,
             Log,
+            Theme,
             Unknown
         }
     }
@@ -480,6 +483,66 @@ namespace reExp.Utils
                     return false;
                 }
                 return Model.IsCurrentUserAdmin(SessionManager.UserName);
+            }
+        }
+        public static bool IsSplit
+        {
+            get
+            {
+                return true;
+            }
+        }
+        public static bool IsDarkTheme
+        {
+            get
+            {
+                if (Utils.IsMobile)
+                {
+                    return false;
+                }
+
+                if (SessionManager.IsUserInSession())
+                {
+                    var theme = Model.GetUserTheme();
+                    if (theme == 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                var res = HttpContext.Current.Session["__THEME"] + "";
+                if (res == "dark")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static void ToggleTheme()
+        {
+            if (IsDarkTheme)
+            {
+                HttpContext.Current.Session["__THEME"] = "light";
+                if (SessionManager.IsUserInSession())
+                {
+                    Model.SaveUserTheme(0);
+                }
+            }
+            else
+            {
+                HttpContext.Current.Session["__THEME"] = "dark";
+                if (SessionManager.IsUserInSession())
+                {
+                    Model.SaveUserTheme(1);
+                }
             }
         }
         public static bool IsUserInSession()

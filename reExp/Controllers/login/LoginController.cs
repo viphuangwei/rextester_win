@@ -317,6 +317,12 @@ namespace reExp.Controllers.login
             else
                 return this.RedirectToAction("UsersStuff");
         }
+
+        public ActionResult Theme()
+        {
+            SessionManager.ToggleTheme();
+            return this.Redirect(Utils.Utils.BaseUrl);
+        }
     }
 
     public class NotificationsData

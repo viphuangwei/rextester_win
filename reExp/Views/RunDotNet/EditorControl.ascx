@@ -280,9 +280,16 @@
                 lineNumbers: true,
                 indentUnit: 4,
                 matchBrackets: true,
-                <%if(!string.IsNullOrEmpty(theme)) 
+                <%if(!string.IsNullOrEmpty(theme) || SessionManager.IsDarkTheme) 
                 {%>
-                    theme: "<%:theme%>",
+                    <%if(!SessionManager.IsDarkTheme)
+                    {%>
+                        theme: "<%:theme%>",
+                    <%}
+                    else
+                    {%>
+                        theme: "ambiance",
+                    <%}%>
                 <%}%>
                 onKeyEvent: keyEvent,
             extraKeys: {

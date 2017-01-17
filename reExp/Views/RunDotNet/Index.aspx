@@ -368,13 +368,17 @@
             <table style="width: 95%; margin:0;">
                 <tr>
                     <td align="left">
-                        <span style="margin: 0 0.5em 0 0">Language:</span><%:Html.DropDownListFor(f => f.LanguageChoiceWrapper, Model.Languages)%>
-                        <%if(!Utils.IsMobile) {%>
+                        <span style="margin: 0 0.5em 0 0">Language:</span><%:Html.DropDownListFor(f => f.LanguageChoiceWrapper, Model.Languages, new { @class = "langdropdown" })%>
+                        <%if(!Utils.IsMobile && !SessionManager.IsDarkTheme) {%>
                         <span style="margin: 0 0.5em 0 0.5em">Editor:</span><%:Html.DropDownListFor(f => f.EditorChoiceWrapper, Model.Editor)%>
                         <%}
-                        else
+                        else if(Utils.IsMobile)
                         {%>
                         <input type="hidden" name="EditorChoiceWrapper" id="EditorChoiceWrapper" value="3"/>
+                        <%}
+                        else if(SessionManager.IsDarkTheme)
+                        {%>
+                        <input type="hidden" name="EditorChoiceWrapper" id="EditorChoiceWrapper" value="1"/>
                         <%}%>
                     </td>
                 </tr>
@@ -388,12 +392,12 @@
                             <textarea class="editor" spellcheck="false" cols="1000" id="Program" name="Program" rows="30" style="width: 100%;resize:none;">Loading live document...</textarea>
                         </td>
                         <td id="chatarea" style="display:none;width:20%;" valign="top">
-                            <textarea id="chatAreaText" readonly="readonly" spellcheck="false" style="width:94%;height:395px; border: solid 1px gray;resize:none;margin-left:1em;background-color:#FFFFBB;" cols="1000"></textarea>
+                            <textarea id="chatAreaText" readonly="readonly" class="input_box" spellcheck="false" style="width:94%;height:395px; border: solid 1px gray;resize:none;margin-left:1em;" cols="1000"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td id="chatbox" style="display:none;width:20%;" valign="bottom">
-                            <textarea id="chatBoxText" idspellcheck="false" style="width:94%;height:80px; border: solid 1px gray; resize:none;margin-left:1em;background-color:#FFFFBB;" cols="1000"></textarea>
+                            <textarea id="chatBoxText" idspellcheck="false" class="input_box" style="width:94%;height:80px; border: solid 1px gray; resize:none;margin-left:1em;" cols="1000"></textarea>
                         </td>
                     </tr>
                 </table>
@@ -427,7 +431,7 @@
             <%if (Model.ShowInput)
               {%>
                 <div style="width: 94.5%; margin-top:0.5em;margin-left:0;">                            
-                    <textarea spellcheck="false" cols="1000" id="Input" name="Input" rows="5" style="background-color:#FFFFBB;border: solid 1px gray;width: 100%;<%:(string.IsNullOrEmpty(Model.Input)) ? "display:none;":"" %>"><%=Model.Input%></textarea>
+                    <textarea spellcheck="false" cols="1000" id="Input" name="Input" rows="5" class="input_box" style="width: 100%;<%:(string.IsNullOrEmpty(Model.Input)) ? "display:none;":"" %>"><%=Model.Input%></textarea>
                 </div>
             <%} %>
             <table style="width: 95%; margin-top:0.5em;">
@@ -488,7 +492,7 @@
                         {%>
                         <input style="margin-left:1em;" id="Wall" type="button" value="Put on a wall" />
                         <%}%>
-                        <%if (Model.EditorChoice == EditorsEnum.Codemirror && !Model.IsLive)
+                        <%if (Model.EditorChoice == EditorsEnum.Codemirror && !Model.IsLive && !SessionManager.IsDarkTheme)
                         {%>
                             <input title="Fullscreen (F11), Esc to exit" style="margin-left:1em;" id="Full" type="button" value="F"/>
                         <%}%>
@@ -938,7 +942,7 @@
                     %><meta name="Description" content="compile c# online" /><%
                 }
     }%>
-    <%if (Model.EditorChoice == EditorsEnum.Codemirror)
+    <%if (Model.EditorChoice == EditorsEnum.Codemirror && !SessionManager.IsDarkTheme)
      {
              %> <link rel="stylesheet" href="/Scripts/codemirror3/codemirror_min.css"/><%
             if (Model.LanguageChoice == LanguagesEnum.CSharp || Model.LanguageChoice == LanguagesEnum.FSharp || Model.LanguageChoice == LanguagesEnum.VB)
@@ -949,7 +953,11 @@
             { 
                 %><link rel="stylesheet" href="/Scripts/codemirror3/theme/java.css"/><%
             }
-    }%>
+    }
+    else if (Model.EditorChoice == EditorsEnum.Codemirror && SessionManager.IsDarkTheme)
+    {%>
+        <link rel="stylesheet" href="/Scripts/codemirror3/codemirror_dark_min.css"/>
+    <%}%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
     <%if (Model.EditorChoice == EditorsEnum.Codemirror && Model.IsIntellisense)
@@ -1092,17 +1100,22 @@
                 else {
                     ScrollToBottom($("#chatAreaText"));
                     $("#chatsign").text("-");
+                    <%if(!SessionManager.IsDarkTheme)
+                    {%> 
                     $("#chatsign").css('color', 'black');
-                }
-            });
-            function ScrollToBottom(textArea) {
-                textArea.scrollTop(
-                    textArea[0].scrollHeight - textArea.height()
-                );
+                    <%} else {%>
+                    $("#chatsign").css('color', '#929292');
+                    <%}%>
             }
+        });
+        function ScrollToBottom(textArea) {
+            textArea.scrollTop(
+                textArea[0].scrollHeight - textArea.height()
+            );
+        }
 
                 <%if (Model.User_Id != null)
-                {%>
+        {%>
             setInterval(function() {
                 $.post('/rundotnet/updateliveindex', { code: GlobalEditor.getValue(), chat: $("#chatAreaText").val(), guid: '<%:Model.CodeGuid%>'}, null, 'text'); 
             }, 60000);

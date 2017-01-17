@@ -69,7 +69,7 @@ namespace reExp.Controllers.rundotnet
         {
             get
             {
-                if ((this.LanguageChoice == LanguagesEnum.CSharp /*||
+                if ((this.LanguageChoice == LanguagesEnum.CSharp && !SessionManager.IsDarkTheme /*||
                     this.LanguageChoice == LanguagesEnum.Java ||
                     this.LanguageChoice == LanguagesEnum.CPP ||
                     this.LanguageChoice == LanguagesEnum.VCPP ||

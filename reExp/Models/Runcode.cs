@@ -622,6 +622,34 @@ namespace reExp.Models
             }
         }
 
+        public static int GetUserTheme()
+        {
+            if (SessionManager.IsUserInSession())
+            {
+                try
+                {
+                    var res = DB.DB.Get_User_theme(SessionManager.UserId);
+                    if (res.Count != 0)
+                    {
+                        return res[0]["theme"] == DBNull.Value ? 0 : Convert.ToInt32(res[0]["theme"]);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Utils.Log.LogInfo(e.Message, e, "get theme error");
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public static void SaveUserProfile(LanguagesEnum language_choice, EditorsEnum editor_choice)
         {
             if (SessionManager.IsUserInSession())
@@ -632,7 +660,21 @@ namespace reExp.Models
                 }
                 catch (Exception e)
                 {
-                    Utils.Log.LogInfo(e.Message, e, "error");
+                    Utils.Log.LogInfo(e.Message, e, "profile save error");
+                }
+            }
+        }
+        public static void SaveUserTheme(int theme)
+        {
+            if (SessionManager.IsUserInSession())
+            {
+                try
+                {
+                    DB.DB.Save_User_theme(SessionManager.UserId, theme);
+                }
+                catch (Exception e)
+                {
+                    Utils.Log.LogInfo(e.Message, e, "theme save error");
                 }
             }
         }

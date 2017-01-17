@@ -39,7 +39,10 @@
     <meta name="Keywords" content="online diff checker, text comparison, online diff, diff, diff tool, quick diff" />
     <meta name="Description" content="online diff checker" />    
     <link rel="Stylesheet" href="/Content/Tester.css" />
-    <style type="text/css">
+    <%if (!SessionManager.IsDarkTheme)
+    {%>
+    <link rel="Stylesheet" href="/Content/List.css" />
+     <style type="text/css">
         table.diff {font-family:Courier; border:medium;}
         .diff_header {background-color:#e0e0e0}
         td.diff_header {text-align:right}
@@ -50,6 +53,22 @@
         /* customized style */
         table.diff {font-family:monospace; border:medium;font-size:14px;}
     </style>
+    <%}
+    else { %>
+     <link rel="Stylesheet" href="/Content/ListDark.css" />
+     <style type="text/css">
+         table { color: #929292; }
+        table.diff {font-family:Courier; border:medium;}
+        .diff_header {background-color:#1a1a1a; }
+        td.diff_header {text-align:right;background-color:#1a1a1a;}
+        .diff_next {background-color:#1a1a1a;}
+        .diff_add {background-color:#aaffaa;color: black;}
+        .diff_chg {background-color:#ffff77;color: black;}
+        .diff_sub {background-color:#ffaaaa;color: black;}
+        /* customized style */
+        table.diff {font-family:monospace; border:medium;font-size:14px;background-color:#1a1a1a;}
+    </style>
+    <%} %>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">

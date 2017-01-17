@@ -44,7 +44,13 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MetaContent" runat="server">
     <meta name="Keywords" content="rextester users' code walls" />
     <meta name="Description" content="rextester users' code walls" />
+    <%if (!SessionManager.IsDarkTheme)
+    {%>
     <link rel="Stylesheet" href="/Content/List.css" />
+    <%}
+    else { %>
+     <link rel="Stylesheet" href="/Content/ListDark.css" />
+    <%} %>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">

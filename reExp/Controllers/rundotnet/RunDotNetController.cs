@@ -126,7 +126,11 @@ namespace reExp.Controllers.rundotnet
                     data.LivesVersion = Model.IsLive(data.PrimaryGuid);
                 }
 
-                if(Utils.Utils.IsMobile)
+                if (SessionManager.IsDarkTheme)
+                {
+                    data.EditorChoice = EditorsEnum.Codemirror;
+                }
+                if (Utils.Utils.IsMobile)
                 {
                     data.EditorChoice = EditorsEnum.Simple;
                 }
@@ -312,7 +316,7 @@ namespace reExp.Controllers.rundotnet
                 }
             }
 
-            if ((int)data.LanguageChoice != (int)LanguagesEnum.Unknown && (int)data.EditorChoice != (int)EditorsEnum.Unknown)
+            if ((int)data.LanguageChoice != (int)LanguagesEnum.Unknown && (int)data.EditorChoice != (int)EditorsEnum.Unknown && !Utils.Utils.IsMobile)
                 Model.SaveUserProfile(data.LanguageChoice, data.EditorChoice);
 
             UserProfile profile = null;
@@ -328,6 +332,10 @@ namespace reExp.Controllers.rundotnet
             data.Program = data.GetInitialCode(data.LanguageChoice, data.EditorChoice);
             data.CompilerArgs = data.GetInitialCompilerArgs(data.LanguageChoice);
 
+            if (SessionManager.IsDarkTheme)
+            {
+                data.EditorChoice = EditorsEnum.Codemirror;
+            }
             if (Utils.Utils.IsMobile)
             {
                 data.EditorChoice = EditorsEnum.Simple;
@@ -516,6 +524,7 @@ namespace reExp.Controllers.rundotnet
             data.IsLive = true;
             data.IsSaved = true;
             data.DisplayName = SessionManager.IsUserInSession() ? SessionManager.UserName : Utils.Utils.RandomLetter();
+            data.EditorChoice = EditorsEnum.Codemirror;
 
             return View("Index", data);
         }
@@ -571,6 +580,10 @@ namespace reExp.Controllers.rundotnet
             data.BackToForkVisible = code.IsPrimaryVersion;
             data.PrimaryGuid = code.PrimaryGuid == null ? data.CodeGuid : code.PrimaryGuid;
 
+            if (SessionManager.IsDarkTheme)
+            {
+                data.EditorChoice = EditorsEnum.Codemirror;
+            }
             if (Utils.Utils.IsMobile)
             {
                 data.EditorChoice = EditorsEnum.Simple;

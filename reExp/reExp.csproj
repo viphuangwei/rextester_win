@@ -189,12 +189,14 @@
     <Content Include="Content\Google.png" />
     <Content Include="Content\javacolors.css" />
     <Content Include="Content\List.css" />
+    <Content Include="Content\ListDark.css" />
     <Content Include="Content\mobile\bootstrap.css" />
     <Content Include="Content\mobile\bootstrap.min.css" />
     <Content Include="Content\mobile\Site.css" />
     <Content Include="Content\mobile\site.min.css" />
     <Content Include="Content\Schema.png" />
     <Content Include="Content\Tester.css" />
+    <Content Include="Content\TesterDark.css" />
     <Content Include="Content\up.png" />
     <Content Include="Content\upvoted.png" />
     <Content Include="Content\ZeroClipboard.swf" />
@@ -280,6 +282,7 @@
     <Content Include="Scripts\codemirror3\addon\wrap\hardwrap.js" />
     <Content Include="Scripts\codemirror3\codemirror.css" />
     <Content Include="Scripts\codemirror3\codemirrorwithhint.js" />
+    <Content Include="Scripts\codemirror3\codemirror_dark_min.css" />
     <Content Include="Scripts\codemirror3\codemirror_min.css" />
     <Content Include="Scripts\codemirror3\codemirror_min.js" />
     <Content Include="Scripts\codemirror3\demo\activeline.html" />

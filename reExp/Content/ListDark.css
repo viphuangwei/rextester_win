@@ -1,0 +1,29 @@
+﻿DIV.pager A {
+font: bold 1em "Arial Narrow", "Franklin Gothic Medium", Arial;
+}
+DIV.pager { text-align:right; /*border-top: 2px solid silver;*/ padding: .5em 0 0 0; margin-top: 1em; }
+DIV.pager A { font-size: 1.1em; color: #666; text-decoration: none; padding: 0 .4em 0 .4em; }
+DIV.pager A:hover { background-color: Silver; }
+DIV.pager A.selected { background-color: #353535; color: White; }
+
+DIV.item {word-wrap: break-word;}
+DIV.item A {color:  #929292; text-decoration: none; padding: 0 .4em 0 .4em;}
+DIV.item A:visited { color: #929292; }
+DIV.item A:hover { text-decoration: underline; }
+DIV.sub {font-size: 0.8em; padding: .8em 0 0 .4em;}
+span.sub {font-size: 0.9em; padding: .8em 0 0 .4em;}
+DIV.holder {display:inline-block;margin-right:10px;text-align:center;}
+span.number {font: Sans; font-size: 130%; color: #929292;}
+span.word { font: Sans; font-size: 90%; color: #929292; }
+span.sort_selected
+{
+    color: White;
+    background-color:#1a1a1a; 
+    cursor: pointer;
+}
+
+span.sort_not_selected
+{
+    color: #929292;
+    cursor: pointer;
+}

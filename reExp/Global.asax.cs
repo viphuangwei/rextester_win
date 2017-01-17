@@ -135,6 +135,12 @@ namespace reExp
 
             routes.MapRoute(
                 null,
+                "theme",
+                new { controller = "login", action = "Theme" }
+            );
+
+            routes.MapRoute(
+                null,
                 "users",
                 new { controller = "users", action = "Index" }
             );

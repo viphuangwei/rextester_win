@@ -36,6 +36,24 @@ namespace reExp.Models.DB
             ExecuteNonQuery(query, pars);
         }
 
+        public static void Save_User_theme(int? UserId, int theme)
+        {
+            string query = @"update users 
+                             set theme = @Theme
+                             where id = @UserId";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("UserId", UserId));
+            pars.Add(new SQLiteParameter("Theme", theme));
+            ExecuteNonQuery(query, pars);
+        }
+
+        public static List<Dictionary<string, object>> Get_User_theme(int? UserId)
+        {
+            string query = @"select theme from Users where id = @UserId";
+            var pars = new List<SQLiteParameter>();
+            pars.Add(new SQLiteParameter("UserId", UserId));
+            return ExecuteQuery(query, pars);
+        }
 
         public static void Increment_Lang_Counter(string data, string input, string compiler_args, string result, int lang, bool is_api)
         {
