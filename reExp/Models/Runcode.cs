@@ -934,12 +934,12 @@ namespace reExp.Models
                 {
                     var next = from.Value.AddDays(1);
                     res.Between(f => f.Time, (DateTime)from, new DateTime(next.Year, next.Month, next.Day), BetweenBoundaries.BothInclusive);
+                    var last_day = new DateTime(to.Value.Year, to.Value.Month, to.Value.Day);
                     DateTime d;
-                    for (d = new DateTime(next.Year, next.Month, next.Day); d <= to.Value.AddDays(-1); d = d.AddDays(1))
+                    for (d = new DateTime(next.Year, next.Month, next.Day); d < last_day; d = d.AddDays(1))
                     {
                         res.Or().Search(f => f.Day_string, d.ToString("yyyyMMdd"));
                     }
-                    d = d.AddDays(-1);
                     res.Or().Between(f => f.Time, d, (DateTime)to, BetweenBoundaries.BothInclusive);
                 }
             }
