@@ -415,6 +415,10 @@ namespace reExp.Models
             try
             {
                 var code = Model.GetCode(guid);
+                if (code.UserId == null)
+                {
+                    return;
+                }
                 if (code.UserId != SessionManager.UserId)
                 {
                     return;
@@ -432,6 +436,10 @@ namespace reExp.Models
             try
             {
                 var code = Model.GetCode(guid);
+                if (code.UserId == null)
+                {
+                    return;
+                }
                 if (code.UserId != SessionManager.UserId)
                 {
                     return;
