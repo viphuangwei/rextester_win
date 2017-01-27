@@ -26,11 +26,11 @@
                 {
                       if(Model.Author.Wall_ID != null)
                       {%>
-                        by <a href="<%:Utils.BaseUrl+"users/"+Model.Author.Wall_ID%>"><%:Model.Author.Name%></a>,
+                        by <a href="<%:Utils.BaseUrl+"users/"+Model.Author.Wall_ID%>"><%:Model.Author.Name.StripEmail()%></a>,
                      <%}
                      else
                      {%>
-                       by <%:Model.Author.Name%>,
+                       by <%:Model.Author.Name.StripEmail()%>,
                      <%}%>                                          
                 <%}%>
                 <%:Model.CreationDate.TimeAgo()%>
@@ -50,11 +50,11 @@
             <div class="sub" style="display:inline-block;">
                 <%if (ordered[i].Wall_id != null) 
                 {%>
-                    <i>by <a href="<%:Utils.BaseUrl+"users/"+ordered[i].Wall_id%>"><%:ordered[i].Author%></a>, <%:ordered[i].CreationDate.TimeAgo()%></i>
+                    <i>by <a href="<%:Utils.BaseUrl+"users/"+ordered[i].Wall_id%>"><%:ordered[i].Author.StripEmail()%></a>, <%:ordered[i].CreationDate.TimeAgo()%></i>
                 <%}
                 else 
                 {%>
-                    <i><%:string.IsNullOrEmpty(ordered[i].Author) ? "" : " by " + ordered[i].Author + ", "%><%:ordered[i].CreationDate.TimeAgo()%></i> 
+                    <i><%:string.IsNullOrEmpty(ordered[i].Author) ? "" : " by " + ordered[i].Author.StripEmail() + ", "%><%:ordered[i].CreationDate.TimeAgo()%></i> 
                 <%}%>
             </div>
             </div>
